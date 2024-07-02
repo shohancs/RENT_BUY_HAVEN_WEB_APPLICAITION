@@ -79,27 +79,37 @@
 										  			$i = 0;
 
 										  			while ( $row = mysqli_fetch_assoc( $categoryQuery ) ) {
-										  				$cat_id  	= $row['cat_id'];
-										  				$name  		= $row['name'];
-										  				$slug  		= $row['slug'];
-										  				$desc  		= $row['desc'];
-										  				$image  	= $row['image'];
-										  				$status  	= $row['status'];
+										  				$cat_id  		= $row['cat_id'];
+										  				$name  			= $row['name'];
+										  				$slug  			= $row['slug'];
+										  				$description 	= $row['description'];
+										  				$image  		= $row['image'];
+										  				$status  		= $row['status'];
 										  				$i++;
 										  				?>
+										  				
 										  					<tr>
 														      <th scope="row" class="text-center"><?php echo $i; ?></th>
-														      <td class="text-center">Image</td>
+														      <td class="text-center">
+														      	<?php  
+														      		if ( !empty( $image ) ) { 
+																		echo '<img src="assets/images/category/' . $image . '" alt="" style="width: 60px;">';
+														      		}
+														      		else { 
+																		echo '<img src="assets/images/dummy.jpg" alt="" style="width: 60px;">';
+														      		}
+														      	?>
+														      </td>
 														      <td class="text-center"><?php echo $name; ?></td>
 														      <td class="text-center"><?php echo $slug; ?></td>
 														      <td class="text-center">quantity</td>
 														      <td class="text-center">
 														      	<?php  
-														      		if ($status == 0) { ?>
+														      		if ($status == 1) { ?>
 														      			<span class="badge text-bg-success">Active</span>
 														      		<?php }
-														      		else { ?>
-														      			<span class="badge text-bg-success">InActive</span>
+														      		else if ($status == 0) { ?>
+														      			<span class="badge text-bg-danger">InActive</span>
 														      		<?php }
 														      	?>
 														      </td>
@@ -166,7 +176,7 @@
 												</div>
 												<div class="mb-3">
 													<label>Category Description</label>
-													<textarea name="desc" class="form-control" cols="30" rows="10" id="editor" placeholder="write category description..."></textarea>
+													<textarea name="description" class="form-control" cols="30" rows="10" id="editor" placeholder="write category description..."></textarea>
 												</div>
 											</div>
 											<div class="col-lg-6">
@@ -175,7 +185,7 @@
 													<select name="status" class="form-select">
 														<option value="1">Please Select the Status</option>
 														<option value="1">Active</option>
-														<option value="2">InActive</option>
+														<option value="0">InActive</option>
 													</select>
 												</div>
 
@@ -199,8 +209,56 @@
 					<?php }
 
 					else if( $do == "Store" ) {
-						if ( isset($_GET['addCart']) ) {
-							echo "Ok";
+						if ( isset($_POST['addCat']) ) {
+							$name 			= mysqli_real_escape_string($db, $_POST['name']);
+							$description 	= mysqli_real_escape_string($db, $_POST['description']);
+							$status 		= mysqli_real_escape_string($db, $_POST['status']);
+							$catImg 		= mysqli_real_escape_string($db, $_FILES['image']['name']);
+							$tmpImg			= $_FILES['image']['tmp_name'];
+
+							if ( !empty($catImg) ) {
+								$img = rand( 0, 999999 ) . "_" . $catImg;
+								move_uploaded_file($tmpImg, 'assets/images/category/' . $img);
+							}
+							else {
+								$img = '';
+							}
+
+							// Start: For Slug Making
+							function createSlug( $name ) {
+								// Convert to Lower case
+								$slug = strtolower($name); 
+
+								// Remove Special Character
+								$slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+
+								// Replace multiple spaces or hyphens with a single hyphen
+								$slug = preg_replace('/[\s-]+/', ' ', $slug);
+
+								// Replace spaces with hyphens
+								$slug = preg_replace('/\s/', '-', $slug);
+
+								// Trim leading and trailing hyphens
+								$slug = trim($slug, '-');
+
+								return $slug;
+							}
+							$slug = createSlug($name);
+							echo "Slug is" . $slug;
+							// End: For Slug Making
+
+							$addCategorySql = "INSERT INTO category ( name, slug, description, image, status, join_date ) VALUES ( '$name', '$slug', '$description', '$img', '$status', now() )";
+							$addQuery = mysqli_query ( $db, $addCategorySql );
+
+							if ( $addQuery ) {
+							  	header( "Location: category.php?do=Manage" );
+							}  
+							else {
+								die( "Mysql Error." . mysqli_error($db) );
+							}
+
+
+
 						}
 					}
 
