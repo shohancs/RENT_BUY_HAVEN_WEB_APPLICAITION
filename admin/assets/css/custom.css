@@ -1,0 +1,17 @@
+.action-btn {
+	text-align: center;
+}
+
+.action-btn ul {
+	padding: 0;
+	margin: 0;
+}
+
+.action-btn ul li {
+	list-style: none;
+	display: inline-block;
+} 
+
+.action-btn ul li a i {
+	font-size: 13px;
+}

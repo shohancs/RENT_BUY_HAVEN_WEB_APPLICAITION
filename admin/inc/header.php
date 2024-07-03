@@ -16,7 +16,6 @@
 	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
 	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
 	<link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
-	<link href="assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 	<!-- loader-->
 	<link href="assets/css/pace.min.css" rel="stylesheet" />
 	<script src="assets/js/pace.min.js"></script>
@@ -33,6 +32,17 @@
 
 	<!-- CK EDITOR -->
 	<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.css" />
+
+	<!-- FONT AWESOME LINK HERE -->
+	<script src="https://kit.fontawesome.com/0c66e46c25.js" crossorigin="anonymous"></script>
+
+	<!-- DATATABLE CSS LINK HERE -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
+
+
+	<!-- CUSTOM CSS LINK HERE -->
+	<link rel="stylesheet" href="assets/css/custom.css">
 	
 	<title>Admin | DASHBOARD</title>
 </head>

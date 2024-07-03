@@ -22,8 +22,6 @@
 	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
 	<script src="assets/plugins/chartjs/chart.min.js"></script>
 	<script src="assets/plugins/peity/jquery.peity.min.js"></script>
-	<script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-	<script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
 	<script src="assets/js/dashboard-eCommerce.js"></script>
 	<!--app JS-->
 	<script src="assets/js/app.js"></script>
@@ -33,9 +31,29 @@
 	</script>
 
 
+	<!-- START: DATATABLE -->
+	<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+	<script src="https://cdn.datatables.net/2.0.8/js/dataTables.jshttps://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
 
-	<!--  -->
-<script type="importmap">
+	<script>
+		new DataTable('#example', {
+		    layout: {
+		        topStart: {
+		            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+		        }
+		    }
+		});
+	</script>
+	<!-- END: DATATABLE -->
+
+	<!-- CK EDITOR -->
+	<script type="importmap">
         {
             "imports": {
                 "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.js",
@@ -61,6 +79,7 @@
                 console.error( error );
             } );
     </script>
+    <!-- CK EDITOR -->
 
 
 	<?php  
