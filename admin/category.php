@@ -253,7 +253,6 @@
 								return $slug;
 							}
 							$slug = createSlug($name);
-							echo "Slug is" . $slug;
 							// End: For Slug Making
 
 							$addCategorySql = "INSERT INTO category ( name, slug, description, image, status, join_date ) VALUES ( '$name', '$slug', '$description', '$img', '$status', now() )";
@@ -320,7 +319,7 @@
 									<div class="card-body">
 										<div class="border p-3 radius-10">
 											<!-- START : FORM -->
-											<form action="category.php?do=Store" method="POST" enctype="multipart/form-data">
+											<form action="category.php?do=Update" method="POST" enctype="multipart/form-data">
 												<div class="row">
 													<div class="col-lg-6">
 														<div class="mb-3">
@@ -359,7 +358,7 @@
 														<div class="mb-3">
 															<div class="d-grid gap-2">
 																<input type="hidden" name="updateId" value="<?php echo $cat_id; ?>">
-																<input type="submit" name="addCat" class="btn btn-dark px-5" value="Update Category">
+																<input type="submit" name="updateCat" class="btn btn-dark px-5" value="Update Category">
 															</div>											
 														</div>
 													</div>
@@ -376,7 +375,104 @@
 					}
 
 					else if( $do == "Update" ) {
-						echo "Update";
+
+						if (isset( $_POST['updateCat'] )) {
+
+							$updateIdStore 	= mysqli_real_escape_string($db, $_POST['updateCat']);
+							$updateId 		= mysqli_real_escape_string($db, $_POST['updateId']);
+							$name 			= mysqli_real_escape_string($db, $_POST['name']);
+							$description 	= mysqli_real_escape_string($db, $_POST['description']);
+							$status 		= mysqli_real_escape_string($db, $_POST['status']);
+							$catImage		= mysqli_real_escape_string($db, $_FILES['image']['name']);
+							$tmpImg			= $_FILES['image']['tmp_name'];
+
+							if ( !empty($catImage) ) {
+								$oldImageSql = "SELECT * FROM category WHERE cat_id='$updateId'";
+								$oldImageQuery = mysqli_query( $db, $oldImageSql );
+
+								while ( $row = mysqli_fetch_assoc( $oldImageQuery ) ) {
+									$catOldImg = $row['image'];	
+									unlink("assets/images/category/$img" . $catOldImg);
+								} 
+
+								$img = rand( 0, 999999 ) . "_" . $catImage;
+								move_uploaded_file($tmpImg, 'assets/images/category/' . $img);
+
+								// Start: For Slug Making
+								function createSlug( $name ) {
+									// Convert to Lower case
+									$slug = strtolower($name); 
+
+									// Remove Special Character
+									$slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+
+									// Replace multiple spaces or hyphens with a single hyphen
+									$slug = preg_replace('/[\s-]+/', ' ', $slug);
+
+									// Replace spaces with hyphens
+									$slug = preg_replace('/\s/', '-', $slug);
+
+									// Trim leading and trailing hyphens
+									$slug = trim($slug, '-');
+
+									return $slug;
+								}
+								$slug = createSlug($name);
+								// End: For Slug Making
+
+								$updateSql = "UPDATE category SET name='$name', slug='$slug', description='$description', image='$img', status='$status', join_date=now() WHERE cat_id='$updateId'";
+								$updateQuery = mysqli_query( $db, $updateSql );
+
+								if ($updateQuery) {
+									header("Location: category.php?do=Manage");
+								}
+								else {
+									die ( "Mysqli Error." . mysqli_error($db) );
+								}
+							}
+
+							else {
+								$updateIdStore 	= mysqli_real_escape_string($db, $_POST['updateCat']);
+								$updateId 		= mysqli_real_escape_string($db, $_POST['updateId']);
+								$name 			= mysqli_real_escape_string($db, $_POST['name']);
+								$description 	= mysqli_real_escape_string($db, $_POST['description']);
+								$status 		= mysqli_real_escape_string($db, $_POST['status']);
+
+								// Start: For Slug Making
+								function createSlug( $name ) {
+									// Convert to Lower case
+									$slug = strtolower($name); 
+
+									// Remove Special Character
+									$slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+
+									// Replace multiple spaces or hyphens with a single hyphen
+									$slug = preg_replace('/[\s-]+/', ' ', $slug);
+
+									// Replace spaces with hyphens
+									$slug = preg_replace('/\s/', '-', $slug);
+
+									// Trim leading and trailing hyphens
+									$slug = trim($slug, '-');
+
+									return $slug;
+								}
+								$slug = createSlug($name);
+								// End: For Slug Making
+
+								$updateSql = "UPDATE category SET name='$name', slug='$slug', description='$description', status='$status', join_date=now() WHERE cat_id='$updateId'";
+								$updateQuery = mysqli_query( $db, $updateSql );
+
+								if ($updateQuery) {
+									header("Location: category.php?do=Manage");
+								}
+								else {
+									die ( "Mysqli Error." . mysqli_error($db) );
+								}
+									
+							}
+
+						}
 					}
 
 					else if( $do == "Trash" ) {
