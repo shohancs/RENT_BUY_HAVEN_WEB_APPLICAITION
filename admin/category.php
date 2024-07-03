@@ -34,7 +34,7 @@
 											<a href="category.php?do=Add" class="btn btn-dark px-5">Add New Category</a>
 										</div>
 										<div class="col">
-											<button type="button" class="btn btn-danger px-5">Trash</button>
+											<a href="category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 										</div>									
 									</div>
 								</div>
@@ -117,11 +117,35 @@
 														      	<div class="action-btn">
 														      		<ul>
 														      			<li>
-														      				<a href="category.php?do=Edit&editId=<?php echo $cat_id; ?>" class="btn btn-outline-primary"><i class="fa-solid fa-pencil"></i> Edit</a> 
-														      				<a href="" class="btn btn-outline-danger"><i class="fa-regular fa-eye-slash"></i> Disable</a>
+														      				<a href="category.php?do=Edit&editId=<?php echo $cat_id; ?>" class="btn btn-outline-primary" style="margin: 0 15px;"><i class="fa-solid fa-pencil"></i> Edit</a> 
+														      				<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#tId<?php echo $cat_id; ?>"><i class="fa-regular fa-eye-slash"></i> Disable</a>
 														      			</li>
 														      		</ul>
 														      	</div>
+
+														      	<!-- START: MODAL -->
+																<div class="modal fade" id="tId<?php echo $cat_id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																  <div class="modal-dialog">
+																    <div class="modal-content">
+																      <div class="modal-header">
+																        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation Alert!</h1>
+																        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																      </div>
+																      <div class="modal-body">
+																      	<h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to disable <span style="color: red;"><?php echo $name; ?> </span>category?</h1>																        
+																      </div>
+																      <div class="modal-footer justify-content-around">
+																      	<ul>
+																      		<li>
+																      			<a href="category.php?do=Trash&tData=<?php echo $cat_id; ?>" class="btn btn-primary">Yes</a>
+																      			<a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
+																      		</li>
+																      	</ul>
+																      </div>
+																    </div>
+																  </div>
+																</div>
+														      	<!-- END: MODAL -->
 														      </td>
 														    </tr>
 										  				<?php
@@ -158,10 +182,10 @@
 								<div class="btn-group">
 									<div class="row row-cols-auto g-3">
 										<div class="col">
-											<a href="category.php?do=Manage" class="btn btn-dark px-5">Category Manage</a>
+											<a href="category.php?do=Manage" class="btn btn-dark px-5">All Category</a>
 										</div>
 										<div class="col">
-											<button type="button" class="btn btn-danger px-5">Trash</button>
+											<a href="category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 										</div>									
 									</div>
 								</div>
@@ -301,10 +325,13 @@
 										<div class="btn-group">
 											<div class="row row-cols-auto g-3">
 												<div class="col">
-													<a href="category.php?do=Manage" class="btn btn-dark px-5">Category Manage</a>
+													<a href="category.php?do=Manage" class="btn btn-dark px-5">All Category</a>
 												</div>
 												<div class="col">
-													<button type="button" class="btn btn-danger px-5">Trash</button>
+													<a href="category.php?do=Add" class="btn btn-primary px-5">Add New Category</a>
+												</div>
+												<div class="col">
+													<a href="category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 												</div>									
 											</div>
 										</div>
@@ -476,15 +503,200 @@
 					}
 
 					else if( $do == "Trash" ) {
-						echo "Trash";
+						if (isset($_GET['tData'])) {
+							$trashId = $_GET['tData'];
+							$trashSql = "UPDATE category SET status=0 WHERE cat_id='$trashId'";
+							$trashQuery = mysqli_query($db, $trashSql);
+
+							if ($trashQuery) {
+								header("Location: category.php?do=Manage");
+							}
+							else {
+								die("MySql Error." . mysqli_error($db));
+							}
+						}
 					}
 
-					else if( $do == "ManageTrash" ) {
-						echo "ManageTrsah";
+					else if( $do == "ManageTrash" ) { ?>
+						<!--breadcrumb-->
+						<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+							<div class="breadcrumb-title pe-3">Manage Trash</div>
+							<div class="ps-3">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb mb-0 p-0">
+										<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">Trash Category list</li>
+									</ol>
+								</nav>
+							</div>
+							<!-- START: For Right Part -->
+							<div class="ms-auto">
+								<div class="btn-group">
+									<div class="row row-cols-auto g-3">
+										<div class="col">
+											<a href="category.php?do=Manage" class="btn btn-primary px-5">All Category</a>
+										</div>
+										<div class="col">
+											<a href="category.php?do=Add" class="btn btn-dark px-5">Add New Category</a>
+										</div>									
+									</div>
+								</div>
+							</div>
+							<!-- END: For Right Part -->
+						</div>
+						<!--end breadcrumb-->
+
+						<h6 class="mb-0 text-uppercase">TRASH CATEGORY LIST</h6>
+						<hr>
+						<div class="card">
+							<div class="card-body">
+								<div class="border p-3 radius-10">
+									<!-- START: DATATABLE -->
+									<div class="table-responsive">
+										<table class="table table-striped table-hover table-bordered"  id="example">
+										  <thead class="table-dark">
+										    <tr>
+										      <th scope="col" class="text-center">#Sl.</th>
+										      <th scope="col" class="text-center">Image</th>
+										      <th scope="col" class="text-center">Category Name</th>
+										      <th scope="col" class="text-center">Slug</th>
+										      <th scope="col" class="text-center">Quantity</th>
+										      <th scope="col" class="text-center">Status</th>
+										      <th scope="col" class="text-center">Action</th>
+										    </tr>
+										  </thead>
+
+										  <tbody>
+										  	<?php  
+
+										  		$categorySql = "SELECT * FROM category WHERE status = 0 ORDER BY name ASC";
+										  		$categoryQuery = mysqli_query( $db, $categorySql );
+										  		$categoryCount = mysqli_num_rows($categoryQuery);
+
+										  		if ( $categoryCount == 0 ) { ?>
+										  			<div class="alert alert-danger text-center" role="alert">
+													  Sorry!! No data found in this datatable.
+													</div>
+										  		<?php }
+										  		else {
+										  			$i = 0;
+
+										  			while ( $row = mysqli_fetch_assoc( $categoryQuery ) ) {
+										  				$cat_id  		= $row['cat_id'];
+										  				$name  			= $row['name'];
+										  				$slug  			= $row['slug'];
+										  				$description 	= $row['description'];
+										  				$image  		= $row['image'];
+										  				$status  		= $row['status'];
+										  				$i++;
+										  				?>
+										  				
+										  					<tr>
+														      <th scope="row" class="text-center"><?php echo $i; ?></th>
+														      <td class="text-center">
+														      	<?php  
+														      		if ( !empty( $image ) ) { 
+																		echo '<img src="assets/images/category/' . $image . '" alt="" style="width: 60px;">';
+														      		}
+														      		else { 
+																		echo '<img src="assets/images/dummy.jpg" alt="" style="width: 60px;">';
+														      		}
+														      	?>
+														      </td>
+														      <td class="text-center"><?php echo $name; ?></td>
+														      <td class="text-center"><?php echo $slug; ?></td>
+														      <td class="text-center">quantity</td>
+														      <td class="text-center">
+														      	<?php  
+														      		if ($status == 1) { ?>
+														      			<span class="badge text-bg-success">Active</span>
+														      		<?php }
+														      		else if ($status == 0) { ?>
+														      			<span class="badge text-bg-danger">InActive</span>
+														      		<?php }
+														      	?>
+														      </td>
+														      <td class="text-center">
+														      	<div class="action-btn">
+														      		<ul>
+														      			<li>
+														      				<a href="category.php?do=Edit&editId=<?php echo $cat_id; ?>" class="btn btn-outline-primary"><i class="fa-solid fa-pencil"></i> Edit</a> 
+														      				<a href="category.php?do=ManageActive&activeId=<?php echo $cat_id; ?>" class="btn btn-outline-success" style="margin: 0 15px;"><i class="fa-solid fa-file-circle-check"></i> Active</a> 
+														      				<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#dId<?php echo $cat_id; ?>"><i class="fa-regular fa-eye-slash"></i> Delete</a>
+														      			</li>
+														      		</ul>
+														      	</div>
+
+														      	<!-- START: MODAL -->
+																<div class="modal fade" id="dId<?php echo $cat_id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																  <div class="modal-dialog">
+																    <div class="modal-content">
+																      <div class="modal-header">
+																        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation Alert!</h1>
+																        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																      </div>
+																      <div class="modal-body">
+																      	<h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to Delete <span style="color: red;"><?php echo $name; ?> </span>category?</h1>																        
+																      </div>
+																      <div class="modal-footer justify-content-around">
+																      	<ul>
+																      		<li>
+																      			<a href="category.php?do=Delete&dData=<?php echo $cat_id; ?>" class="btn btn-primary">Yes</a>
+																      			<a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
+																      		</li>
+																      	</ul>
+																      </div>
+																    </div>
+																  </div>
+																</div>
+														      	<!-- END: MODAL -->
+														      </td>
+														    </tr>
+										  				<?php
+										  			}
+										  		}
+
+
+										  	?>
+										    
+										  </tbody>
+										</table>
+									</div>							
+									<!-- END: DATATABLE -->	
+								</div>													
+							</div>
+						</div>
+					<?php }
+
+					else if ( $do == "ManageActive" ) {
+						if ( isset($_GET['activeId']) ) {
+							$acId = $_GET['activeId'];
+							$activeSql = "UPDATE category SET status=1 WHERE cat_id='$acId'";
+							$activeQuery = mysqli_query($db, $activeSql);
+
+							if ($activeQuery) {
+								header("Location: category.php?do=Manage");
+							}
+							else {
+								die("Mysqli_Error" . mysqli_error($db));
+							}
+						}
 					}
 
 					else if( $do == "Delete" ) {
-						echo "Delete";
+						if (isset($_GET['dData'])) {
+							$deleteData = $_GET['dData'];
+							$deleteSQL = "DELETE FROM category WHERE cat_id='$deleteData' ";
+							$deleteQuery = mysqli_query($db, $deleteSQL);
+
+							if ($deleteQuery) {
+								header("Location: category.php?do=ManageTrash");
+							}
+							else {
+								die("Mysqli_Error" . mysqli_error($db));
+							}
+						}
 					}
 				?>
 

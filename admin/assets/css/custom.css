@@ -1,13 +1,16 @@
-.action-btn {
+.action-btn,
+.modal-footer {
 	text-align: center;
 }
 
-.action-btn ul {
+.action-btn ul,
+.modal-footer ul {
 	padding: 0;
 	margin: 0;
 }
 
-.action-btn ul li {
+.action-btn ul li,
+.modal-footer ul li {
 	list-style: none;
 	display: inline-block;
 } 
