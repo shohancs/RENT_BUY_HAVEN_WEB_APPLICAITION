@@ -59,6 +59,7 @@
 										      <th scope="col" class="text-center">Slug</th>
 										      <th scope="col" class="text-center">Quantity</th>
 										      <th scope="col" class="text-center">Status</th>
+										      <th scope="col" class="text-center">Join Date</th>
 										      <th scope="col" class="text-center">Action</th>
 										    </tr>
 										  </thead>
@@ -85,6 +86,7 @@
 										  				$description 	= $row['description'];
 										  				$image  		= $row['image'];
 										  				$status  		= $row['status'];
+										  				$join_date  	= $row['join_date'];
 										  				$i++;
 										  				?>
 										  				
@@ -113,6 +115,7 @@
 														      		<?php }
 														      	?>
 														      </td>
+														      <td class="text-center"><?php echo $join_date; ?></td>
 														      <td class="text-center">
 														      	<div class="action-btn">
 														      		<ul>
