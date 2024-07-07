@@ -127,14 +127,27 @@
 														      </td>
 														      <td class="text-center"><?php echo $subcat_name; ?></td>
 														      <td class="text-center"><?php echo $slug; ?></td>
-														      <td class="text-center">category Name</td>
+														      <td class="text-center">
+														      	<?php  
+														      		$catSql = "SELECT * FROM category WHERE cat_id='$is_parent'";
+														      		$catQuery = mysqli_query($db, $catSql);
+
+														      		while ( $row = mysqli_fetch_assoc($catQuery) ) {
+														      			$cat_id = $row['cat_id'];
+														      			$catname = $row['name'];
+														      			?>
+														      			<span class="badge rounded-pill text-bg-primary"><?php echo $catname; ?></span>
+														      			<?php														      			
+														      		}
+														      	?>
+														      </td>
 														      <td class="text-center"><?php echo $location; ?></td>
-														      <td class="text-center"><?php echo $price; ?></td>
+														      <td class="text-center"><?php echo $price; ?>৳</td>
 														      <td class="text-center"><?php echo $bed; ?></td>
 														      <td class="text-center"><?php echo $kitchen; ?></td>
 														      <td class="text-center"><?php echo $washroom; ?></td>
 														      <td class="text-center"><?php echo $totalroom; ?></td>
-														      <td class="text-center"><?php echo $area_size; ?> sq ft</td>
+														      <td class="text-center"><?php echo $area_size; ?> sqft</td>
 														      <td class="text-center"><?php echo $floor; ?></td>
 														      <td class="text-center">
 														      	<?php  
@@ -287,10 +300,19 @@
 												<div class="mb-3">
 													<label>Category Name</label>
 													<select class="form-select" name="is_parent">
-													  <option value="1">Please Select the Category</option>
-													  <option value="1">One</option>
-													  <option value="2">Two</option>
-													  <option value="3">Three</option>
+														<option>Please Select the Category</option>
+														<?php  
+												      		$catSql = "SELECT * FROM category WHERE status=1";
+												      		$catQuery = mysqli_query($db, $catSql);
+
+												      		while ( $row = mysqli_fetch_assoc($catQuery) ) {
+												      			$cat_id = $row['cat_id'];
+												      			$catname = $row['name'];
+												      			?>
+												      			<option value="<?php echo $cat_id ?>"> - <?php echo $catname; ?></option>
+												      			<?php
+												      		}
+												      	?>
 													</select>
 												</div>												
 												<div class="mb-3">
