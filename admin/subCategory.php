@@ -58,6 +58,9 @@
 										      <th scope="col" class="text-center">Sub Category Name</th>
 										      <th scope="col" class="text-center">Slug</th>
 										      <th scope="col" class="text-center">Category Name</th>
+										      <th scope="col" class="text-center">Owner Name</th>
+										      <th scope="col" class="text-center">Owner Email</th>
+										      <th scope="col" class="text-center">Owner Phone No.</th>
 										      <th scope="col" class="text-center">Location</th>
 										      <th scope="col" class="text-center">Price</th>
 										      <th scope="col" class="text-center">Bed</th>
@@ -92,6 +95,9 @@
 										  				$subcat_name  	= $row['subcat_name'];
 										  				$slug  			= $row['slug'];
 										  				$is_parent  	= $row['is_parent'];
+										  				$ow_name  		= $row['ow_name'];
+										  				$ow_email  		= $row['ow_email'];
+										  				$ow_phone  		= $row['ow_phone'];
 										  				$location  		= $row['location'];
 										  				$price 			= $row['price'];
 										  				$bed  			= $row['bed'];
@@ -126,7 +132,7 @@
 														      	?>
 														      </td>
 														      <td class="text-center"><?php echo $subcat_name; ?></td>
-														      <td class="text-center"><?php echo $slug; ?></td>
+														      <td class="text-center"><?php echo substr($slug, 0, 10); ?>...</td>
 														      <td class="text-center">
 														      	<?php  
 														      		$catSql = "SELECT * FROM category WHERE cat_id='$is_parent'";
@@ -141,7 +147,10 @@
 														      		}
 														      	?>
 														      </td>
-														      <td class="text-center"><?php echo $location; ?></td>
+														      <td class="text-center"><?php echo $ow_name; ?></td>
+														      <td class="text-center"><?php echo $ow_email; ?></td>
+														      <td class="text-center"><?php echo $ow_phone; ?></td>
+														      <td class="text-center"><?php echo substr($location, 0, 20) ; ?>...</td>
 														      <td class="text-center"><?php echo $price; ?>৳</td>
 														      <td class="text-center"><?php echo $bed; ?></td>
 														      <td class="text-center"><?php echo $kitchen; ?></td>
@@ -253,68 +262,101 @@
 												<div class="mb-3">
 													<label>Sub Category Name</label>
 													<input type="text" name="subname" class="form-control" required autocomplete="off" placeholder="enter sub category name..">
-												</div>												
+												</div>			
+												<div class="mb-3">
+													<label>Owner Name</label>
+													<input type="text" name="ow_name" class="form-control" required autocomplete="off" placeholder="enter owner name..">
+												</div>	
+												<div class="mb-3">
+													<label>Owner Email</label>
+													<input type="email" name="ow_email" class="form-control" required autocomplete="off" placeholder="enter owner email..">
+												</div>	
+												<div class="mb-3">
+													<label>Owner Phone No.</label>
+													<input type="phone" name="ow_phone" class="form-control" required autocomplete="off" placeholder="enter owner phone..">
+												</div>	
 												<div class="mb-3">
 													<label>Location</label>
 													<input type="text" name="location" class="form-control" required autocomplete="off" placeholder="enter location..">
 												</div>
-												<div class="mb-3">
-													<label>Price <sup>(Taka)</sup></label>
-													<input type="number" name="price" class="form-control" required autocomplete="off" placeholder="enter price..">
-												</div>
-												<div class="mb-3">
-													<label>Bed</label>
-													<input type="number" name="bed" class="form-control" required autocomplete="off" placeholder="enter number of bed..">
-												</div>
-												<div class="mb-3">
-													<label>Kitchen</label>
-													<input type="number" name="kitchen" class="form-control" required autocomplete="off" placeholder="enter number of kitchen..">
-												</div>
-												<div class="mb-3">
-													<label>Washroom</label>
-													<input type="number" name="washroom" class="form-control" required autocomplete="off" placeholder="enter number of washroom..">
-												</div>
-												<div class="mb-3">
-													<label>Total Room</label>
-													<input type="number" name="totalRoom" class="form-control" required autocomplete="off" placeholder="enter number of total room..">
-												</div>
-												<div class="mb-3">
-													<label>Area Size <sup>(Sq Ft)</sup></label>
-													<input type="number" name="areaSize" class="form-control" required autocomplete="off" placeholder="enter size of area..">
-												</div>
-												<div class="mb-3">
-													<label>Floor Number <sup>(1st->2nd->3rd..)</sup></label>
-													<input type="number" name="floor" class="form-control" required autocomplete="off" placeholder="enter size of area..">
-												</div>
-												<div class="mb-3">
-													<label>Short Description</label>
-													<textarea name="sdesc" class="form-control" cols="30" rows="10" id="editor" placeholder="write short description..."></textarea>
-												</div>
+
+												<div class="row">
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Category Name</label>
+															<select class="form-select" name="is_parent">
+																<option>Please Select the Category</option>
+																<?php  
+														      		$catSql = "SELECT * FROM category WHERE status=1";
+														      		$catQuery = mysqli_query($db, $catSql);
+
+														      		while ( $row = mysqli_fetch_assoc($catQuery) ) {
+														      			$cat_id = $row['cat_id'];
+														      			$catname = $row['name'];
+														      			?>
+														      			<option value="<?php echo $cat_id ?>"> - <?php echo $catname; ?></option>
+														      			<?php
+														      		}
+														      	?>
+															</select>
+														</div>	
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Price <sup>(Taka)</sup></label>
+															<input type="number" name="price" class="form-control" required autocomplete="off" placeholder="enter price..">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Bed</label>
+															<input type="number" name="bed" class="form-control" required autocomplete="off" placeholder="enter number of bed..">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Kitchen</label>
+															<input type="number" name="kitchen" class="form-control" required autocomplete="off" placeholder="enter number of kitchen..">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Washroom</label>
+															<input type="number" name="washroom" class="form-control" required autocomplete="off" placeholder="enter number of washroom..">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Total Room</label>
+															<input type="number" name="totalRoom" class="form-control" required autocomplete="off" placeholder="enter number of total room..">
+														</div>
+													</div>
+
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Area Size <sup>(Sq Ft)</sup></label>
+															<input type="number" name="areaSize" class="form-control" required autocomplete="off" placeholder="enter size of area..">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Floor Number <sup>(1st->2nd->3rd..)</sup></label>
+															<input type="number" name="floor" class="form-control" required autocomplete="off" placeholder="enter size of area..">
+														</div>
+													</div>
+												</div>			
 												
 											</div>
 											<div class="col-lg-6">
 												<div class="mb-3">
+													<label>Short Description</label>
+													<textarea name="sdesc" class="form-control" cols="30" rows="10" id="editor" placeholder="write short description..."></textarea>
+												</div>
+												<div class="mb-3">
 													<label>Long Description</label>
 													<textarea name="ldesc" class="form-control" cols="30" rows="10" id="editor1" placeholder="write long description..."></textarea>
 												</div>
-												<div class="mb-3">
-													<label>Category Name</label>
-													<select class="form-select" name="is_parent">
-														<option>Please Select the Category</option>
-														<?php  
-												      		$catSql = "SELECT * FROM category WHERE status=1";
-												      		$catQuery = mysqli_query($db, $catSql);
-
-												      		while ( $row = mysqli_fetch_assoc($catQuery) ) {
-												      			$cat_id = $row['cat_id'];
-												      			$catname = $row['name'];
-												      			?>
-												      			<option value="<?php echo $cat_id ?>"> - <?php echo $catname; ?></option>
-												      			<?php
-												      		}
-												      	?>
-													</select>
-												</div>												
+																							
 												<div class="mb-3">
 													<label>Status</label>
 													<select name="status" class="form-select">
@@ -381,6 +423,9 @@
 					else if( $do == "Store" ) {
 						if ( isset($_POST['addSubCat']) ) {
 							$subname 		= mysqli_real_escape_string($db, $_POST['subname']);
+							$ow_name 		= mysqli_real_escape_string($db, $_POST['ow_name']);
+							$ow_email 		= mysqli_real_escape_string($db, $_POST['ow_email']);
+							$ow_phone 		= mysqli_real_escape_string($db, $_POST['ow_phone']);
 							$location 		= mysqli_real_escape_string($db, $_POST['location']);
 							$price 			= mysqli_real_escape_string($db, $_POST['price']);
 							$bed 			= mysqli_real_escape_string($db, $_POST['bed']);
@@ -489,7 +534,7 @@
 							$slug = createSlug($subname);
 							// End: For Slug Making
 
-							$addSubCategorySql = "INSERT INTO subcategory ( subcat_name, slug, is_parent, location, price, bed, kitchen, washroom, totalroom, area_size, floor, short_desc, long_desc, img_one, img_two, img_three, img_four, img_five, img_six, status, join_date ) VALUES ( '$subname', '$slug', '$is_parent', '$location', '$price', '$bed', '$kitchen', '$washroom', '$totalRoom', '$areaSize', '$floor', '$sdesc', '$ldesc', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$status', now() )";
+							$addSubCategorySql = "INSERT INTO subcategory ( subcat_name, slug, is_parent, ow_name, ow_email, ow_phone, location, price, bed, kitchen, washroom, totalroom, area_size, floor, short_desc, long_desc, img_one, img_two, img_three, img_four, img_five, img_six, status, join_date ) VALUES ( '$subname', '$slug', '$is_parent', '$ow_name', '$ow_email', '$ow_phone', '$location', '$price', '$bed', '$kitchen', '$washroom', '$totalRoom', '$areaSize', '$floor', '$sdesc', '$ldesc', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$status', now() )";
 							$addQuery = mysqli_query ( $db, $addSubCategorySql );
 
 							if ( $addQuery ) {
