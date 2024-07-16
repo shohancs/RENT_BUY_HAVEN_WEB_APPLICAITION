@@ -78,7 +78,11 @@
 										  <tbody>
 										  	<?php  
 
-										  		$subcategorySql = "SELECT * FROM subcategory WHERE status = 1 ORDER BY subcat_name ASC";
+										  		$subcategorySql = "SELECT subcategory.*
+FROM subcategory
+JOIN category ON subcategory.category_name = category.name
+WHERE subcategory.status = 1 AND category.status = 1
+ORDER BY category.name, subcategory.subcat_name ASC;";
 										  		$subcategoryQuery = mysqli_query( $db, $subcategorySql );
 										  		$subcategoryCount = mysqli_num_rows($subcategoryQuery);
 
@@ -92,9 +96,10 @@
 																
 										  			while ( $row = mysqli_fetch_assoc( $subcategoryQuery ) ) {
 										  				$sub_id  		= $row['sub_id'];
+										  				$is_parent  	= $row['is_parent'];
 										  				$subcat_name  	= $row['subcat_name'];
 										  				$slug  			= $row['slug'];
-										  				$is_parent  	= $row['is_parent'];
+										  				$category_name  = $row['category_name'];
 										  				$ow_name  		= $row['ow_name'];
 										  				$ow_email  		= $row['ow_email'];
 										  				$ow_phone  		= $row['ow_phone'];
@@ -135,7 +140,7 @@
 														      <td class="text-center"><?php echo substr($slug, 0, 10); ?>...</td>
 														      <td class="text-center">
 														      	<?php  
-														      		$catSql = "SELECT * FROM category WHERE cat_id='$is_parent'";
+														      		$catSql = "SELECT * FROM category WHERE cat_id='$category_name'";
 														      		$catQuery = mysqli_query($db, $catSql);
 
 														      		while ( $row = mysqli_fetch_assoc($catQuery) ) {

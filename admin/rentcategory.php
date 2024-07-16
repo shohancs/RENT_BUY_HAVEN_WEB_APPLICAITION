@@ -22,7 +22,7 @@
 									<ol class="breadcrumb mb-0 p-0">
 										<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
 										</li>
-										<li class="breadcrumb-item active" aria-current="page">All Category list</li>
+										<li class="breadcrumb-item active" aria-current="page">All Rent Category list</li>
 									</ol>
 								</nav>
 							</div>
@@ -31,10 +31,10 @@
 								<div class="btn-group">
 									<div class="row row-cols-auto g-3">
 										<div class="col">
-											<a href="category.php?do=Add" class="btn btn-dark px-5">Add New Category</a>
+											<a href="rentcategory.php?do=Add" class="btn btn-dark px-5">Add New Rent Category</a>
 										</div>
 										<div class="col">
-											<a href="category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
+											<a href="rentcategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 										</div>									
 									</div>
 								</div>
@@ -43,7 +43,7 @@
 						</div>
 						<!--end breadcrumb-->
 
-						<h6 class="mb-0 text-uppercase">ALL CATEGORY LIST</h6>
+						<h6 class="mb-0 text-uppercase">ALL RENT CATEGORY LIST</h6>
 						<hr>
 						<div class="card">
 							<div class="card-body">
@@ -55,9 +55,10 @@
 										    <tr>
 										      <th scope="col" class="text-center">#Sl.</th>
 										      <th scope="col" class="text-center">Image</th>
-										      <th scope="col" class="text-center">Category Name</th>
+										      <th scope="col" class="text-center">Rent Category Name</th>
 										      <th scope="col" class="text-center">Slug</th>
 										      <th scope="col" class="text-center">Quantity</th>
+										      <th scope="col" class="text-center">Is Parent</th>
 										      <th scope="col" class="text-center">Status</th>
 										      <th scope="col" class="text-center">Join Date</th>
 										      <th scope="col" class="text-center">Action</th>
@@ -67,11 +68,11 @@
 										  <tbody>
 										  	<?php  
 
-										  		$categorySql = "SELECT * FROM category WHERE status = 1 ORDER BY name ASC";
-										  		$categoryQuery = mysqli_query( $db, $categorySql );
-										  		$categoryCount = mysqli_num_rows($categoryQuery);
+										  		$rentcategorySql = "SELECT * FROM rent_category WHERE status = 1 ORDER BY name ASC";
+										  		$rentcategoryQuery = mysqli_query( $db, $rentcategorySql );
+										  		$rentcategoryCount = mysqli_num_rows($rentcategoryQuery);
 
-										  		if ( $categoryCount == 0 ) { ?>
+										  		if ( $rentcategoryCount == 0 ) { ?>
 										  			<div class="alert alert-danger text-center" role="alert">
 													  Sorry!! No data found in this datatable.
 													</div>
@@ -79,10 +80,11 @@
 										  		else {
 										  			$i = 0;
 
-										  			while ( $row = mysqli_fetch_assoc( $categoryQuery ) ) {
+										  			while ( $row = mysqli_fetch_assoc( $rentcategoryQuery ) ) {
 										  				$cat_id  		= $row['cat_id'];
 										  				$name  			= $row['name'];
-										  				$slug  			= $row['slug'];
+										  				$slug  			= $row['slug'];										  				
+										  				$is_parent  	= $row['is_parent'];
 										  				$description 	= $row['description'];
 										  				$image  		= $row['image'];
 										  				$status  		= $row['status'];
@@ -95,7 +97,7 @@
 														      <td class="text-center">
 														      	<?php  
 														      		if ( !empty( $image ) ) { 
-																		echo '<img src="assets/images/category/' . $image . '" alt="" style="width: 60px;">';
+																		echo '<img src="assets/images/rentcategory/' . $image . '" alt="" style="width: 60px;">';
 														      		}
 														      		else { 
 																		echo '<img src="assets/images/dummy.jpg" alt="" style="width: 60px;">';
@@ -104,7 +106,20 @@
 														      </td>
 														      <td class="text-center"><?php echo $name; ?></td>
 														      <td class="text-center"><?php echo $slug; ?></td>
-														      <td class="text-center">quantity</td>
+														      
+														      <td class="text-center">
+														      	quantity
+														      </td>
+														      <td class="text-center">
+														      	<?php  
+														      		if ($is_parent == 1) { ?>
+														      			<span class="badge text-bg-primary">Parent</span>
+														      		<?php }
+														      		else {
+														      			echo "Not Parent";
+														      		}
+														      	?>
+														      </td>
 														      <td class="text-center">
 														      	<?php  
 														      		if ($status == 1) { ?>
@@ -120,7 +135,7 @@
 														      	<div class="action-btn">
 														      		<ul>
 														      			<li>
-														      				<a href="category.php?do=Edit&editId=<?php echo $cat_id; ?>" class="btn btn-outline-primary" style="margin: 0 15px;"><i class="fa-solid fa-pencil"></i> Edit</a> 
+														      				<a href="rentcategory.php?do=Edit&editId=<?php echo $cat_id; ?>" class="btn btn-outline-primary" style="margin: 0 15px;"><i class="fa-solid fa-pencil"></i> Edit</a> 
 														      				<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#tId<?php echo $cat_id; ?>"><i class="fa-regular fa-eye-slash"></i> Disable</a>
 														      			</li>
 														      		</ul>
@@ -140,7 +155,7 @@
 																      <div class="modal-footer justify-content-around">
 																      	<ul>
 																      		<li>
-																      			<a href="category.php?do=Trash&tData=<?php echo $cat_id; ?>" class="btn btn-primary">Yes</a>
+																      			<a href="rentcategory.php?do=Trash&tData=<?php echo $cat_id; ?>" class="btn btn-primary">Yes</a>
 																      			<a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
 																      		</li>
 																      	</ul>
@@ -176,7 +191,7 @@
 									<ol class="breadcrumb mb-0 p-0">
 										<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
 										</li>
-										<li class="breadcrumb-item active" aria-current="page">Category Create</li>
+										<li class="breadcrumb-item active" aria-current="page">Rent Category Create</li>
 									</ol>
 								</nav>
 							</div>
@@ -185,10 +200,10 @@
 								<div class="btn-group">
 									<div class="row row-cols-auto g-3">
 										<div class="col">
-											<a href="category.php?do=Manage" class="btn btn-dark px-5">All Category</a>
+											<a href="rentcategory.php?do=Manage" class="btn btn-dark px-5">All Rent Category</a>
 										</div>
 										<div class="col">
-											<a href="category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
+											<a href="rentcategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 										</div>									
 									</div>
 								</div>
@@ -197,17 +212,17 @@
 						</div>
 						<!--end breadcrumb-->
 
-						<h6 class="mb-0 text-uppercase">Add New Category</h6>
+						<h6 class="mb-0 text-uppercase">Add New Rent Category</h6>
 						<hr>
 						<div class="card">
 							<div class="card-body">
 								<div class="border p-3 radius-10">
 									<!-- START : FORM -->
-									<form action="category.php?do=Store" method="POST" enctype="multipart/form-data">
+									<form action="rentcategory.php?do=Store" method="POST" enctype="multipart/form-data">
 										<div class="row">
 											<div class="col-lg-6">
 												<div class="mb-3">
-													<label>Category Name</label>
+													<label>Rent Category Name</label>
 													<input type="text" name="name" class="form-control" required autocomplete="off" placeholder="enter category name..">
 												</div>
 												<div class="mb-3">
@@ -232,7 +247,7 @@
 
 												<div class="mb-3">
 													<div class="d-grid gap-2">
-														<input type="submit" name="addCat" class="btn btn-dark px-5" value="Add Category">
+														<input type="submit" name="addRentCat" class="btn btn-dark px-5" value="Add Rent Category">
 													</div>											
 												</div>
 											</div>
@@ -245,7 +260,7 @@
 					<?php }
 
 					else if( $do == "Store" ) {
-						if ( isset($_POST['addCat']) ) {
+						if ( isset($_POST['addRentCat']) ) {
 							$name 			= mysqli_real_escape_string($db, $_POST['name']);
 							$description 	= mysqli_real_escape_string($db, $_POST['description']);
 							$status 		= mysqli_real_escape_string($db, $_POST['status']);
@@ -254,7 +269,7 @@
 
 							if ( !empty($catImg) ) {
 								$img = rand( 0, 999999 ) . "_" . $catImg;
-								move_uploaded_file($tmpImg, 'assets/images/category/' . $img);
+								move_uploaded_file($tmpImg, 'assets/images/rentcategory/' . $img);
 							}
 							else {
 								$img = '';
@@ -282,11 +297,11 @@
 							$slug = createSlug($name);
 							// End: For Slug Making
 
-							$addCategorySql = "INSERT INTO category ( name, slug, description, image, status, join_date ) VALUES ( '$name', '$slug', '$description', '$img', '$status', now() )";
-							$addQuery = mysqli_query ( $db, $addCategorySql );
+							$addRentCategorySql = "INSERT INTO rent_category ( name, slug, description, image, status, join_date ) VALUES ( '$name', '$slug', '$description', '$img', '$status', now() )";
+							$addRentQuery = mysqli_query ( $db, $addRentCategorySql );
 
-							if ( $addQuery ) {
-							  	header( "Location: category.php?do=Manage" );
+							if ( $addRentQuery ) {
+							  	header( "Location: rentcategory.php?do=Manage" );
 							}  
 							else {
 								die( "Mysql Error." . mysqli_error($db) );
@@ -300,7 +315,7 @@
 					else if( $do == "Edit" ) {
 						if ( isset($_GET['editId']) ) {
 							$editIdStore = $_GET['editId'];
-							$editSql = "SELECT * FROM category WHERE cat_id='$editIdStore'";
+							$editSql = "SELECT * FROM rent_category WHERE cat_id='$editIdStore'";
 							$editQuery = mysqli_query( $db, $editSql );
 
 							while ( $row = mysqli_fetch_assoc( $editQuery ) ) {
@@ -319,7 +334,7 @@
 											<ol class="breadcrumb mb-0 p-0">
 												<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
 												</li>
-												<li class="breadcrumb-item active" aria-current="page">Category Edit</li>
+												<li class="breadcrumb-item active" aria-current="page">Rent Category Edit</li>
 											</ol>
 										</nav>
 									</div>
@@ -328,13 +343,13 @@
 										<div class="btn-group">
 											<div class="row row-cols-auto g-3">
 												<div class="col">
-													<a href="category.php?do=Manage" class="btn btn-dark px-5">All Category</a>
+													<a href="rent_category.php?do=Manage" class="btn btn-dark px-5">All Rent Category</a>
 												</div>
 												<div class="col">
-													<a href="category.php?do=Add" class="btn btn-primary px-5">Add New Category</a>
+													<a href="rent_category.php?do=Add" class="btn btn-primary px-5">Add New Rent Category</a>
 												</div>
 												<div class="col">
-													<a href="category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
+													<a href="rent_category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 												</div>									
 											</div>
 										</div>
@@ -343,13 +358,13 @@
 								</div>
 								<!--end breadcrumb-->
 
-								<h6 class="mb-0 text-uppercase">Edit Category Info</h6>
+								<h6 class="mb-0 text-uppercase">Edit Rent Category Info</h6>
 								<hr>
 								<div class="card">
 									<div class="card-body">
 										<div class="border p-3 radius-10">
 											<!-- START : FORM -->
-											<form action="category.php?do=Update" method="POST" enctype="multipart/form-data">
+											<form action="rentcategory.php?do=Update" method="POST" enctype="multipart/form-data">
 												<div class="row">
 													<div class="col-lg-6">
 														<div class="mb-3">
@@ -375,7 +390,7 @@
 															<label>Category Logo</label> <br><br>
 															<?php  
 																if (!empty( $image )) {
-																	echo '<img src="assets/images/category/' . $image . '" alt="" style="width: 100px;">';
+																	echo '<img src="assets/images/rentcategory/' . $image . '" alt="" style="width: 100px;">';
 																}
 																else {
 																	echo '<h5>No Image Uploaded!!</h5>';
@@ -388,7 +403,7 @@
 														<div class="mb-3">
 															<div class="d-grid gap-2">
 																<input type="hidden" name="updateId" value="<?php echo $cat_id; ?>">
-																<input type="submit" name="updateCat" class="btn btn-dark px-5" value="Update Category">
+																<input type="submit" name="updateRentCat" class="btn btn-dark px-5" value="Update Rent Category">
 															</div>											
 														</div>
 													</div>
@@ -406,7 +421,7 @@
 
 					else if( $do == "Update" ) {
 
-						if (isset( $_POST['updateCat'] )) {
+						if (isset( $_POST['updateRentCat'] )) {
 
 							$updateIdStore 	= mysqli_real_escape_string($db, $_POST['updateCat']);
 							$updateId 		= mysqli_real_escape_string($db, $_POST['updateId']);
@@ -417,16 +432,16 @@
 							$tmpImg			= $_FILES['image']['tmp_name'];
 
 							if ( !empty($catImage) ) {
-								$oldImageSql = "SELECT * FROM category WHERE cat_id='$updateId'";
+								$oldImageSql = "SELECT * FROM rent_category WHERE cat_id='$updateId'";
 								$oldImageQuery = mysqli_query( $db, $oldImageSql );
 
 								while ( $row = mysqli_fetch_assoc( $oldImageQuery ) ) {
 									$catOldImg = $row['image'];	
-									unlink("assets/images/category/$img" . $catOldImg);
+									unlink("assets/images/rentcategory/$img" . $catOldImg);
 								} 
 
 								$img = rand( 0, 999999 ) . "_" . $catImage;
-								move_uploaded_file($tmpImg, 'assets/images/category/' . $img);
+								move_uploaded_file($tmpImg, 'assets/images/rentcategory/' . $img);
 
 								// Start: For Slug Making
 								function createSlug( $name ) {
@@ -450,11 +465,11 @@
 								$slug = createSlug($name);
 								// End: For Slug Making
 
-								$updateSql = "UPDATE category SET name='$name', slug='$slug', description='$description', image='$img', status='$status', join_date=now() WHERE cat_id='$updateId'";
-								$updateQuery = mysqli_query( $db, $updateSql );
+								$updateRentSql = "UPDATE rent_category SET name='$name', slug='$slug', description='$description', image='$img', status='$status', join_date=now() WHERE cat_id='$updateId'";
+								$updateRentQuery = mysqli_query( $db, $updateRentSql );
 
-								if ($updateQuery) {
-									header("Location: category.php?do=Manage");
+								if ($updateRentQuery) {
+									header("Location: rentcategory.php?do=Manage");
 								}
 								else {
 									die ( "Mysqli Error." . mysqli_error($db) );
@@ -490,11 +505,11 @@
 								$slug = createSlug($name);
 								// End: For Slug Making
 
-								$updateSql = "UPDATE category SET name='$name', slug='$slug', description='$description', status='$status', join_date=now() WHERE cat_id='$updateId'";
-								$updateQuery = mysqli_query( $db, $updateSql );
+								$updateRentSql = "UPDATE rent_category SET name='$name', slug='$slug', description='$description', status='$status', join_date=now() WHERE cat_id='$updateId'";
+								$updateRentQuery = mysqli_query( $db, $updateRentSql );
 
-								if ($updateQuery) {
-									header("Location: category.php?do=Manage");
+								if ($updateRentQuery) {
+									header("Location: rentcategory.php?do=Manage");
 								}
 								else {
 									die ( "Mysqli Error." . mysqli_error($db) );
@@ -508,11 +523,11 @@
 					else if( $do == "Trash" ) {
 						if (isset($_GET['tData'])) {
 							$trashId = $_GET['tData'];
-							$trashSql = "UPDATE category SET status=0 WHERE cat_id='$trashId'";
+							$trashSql = "UPDATE rent_category SET status=0 WHERE cat_id='$trashId'";
 							$trashQuery = mysqli_query($db, $trashSql);
 
 							if ($trashQuery) {
-								header("Location: category.php?do=Manage");
+								header("Location: rentcategory.php?do=Manage");
 							}
 							else {
 								die("MySql Error." . mysqli_error($db));
@@ -523,13 +538,13 @@
 					else if( $do == "ManageTrash" ) { ?>
 						<!--breadcrumb-->
 						<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-							<div class="breadcrumb-title pe-3">Manage Trash</div>
+							<div class="breadcrumb-title pe-3">Manage Rent Trash</div>
 							<div class="ps-3">
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb mb-0 p-0">
 										<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
 										</li>
-										<li class="breadcrumb-item active" aria-current="page">Trash Category list</li>
+										<li class="breadcrumb-item active" aria-current="page">Trash Rent Category list</li>
 									</ol>
 								</nav>
 							</div>
@@ -538,10 +553,10 @@
 								<div class="btn-group">
 									<div class="row row-cols-auto g-3">
 										<div class="col">
-											<a href="category.php?do=Manage" class="btn btn-primary px-5">All Category</a>
+											<a href="rentcategory.php?do=Manage" class="btn btn-primary px-5">All Rent Category</a>
 										</div>
 										<div class="col">
-											<a href="category.php?do=Add" class="btn btn-dark px-5">Add New Category</a>
+											<a href="rentcategory.php?do=Add" class="btn btn-dark px-5">Add New Rent Category</a>
 										</div>									
 									</div>
 								</div>
@@ -550,7 +565,7 @@
 						</div>
 						<!--end breadcrumb-->
 
-						<h6 class="mb-0 text-uppercase">TRASH CATEGORY LIST</h6>
+						<h6 class="mb-0 text-uppercase">TRASH Rent CATEGORY LIST</h6>
 						<hr>
 						<div class="card">
 							<div class="card-body">
@@ -565,6 +580,7 @@
 										      <th scope="col" class="text-center">Category Name</th>
 										      <th scope="col" class="text-center">Slug</th>
 										      <th scope="col" class="text-center">Quantity</th>
+										      <th scope="col" class="text-center">Is Parent</th>
 										      <th scope="col" class="text-center">Status</th>
 										      <th scope="col" class="text-center">Action</th>
 										    </tr>
@@ -573,11 +589,11 @@
 										  <tbody>
 										  	<?php  
 
-										  		$categorySql = "SELECT * FROM category WHERE status = 0 ORDER BY name ASC";
-										  		$categoryQuery = mysqli_query( $db, $categorySql );
-										  		$categoryCount = mysqli_num_rows($categoryQuery);
+										  		$categoryRentSql = "SELECT * FROM rent_category WHERE status = 0 ORDER BY name ASC";
+										  		$categoryRentQuery = mysqli_query( $db, $categoryRentSql );
+										  		$categoryRentCount = mysqli_num_rows($categoryRentQuery);
 
-										  		if ( $categoryCount == 0 ) { ?>
+										  		if ( $categoryRentCount == 0 ) { ?>
 										  			<div class="alert alert-danger text-center" role="alert">
 													  Sorry!! No data found in this datatable.
 													</div>
@@ -585,12 +601,13 @@
 										  		else {
 										  			$i = 0;
 
-										  			while ( $row = mysqli_fetch_assoc( $categoryQuery ) ) {
+										  			while ( $row = mysqli_fetch_assoc( $categoryRentQuery ) ) {
 										  				$cat_id  		= $row['cat_id'];
 										  				$name  			= $row['name'];
 										  				$slug  			= $row['slug'];
 										  				$description 	= $row['description'];
 										  				$image  		= $row['image'];
+										  				$is_parent  	= $row['is_parent'];
 										  				$status  		= $row['status'];
 										  				$i++;
 										  				?>
@@ -600,7 +617,7 @@
 														      <td class="text-center">
 														      	<?php  
 														      		if ( !empty( $image ) ) { 
-																		echo '<img src="assets/images/category/' . $image . '" alt="" style="width: 60px;">';
+																		echo '<img src="assets/images/rentcategory/' . $image . '" alt="" style="width: 60px;">';
 														      		}
 														      		else { 
 																		echo '<img src="assets/images/dummy.jpg" alt="" style="width: 60px;">';
@@ -610,6 +627,13 @@
 														      <td class="text-center"><?php echo $name; ?></td>
 														      <td class="text-center"><?php echo $slug; ?></td>
 														      <td class="text-center">quantity</td>
+														      <td class="text-center">
+														      	<?php  
+														      		if ($is_parent == 1) { ?>
+														      			<span class="badge text-bg-primary">Parent</span>
+														      		<?php }
+														      	?>
+														      </td>
 														      <td class="text-center">
 														      	<?php  
 														      		if ($status == 1) { ?>
@@ -624,8 +648,8 @@
 														      	<div class="action-btn">
 														      		<ul>
 														      			<li>
-														      				<a href="category.php?do=Edit&editId=<?php echo $cat_id; ?>" class="btn btn-outline-primary"><i class="fa-solid fa-pencil"></i> Edit</a> 
-														      				<a href="category.php?do=ManageActive&activeId=<?php echo $cat_id; ?>" class="btn btn-outline-success" style="margin: 0 15px;"><i class="fa-solid fa-file-circle-check"></i> Active</a> 
+														      				<a href="rentcategory.php?do=Edit&editId=<?php echo $cat_id; ?>" class="btn btn-outline-primary"><i class="fa-solid fa-pencil"></i> Edit</a> 
+														      				<a href="rentcategory.php?do=ManageActive&activeId=<?php echo $cat_id; ?>" class="btn btn-outline-success" style="margin: 0 15px;"><i class="fa-solid fa-file-circle-check"></i> Active</a> 
 														      				<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#dId<?php echo $cat_id; ?>"><i class="fa-regular fa-eye-slash"></i> Delete</a>
 														      			</li>
 														      		</ul>
@@ -645,7 +669,7 @@
 																      <div class="modal-footer justify-content-around">
 																      	<ul>
 																      		<li>
-																      			<a href="category.php?do=Delete&dData=<?php echo $cat_id; ?>" class="btn btn-primary">Yes</a>
+																      			<a href="rentcategory.php?do=Delete&dData=<?php echo $cat_id; ?>" class="btn btn-primary">Yes</a>
 																      			<a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
 																      		</li>
 																      	</ul>
@@ -675,11 +699,11 @@
 					else if ( $do == "ManageActive" ) {
 						if ( isset($_GET['activeId']) ) {
 							$acId = $_GET['activeId'];
-							$activeSql = "UPDATE category SET status=1 WHERE cat_id='$acId'";
+							$activeSql = "UPDATE rent_category SET status=1 WHERE cat_id='$acId'";
 							$activeQuery = mysqli_query($db, $activeSql);
 
 							if ($activeQuery) {
-								header("Location: category.php?do=Manage");
+								header("Location: rentcategory.php?do=Manage");
 							}
 							else {
 								die("Mysqli_Error" . mysqli_error($db));
@@ -690,11 +714,11 @@
 					else if( $do == "Delete" ) {
 						if (isset($_GET['dData'])) {
 							$deleteData = $_GET['dData'];
-							$deleteSQL = "DELETE FROM category WHERE cat_id='$deleteData' ";
+							$deleteSQL = "DELETE FROM rent_category WHERE cat_id='$deleteData' ";
 							$deleteQuery = mysqli_query($db, $deleteSQL);
 
 							if ($deleteQuery) {
-								header("Location: category.php?do=ManageTrash");
+								header("Location: rentcategory.php?do=ManageTrash");
 							}
 							else {
 								die("Mysqli_Error" . mysqli_error($db));

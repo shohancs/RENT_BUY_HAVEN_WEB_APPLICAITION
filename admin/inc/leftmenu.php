@@ -26,10 +26,10 @@
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-category'></i>
 						</div>
-						<div class="menu-title">Category</div>
+						<div class="menu-title">Rent Category</div>
 					</a>
 					<ul>
-						<li> <a href="category.php?do=Manage"><i class="bx bx-radio-circle"></i>All Parent Categories</a>
+						<li> <a href="rentcategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Parent Categories</a>
 						</li>
 						<li> <a href="subCategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Sub Categories</a>
 						</li>
