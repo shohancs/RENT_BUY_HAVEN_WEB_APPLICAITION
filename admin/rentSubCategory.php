@@ -31,10 +31,10 @@
 								<div class="btn-group">
 									<div class="row row-cols-auto g-3">
 										<div class="col">
-											<a href="subCategory.php?do=Add" class="btn btn-dark px-5">Add New Sub Category</a>
+											<a href="rentSubCategory.php?do=Add" class="btn btn-dark px-5">Add New Sub Category</a>
 										</div>
 										<div class="col">
-											<a href="subCategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
+											<a href="rentSubCategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 										</div>									
 									</div>
 								</div>
@@ -76,58 +76,59 @@
 										  </thead>
 
 										  <tbody>
+
 										  	<?php  
+										  		$rentcategorySql = "SELECT * FROM rent_category WHERE status = 1 ORDER BY name ASC";
+										  		$rentcategoryQuery = mysqli_query( $db, $rentcategorySql );
 
-										  		$subcategorySql = "SELECT subcategory.*
-FROM subcategory
-JOIN category ON subcategory.category_name = category.name
-WHERE subcategory.status = 1 AND category.status = 1
-ORDER BY category.name, subcategory.subcat_name ASC;";
-										  		$subcategoryQuery = mysqli_query( $db, $subcategorySql );
-										  		$subcategoryCount = mysqli_num_rows($subcategoryQuery);
+										  		while ( $row = mysqli_fetch_assoc( $rentcategoryQuery ) ) {
+										  			$cat_id  		= $row['cat_id'];
+										  			$cat_name  		= $row['name'];
 
-										  		if ( $subcategoryCount == 0 ) { ?>
-										  			<div class="alert alert-danger text-center" role="alert">
-													  Sorry!! No data found in this datatable.
-													</div>
-										  		<?php }
-										  		else {
-										  			$i = 0;
-																
-										  			while ( $row = mysqli_fetch_assoc( $subcategoryQuery ) ) {
-										  				$sub_id  		= $row['sub_id'];
-										  				$is_parent  	= $row['is_parent'];
-										  				$subcat_name  	= $row['subcat_name'];
-										  				$slug  			= $row['slug'];
-										  				$category_name  = $row['category_name'];
-										  				$ow_name  		= $row['ow_name'];
-										  				$ow_email  		= $row['ow_email'];
-										  				$ow_phone  		= $row['ow_phone'];
-										  				$location  		= $row['location'];
-										  				$price 			= $row['price'];
-										  				$bed  			= $row['bed'];
-										  				$kitchen  		= $row['kitchen'];
-										  				$washroom  		= $row['washroom'];
-										  				$totalroom  	= $row['totalroom'];
-										  				$area_size  	= $row['area_size'];
-										  				$floor  		= $row['floor'];
-										  				$short_desc  	= $row['short_desc'];
-										  				$long_desc  	= $row['long_desc'];
-										  				$img_one  		= $row['img_one'];
-										  				$img_two  		= $row['img_two'];
-										  				$img_three  	= $row['img_three'];
-										  				$img_four  		= $row['img_four'];
-										  				$img_five  		= $row['img_five'];
-										  				$img_six  		= $row['img_six'];
-										  				$status  		= $row['status'];
-										  				$join_date  	= $row['join_date'];
-										  				$i++;
-										  				?>
-										  				
-										  					<tr>
-														      <th scope="row" class="text-center"><?php echo $i; ?></th>
-														      <td class="text-center">
-														      	<?php  
+											  		$childSql = "SELECT * FROM rent_subcategory WHERE is_parent ='$cat_id' AND status=1 ORDER BY subcat_name ASC";
+											  		$childQuery = mysqli_query( $db, $childSql );
+											  		$childSqlCount = mysqli_num_rows($childQuery);
+
+											  		if ($childSqlCount == 0) { ?>
+											  			<div class="alert alert-danger text-center" role="alert">
+														  Sorry!! No data found in this datatable.
+														</div>
+											  		<?php }
+											  		else {
+											  			$i=0;
+
+												  		while( $row = mysqli_fetch_assoc($childQuery) ) {
+									  						$sub_id 		= $row['sub_id'];
+															$is_parent		= $row['is_parent'];
+															$subcat_name	= $row['subcat_name'];
+															$slug 			= $row['slug'];
+															$ow_name		= $row['ow_name'];
+															$ow_email		= $row['ow_email'];
+															$ow_phone		= $row['ow_phone'];
+															$location		= $row['location'];
+															$price			= $row['price'];
+															$bed			= $row['bed'];
+															$kitchen		= $row['kitchen'];
+															$washroom		= $row['washroom'];
+															$totalroom		= $row['totalroom'];
+															$area_size		= $row['area_size'];
+															$floor			= $row['floor'];
+															$short_desc		= $row['short_desc'];
+															$long_desc		= $row['long_desc'];
+															$img_one		= $row['img_one'];
+															$img_two		= $row['img_two'];
+															$img_three		= $row['img_three'];
+															$img_four		= $row['img_four'];
+															$img_five		= $row['img_five'];
+															$img_six		= $row['img_six'];
+															$status 		= $row['status'];
+															$join_date 		= $row['join_date'];
+															$i++;
+															?>
+															<tr>
+														  		<th scope="row" class="text-center"><?php echo $i; ?></th>
+														  		<td class="text-center">
+														  			<?php  
 														      		if ( !empty( $img_one ) ) { 
 																		echo '<img src="assets/images/subcategory/' . $img_one . '" alt="" style="width: 60px;">';
 														      		}
@@ -135,35 +136,22 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 																		echo '<img src="assets/images/dummy.jpg" alt="" style="width: 60px;">';
 														      		}
 														      	?>
-														      </td>
-														      <td class="text-center"><?php echo $subcat_name; ?></td>
-														      <td class="text-center"><?php echo substr($slug, 0, 10); ?>...</td>
-														      <td class="text-center">
-														      	<?php  
-														      		$catSql = "SELECT * FROM category WHERE cat_id='$category_name'";
-														      		$catQuery = mysqli_query($db, $catSql);
-
-														      		while ( $row = mysqli_fetch_assoc($catQuery) ) {
-														      			$cat_id = $row['cat_id'];
-														      			$catname = $row['name'];
-														      			?>
-														      			<span class="badge rounded-pill text-bg-primary"><?php echo $catname; ?></span>
-														      			<?php														      			
-														      		}
-														      	?>
-														      </td>
-														      <td class="text-center"><?php echo $ow_name; ?></td>
-														      <td class="text-center"><?php echo $ow_email; ?></td>
-														      <td class="text-center"><?php echo $ow_phone; ?></td>
-														      <td class="text-center"><?php echo substr($location, 0, 20) ; ?>...</td>
-														      <td class="text-center"><?php echo $price; ?>৳</td>
-														      <td class="text-center"><?php echo $bed; ?></td>
-														      <td class="text-center"><?php echo $kitchen; ?></td>
-														      <td class="text-center"><?php echo $washroom; ?></td>
-														      <td class="text-center"><?php echo $totalroom; ?></td>
-														      <td class="text-center"><?php echo $area_size; ?> sqft</td>
-														      <td class="text-center"><?php echo $floor; ?></td>
-														      <td class="text-center">
+														  		</td>
+														  		<td class="text-center"> <?php echo $subcat_name; ?></td>
+														  		<td class="text-center"> <?php echo substr($slug, 0, 10); ?>..</td>
+														  		<td class="text-center"><span class="badge rounded-pill text-bg-primary"><?php echo $cat_name; ?></span></td>
+														  		<td class="text-center"><?php echo $ow_name; ?></td>
+														  		<td class="text-center"><?php echo $ow_email; ?></td>
+														  		<td class="text-center"><?php echo $ow_phone; ?></td>
+														  		<td class="text-center"><?php echo substr($location, 0, 10); ?>..</td>
+														  		<td class="text-center"><?php echo $price; ?> ৳</td>
+														  		<td class="text-center"><?php echo $bed; ?></td>
+														  		<td class="text-center"><?php echo $kitchen; ?></td>
+														  		<td class="text-center"><?php echo $washroom; ?></td>
+														  		<td class="text-center"><?php echo $totalroom; ?></td>
+														  		<td class="text-center"><?php echo $area_size; ?> sqft</td>
+														  		<td class="text-center"><?php echo $floor; ?></td>
+														  		<td class="text-center">
 														      	<?php  
 														      		if ($status == 1) { ?>
 														      			<span class="badge text-bg-success">Active</span>
@@ -172,13 +160,13 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 														      			<span class="badge text-bg-danger">InActive</span>
 														      		<?php }
 														      	?>
-														      </td>
-														      <td class="text-center"><?php echo $join_date; ?></td>
-														      <td class="text-center">
+														      	</td>
+														  		<td class="text-center"><?php echo $join_date; ?></td>
+														  		<td class="text-center">
 														      	<div class="action-btn">
 														      		<ul>
 														      			<li>
-														      				<a href="subCategory.php?do=Edit&editId=<?php echo $sub_id; ?>" class="btn btn-outline-primary" style="margin: 0 15px;"><i class="fa-solid fa-pencil"></i> Edit</a> 
+														      				<a href="rentSubCategory.php?do=Edit&editId=<?php echo $sub_id; ?>" class="btn btn-outline-primary" style="margin: 0 15px;"><i class="fa-solid fa-pencil"></i> Edit</a> 
 														      				<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#tId<?php echo $sub_id; ?>"><i class="fa-regular fa-eye-slash"></i> Disable</a>
 														      			</li>
 														      		</ul>
@@ -193,12 +181,12 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 																        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 																      </div>
 																      <div class="modal-body">
-																      	<h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to disable <span style="color: red;"><?php echo $subcat_name; ?> </span>Sub Category?</h1>																        
+																      	<h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to disable Rent SubCategory <br><span style="color: red;"><?php echo $subcat_name; ?> </span>?</h1>																        
 																      </div>
 																      <div class="modal-footer justify-content-around">
 																      	<ul>
 																      		<li>
-																      			<a href="subCategory.php?do=Trash&tData=<?php echo $sub_id; ?>" class="btn btn-primary">Yes</a>
+																      			<a href="rentSubCategory.php?do=Trash&tData=<?php echo $sub_id; ?>" class="btn btn-primary">Yes</a>
 																      			<a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
 																      		</li>
 																      	</ul>
@@ -208,15 +196,17 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 																</div>
 														      	<!-- END: MODAL -->
 														      </td>
-														    </tr>
-										  				<?php
+														  	</tr>
+															<?php
+										  				}
 										  			}
-										  		}
-
-
+											  	}
+											  		
 										  	?>
-										    
+										  	
+										  	
 										  </tbody>
+										  
 										</table>
 									</div>							
 									<!-- END: DATATABLE -->	
@@ -243,10 +233,10 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 								<div class="btn-group">
 									<div class="row row-cols-auto g-3">
 										<div class="col">
-											<a href="subCategory.php?do=Manage" class="btn btn-dark px-5">All Sub Category</a>
+											<a href="rentSubCategory.php?do=Manage" class="btn btn-dark px-5">All Sub Category</a>
 										</div>
 										<div class="col">
-											<a href="subCategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
+											<a href="rentSubCategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 										</div>									
 									</div>
 								</div>
@@ -261,7 +251,7 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 							<div class="card-body">
 								<div class="border p-3 radius-10">
 									<!-- START : FORM -->
-									<form action="subCategory.php?do=Store" method="POST" enctype="multipart/form-data">
+									<form action="rentSubCategory.php?do=Store" method="POST" enctype="multipart/form-data">
 										<div class="row">
 											<div class="col-lg-6">
 												<div class="mb-3">
@@ -292,7 +282,7 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 															<select class="form-select" name="is_parent">
 																<option>Please Select the Category</option>
 																<?php  
-														      		$catSql = "SELECT * FROM category WHERE status=1";
+														      		$catSql = "SELECT * FROM rent_category WHERE status=1";
 														      		$catQuery = mysqli_query($db, $catSql);
 
 														      		while ( $row = mysqli_fetch_assoc($catQuery) ) {
@@ -539,11 +529,11 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 							$slug = createSlug($subname);
 							// End: For Slug Making
 
-							$addSubCategorySql = "INSERT INTO subcategory ( subcat_name, slug, is_parent, ow_name, ow_email, ow_phone, location, price, bed, kitchen, washroom, totalroom, area_size, floor, short_desc, long_desc, img_one, img_two, img_three, img_four, img_five, img_six, status, join_date ) VALUES ( '$subname', '$slug', '$is_parent', '$ow_name', '$ow_email', '$ow_phone', '$location', '$price', '$bed', '$kitchen', '$washroom', '$totalRoom', '$areaSize', '$floor', '$sdesc', '$ldesc', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$status', now() )";
+							$addSubCategorySql = "INSERT INTO rent_subcategory ( subcat_name, slug, is_parent, ow_name, ow_email, ow_phone, location, price, bed, kitchen, washroom, totalroom, area_size, floor, short_desc, long_desc, img_one, img_two, img_three, img_four, img_five, img_six, status, join_date ) VALUES ( '$subname', '$slug', '$is_parent', '$ow_name', '$ow_email', '$ow_phone', '$location', '$price', '$bed', '$kitchen', '$washroom', '$totalRoom', '$areaSize', '$floor', '$sdesc', '$ldesc', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$status', now() )";
 							$addQuery = mysqli_query ( $db, $addSubCategorySql );
 
 							if ( $addQuery ) {
-							  	header( "Location: subCategory.php?do=Manage" );
+							  	header( "Location: rentSubCategory.php?do=Manage" );
 							}  
 							else {
 								die( "Mysql Error." . mysqli_error($db) );
@@ -557,16 +547,35 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 					else if( $do == "Edit" ) {
 						if ( isset($_GET['editId']) ) {
 							$editIdStore = $_GET['editId'];
-							$editSql = "SELECT * FROM category WHERE cat_id='$editIdStore'";
+							$editSql = "SELECT * FROM rent_subcategory WHERE sub_id='$editIdStore'";
 							$editQuery = mysqli_query( $db, $editSql );
 
 							while ( $row = mysqli_fetch_assoc( $editQuery ) ) {
-								$cat_id  		= $row['cat_id'];
-				  				$name  			= $row['name'];
-				  				$slug  			= $row['slug'];
-				  				$description 	= $row['description'];
-				  				$image  		= $row['image'];
-				  				$status  		= $row['status'];
+								$sub_id 		= $row['sub_id'];
+								$is_parent		= $row['is_parent'];
+								$subcat_name	= $row['subcat_name'];
+								$slug 			= $row['slug'];
+								$ow_name		= $row['ow_name'];
+								$ow_email		= $row['ow_email'];
+								$ow_phone		= $row['ow_phone'];
+								$location		= $row['location'];
+								$price			= $row['price'];
+								$bed			= $row['bed'];
+								$kitchen		= $row['kitchen'];
+								$washroom		= $row['washroom'];
+								$totalroom		= $row['totalroom'];
+								$area_size		= $row['area_size'];
+								$floor			= $row['floor'];
+								$short_desc		= $row['short_desc'];
+								$long_desc		= $row['long_desc'];
+								$img_one		= $row['img_one'];
+								$img_two		= $row['img_two'];
+								$img_three		= $row['img_three'];
+								$img_four		= $row['img_four'];
+								$img_five		= $row['img_five'];
+								$img_six		= $row['img_six'];
+								$status 		= $row['status'];
+								$join_date 		= $row['join_date'];
 				  				?>
 				  				<!--breadcrumb-->
 								<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -576,7 +585,7 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 											<ol class="breadcrumb mb-0 p-0">
 												<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
 												</li>
-												<li class="breadcrumb-item active" aria-current="page">Category Edit</li>
+												<li class="breadcrumb-item active" aria-current="page">Rent Sub Category Edit</li>
 											</ol>
 										</nav>
 									</div>
@@ -585,13 +594,13 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 										<div class="btn-group">
 											<div class="row row-cols-auto g-3">
 												<div class="col">
-													<a href="category.php?do=Manage" class="btn btn-dark px-5">All Category</a>
+													<a href="rentSubCategory.php?do=Manage" class="btn btn-dark px-5">All Rent Category</a>
 												</div>
 												<div class="col">
-													<a href="category.php?do=Add" class="btn btn-primary px-5">Add New Category</a>
+													<a href="rentSubCategory.php?do=Add" class="btn btn-primary px-5">Add New Rent Category</a>
 												</div>
 												<div class="col">
-													<a href="category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
+													<a href="rentSubCategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 												</div>									
 											</div>
 										</div>
@@ -600,58 +609,232 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 								</div>
 								<!--end breadcrumb-->
 
-								<h6 class="mb-0 text-uppercase">Edit Category Info</h6>
+								<h6 class="mb-0 text-uppercase">Edit Rent Sub Category Info</h6>
 								<hr>
 								<div class="card">
 									<div class="card-body">
 										<div class="border p-3 radius-10">
 											<!-- START : FORM -->
-											<form action="category.php?do=Update" method="POST" enctype="multipart/form-data">
+									<form action="rentSubCategory.php?do=Store" method="POST" enctype="multipart/form-data">
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Sub Category Name</label>
+													<input type="text" name="subname" class="form-control" required autocomplete="off" placeholder="enter sub category name.." value="<?php echo $subcat_name; ?>">
+												</div>			
+												<div class="mb-3">
+													<label>Owner Name</label>
+													<input type="text" name="ow_name" class="form-control" required autocomplete="off" placeholder="enter owner name.." value="<?php echo $ow_name; ?>">
+												</div>	
+												<div class="mb-3">
+													<label>Owner Email</label>
+													<input type="email" name="ow_email" class="form-control" required autocomplete="off" placeholder="enter owner email.." value="<?php echo $ow_email; ?>">
+												</div>	
+												<div class="mb-3">
+													<label>Owner Phone No.</label>
+													<input type="phone" name="ow_phone" class="form-control" required autocomplete="off" placeholder="enter owner phone.." value="<?php echo $ow_phone; ?>">
+												</div>	
+												<div class="mb-3">
+													<label>Location</label>
+													<input type="text" name="location" class="form-control" required autocomplete="off" placeholder="enter location.." value="<?php echo $location; ?>">
+												</div>
+
 												<div class="row">
 													<div class="col-lg-6">
 														<div class="mb-3">
 															<label>Category Name</label>
-															<input type="text" name="name" class="form-control" required autocomplete="off" placeholder="enter category name.." value="<?php echo $name; ?>">
-														</div>
+															<select class="form-select" name="is_parent">
+																<option>Please Select the Category</option>
+																<?php  
+														      		$catSql = "SELECT * FROM rent_category WHERE status=1";
+														      		$catQuery = mysqli_query($db, $catSql);
+
+														      		while ( $row = mysqli_fetch_assoc($catQuery) ) {
+														      			$cat_id = $row['cat_id'];
+														      			$catname = $row['name'];
+														      			?>
+														      			<option value="<?php echo $cat_id ?>" <?php if ( $is_parent == $cat_id ) { echo "selected"; } ?>> - <?php echo $catname; ?></option>
+														      			<?php
+														      		}
+														      	?>
+															</select>
+														</div>	
+													</div>
+													<div class="col-lg-6">
 														<div class="mb-3">
-															<label>Category Description</label>
-															<textarea name="description" class="form-control" cols="30" rows="10" id="editor" placeholder="write category description..."><?php echo $description; ?></textarea>
+															<label>Price <sup>(Taka)</sup></label>
+															<input type="number" name="price" class="form-control" required autocomplete="off" placeholder="enter price.." value="<?php echo $price; ?>">
 														</div>
 													</div>
 													<div class="col-lg-6">
 														<div class="mb-3">
-															<label>Status</label>
-															<select name="status" class="form-select">
-																<option value="1">Please Select the Status</option>
-																<option value="1" <?php if( $status == 1 ) { echo "selected"; } ?>>Active</option>
-																<option value="0" <?php if( $status == 0 ) { echo "selected"; } ?>>InActive</option>
-															</select>
+															<label>Bed</label>
+															<input type="number" name="bed" class="form-control" required autocomplete="off" placeholder="enter number of bed.." value="<?php echo $bed; ?>">
 														</div>
-
+													</div>
+													<div class="col-lg-6">
 														<div class="mb-3">
-															<label>Category Logo</label> <br><br>
+															<label>Kitchen</label>
+															<input type="number" name="kitchen" class="form-control" required autocomplete="off" placeholder="enter number of kitchen.." value="<?php echo $kitchen; ?>">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Washroom</label>
+															<input type="number" name="washroom" class="form-control" required autocomplete="off" placeholder="enter number of washroom.." value="<?php echo $washroom; ?>">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Total Room</label>
+															<input type="number" name="totalRoom" class="form-control" required autocomplete="off" placeholder="enter number of total room.." value="<?php echo $totalroom; ?>">
+														</div>
+													</div>
+
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Area Size <sup>(Sq Ft)</sup></label>
+															<input type="number" name="areaSize" class="form-control" required autocomplete="off" placeholder="enter size of area.." value="<?php echo $area_size; ?>">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Floor Number <sup>(1st->2nd->3rd..)</sup></label>
+															<input type="number" name="floor" class="form-control" required autocomplete="off" placeholder="enter size of area.." value="<?php echo $floor; ?>">
+														</div>
+													</div>
+												</div>			
+												
+											</div>
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Short Description</label>
+													<textarea name="sdesc" class="form-control" cols="30" rows="10" id="editor" placeholder="write short description..."><?php echo $short_desc; ?></textarea>
+												</div>
+												<div class="mb-3">
+													<label>Long Description</label>
+													<textarea name="ldesc" class="form-control" cols="30" rows="10" id="editor1" placeholder="write long description..."><?php echo $long_desc; ?></textarea>
+												</div>
+																							
+												<div class="mb-3">
+													<label>Status</label>
+													<select name="status" class="form-select">
+														<option value="1">Please Select the Status</option>
+														<option value="1" <?php if ( $status == 1 ) { echo 'selected'; } ?>>Active</option>
+														<option value="0" <?php if ( $status == 0 ) { echo 'selected'; } ?>>InActive</option>
+													</select>
+												</div>
+
+												<div class="row">
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image One</label>
+															<br><br>
 															<?php  
-																if (!empty( $image )) {
-																	echo '<img src="assets/images/category/' . $image . '" alt="" style="width: 100px;">';
+																if (!empty( $img_one )) {
+																	echo '<img src="assets/images/subcategory/' . $img_one . '" alt="" style="width: 100%;">';
 																}
 																else {
 																	echo '<h5>No Image Uploaded!!</h5>';
 																}
 															?>
 															<br><br>
-															<input type="file" class="form-control" name="image">
-														</div>
-
-														<div class="mb-3">
-															<div class="d-grid gap-2">
-																<input type="hidden" name="updateId" value="<?php echo $cat_id; ?>">
-																<input type="submit" name="updateCat" class="btn btn-dark px-5" value="Update Category">
-															</div>											
+															<input type="file" class="form-control" name="img_one">
 														</div>
 													</div>
-												</div>								
-											</form>
-											<!-- END : FORM -->
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Two</label>
+															<br><br>
+															<?php  
+																if (!empty( $img_two )) {
+																	echo '<img src="assets/images/subcategory/' . $img_two . '" alt="" style="width: 100%;">';
+																}
+																else {
+																	echo '<h5>No Image Uploaded!!</h5>';
+																}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_two">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<br><br>
+															<?php  
+																if (!empty( $img_three )) {
+																	echo '<img src="assets/images/subcategory/' . $img_three . '" alt="" style="width: 100%;">';
+																}
+																else {
+																	echo '<h5>No Image Uploaded!!</h5>';
+																}
+															?>
+															<br><br>
+															<label>Image Three</label>
+															<input type="file" class="form-control" name="img_three">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Four</label>
+															<br><br>
+															<?php  
+																if (!empty( $img_four )) {
+																	echo '<img src="assets/images/subcategory/' . $img_four . '" alt="" style="width: 100%;">';
+																}
+																else {
+																	echo '<h5>No Image Uploaded!!</h5>';
+																}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_four">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Five</label>
+															<br><br>
+															<?php  
+																if (!empty( $img_five )) {
+																	echo '<img src="assets/images/subcategory/' . $img_five . '" alt="" style="width: 100%;">';
+																}
+																else {
+																	echo '<h5>No Image Uploaded!!</h5>';
+																}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_five">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Six</label>
+															<br><br>
+															<?php  
+																if (!empty( $img_six )) {
+																	echo '<img src="assets/images/subcategory/' . $img_six . '" alt="" style="width: 100%;">';
+																}
+																else {
+																	echo '<h5>No Image Uploaded!!</h5>';
+																}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_six">
+														</div>
+													</div>
+												</div>
+												
+
+												<div class="mb-3">
+													<div class="d-grid gap-2">
+														<input type="hidden" name="rentSubId" value="<?php echo $sub_id; ?>">
+														<input type="submit" name="updateRentSubCat" class="btn btn-dark px-5" value="Update Rent Sub Category">
+													</div>											
+												</div>
+											</div>
+										</div>								
+									</form>
+									<!-- END : FORM -->
 										</div>							
 									</div>
 								</div>
@@ -663,9 +846,9 @@ ORDER BY category.name, subcategory.subcat_name ASC;";
 
 					else if( $do == "Update" ) {
 
-						if (isset( $_POST['updateCat'] )) {
+						if (isset( $_POST['updateRentSubCat'] )) {
 
-							$updateIdStore 	= mysqli_real_escape_string($db, $_POST['updateCat']);
+							$updateIdStore 	= mysqli_real_escape_string($db, $_POST['rentSubId']);
 							$updateId 		= mysqli_real_escape_string($db, $_POST['updateId']);
 							$name 			= mysqli_real_escape_string($db, $_POST['name']);
 							$description 	= mysqli_real_escape_string($db, $_POST['description']);

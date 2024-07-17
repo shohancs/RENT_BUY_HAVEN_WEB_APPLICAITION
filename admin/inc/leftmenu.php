@@ -21,7 +21,7 @@
 					</a>
 				</li>
 				
-				<li class="menu-label">UI Elements</li>
+				<li class="menu-label">Category Management</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-category'></i>
@@ -29,9 +29,9 @@
 						<div class="menu-title">Rent Category</div>
 					</a>
 					<ul>
-						<li> <a href="rentcategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Parent Categories</a>
+						<li> <a href="rentcategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Rent Categories</a>
 						</li>
-						<li> <a href="subCategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Sub Categories</a>
+						<li> <a href="rentSubCategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Rent Sub Categories</a>
 						</li>
 					</ul>
 				</li>

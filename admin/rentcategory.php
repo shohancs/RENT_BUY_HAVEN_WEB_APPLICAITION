@@ -108,7 +108,14 @@
 														      <td class="text-center"><?php echo $slug; ?></td>
 														      
 														      <td class="text-center">
-														      	quantity
+														      	<?php  
+														      		$childSql = "SELECT * FROM rent_subcategory WHERE is_parent ='$cat_id' AND status=1";
+											  						$childQuery = mysqli_query( $db, $childSql );
+											  						$childSqlCount = mysqli_num_rows($childQuery);
+											  						?>
+											  						<span class="badge text-bg-warning"><?php echo $childSqlCount; ?></span>
+											  						<?php											  						
+														      	?>
 														      </td>
 														      <td class="text-center">
 														      	<?php  
