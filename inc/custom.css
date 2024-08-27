@@ -20,3 +20,43 @@ a {
     border: 1px solid #ffc107;
     transition: 0.2s ease-in-out;
 }
+
+.btn-2 {
+    color: #023021;
+    box-shadow: 1px 1px 10px #ffc107;
+}
+
+.btn-2:hover {
+    background-color: #023021;
+    border: 1px solid #023021;
+    color: #ffc107;
+    transition: 0.2s ease-in-out;
+    box-shadow: 1px 1px 10px #023021;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    color: #023021;
+    transition: 0.1s ease-in-out;
+}
+
+.nav-link {
+    color: #023021;
+}
+
+.cart {
+    color: #023021;
+    font-size: 20px;
+    filter: drop-shadow(0px 0px 12px #023021);
+}
+
+.nav-link:hover {
+    color: #023021;
+    transition: 0.1s ease-in-out;
+    filter: drop-shadow(0px 0px 12px #023021);
+    border-bottom: 1px solid #023021;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
