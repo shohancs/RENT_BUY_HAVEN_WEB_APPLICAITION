@@ -1,0 +1,22 @@
+/* Start: All Application default Css */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Kanit", sans-serif;
+    color: #545454;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* End: All Application default Css */
+
+/* Top Header Button Css */
+.top-btn:hover {
+    background-color: #ffc107;
+    border: 1px solid #ffc107;
+    transition: 0.2s ease-in-out;
+}
