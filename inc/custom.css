@@ -14,7 +14,7 @@ a {
 
 /* End: All Application default Css */
 
-/* Top Header Button Css */
+/* Start: Top Header Button Css */
 .top-btn:hover {
     background-color: #ffc107;
     border: 1px solid #ffc107;
@@ -60,3 +60,47 @@ a {
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
+/* End: Top Header Button Css */
+
+/* Start: Bannner Carousel Slider */
+swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+swiper-slide {
+    font-size: 18px;
+    color: #fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 15%;
+}
+
+.parallax-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 130%;
+    height: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+swiper-slide .title {
+    font-size: 41px;
+    font-weight: 300;
+}
+
+swiper-slide .subtitle {
+    font-size: 21px;
+}
+
+swiper-slide .text {
+    font-size: 14px;
+    max-width: 400px;
+    line-height: 1.3;
+}
+
+/* End: Bannner Carousel Slider */
