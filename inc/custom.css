@@ -8,6 +8,13 @@ body {
     color: #545454;
 }
 
+main {
+    /* background-image: url(../assets/images/body.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; */
+}
+
 a {
     text-decoration: none;
 }
@@ -104,3 +111,19 @@ swiper-slide .text {
 }
 
 /* End: Bannner Carousel Slider */
+
+/* START: Our Services */
+.service-card {
+
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+}
+
+.service-card:hover {
+    box-shadow: 0px 0px 14px 0px #ccc;
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.2);
+}
+
+
+/* END: Our Services */
