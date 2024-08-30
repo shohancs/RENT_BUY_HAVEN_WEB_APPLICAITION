@@ -110,6 +110,7 @@ swiper-slide .text {
     line-height: 1.3;
 }
 
+
 /* End: Bannner Carousel Slider */
 
 /* START: Our Services */
@@ -122,8 +123,26 @@ swiper-slide .text {
 .service-card:hover {
     box-shadow: 0px 0px 14px 0px #ccc;
     transition: all 0.2s ease-in-out;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 
 /* END: Our Services */
+
+.explore-card:hover {
+    transition: 0.3s ease-in;
+    box-shadow: 0px 0px 14px 0px #ccc;
+}
+
+.btn-3 {
+    color: #023021;
+    box-shadow: 1px 1px 10px #ffc107;
+}
+
+.btn-3:hover {
+    background-color: #023021;
+    border: 1px solid #023021;
+    color: #ffc107;
+    transition: 0.2s ease-in-out;
+    box-shadow: 1px 1px 10px #023021;
+}
