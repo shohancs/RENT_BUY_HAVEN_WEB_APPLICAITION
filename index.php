@@ -43,12 +43,11 @@
                     <h1 class="text-center fs-1 fw-semibold pt-3 " style="color:#023021; letter-spacing: 1px; ">Our Services</h1>
                     <div class="mb-3" style="border-bottom: 3px solid #ffc107;width: 5%;margin: 0px auto;"></div>
 
-                    <div class="row py-5">
+                    <div class="row pt-5">
                         <div class="col-lg-12">
                             <div class="d-flex justify-content-center">
                                 <a href="">
                                     <div class="card me-5 py-3 service-card" style="width: 18rem;">
-                                    <div class="background-image"></div>
                                         <div class="card-body">                                        
                                             <img src="assets/images/rent.svg" alt="" class="w-50" style="margin:0 23%;">
                                             <h1 class="text-center pt-3 card-head" style="color:#023021;">Rent</h1>
@@ -76,12 +75,12 @@
     <!-- END: Our Services -->
 
     <!-- START: EXPLORE PART -->
-     <section>
+     <section class="py-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="pb-5">
-                        <h1 class="text-center fs-1 fw-semibold pt-3 " style="color:#023021; letter-spacing: 1px; ">Explore Destinations</h1>
+                    <div class="pb-4">
+                        <h1 class="text-center fs-1 fw-semibold " style="color:#023021; letter-spacing: 1px; ">Explore Destinations</h1>
                         <div class="mb-3" style="border-bottom: 3px solid #ffc107;width: 5%;margin: 0px auto;"></div>
                     </div>
                     
@@ -97,8 +96,12 @@
                             $description    = $row['description'];
                             $image          = $row['image'];
                             $status         = $row['status'];
-                            ?>
-                            <div class="">
+                            
+                            $childSql = "SELECT * FROM rent_subcategory WHERE is_parent ='$cat_id' AND status=1";
+                            $childQuery = mysqli_query( $db, $childSql );
+                            $childSqlCount = mysqli_num_rows($childQuery);
+                            if ($childSqlCount != 0){ ?>
+                                <div class="">
                                 <div class="d-flex align-self-center justify-content-between py-5">
                                     <a href="" class="h2" style="color:#023021; filter: drop-shadow(0px 0px 20px #023021);"><?php echo $name; ?></a>
                                     <a href="" style="color:#023021;">Show all</a>
@@ -136,33 +139,33 @@
                                             $join_date 		= $row['join_date'];
                                             ?>
                                                 <div class="col-lg-3">
-                                                    <div class="explore-card" style="border-radius: 8px; transition: 0.2s ease-in;">
+                                                    <div class="explore-card" style="border-radius: 8px; transition: 0.2s ease-in; border: 1px solid #ccc;">
                                                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                                             <div class="carousel-inner">
                                                                 <div class="carousel-item active">
                                                                     <?php 
                                                                         if (!empty($img_one)) {
-                                                                            echo '<img src="admin/assets/images/subcategory/' . $img_one . '" class="d-block w-100" alt="" style="width: 60px;">';
+                                                                            echo '<img src="admin/assets/images/subcategory/' . $img_one . '" class="d-block w-100" alt="" style="height: 215px; ">';
                                                                         } else {
-                                                                            echo '<img src="admin/assets/images/dummy.jpg" class="d-block w-100" alt="" style="width: 60px;">';
+                                                                            echo '<img src="admin/assets/images/dummy.jpg" class="d-block w-100" alt="" style="height: 215px; " >';
                                                                         }
                                                                     ?>
                                                                 </div>
                                                                 <div class="carousel-item">
                                                                     <?php 
                                                                         if (!empty($img_two)) {
-                                                                            echo '<img src="admin/assets/images/subcategory/' . $img_two . '" class="d-block w-100" alt="" style="width: 60px;">';
+                                                                            echo '<img src="admin/assets/images/subcategory/' . $img_two . '" class="d-block w-100" alt="" style="height: 215px; ">';
                                                                         } else {
-                                                                            echo '<img src="admin/assets/images/dummy.jpg" class="d-block w-100" alt="" style="width: 60px;">';
+                                                                            echo '<img src="admin/assets/images/dummy.jpg" class="d-block w-100" alt="" style="height: 215px; ">';
                                                                         }
                                                                     ?>
                                                                 </div>
                                                                 <div class="carousel-item">
                                                                     <?php 
                                                                         if (!empty($img_three)) {
-                                                                            echo '<img src="admin/assets/images/subcategory/' . $img_three . '" class="d-block w-100" alt="" style="width: 60px;">';
+                                                                            echo '<img src="admin/assets/images/subcategory/' . $img_three . '" class="d-block w-100" alt="" style="height: 215px; ">';
                                                                         } else {
-                                                                            echo '<img src="admin/assets/images/dummy.jpg" class="d-block w-100" alt="" style="width: 60px;">';
+                                                                            echo '<img src="admin/assets/images/dummy.jpg" class="d-block w-100" alt="" style="height: 215px; ">';
                                                                         }
                                                                     ?>
                                                                 </div>
@@ -170,9 +173,9 @@
                                                                 <div class="carousel-item">
                                                                     <?php 
                                                                         if (!empty($img_four)) {
-                                                                            echo '<img src="admin/assets/images/subcategory/' . $img_four . '" class="d-block w-100" alt="" style="width: 60px;">';
+                                                                            echo '<img src="admin/assets/images/subcategory/' . $img_four . '" class="d-block w-100" alt="" style="height: 215px; ">';
                                                                         } else {
-                                                                            echo '<img src="admin/assets/images/dummy.jpg" class="d-block w-100" alt="" style="width: 60px;">';
+                                                                            echo '<img src="admin/assets/images/dummy.jpg" class="d-block w-100" alt="" style="height: 215px; ">';
                                                                         }
                                                                     ?>
                                                                 </div>
@@ -186,18 +189,19 @@
                                                                 <span class="visually-hidden">Next</span>
                                                             </button>
                                                         </div>
+                                                        <div class="top-text "><span class="badge text-bg-warning">FOR RENT</span></div>
                                                         <div class="d-flex justify-content-between p-3">
                                                             <div>
-                                                                <h5 class="fw-bold">BDT <?php echo $price; ?>৳ <sup>PER MONTH</sup></h5>
-                                                                <h6 class="fw-semibold" style="text-align:justify;"><?php echo $subcat_name; ?></h6>
+                                                                <h5 class="fw-bold" style="color:#023021;">BDT <?php echo $price; ?>৳ <sup>PER MONTH</sup></h5>
+                                                                <h6 class="fw-semibold" style="text-align:justify; color:#023021;""><?php echo $subcat_name; ?></h6>
                                                                 
-                                                                <p class="h-6 fw-light lh-sm" style="text-align:justify;"><?php echo $location; ?></p>
+                                                                <p class="h-6 fw-light lh-sm" style="text-align:justify; color:#023021;""><?php echo $location; ?></p>
                                                                 <div class="">
                                                                     <div class="d-flex justify-content-xl-around align-items-center">
-                                                                        <i class="fa-solid fa-person-shelter"></i> <?php echo $totalroom; ?>
-                                                                        <i class="fa-solid fa-bath"></i> <?php echo $washroom; ?>
-                                                                        <i class="fa-solid fa-fire-burner"></i> <?php echo $kitchen; ?>
-                                                                        <i class="fa-solid fa-house"></i></i> <?php echo $area_size; ?>
+                                                                        <i class="fa-solid fa-person-shelter" style="color:#023021;"></i> <?php echo $totalroom; ?>
+                                                                        <i class="fa-solid fa-bath" style="color:#023021;"></i> <?php echo $washroom; ?>
+                                                                        <i class="fa-solid fa-fire-burner" style="color:#023021;"></i> <?php echo $kitchen; ?>
+                                                                        <i class="fa-solid fa-house" style="color:#023021;"></i></i> <?php echo $area_size; ?>sqft
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-grid gap-2 py-3">
@@ -215,7 +219,10 @@
                                 </div>
                                     
                             </div>
-                            <?php
+                           <?php }
+
+
+                            
                         }
                     ?>
 
@@ -225,6 +232,78 @@
         </div>
      </section>
     <!-- END: EXPLORE PART -->
+
+    <!-- START: QUESTION PART -->
+     <section class="py-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 question_part">
+                    <div class="bg-white " style="margin: 10% auto; width: 65%;">
+                        <h4 class="px-5 py-3" style="background: #1a7e00; color: #fff;">Got Questions? Ask Away!</h4 class="p-3">
+                        <form action="" method="POST" class="px-5 py-5">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">First Name</label>
+                                        <input type="text" name="fname" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Last Name</label>
+                                        <input type="text" name="lname" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Email Address</label>
+                                        <input type="email" name="email" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Phone</label>
+                                        <input type="tel" name="phone" class="form-control" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Message</label>
+                                <textarea name="desb" id="" class="form-control" placeholder="write here..." rows="5" ></textarea>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <input type="submit" value="SUBMIT" class="btn btn-primary quBtn">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 review-part p-5 d-flex align-items-center">
+                    <div class="">
+                        <h1 class="text-white pb-3" >Rent Buy Haven Provide Safe, Trusted And Reliable Collection!</h1>
+                        <p class="text-white fw-light pb-3" style="">We offer customers reliable and regular collection of trash and materials, on a scheduled or call basis, with a safe and unique level of service for family.</p>
+                        <a href="" class="quPartBtn">GET START NOW</a>
+
+                        <div class="row d-flex align-items-center pt-5 mt-4">
+                            <div class="col-lg-3">
+                            <i class="fa-solid fa-sack-dollar cost"></i>
+                            </div>
+                            <div class="col-lg-9">
+                                <h5 class="text-white pb-2">Great Service & Low Cost</h5>
+                                <p class="text-white fw-light">If your business is looking for reliable, cost effective general waste collection then you should cgoose us now!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                
+            </div>
+        </div>
+     </section>
+    <!-- END: QUESTION PART -->
+
+
 
 
     

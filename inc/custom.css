@@ -129,6 +129,7 @@ swiper-slide .text {
 
 /* END: Our Services */
 
+/* START: Explore Part */
 .explore-card:hover {
     transition: 0.3s ease-in;
     box-shadow: 0px 0px 14px 0px #ccc;
@@ -146,3 +147,124 @@ swiper-slide .text {
     transition: 0.2s ease-in-out;
     box-shadow: 1px 1px 10px #023021;
 }
+
+.explore-card {
+    position: relative;
+}
+
+.top-text span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 13px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/* END: Explore Part */
+
+
+/* Start: Question Part */
+.question_part {
+    background-image: linear-gradient(to bottom, #053029c7, #05362e), url(../assets/images/quBg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.review-part {
+    background-image: linear-gradient(to top, #e2ba07, #ca9e0fe1), url(../assets/images/quBgL.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+/* End: Question Part */
+
+/* START: Question Part */
+.quBtn {
+    background-color: #05362e;
+    color: #fff;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.quBtn:hover {
+    background: #1a7e00;
+    color: #fff;
+}
+
+.quPartBtn {
+    background-color: #fff;
+    color: #05362e;
+    padding: 15px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.quPartBtn:hover {
+    background: #1a7e00;
+    color: #fff;
+    transition: all 0.2s ease-in-out;
+}
+
+.cost {
+    color: #fff;
+    font-size: 4em;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.cost:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+
+/* END: Question Part */

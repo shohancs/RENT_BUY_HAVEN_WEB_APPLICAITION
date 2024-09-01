@@ -1,5 +1,4 @@
-<header>   
-    <div class="top-header p-0" style="background: #023021;">
+<div class="top-header p-0" style="background: #023021;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6">
@@ -23,14 +22,16 @@
                 </div>
             </div>
         </div>
-    </div>   
+    </div> 
+<header > <!-- class="sticky-top bg-light"  -->  
+      
     <div class="main_navbar border">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="index.php"><img src="assets/images/logo2.png" alt=""></a>
+                        <a class="navbar-brand" href="index.php"><img src="assets/images/logo2.png" alt="" style="width: 65%;"></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                         </button>
