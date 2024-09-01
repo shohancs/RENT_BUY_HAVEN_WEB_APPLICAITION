@@ -43,7 +43,7 @@
                     <h1 class="text-center fs-1 fw-semibold pt-3 " style="color:#023021; letter-spacing: 1px; ">Our Services</h1>
                     <div class="mb-3" style="border-bottom: 3px solid #ffc107;width: 5%;margin: 0px auto;"></div>
 
-                    <div class="row pt-5">
+                    <div class="row pt-4">
                         <div class="col-lg-12">
                             <div class="d-flex justify-content-center">
                                 <a href="">
@@ -75,13 +75,13 @@
     <!-- END: Our Services -->
 
     <!-- START: EXPLORE PART -->
-     <section class="py-4">
+     <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="pb-4">
                         <h1 class="text-center fs-1 fw-semibold " style="color:#023021; letter-spacing: 1px; ">Explore Destinations</h1>
-                        <div class="mb-3" style="border-bottom: 3px solid #ffc107;width: 5%;margin: 0px auto;"></div>
+                        <div class="mb-2" style="border-bottom: 3px solid #ffc107;width: 5%;margin: 0px auto;"></div>
                     </div>
                     
 
@@ -305,11 +305,11 @@
 
     <!-- START: Blog Part -->
      <section>
-        <div class="container py-4">
+        <div class="container py-5">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="pb-4 fs-1 fw-semibold" style="color: #05362e;">Recent News And Articles</h1>
-                    <div class="row">
+                    <h1 class="fs-1 fw-semibold" style="color: #05362e;">Recent News And Articles</h1>
+                    <div class="row py-5">
                         <div class="col-lg-6">
                             <div class="blog-left">
                                 <div class="card">

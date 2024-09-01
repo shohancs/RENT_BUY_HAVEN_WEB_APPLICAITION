@@ -318,6 +318,14 @@ swiper-slide .text {
 
 }
 
-
-
 /* END: Blog part */
+
+/* START: Footer Part */
+footer {
+    background-image: linear-gradient(to right, #01221780, #0122177c), url(../assets/images/footer-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* End: Footer Part */
