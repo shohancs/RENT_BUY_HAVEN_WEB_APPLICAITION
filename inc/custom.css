@@ -268,3 +268,56 @@ swiper-slide .text {
 }
 
 /* END: Question Part */
+
+/* START: Blog part */
+.blog-left {
+    background-image: linear-gradient(to left, rgba(129, 118, 118, 0.486), rgba(99, 93, 93, 0.247)), url(../assets/images/blog.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    padding: 16% 0;
+}
+
+.card {
+    background-color: #fff;
+    padding: 7%;
+    width: 80%;
+    margin: 0px auto;
+    top: 10%;
+    position: relative;
+}
+
+.category_blog {
+    position: absolute;
+    background-color: #e2ba07;
+    color: #fff;
+    padding: 3px 18px;
+    top: -23px;
+}
+
+.b_title {
+    color: #023021;
+    text-align: left;
+}
+
+.b_title:hover {
+    color: #1a7e00;
+}
+
+.blog-right {
+    position: relative;
+}
+
+.blog-right::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    border: 1px solid #ccc;
+
+}
+
+
+
+/* END: Blog part */

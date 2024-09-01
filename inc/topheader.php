@@ -23,7 +23,7 @@
             </div>
         </div>
     </div> 
-<header > <!-- class="sticky-top bg-light"  -->  
+<header> <!-- class="sticky-top bg-light"  -->  
       
     <div class="main_navbar border">
         <div class="container">

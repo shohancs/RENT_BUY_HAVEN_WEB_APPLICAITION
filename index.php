@@ -285,7 +285,7 @@
                         <a href="" class="quPartBtn">GET START NOW</a>
 
                         <div class="row d-flex align-items-center pt-5 mt-4">
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" style="text-align: center;">
                             <i class="fa-solid fa-sack-dollar cost"></i>
                             </div>
                             <div class="col-lg-9">
@@ -302,6 +302,66 @@
         </div>
      </section>
     <!-- END: QUESTION PART -->
+
+    <!-- START: Blog Part -->
+     <section>
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="pb-4 fs-1 fw-semibold" style="color: #05362e;">Recent News And Articles</h1>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="blog-left">
+                                <div class="card">
+                                    <div class="category_blog"> <p>Apartments</p> </div>
+                                    <a href="" class="b_title h4 pb-3">Wastia Start Recycling Electric Car Batteries To Solve An Ecological Issue With A Circular Solution!</a>
+                                    <p class="" style="text-align: justify; color: #677a74;">We partnered with community to create circular value ecosystem for electric and hybrid vehicle batteries, this will enable scarce raw materials to be reused through closed loop recycling...</p>
+                                    <hr>
+                                    <div class="d-flex">
+                                        <p class="px-3"><i class="fa-regular fa-calendar-days"></i> September 2, 2024</p>
+                                        <p><i class="fa-regular fa-user"></i> Habiba</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="blog-right">
+                                <div class="rightBlogPart px-4">
+                                    <div>
+                                        <p class="text-warning link-underline-warning" ><u>Hottle</u></p>
+                                        <a href="" class="b_title h4 py-2">Wastia Start Recycling Electric Car Batteries To Solve An Ecological Issue With A Circular Solution!</a>
+                                        <div class="d-flex py-3">
+                                            <p class="px-3"><i class="fa-regular fa-calendar-days"></i> September 2, 2024</p>
+                                            <p><i class="fa-regular fa-user"></i> Habiba</p>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div>
+                                        <p class="text-warning link-underline-warning" ><u>Hottle</u></p>
+                                        <a href="" class="b_title h4 py-2">Wastia Start Recycling Electric Car Batteries To Solve An Ecological Issue With A Circular Solution!</a>
+                                        <div class="d-flex py-3">
+                                            <p class="px-3"><i class="fa-regular fa-calendar-days"></i> September 2, 2024</p>
+                                            <p><i class="fa-regular fa-user"></i> Habiba</p>
+                                        </div>
+                                        <hr>
+                                    </div>
+
+                                    <div class="py-5">
+                                      <a href="" class="quBtn" style="padding: 20px 35px;">Check All Blog Posts</a>  
+                                      
+                                    </div>                                    
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+    <!-- END: Blog Part -->
 
 
 
