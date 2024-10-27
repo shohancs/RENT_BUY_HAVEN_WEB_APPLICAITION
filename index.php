@@ -192,7 +192,7 @@
                                                         <div class="top-text "><span class="badge text-bg-warning">FOR RENT</span></div>
                                                         <div class="d-flex justify-content-between p-3">
                                                             <div>
-                                                                <h5 class="fw-bold" style="color:#023021;">BDT <?php echo $price; ?>৳ <sup>PER MONTH</sup></h5>
+                                                                <h5 class="fw-bold" style="color:#023021;">৳<?php echo $price; ?> BDT <sup>PER MONTH</sup></h5>
                                                                 <h6 class="fw-semibold" style="text-align:justify; color:#023021;""><?php echo $subcat_name; ?></h6>
                                                                 
                                                                 <p class="h-6 fw-light lh-sm" style="text-align:justify; color:#023021;""><?php echo $location; ?></p>
