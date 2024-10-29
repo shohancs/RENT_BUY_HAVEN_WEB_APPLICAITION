@@ -256,6 +256,124 @@
      </section>
     <!-- END: EXPLORE PART -->
 
+    <!-- START: FAQ PART -->
+     <section class="text-bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="d-flex">
+                        <div>
+                            <img src="assets/images/faq1.jpg" alt="" width="90%">
+                        </div>
+                        <div style="margin: 20% 0px 0px">
+                            <img src="assets/images/faq2.jpg" alt="" width="90%">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6">                
+                    <div style="border-left: 3px double #ffc107; padding: 0 3%;">
+                        <h1 class=""  style="letter-spacing: 3px; font-family: &quot;Acme&quot;, sans-serif; color:#023021; font-size: 40px; font-weight:600;">FAQ Services</h1>
+                    </div>
+
+                    <div class="pt-5">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What are the available packages for property listings?
+                                </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    We offer multiple packages for property listings, allowing sellers to select one based on their needs. Each package comes with different benefits, such as the number of properties allowed, enhanced visibility, and additional verification services. This makes it easier for property owners to choose a plan that suits their budget and listing requirements.
+                                </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    How does the property verification process work?
+                                </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Each property goes through a multi-step verification process. First, a field checker verifies the authenticity of the property and confirms ownership based on the selected package. After this initial check, our super admin performs a final review to approve the listing for display on the platform, ensuring users can trust the listings they see.
+                                </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    What payment options are available, and is there a transaction fee?
+                                </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    We support various payment methods, including cryptocurrency payments via CoinGate. Each transaction incurs a 1% platform fee, which is deducted from the total before releasing funds to the seller. This fee covers operational costs and helps us provide a secure and seamless transaction experience.
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    How do users create accounts and access services?
+                                </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                Users can create accounts on the platform to access property listings and other services. Once registered, users can browse listings, communicate with sellers, and make payments directly through their account. We also offer additional services beyond property listings, making it easy for users to find the resources they need in one place.
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    How does the platform ensure the security of transactions and data?
+                                </button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                Security is a top priority for us. We use encryption for all transactions and sensitive data storage, ensuring users personal information and financial details remain safe. Our system also includes multi-factor authentication and regular security audits to protect against unauthorized access and data breaches.
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    What types of customer support are available for users and sellers?
+                                </button>
+                                </h2>
+                                <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                We offer comprehensive customer support via email, chat, and phone. Our support team assists with account setup, payments, verification issues, and general inquiries about using the platform. Additionally, we provide dedicated support for sellers, helping them with listing management, package upgrades, and technical troubleshooting.
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                    What types of properties are listed on the platform?
+                                </button>
+                                </h2>
+                                <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                Our platform supports a variety of property types, including apartments, hotels, and commercial spaces like stores. Each listing provides detailed information about the property, including amenities, location, pricing, and availability. We aim to cater to a wide range of users, whether they're looking to rent, buy, or invest in different property types.
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+    <!-- END: FAQ PART -->
+
     <!-- START: QUESTION PART -->
      <section class="py-5">
         <div class="container-fluid">
