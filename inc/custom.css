@@ -47,10 +47,12 @@ a {
 .navbar-nav .nav-link.show {
     color: #023021;
     transition: 0.1s ease-in-out;
+    font-size: 19px;
 }
 
 .nav-link {
     color: #023021;
+    font-size: 19px;
 }
 
 .nav-link:hover {
@@ -109,8 +111,12 @@ a {
     filter: drop-shadow(0px 0px 12px #023021);
 }
 
-
 /* End: Navigation Header Button Css */
+
+/* START: BANNER PART CSS */
+
+
+/* END: BANNER PART CSS */
 
 
 /* .top-btn:hover {
