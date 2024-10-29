@@ -3,7 +3,7 @@
 <main>
 
     <!-- START: BANNER PART -->
-     <section class="text-bg-light p-5">
+     <!-- <section class="text-bg-light p-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-     </section>
+     </section> -->
     <!-- END: BANNER PART -->
 
     <!-- START: Bannner Carousel Slider -->
@@ -32,24 +32,24 @@
         style="background-image: linear-gradient(to left, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(assets/images/banner_slider.jpg); background-size:cover;" data-swiper-parallax="-23%"></div>
 
         <swiper-slide>
-            <div class="title fs-1 fw-semibold text-warning text-center mb-2" data-swiper-parallax="-300" style='letter-spacing: 2px; font-family: "Acme", sans-serif;'>Rent to Buy: Save for Your Dream Home</div>
-            <div class="subtitle text-center fs-4 fw-light mb-1" data-swiper-parallax="-200" style='letter-spacing: 1px;'>Affordable Rentals with a Path to Ownership</div>
+            <div class="title  fw-semibold text-warning text-center mb-2" data-swiper-parallax="-300" style="letter-spacing: 3px;font-family: Acme, sans-serif;transform: translate3d(0px, 0px, 0px);transition-duration: 0ms;font-size: 53px;line-height: 79px;">Rent to Buy: Save for Your Dream Home</div>
+            <div class="subtitle text-center mb-1" data-swiper-parallax="-200" style="letter-spacing: 1px;transform: translate3d(0px, 0px, 0px);font-size: 27px;line-height: 57px;color: #fff; padding-bottom: 3px;">Affordable Rentals with a Path to Ownership</div>
             <div class="subtitle text-center fw-lighter lh-sm" data-swiper-parallax="-100" >
                 Explore our discounted rental properties that help you save for a future home purchase. Start your journey toward homeownership today!
             </div>
         </swiper-slide>
 
         <swiper-slide>
-            <div class="title fs-1 fw-semibold text-warning text-center mb-2" data-swiper-parallax="-300" style='letter-spacing: 2px; font-family: "Acme", sans-serif;'>Stay in Style: Hotel Rentals</div>
-            <div class="subtitle text-center fs-4 fw-light mb-1" data-swiper-parallax="-200" style='letter-spacing: 1px;'>Luxury Stays at Unbeatable Prices</div>
+            <div class="title  fw-semibold text-warning text-center mb-2" data-swiper-parallax="-300" style="letter-spacing: 3px;font-family: Acme, sans-serif;transform: translate3d(0px, 0px, 0px);transition-duration: 0ms;font-size: 53px;line-height: 79px;">Stay in Style: Hotel Rentals</div>
+            <div class="subtitle text-center mb-1" data-swiper-parallax="-200" style="letter-spacing: 1px;transform: translate3d(0px, 0px, 0px);font-size: 27px;line-height: 57px;color: #fff; padding-bottom: 3px;">Luxury Stays at Unbeatable Prices</div>
             <div class="subtitle text-center fw-lighter lh-sm" data-swiper-parallax="-100">              
                 Discover our curated selection of hotels available for rent. Enjoy comfort, convenience, and exceptional service during your stay.                
             </div>
         </swiper-slide>
 
         <swiper-slide>
-            <div class="title fs-1 fw-semibold text-warning text-center mb-2" data-swiper-parallax="-300" style='letter-spacing: 2px; font-family: "Acme", sans-serif;'>Prime Retail Spaces for Rent</div>
-            <div class="subtitle text-center fs-4 fw-light mb-1" data-swiper-parallax="-200" style='letter-spacing: 1px;'>Your Business Deserves the Best Location</div>
+            <div class="title  fw-semibold text-warning text-center mb-2" data-swiper-parallax="-300" style="letter-spacing: 3px;font-family: Acme, sans-serif;transform: translate3d(0px, 0px, 0px);transition-duration: 0ms;font-size: 53px;line-height: 79px;">Prime Retail Spaces for Rent</div>
+            <div class="subtitle text-center mb-1" data-swiper-parallax="-200" style="letter-spacing: 1px;transform: translate3d(0px, 0px, 0px);font-size: 27px;line-height: 57px;color: #fff; padding-bottom: 3px;">Your Business Deserves the Best Location</div>
             <div class="subtitle text-center fw-lighter lh-sm" data-swiper-parallax="-100">
                 Browse our commercial properties for rent—perfect for stores, boutiques, and businesses. Secure your ideal space today!
             </div>
