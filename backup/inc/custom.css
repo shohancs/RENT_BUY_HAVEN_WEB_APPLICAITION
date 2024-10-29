@@ -22,98 +22,7 @@ a {
 /* End: All Application default Css */
 
 /* Start: Top Header Button Css */
-.btn-1 {
-    color: #023021;
-    border: 1px solid #ccc;
-}
-
-.btn-1:hover {
-    background-color: #023021;
-    border: 1px solid #023021;
-    color: #ffc107;
-    transition: 0.2s ease-in-out;
-    box-shadow: 1px 1px 10px #023021;
-}
-
-.btn-2 {
-    color: #ffc107;
-    background-color: #023021;
-    font-size: 20px;
-    border: 1px solid #023021;
-    filter: drop-shadow(0px 0px 12px #023021);
-}
-
-.navbar-nav .nav-link.active,
-.navbar-nav .nav-link.show {
-    color: #023021;
-    transition: 0.1s ease-in-out;
-}
-
-.nav-link {
-    color: #023021;
-}
-
-.nav-link:hover {
-    color: #023021;
-    transition: 0.1s ease-in-out;
-    filter: drop-shadow(0px 0px 12px #023021);
-}
-
-/* End: Top Header Button Css */
-
-/* Start: Navigation Header Button Css */
-
-/* Initial styling for container */
-.search-container {
-    position: relative;
-    width: 40px;
-    /* Start small */
-    transition: width 0.5s ease;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    /* border: 1px solid #023021; */
-    border-radius: 5px;
-    /* background-color: white; */
-}
-
-#search-input {
-    width: 100%;
-    padding: 5px;
-    border: none;
-    outline: none;
-    opacity: 0;
-    /* Start hidden */
-    transition: opacity 0.3s ease 0.2s;
-}
-
-#search-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    font-size: 18px;
-}
-
-.search-container.active {
-    width: 200px;
-}
-
-.search-container.active #search-input {
-    opacity: 1;
-}
-
-.cart {
-    color: #023021;
-    font-size: 20px;
-    filter: drop-shadow(0px 0px 12px #023021);
-}
-
-
-/* End: Navigation Header Button Css */
-
-
-/* .top-btn:hover {
+.top-btn:hover {
     background-color: #ffc107;
     border: 1px solid #ffc107;
     transition: 0.2s ease-in-out;
@@ -157,7 +66,7 @@ a {
 
 .dropdown:hover .dropdown-menu {
     display: block;
-} */
+}
 
 /* End: Top Header Button Css */
 

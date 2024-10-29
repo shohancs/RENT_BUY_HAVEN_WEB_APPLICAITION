@@ -12,20 +12,6 @@
 
     <!-- Swiper js cdn link -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-
-
-    <script>
-document.getElementById("search-button").addEventListener("click", function() {
-    const container = document.querySelector(".search-container");
-    container.classList.toggle("active");
-    if (container.classList.contains("active")) {
-        document.getElementById("search-input").focus();
-    }
-});
-
-
-
-    </script>
     
 
     <?php 
