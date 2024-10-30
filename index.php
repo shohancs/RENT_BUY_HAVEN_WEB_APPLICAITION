@@ -258,7 +258,7 @@
 
     <!-- START: FAQ PART -->
      <section class="text-bg-light py-5">
-        <div class="container">
+        <div class="container pt-5">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="d-flex">
@@ -374,8 +374,30 @@
      </section>
     <!-- END: FAQ PART -->
 
+    <!-- START: CONTACT -->
+     <div class="text-bg-light pb-5 pt-3" >
+        <section class="p-5 " style="background: #1a7e00; color: #fff; width: 60%; margin: 0px auto; border-radius: 10px;">
+        <div class="d-flex justify-content-evenly align-items-center">
+            <div>
+                <h3 style="font-size: 20px; letter-spacing:1px; margin-bottom: 2px;">Get In Tour</h3>
+                <h1><a href="mailto:rentbuyhaven@gmail.com" style="font-size: 25px; color:#fff; letter-spacing:1px;">rentbuyhaven@gmail.com</a></h1>
+            </div>
+            <div>
+                <h1 class="rounded-circle py-2 px-3" style="background: #fff; color: #05362e;">or</h1>
+            </div>
+            <div>
+            <h3 style="font-size: 20px; letter-spacing:1px; margin-bottom: 2px;">Call Us Via</h3>
+            <h1><a href="tel:01758745698" style="font-size: 25px; color:#fff; letter-spacing:1px;">+880 1758745698</a></h1>
+            </div>
+        </div>
+     </section>
+     </div>
+     
+     
+    <!-- END: CONTACT -->
+
     <!-- START: QUESTION PART -->
-     <section class="py-5">
+     <section class="pb-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 question_part">
