@@ -168,12 +168,12 @@ a {
 /* End: Top Header Button Css */
 
 /* Start: Bannner Carousel Slider */
-swiper-container {
+.banner-slider swiper-container {
     width: 100%;
     height: 100%;
 }
 
-swiper-slide {
+.banner-slider swiper-slide {
     font-size: 18px;
     color: #fff;
     -webkit-box-sizing: border-box;
@@ -181,7 +181,7 @@ swiper-slide {
     padding: 15%;
 }
 
-.parallax-bg {
+.banner-slider .parallax-bg {
     position: absolute;
     left: 0;
     top: 0;
@@ -192,16 +192,16 @@ swiper-slide {
     background-position: center;
 }
 
-swiper-slide .title {
+.banner-slider swiper-slide .title {
     font-size: 41px;
     font-weight: 300;
 }
 
-swiper-slide .subtitle {
+.banner-slider swiper-slide .subtitle {
     font-size: 21px;
 }
 
-swiper-slide .text {
+.banner-slider swiper-slide .text {
     font-size: 14px;
     max-width: 400px;
     line-height: 1.3;
@@ -249,14 +249,7 @@ swiper-slide .text {
     position: relative;
 }
 
-.top-text span {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 13px;
-    letter-spacing: 1px;
-    font-weight: 500;
-}
+
 
 /* END: Explore Part */
 
@@ -441,3 +434,68 @@ footer .nav-link:hover {
 }
 
 /* End: Footer Part */
+
+
+.service-part swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.service-part swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #F8F9FA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-part swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.verifiction-owner {
+    position: relative;
+}
+
+.verifiction-owner .ow_img {
+    width: 110%;
+    border-radius: 50%;
+}
+
+.verifiction-owner .verify {
+    position: absolute;
+    bottom: -8px;
+    width: 24px;
+    height: 23px;
+}
+
+
+.top-text span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 13px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.show-img {
+    position: relative;
+}
+
+.items {
+    position: absolute;
+    top: 8px;
+    padding: 2% 5%;
+}
+
+.items-icon {
+    position: absolute;
+    top: 8px;
+    padding: 2% 5%;
+    right: 0px;
+}
