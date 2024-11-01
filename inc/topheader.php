@@ -79,7 +79,6 @@
                 </div>
             </div>
         </div>
-        <hr style="margin: 0">
         
     </div>
 </header>

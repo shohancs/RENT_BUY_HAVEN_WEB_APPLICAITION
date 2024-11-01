@@ -1292,12 +1292,6 @@
         </div>
      </section>
     <!-- END: Blog Part -->
-
-
-
-
-    
-
     
 </main>
     
