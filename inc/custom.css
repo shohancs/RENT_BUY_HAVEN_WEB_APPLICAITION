@@ -514,3 +514,20 @@ footer .nav-link:hover {
     transition: 0.1s ease-in-out;
     /* filter: drop-shadow(0px 0px 12px #023021); */
 }
+
+.image_show {
+    position: relative;
+}
+
+.category {
+    position: absolute;
+    top: 8px;
+    padding: 2% 5%;
+}
+
+.category-icon {
+    position: absolute;
+    top: 8px;
+    padding: 2% 5%;
+    right: 0px;
+}
