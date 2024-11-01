@@ -499,3 +499,18 @@ footer .nav-link:hover {
     padding: 2% 5%;
     right: 0px;
 }
+
+.district {
+    color: #023021;
+    font-size: 19px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.district:hover {
+    color: #023021;
+    transition: 0.1s ease-in-out;
+    /* filter: drop-shadow(0px 0px 12px #023021); */
+}

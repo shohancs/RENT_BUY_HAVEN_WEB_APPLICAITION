@@ -69,7 +69,7 @@
 
                                 <div>
                                     <a href="">
-                                        <i class="fa-solid fa-cart-shopping cart"></i><sup style="top: -14px; color:#023021; ">20</sup>
+                                    <i class="fa-solid fa-heart cart"></i><sup style="top: -14px; color:#023021; ">20</sup>
                                     </a>
                                 </div>
                             </div>
