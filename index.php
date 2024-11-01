@@ -144,7 +144,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="p-3">
+                                    <div class="py-4 px-3">
                                         <div class="row">
                                             <div class="col-lg-10">
                                                 <div>
@@ -232,7 +232,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="p-3">
+                                    <div class="py-4 px-3">
                                         <div class="row">
                                             <div class="col-lg-10">
                                                 <div>
@@ -320,7 +320,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="p-3">
+                                    <div class="py-4 px-3">
                                         <div class="row">
                                             <div class="col-lg-10">
                                                 <div>
@@ -408,7 +408,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="p-3">
+                                    <div class="py-4 px-3">
                                         <div class="row">
                                             <div class="col-lg-10">
                                                 <div>
@@ -502,7 +502,7 @@
                     <div class="py-5">
                         <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="3" space-between="30" free-mode="true">
 
-                            <swiper-slide class="text-start">
+                        <swiper-slide class="text-start">
                                 <div>
                                     <div>
                                         <div class="show-img">
@@ -526,7 +526,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="p-3">
+                                    <div class="py-4 px-3">
                                         <div class="row">
                                             <div class="col-lg-10">
                                                 <div>
@@ -614,7 +614,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="p-3">
+                                    <div class="py-4 px-3">
                                         <div class="row">
                                             <div class="col-lg-10">
                                                 <div>
@@ -702,7 +702,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="p-3">
+                                    <div class="py-4 px-3">
                                         <div class="row">
                                             <div class="col-lg-10">
                                                 <div>
@@ -790,7 +790,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="p-3">
+                                    <div class="py-4 px-3">
                                         <div class="row">
                                             <div class="col-lg-10">
                                                 <div>
