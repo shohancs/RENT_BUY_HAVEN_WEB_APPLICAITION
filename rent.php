@@ -21,10 +21,9 @@
      </section>
     <!-- END: Breadcrumb -->
 
-    <!--  -->
 
     <!-- START: Divison wise select -->
-     <section class="pt-3">
+     <section class="pt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -59,14 +58,36 @@
                             <a class="nav-link district border" href="#">Rangpur (0)</a>
                         </li>
                     </ul>
-                    
-                    <p class="pt-5" style="color: #023021; font-size: 20px;">3900+ results</p>
-
                 </div>
             </div>
         </div>
      </section>
     <!-- END: Divison wise select -->
+
+    <!-- START: Category ShowCase -->
+    <section class="pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center text-uppercase">
+                    <a href="products.php"><p class="border border-dark-subtle p-3 me-4 category_name" style="color: #023021; font-size: 19px; letter-spacing: 0.9px; font-weight: 600;">Apartments</p></a>
+                    <a href=""><p class="border border-dark-subtle p-3 me-4 category_name" style="color: #023021; font-size: 19px; letter-spacing: 0.9px; font-weight: 600;">Hotels</p></a>
+                    <a href=""><p class="border border-dark-subtle p-3 me-4 category_name" style="color: #023021; font-size: 19px; letter-spacing: 0.9px; font-weight: 600;">Stores</p></a>
+
+                </div>
+            </div>
+        </div>
+     </section>
+    <!-- END: Category ShowCase -->
+
+    <!-- START: RESULT TOTAL -->
+     <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="pt-5 pb-2" style="color: #023021; font-size: 20px;">3900+ results</p>
+            </div>
+        </div>
+     </div>
+    <!-- END: RESULT TOTAL -->
 
     
 
