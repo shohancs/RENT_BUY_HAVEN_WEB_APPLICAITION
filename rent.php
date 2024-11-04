@@ -22,47 +22,7 @@
     <!-- END: Breadcrumb -->
 
 
-    <!-- START: Divison wise select -->
-     <section class="pt-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="nav">
-                        <li class="nav-item dropdown border me-3">
-                            <a class="nav-link dropdown-toggle district" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dhaka(20)</a>
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Badda</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Agargaon</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link district border" href="#">Chittagong (10)</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link district border" href="#">Khulna (10)</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link district border" href="#">Rajshahi (10)</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link district border" href="#">Barishal (10)</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link district border" href="#">Sylhet (10)</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link district border" href="#">Mymanshing (10)</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link district border" href="#">Rangpur (0)</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-     </section>
-    <!-- END: Divison wise select -->
+    <?php include"inc/rent_area.php"; ?>
 
     <!-- START: Category ShowCase -->
     <section class="pt-5">
@@ -190,7 +150,7 @@
                                     <hr class="m-0 pb-2">
                                     <p class="h-6 fw-light lh-sm py-2" style="text-align:justify; color:#023021;"><i class="fa-solid fa-location-dot px-1"></i> 186/c1 Taltola, Agargaon, Dhaka</p>
                                     <div class="d-grid gap-2 pb-2">
-                                        <a href="" class="btn btn-outline-warning btn-3 px-3">View Details</a>
+                                        <a href="details.php" class="btn btn-outline-warning btn-3 px-3">View Details</a>
                                     </div>
                                 </div>
                             </div> 
@@ -1315,7 +1275,7 @@
                                     <hr class="m-0 pb-2">
                                     <p class="h-6 fw-light lh-sm py-2" style="text-align:justify; color:#023021;"><i class="fa-solid fa-location-dot px-1"></i> 186/c1 Taltola, Agargaon, Dhaka</p>
                                     <div class="d-grid gap-2 pb-2">
-                                        <a href="" class="btn btn-outline-warning btn-3 px-3">View Details</a>
+                                        <a href="detils.php" class="btn btn-outline-warning btn-3 px-3">View Details</a>
                                     </div>
                                 </div>
                             </div> 

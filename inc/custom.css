@@ -574,7 +574,7 @@ footer .nav-link:hover {
 
 /* Position the "next button" to the right */
 .product-image .next {
-    right: 0;
+    right: 12px;
     border-radius: 3px 0 0 3px;
 }
 
@@ -586,7 +586,7 @@ footer .nav-link:hover {
 
 /* Number text (1/3 etc) */
 .product-image .numbertext {
-    color: #f2f2f2;
+    color: #023021;
     font-size: 12px;
     padding: 8px 12px;
     position: absolute;
@@ -613,4 +613,25 @@ footer .nav-link:hover {
 .product-image .active,
 .demo:hover {
     opacity: 1;
+}
+
+
+/* Details css */
+
+
+.cntct-btn:hover {
+    background-color: #023021;
+    border: 1px solid #023021;
+    color: #ffc107;
+    transition: 0.2s ease-in-out;
+    box-shadow: 1px 1px 10px #023021;
+}
+
+.amenities i {
+    font-size: 20px;
+}
+
+.amenities p {
+    color: #023021;
+
 }
