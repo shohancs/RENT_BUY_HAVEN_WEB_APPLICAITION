@@ -25,7 +25,69 @@
      </section>
     <!-- END: Breadcrumb -->
 
-    
+    <!-- START: Product DETAILS IMAGE -->
+     <section class="product-image">
+     <div class="container">
+        <div class="mySlides">
+            <div class="numbertext">1 / 6</div>
+            <img src="assets/images/banner_slider.jpg" style="width:100%;height: 676px;object-fit: scale-down;">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">2 / 6</div>
+            <img src="assets/images/phil-hearing-IYfp2Ixe9nM-unsplash.jpg" style="width:100%;height: 676px;object-fit: scale-down;">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">3 / 6</div>
+            <img src="assets/images/Anika/185827dc-0515-4cd1-aad5-01ac281c4b48.jpeg" style="width:100%;height: 676px;object-fit: scale-down;">
+        </div>
+            
+        <div class="mySlides">
+            <div class="numbertext">4 / 6</div>
+            <img src="assets/images/Anika/185827dc-0515-4cd1-aad5-01ac281c4b48.jpeg" style="width:100%;height: 676px;object-fit: scale-down;">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">5 / 6</div>
+            <img src="assets/images/Anika/185827dc-0515-4cd1-aad5-01ac281c4b48.jpeg" style="width:100%;height: 676px;object-fit: scale-down;">
+        </div>
+            
+        <div class="mySlides">
+            <div class="numbertext">6 / 6</div>
+            <img src="assets/images/Anika/185827dc-0515-4cd1-aad5-01ac281c4b48.jpeg" style="width:100%;height: 676px;object-fit: scale-down;">
+        </div>
+            
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+
+        <div class="caption-container">
+            <p id="caption"></p>
+        </div>
+
+        <div class="row">
+            <div class="column">
+            <img class="demo cursor" src="assets/images/banner_slider.jpg" style="width:100%; height: 100%;" onclick="currentSlide(1)" >
+            </div>
+            <div class="column">
+            <img class="demo cursor" src="assets/images/phil-hearing-IYfp2Ixe9nM-unsplash.jpg" style="width:100%; height: 100%;" onclick="currentSlide(2)" >
+            </div>
+            <div class="column">
+            <img class="demo cursor" src="assets/images/Anika/185827dc-0515-4cd1-aad5-01ac281c4b48.jpeg" style="width:100%; height: 100%;" onclick="currentSlide(3)" >
+            </div>
+            <div class="column">
+            <img class="demo cursor" src="assets/images/Anika/185827dc-0515-4cd1-aad5-01ac281c4b48.jpeg" style="width:100%; height: 100%;" onclick="currentSlide(4)" >
+            </div>
+            <div class="column">
+            <img class="demo cursor" src="assets/images/Anika/185827dc-0515-4cd1-aad5-01ac281c4b48.jpeg" style="width:100%; height: 100%;" onclick="currentSlide(5)" >
+            </div>    
+            <div class="column">
+            <img class="demo cursor" src="assets/images/Anika/185827dc-0515-4cd1-aad5-01ac281c4b48.jpeg" style="width:100%; height: 100%;" onclick="currentSlide(6)" >
+            </div>
+        </div>
+        </div>
+     </section>
+    <!-- END: Product DETAILS IMAGE -->
 
     
 
