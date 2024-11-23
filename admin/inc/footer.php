@@ -98,6 +98,25 @@
                 console.error( error );
             } );
     </script>
+
+    <script type="module">
+      	import {
+            ClassicEditor,
+            Essentials,
+            Paragraph,
+            Bold,
+            Italic
+        } from 'ckeditor5';
+
+        ClassicEditor
+            .create( document.querySelector( '#editor2' ), {
+                plugins: [ Essentials, Paragraph, Bold, Italic ],
+                toolbar: [ 'bold', 'italic' ]
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
     <!-- CK EDITOR -->
 
 

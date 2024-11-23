@@ -51,6 +51,8 @@
 						</li>
 						<li> <a href="rentSubCategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Rent Sub Categories</a>
 						</li>
+						<li> <a href="rentDivision.php?do=Manage"><i class="bx bx-radio-circle"></i>All Divison List</a>
+						</li>
 					</ul>
 				</li>
 

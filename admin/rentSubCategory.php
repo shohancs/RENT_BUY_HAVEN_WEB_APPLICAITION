@@ -233,9 +233,9 @@
 																																	$cat_id = $row['cat_id'];
 																																	$catname = $row['name'];
 																																?>
-																																	<option value="<?php echo $cat_id ?>" <?php if ($is_parent == $cat_id) {
-																																												echo "selected";
-																																											} ?>> - <?php echo $catname; ?></option>
+																																<option value="<?php echo $cat_id ?>" <?php if ($is_parent == $cat_id) {
+																																																																												echo "selected";
+																																																																											} ?>> - <?php echo $catname; ?>																																  <option>
 																																<?php
 																																}
 																																?>
@@ -470,9 +470,41 @@
 											<label>Owner Phone No.</label>
 											<input type="phone" name="ow_phone" class="form-control" required autocomplete="off" placeholder="enter owner phone..">
 										</div>
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Division</label>
+													<select class="form-select" name="division">
+														<option>Select the Division</option>
+														<?php  
+															$sql = "SELECT * FROM rent_division WHERE status=1 ORDER BY priority ASC";
+															$query = mysqli_query($db, $sql);
+
+															while ( $row = mysqli_fetch_assoc($query) ) {
+																$id  			= $row['id'];
+												  				$name  			= $row['name'];
+												  				$priority  		= $row['priority'];
+												  				$status  		= $row['status'];
+												  				?>
+												  				  
+																  <option value="<?php echo $id; ?>"><?php echo $name; ?></option>
+												  				<?php
+															}
+														?>
+													  
+													</select>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>District</label>
+													<input type="text" name="district" class="form-control" required autocomplete="off" placeholder="enter district..">
+												</div>
+											</div>
+										</div>
 										<div class="mb-3">
-											<label>Location</label>
-											<input type="text" name="location" class="form-control" required autocomplete="off" placeholder="enter location..">
+											<label>House Number & Location</label>
+											<input type="text" name="location" class="form-control" required autocomplete="off" placeholder="enter area location..">
 										</div>
 
 										<div class="row">
@@ -516,7 +548,31 @@
 											</div>
 											<div class="col-lg-6">
 												<div class="mb-3">
-													<label>Washroom</label>
+													<label>Drawing</label>
+													<input type="number" name="drawing" class="form-control" required autocomplete="off" placeholder="drawing..">
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Dinning</label>
+													<input type="number" name="dinning" class="form-control" required autocomplete="off" placeholder="enter number of dinning..">
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Balcony</label>
+													<input type="number" name="balcony" class="form-control" required autocomplete="off" placeholder="enter number of balcony..">
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Garage</label>
+													<input type="number" name="garage" class="form-control" required autocomplete="off" placeholder="enter number of garage..">
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Bathroom</label>
 													<input type="number" name="washroom" class="form-control" required autocomplete="off" placeholder="enter number of washroom..">
 												</div>
 											</div>
@@ -551,17 +607,38 @@
 											<label>Long Description</label>
 											<textarea name="ldesc" class="form-control" cols="30" rows="10" id="editor1" placeholder="write long description..."></textarea>
 										</div>
-
 										<div class="mb-3">
-											<label>Status</label>
-											<select name="status" class="form-select">
-												<option value="1">Please Select the Status</option>
-												<option value="1">Active</option>
-												<option value="0">InActive</option>
-											</select>
+											<label>Google Embed Map URL <sup>(iframe)</sup></label>
+											<textarea name="map" rows="2" class="form-control"  placeholder="iframe url code"></textarea>
+										</div>
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Available on</label>
+													<input type="date" name="availabe" class="form-control">
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Status</label>
+													<select name="status" class="form-select">
+														<option value="1">Please Select the Status</option>
+														<option value="1">Active</option>
+														<option value="0">InActive</option>
+													</select>
+												</div>
+											</div>											
 										</div>
 
+										<div class="mb-3">
+											<label>Owner Image</label>
+											<input type="file" class="form-control" name="ow_image">
+										</div>
+
+										
+
 										<div class="row">
+											<label for="">Products Images</label>
 											<div class="col-lg-6">
 												<div class="mb-3">
 													<label>Image One</label>
@@ -619,18 +696,37 @@
 					$ow_name 		= mysqli_real_escape_string($db, $_POST['ow_name']);
 					$ow_email 		= mysqli_real_escape_string($db, $_POST['ow_email']);
 					$ow_phone 		= mysqli_real_escape_string($db, $_POST['ow_phone']);
+					$division		= mysqli_real_escape_string($db, $_POST['division']);
+					$district 		= mysqli_real_escape_string($db, $_POST['district']);
 					$location 		= mysqli_real_escape_string($db, $_POST['location']);
 					$price 			= mysqli_real_escape_string($db, $_POST['price']);
 					$bed 			= mysqli_real_escape_string($db, $_POST['bed']);
 					$kitchen 		= mysqli_real_escape_string($db, $_POST['kitchen']);
+					$drawing 		= mysqli_real_escape_string($db, $_POST['drawing']);
+					$dinning 		= mysqli_real_escape_string($db, $_POST['dinning']);
+					$balcony 		= mysqli_real_escape_string($db, $_POST['balcony']);
+					$garage 		= mysqli_real_escape_string($db, $_POST['garage']);
 					$washroom 		= mysqli_real_escape_string($db, $_POST['washroom']);
 					$totalRoom 		= mysqli_real_escape_string($db, $_POST['totalRoom']);
 					$areaSize 		= mysqli_real_escape_string($db, $_POST['areaSize']);
 					$floor 			= mysqli_real_escape_string($db, $_POST['floor']);
 					$sdesc 			= mysqli_real_escape_string($db, $_POST['sdesc']);
 					$ldesc 			= mysqli_real_escape_string($db, $_POST['ldesc']);
+					$map			= mysqli_real_escape_string($db, $_POST['map']);
+					$availabe		= $_POST['availabe'];
 					$is_parent 		= mysqli_real_escape_string($db, $_POST['is_parent']);
 					$status 		= mysqli_real_escape_string($db, $_POST['status']);
+
+					// For Owner Image
+					$ow_image		= mysqli_real_escape_string($db, $_FILES['ow_image']['name']);
+					$tmpImgOwn		= $_FILES['ow_image']['tmp_name'];
+
+					if (!empty($ow_image)) {
+						$imgOwn = rand(0, 999999) . "_" . $ow_image;
+						move_uploaded_file($tmpImgOwn, 'assets/images/owner/' . $imgOwn);
+					} else {
+						$imgOwn = '';
+					}
 
 					// For Image One
 					$img_one		= mysqli_real_escape_string($db, $_FILES['img_one']['name']);
@@ -722,7 +818,7 @@
 					$slug = createSlug($subname);
 					// End: For Slug Making
 
-					$addSubCategorySql = "INSERT INTO rent_subcategory ( subcat_name, slug, is_parent, ow_name, ow_email, ow_phone, location, price, bed, kitchen, washroom, totalroom, area_size, floor, short_desc, long_desc, img_one, img_two, img_three, img_four, img_five, img_six, status, join_date ) VALUES ( '$subname', '$slug', '$is_parent', '$ow_name', '$ow_email', '$ow_phone', '$location', '$price', '$bed', '$kitchen', '$washroom', '$totalRoom', '$areaSize', '$floor', '$sdesc', '$ldesc', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$status', now() )";
+					$addSubCategorySql = "INSERT INTO rent_subcategory ( subcat_name, slug, is_parent, ow_name, ow_email, ow_phone, district, division_id, location, price, bed, kitchen, washroom, totalroom, area_size, floor, drwaing, dinning, balcony, garage, availability, short_desc, long_desc, ow_image, img_one, img_two, img_three, img_four, img_five, img_six, status, google_map, join_date ) VALUES ( '$subname', '$slug', '$is_parent', '$ow_name', '$ow_email', '$ow_phone', '$district', '$division', '$location', '$price', '$bed', '$kitchen', '$washroom', '$totalRoom', '$areaSize', '$floor', '$drawing', '$dinning', '$balcony', '$garage', '$availabe', '$sdesc', '$ldesc', '$imgOwn', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$status', '$map', now() )";
 					$addQuery = mysqli_query($db, $addSubCategorySql);
 
 					if ($addQuery) {
@@ -869,7 +965,7 @@
 													</div>
 													<div class="col-lg-6">
 														<div class="mb-3">
-															<label>Washroom</label>
+															<label>Bathroom</label>
 															<input type="number" name="washroom" class="form-control" required autocomplete="off" placeholder="enter number of washroom.." value="<?php echo $washroom; ?>">
 														</div>
 													</div>

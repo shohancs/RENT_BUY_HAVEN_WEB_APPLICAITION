@@ -635,3 +635,8 @@ footer .nav-link:hover {
     color: #023021;
 
 }
+
+.map iframe{
+    width: 100% !important;
+    height: 350px;
+}
