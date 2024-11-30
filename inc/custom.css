@@ -640,3 +640,23 @@ footer .nav-link:hover {
     width: 100% !important;
     height: 350px;
 }
+
+.cards{
+    position: relative;
+}
+.text-cards {
+    position: absolute;
+    background-color: #023021;
+    color: #fff;
+    top: 0;
+    right: 0;
+    padding: 2px 14px;
+    width: 30%;
+    clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0 100%, 21% 0);
+}
+
+.offer{
+    color: #023021;
+    font-size: 16px;
+    letter-spacing: 1px;
+}

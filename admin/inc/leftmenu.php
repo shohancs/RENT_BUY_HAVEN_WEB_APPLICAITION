@@ -29,12 +29,14 @@
 						<div class="menu-title">Role Management</div>
 					</a>
 					<ul>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Super Admin</a>
+						<li> <a href="role.php?do=AdminManage"><i class="bx bx-radio-circle"></i>Super Admin</a>
 						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Field Checker</a>
+						<li> <a href="role.php?do=fieldManage"><i class="bx bx-radio-circle"></i>Field Checker</a>
 						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>User</a>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Seller</a>
+						<li> <a href="role.php?do=userManage"><i class="bx bx-radio-circle"></i>User</a>
+						<li> <a href="role.php?do=sellerManage"><i class="bx bx-radio-circle"></i>Seller</a>
+						</li>
+						<li> <a href="role.php?do=Manage"><i class="bx bx-radio-circle"></i>All Role</a>
 						</li>
 					</ul>
 				</li>
@@ -63,9 +65,27 @@
 						<div class="menu-title">Buy Category</div>
 					</a>
 					<ul>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>All Buy Categories</a>
+						<li> <a href="buycategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Buy Categories</a>
 						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>All Buy Sub Categories</a>
+						<li> <a href="buySubCategory.php?do=Manage"><i class="bx bx-radio-circle"></i>All Buy Sub Categories</a>
+						</li>
+						<li> <a href="buyDivision.php?do=Manage"><i class="bx bx-radio-circle"></i>All Divison List</a>
+						</li>
+					</ul>
+				</li>
+
+
+				<li class="menu-label">Packages Offer</li>
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-category'></i>
+						</div>
+						<div class="menu-title">Packages</div>
+					</a>
+					<ul>
+						<li> <a href="package.php?do=Manage"><i class="bx bx-radio-circle"></i>All Packages</a>
+						</li>
+						<li> <a href=""><i class="bx bx-radio-circle"></i>Packages Control</a>
 						</li>
 					</ul>
 				</li>

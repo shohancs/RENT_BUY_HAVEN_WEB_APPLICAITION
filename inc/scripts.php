@@ -48,3 +48,15 @@ function showSlides(n) {
   captionText.innerHTML = dots[slideIndex-1].alt;
 }
 </script>
+
+
+<script>
+    function updateValue(id, delta) {
+      const input = document.getElementById(id);
+      const currentValue = parseInt(input.value, 10);
+      const newValue = currentValue + delta;
+      if (newValue >= parseInt(input.min) && newValue <= parseInt(input.max)) {
+        input.value = newValue;
+      }
+    }
+  </script>

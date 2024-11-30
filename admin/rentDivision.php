@@ -91,7 +91,17 @@
 														      <th scope="row" class="text-center"><?php echo $i; ?></th>
 														      <td class="text-center"><?php echo $name; ?></td>
 														      <td class="text-center"><?php echo $priority; ?></td>
-														      <td class="text-center">sub count</td>
+														      <td class="text-center">
+															  	<?php  
+															  		$childSql = "SELECT * FROM rent_subcategory WHERE division_id ='$id' AND status=1 ORDER BY subcat_name ASC";
+																	$childQuery = mysqli_query($db, $childSql);
+																	$childSqlCount = mysqli_num_rows($childQuery);
+
+																	?>
+																	<span class="badge text-bg-warning"><?php echo $childSqlCount; ?></span>
+																	<?php
+															  	?>
+														      </td>
 														      <td class="text-center">
 														      	<?php  
 														      		if ($status == 1) { ?>

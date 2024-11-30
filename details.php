@@ -27,6 +27,19 @@
                 $totalroom      = $row['totalroom'];
                 $area_size      = $row['area_size'];
                 $floor          = $row['floor'];
+                $rank           = $row['rank'];
+                $decoration     = $row['decoration'];
+                $desk           = $row['desk'];
+                $wifi           = $row['wifi'];
+                $hottub         = $row['hottub'];
+                $currency       = $row['currency'];
+                $breakfast      = $row['breakfast'];
+                $restourant     = $row['restourant'];
+                $ac             = $row['ac'];
+                $pool           = $row['pool'];
+                $park           = $row['park'];
+                $gym            = $row['gym'];
+                $luggage        = $row['luggage'];
                 $drwaing        = $row['drwaing'];
                 $dinning        = $row['dinning'];
                 $balcony        = $row['balcony'];
@@ -50,20 +63,38 @@
                  <section class="py-5 bg-light">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12 text-uppercase d-flex justify-content-between">
-                                <div>
-                                    <h4 style="color: #023021; font-size: 25px;">Apartments</h4>
-                                </div>
-                                <div class="d-flex">
-                                    <a href="index.php"><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">HOME</h4></a>
-                                    <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
-                                    <a href=""><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">RENT CATEGORY</h4></a>
-                                    <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
-                                    <a href=""><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">APARTMENTS</h4></a>
-                                    <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
-                                    <h4 style="color:#6c757d; font-size: 17px; font-weight: 400; "><?php echo $slug; ?></h4>
-                                </div>
-                            </div>
+                            
+                                    <div class="col-lg-12 text-uppercase d-flex justify-content-between">
+                                        <?php  
+
+                                                $sql = "SELECT * FROM rent_category WHERE status = 1 AND cat_id='$is_parent'";
+                                                $query = mysqli_query( $db, $sql );
+
+                                                while ($row = mysqli_fetch_assoc($query)) {
+                                                    $cat_id         = $row['cat_id'];
+                                                    $cat_name       = $row['name'];
+                                                    ?>
+                                        <div>
+                                            <h4 style="color: #023021; font-size: 25px;">Details <?php echo $cat_name; ?> </h4>
+                                        </div>
+                                        <div class="d-flex">
+                                            <a href="index.php"><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">HOME</h4></a>
+                                            <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
+                                            <a href="rent.php"><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">RENT CATEGORY</h4></a>
+                                            <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
+                                            
+                                                    <a href="products.php?pid=<?php echo $cat_id; ?>"><h4 style="color:#545454; font-size: 17px; font-weight: 400; "><?php echo $cat_name; ?></h4></a>
+                                                    <?php
+                                                    }
+
+                                                ?>
+                                            
+                                            <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
+                                            <h4 style="color:#6c757d; font-size: 17px; font-weight: 400; "><?php echo $slug; ?></h4>
+                                        </div>
+                                    </div>
+                                    
+                            
                         </div>
                     </div>
                  </section>
@@ -213,6 +244,68 @@
                                 <div class="top-details">
                                     <div class="row pb-3">
                                         <div class="col-lg-8">
+                                              <?php  
+                                                if ( $cat_id == 2 ) { 
+                                                    if ( $rank == 1 ) { ?>
+                                                        <div class="d-flex pb-2">
+                                                            <div >
+                                                                <i class="fa-solid fa-star text-success"></i>
+                                                                <i class="fa-solid fa-star text-success"></i>
+                                                                <i class="fa-solid fa-star text-success"></i>
+                                                                <i class="fa-solid fa-star text-success"></i>
+                                                                <i class="fa-solid fa-star text-success"></i>
+                                                            </div>
+                                                            <h3 class="px-3" style="letter-spacing: 1px; color:#023021; font-size: 22px; font-weight:600; text-transform: capitalize;">Five Star</h3>
+                                                        </div>
+                                                    
+                                                    <?php }
+
+                                                    else if ( $rank == 2 ) { ?>
+                                                    <div class="d-flex pb-2">
+                                                        <div >
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                        </div>
+                                                        <h3 class="px-3" style="letter-spacing: 1px; color:#023021; font-size: 22px; font-weight:600; text-transform: capitalize;">Four Star</h3>
+                                                    </div>
+                                                    <?php }
+
+                                                    else if ( $rank == 3 ) { ?>
+                                                    <div class="d-flex pb-2">
+                                                        <div >
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                        </div>
+                                                        <h3 class="px-3" style="letter-spacing: 1px; color:#023021; font-size: 22px; font-weight:600; text-transform: capitalize;">Three Star</h3>
+                                                    </div>
+                                                    <?php }
+
+                                                    else if ( $rank == 4 ) { ?>
+                                                    <div class="d-flex pb-2">
+                                                        <div >
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                        </div>
+                                                        <h3 class="px-3" style="letter-spacing: 1px; color:#023021; font-size: 22px; font-weight:600; text-transform: capitalize;">Two Star</h3>
+                                                    </div>
+                                                    <?php }
+
+                                                    else if ( $rank == 1 ) { ?>
+                                                    <div class="d-flex pb-2">
+                                                        <div >
+                                                            <i class="fa-solid fa-star text-success"></i>
+                                                        </div>
+                                                        <h3 class="px-3" style="letter-spacing: 1px; color:#023021; font-size: 22px; font-weight:600; text-transform: capitalize;">One Star</h3>
+                                                    </div>
+                                                    <?php }
+                                                } 
+                                                else {
+
+                                                }
+                                            ?>
                                             <h1 class="" style="letter-spacing: 2px; color:#023021; font-size: 35px; font-weight:600; text-transform: uppercase;">৳ <?php echo $price; ?> BDT</h1>
                                             <h3 class="py-1" style="letter-spacing: 2px; color:#023021; font-size: 24px; font-weight:600; text-transform: capitalize;"><?php echo $subcat_name; ?></h3>
                                             <?php  
@@ -229,50 +322,52 @@
                                                     <?php
                                                 } 
                                             ?>
+                                          
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4">                                            
                                             <div class="review">
-                                            <div>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                (20)
-                                            </div>
-                                            <div>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                (10)
-                                            </div>
-                                            <div>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                (10)
-                                            </div>
-                                            <div>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star-half-stroke text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                (10)
-                                            </div>
-                                            <div>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star text-warning"></i>
-                                                (10)
-                                            </div>
-                                            </div>  
+                                                <div>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    (20)
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    (10)
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    (10)
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star-half-stroke text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    (10)
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    <i class="fa-regular fa-star text-warning"></i>
+                                                    (10)
+                                                </div>
+                                        </div> 
+                                             
                                         </div>
                                     </div>
 
@@ -281,57 +376,359 @@
                                     </div>
                                     
                                     <div class="services d-flex">
-                                        <div class="bg-light px-5 py-4 me-5">
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-bed" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $bed; ?> Bedrooms</p></div>
-                                            </div>
+                                        <?php  
+                                            if ( $cat_id == 3 ) { ?>
+                                                <div class="bg-light px-5 py-4 me-5">
+                                                    <?php  
 
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $drwaing; ?> Drawing</p></div>
-                                            </div>
+                                                    if ( $cat_id == 2 || $cat_id == 3 ) { 
+                                                        if ( $decoration == 1 ) {?>
+                                                            <div class="d-flex ">
+                                                                <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                <div><p>Furnished</p></div>
+                                                            </div>
+                                                        <?php }
+                                                        else if ( $decoration == 2 ) {?>
+                                                            <div class="d-flex ">
+                                                                <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                <div><p>Semi-Furnished</p></div>
+                                                            </div>
+                                                        <?php }
+                                                        else if ( $decoration == 3 ) {?>
+                                                            <div class="d-flex ">
+                                                                <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                <div><p>Non-Furnished</p></div>
+                                                            </div>
+                                                        <?php }
+                                                    }
+                                                        ?>
+                                                    <div class="d-flex ">                                                        
+                                                        <div><i class="fa-solid fa-bath" style="padding-right: 11px"></i></div>
+                                                        <div><p><?php echo $washroom; ?> Bathrooms</p></div>
+                                                    </div>
 
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-utensils" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $dinning; ?> Dinning</p></div>
-                                            </div>
+                                                    <div class="d-flex ">
+                                                        <div><i class="fa-solid fa-stairs" style="padding-right: 11px"></i></div>
+                                                        <div><p><?php echo $floor; ?> Floor</p></div>
+                                                    </div>
 
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-kitchen-set" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $kitchen; ?> Kitchen</p></div>
-                                            </div>
+                                                    <div class="d-flex ">
+                                                        <div><i class="fa-solid fa-warehouse" style="padding-right: 11px"></i></div>
+                                                        <div><p><?php echo $garage; ?> Garage</p></div>
+                                                    </div>
 
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-bath" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $washroom; ?> Bathrooms</p></div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-light px-5 py-4">
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-building" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $balcony; ?> Balcony</p></div>
-                                            </div>
+                                                    <div class="d-flex ">
+                                                        <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                        <div><p><?php echo $area_size; ?> sqft area Size</p></div>
+                                                    </div>
 
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-stairs" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $floor; ?> Floor</p></div>
-                                            </div>
+                                                    <div class="d-flex ">
+                                                        <p style="color:#023021; font-size: 18px;">Available: <?php echo $availability; ?></p>
+                                                    </div>
+                                                </div>
+                                            <?php }
 
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-warehouse" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $garage; ?> Garage</p></div>
-                                            </div>
+                                            else { 
 
-                                            <div class="d-flex ">
-                                                <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
-                                                <div><p><?php echo $area_size; ?> sqft area Size</p></div>
-                                            </div>
+                                                if ( $cat_id == 2 ) { ?>
+                                                    <div class="bg-light px-4 py-4 me-5">
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-bed" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $bed; ?> Bedrooms</p></div>
+                                                        </div>
 
-                                            <div class="d-flex ">
-                                                <p style="color:#023021; font-size: 18px;">Available: <?php echo $availability; ?></p>
-                                            </div>
-                                        </div>
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $drwaing; ?> Drawing</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <?php  
+                                                                if ( !empty( $dinning ) ) { ?>
+
+                                                                <div><i class="fa-solid fa-utensils" style="padding-right: 11px"></i>
+                                                                </div>
+
+                                                                <div>
+                                                                
+                                                                    <p><?php echo $dinning; ?> Dinning</p>
+                                                                    
+                                                                </div>
+                                                            <?php }
+                                                                else {
+
+                                                                }
+                                                            ?>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-kitchen-set" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $kitchen; ?> Kitchen</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-bath" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $washroom; ?> Bathrooms</p></div>
+                                                        </div>
+
+                                                        <?php  
+                                                            if ( $cat_id == 2 ) { ?>
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-building" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php echo $balcony; ?> Balcony</p></div>
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-stairs" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php echo $floor; ?> Floor</p></div>
+                                                                </div>
+                                                           <?php }
+                                                            else {
+
+                                                            }
+                                                        ?>
+                                                    </div>
+
+                                                    <div class="bg-light px-4 py-4">
+                                                        <?php  
+                                                            if ( $cat_id != 2 ) { ?>
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-building" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php echo $balcony; ?> Balcony</p></div>
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-stairs" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php echo $floor; ?> Floor</p></div>
+                                                                </div>
+                                                           <?php }
+                                                        ?>
+                                                        
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-warehouse" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $garage; ?> Garage</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $area_size; ?> sqft area Size</p></div>
+                                                        </div>
+
+                                                        <?php  
+                                                            if ( $cat_id == 2 ) { ?>
+                                                                <div class="d-flex ">
+                                                                    <?php  
+                                                                        if ( !empty( $pool ) ) { ?>
+                                                                            <div><i class="fa-solid fa-water-ladder" style="padding-right: 11px"></i></div>
+                                                                            <div><p>Swimming pool(indoor)</p></div>
+                                                                        <?php }
+                                                                    ?>                         
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <?php  
+                                                                        if ( !empty( $park ) ) { ?>
+                                                                            <div><i class="fa-solid fa-car-side" style="padding-right: 11px"></i></div>
+                                                                            <div><p>Car park</p></div>
+                                                                        <?php }
+                                                                    ?>                         
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <?php  
+                                                                        if ( !empty( $gym ) ) { ?>
+                                                                            <div><i class="fa-solid fa-dumbbell" style="padding-right: 11px"></i></div>
+                                                                            <div><p>Fitness center</p></div>
+                                                                        <?php }
+                                                                    ?>                         
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <?php  
+                                                                        if ( !empty( $luggage ) ) { ?>
+                                                                            <div><i class="fa-solid fa-cart-flatbed-suitcase" style="padding-right: 11px"></i></div>
+                                                                            <div><p>Luggage Storage</p></div>
+                                                                        <?php }
+                                                                    ?>                         
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <?php  
+                                                                        if ( !empty( $ac ) ) { ?>
+                                                                            <div><i class="fa-solid fa-snowflake" style="padding-right: 11px"></i>
+                                                                            </div>
+                                                                            <div><p>Air conditioning</p></div> 
+                                                                        <?php }
+                                                                    ?>                                                                    
+                                                                </div>
+                                                            <?php }
+                                                        ?>
+
+                                                        <?php  
+                                                            if ( $cat_id != 2 ) { ?>
+                                                                <div class="d-flex ">
+                                                                    <p style="color:#023021; font-size: 18px;">Available: <?php echo $availability; ?></p>
+                                                                </div>
+                                                            <?php }
+                                                        ?>
+
+                                                        
+                                                    </div>
+
+                                                    <?php  
+                                                        if ( $cat_id == 2 ) { ?>
+                                                            <div class="bg-light px-4 py-4 ms-5">
+                                                                <?php  
+                                                                    if ( $decoration == 1 ) {?>
+                                                                        <div class="d-flex ">
+                                                                            <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                            <div><p>Furnished</p></div>
+                                                                        </div>
+                                                                    <?php }
+                                                                    else if ( $decoration == 2 ) {?>
+                                                                        <div class="d-flex ">
+                                                                            <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                            <div><p>Semi-Furnished</p></div>
+                                                                        </div>
+                                                                    <?php }
+                                                                    else if ( $decoration == 3 ) {?>
+                                                                        <div class="d-flex ">
+                                                                            <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                            <div><p>Non-Furnished</p></div>
+                                                                        </div>
+                                                                    <?php }
+                                                                ?>
+
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-user-shield" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php if ( !empty( $desk ) ) {
+                                                                        echo "Front desk [24-hour]";
+                                                                    } ?></p></div>
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-wifi" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php if ( !empty( $wifi ) ) {
+                                                                        echo "Wifi";
+                                                                    } ?></p></div>
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-hot-tub-person" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php if ( !empty( $hottub ) ) {
+                                                                        echo "Hot tub";
+                                                                    } ?></p></div>
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-comments-dollar"style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php if ( !empty( $currency ) ) {
+                                                                        echo "Currency";
+                                                                    } ?></p></div>
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-bowl-rice" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php if ( !empty( $breakfast ) ) {
+                                                                        echo "Complementary Breakfast";
+                                                                    } ?></p></div>
+                                                                </div>
+
+                                                                <div class="d-flex ">
+                                                                    <div><i class="fa-solid fa-bell-concierge" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php if ( !empty( $restourant ) ) {
+                                                                        echo "Restourant";
+                                                                    } ?></p></div>
+                                                                </div>                                                              
+
+                                                                
+
+
+
+                                                        
+                                                            </div>
+                                                        <?php }
+                                                        else {
+
+                                                        }
+                                                    ?>
+                                                <?php }
+                                                else { ?>
+                                                    <div class="bg-light px-5 py-4 me-5">
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-bed" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $bed; ?> Bedrooms</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $drwaing; ?> Drawing</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <?php  
+                                                                if ( !empty( $dinning ) ) { ?>
+
+                                                                <div><i class="fa-solid fa-utensils" style="padding-right: 11px"></i>
+                                                                </div>
+
+                                                                <div>
+                                                                
+                                                                    <p><?php echo $dinning; ?> Dinning</p>
+                                                                    
+                                                                </div>
+                                                            <?php }
+                                                                else {
+
+                                                                }
+                                                            ?>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-kitchen-set" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $kitchen; ?> Kitchen</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-bath" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $washroom; ?> Bathrooms</p></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bg-light px-5 py-4">
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-building" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $balcony; ?> Balcony</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-stairs" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $floor; ?> Floor</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-warehouse" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $garage; ?> Garage</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $area_size; ?> sqft area Size</p></div>
+                                                        </div>
+
+                                                        <div class="d-flex ">
+                                                            <p style="color:#023021; font-size: 18px;">Available: <?php echo $availability; ?></p>
+                                                        </div>
+                                                    </div>
+                                                <?php }
+
+
+
+                                                
+
+                                             }
+                                        ?>
+                                        
                                     </div>
 
                                     <div class="my-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
@@ -351,90 +748,152 @@
 
                                     <div class="amenities">
                                     <div class="row ">
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-brands fa-windows"></i>
-                                            <p>Double Glazed Windows</p>
-                                        </div>
+                                        <?php  
+                                            if ( $cat_id == 3 ) { ?>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-stairs"></i>
-                                            <p>Flooring</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-stairs"></i>
+                                                    <p>Flooring</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                        <i class="fa-solid fa-bell-concierge"></i>
-                                            <p>24 Hours Concierege</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                <i class="fa-solid fa-bell-concierge"></i>
+                                                    <p>24 Hours Concierege</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                        <i class="fa-solid fa-building"></i>
-                                            <p>Apartment Facing</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                <i class="fa-solid fa-building"></i>
+                                                    <p>Apartment Facing</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                        <i class="fa-solid fa-mask-ventilator"></i>
-                                            <p>Gas</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-plug"></i>
+                                                    <p>Electricity</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-plug"></i>
-                                            <p>Electricity</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-stairs"></i>
+                                                    <p>Floor Level</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-stairs"></i>
-                                            <p>Floor Level</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-video"></i>
+                                                    <p>View</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-person-shelter"></i>
-                                            <p>Maintanance Staff</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-school"></i>
+                                                    <p>Nearby School</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-broom"></i>
-                                            <p>Cleaning Service</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-plane"></i>
+                                                    <p>Distance from Airport(kms)</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-video"></i>
-                                            <p>View</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-bus"></i>
+                                                    <p>Nearby Public Transport</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-building"></i>
-                                            <p>Balcony</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-shield-halved"></i>
+                                                    <p>Guard/Security Staff</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-people-carry-box"></i>
-                                            <p>Lobby in Building</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-paw"></i>
+                                                    <p>Pet Policy</p>
+                                                </div>
+                                            <?php }
+                                            else { ?>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-brands fa-windows"></i>
+                                                    <p>Double Glazed Windows</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-school"></i>
-                                            <p>Nearby School</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-stairs"></i>
+                                                    <p>Flooring</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-plane"></i>
-                                            <p>Distance from Airport(kms)</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                <i class="fa-solid fa-bell-concierge"></i>
+                                                    <p>24 Hours Concierege</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-bus"></i>
-                                            <p>Nearby Public Transport</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                <i class="fa-solid fa-building"></i>
+                                                    <p>Apartment Facing</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-shield-halved"></i>
-                                            <p>Guard/Security Staff</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                <i class="fa-solid fa-mask-ventilator"></i>
+                                                    <p>Gas</p>
+                                                </div>
 
-                                        <div class="col-lg-2 text-center p-2">
-                                            <i class="fa-solid fa-paw"></i>
-                                            <p>Pet Policy</p>
-                                        </div>
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-plug"></i>
+                                                    <p>Electricity</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-stairs"></i>
+                                                    <p>Floor Level</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-person-shelter"></i>
+                                                    <p>Maintanance Staff</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-broom"></i>
+                                                    <p>Cleaning Service</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-video"></i>
+                                                    <p>View</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-building"></i>
+                                                    <p>Balcony</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-people-carry-box"></i>
+                                                    <p>Lobby in Building</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-school"></i>
+                                                    <p>Nearby School</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-plane"></i>
+                                                    <p>Distance from Airport(kms)</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-bus"></i>
+                                                    <p>Nearby Public Transport</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-shield-halved"></i>
+                                                    <p>Guard/Security Staff</p>
+                                                </div>
+
+                                                <div class="col-lg-2 text-center p-2">
+                                                    <i class="fa-solid fa-paw"></i>
+                                                    <p>Pet Policy</p>
+                                                </div>
+                                            <?php }
+                                        ?>
+                                        
 
 
                                     </div>
@@ -563,55 +1022,166 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="sticky-top">
-                                    <div class="mb-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
-                                        <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 23px; font-weight:600; text-transform: uppercase;">For Booking Contact Owner</h1>
-                                    </div>
+                                    <?php  
+                                        $sql = "SELECT * FROM rent_category WHERE status = 1 AND cat_id='$is_parent'";
+                                        $query = mysqli_query( $db, $sql );
 
-                                    <div class="bg-light p-4">
-                                        <div class="d-flex align-items-center">
-                                            <?php
-                                                if (!empty($ow_image)) {
-                                                    echo '<img src="admin/assets/images/owner/' . $ow_image . '" alt="" width="100">
-                                                        ';
-                                                } else {
-                                                    echo '
-                                                        <img src="assets/images/dummy.png" alt="" width="100"">
-                                                    ';
-                                                }
-                                            ?>
-                                            <h5 class="ps-3" style="color:#023021;"><?php echo $ow_name; ?></h5>
-                                        </div>
-                                        <div class="d-flex pt-5">
-                                            <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
-                                            <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
-                                        </div>
-                                        <div class="d-flex">
-                                            <i class="fa-solid fa-envelope pe-3" style="color:#023021;"></i>
-                                            <P style="color:#023021;">Email: <a href="mailto:<?php echo $ow_email; ?>" style="color:#023021;"><?php echo $ow_email; ?></a></P>
-                                        </div>
-                                        <div class="d-flex">
-                                            <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
-                                            <?php  
-                                                $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
-                                                $divquery = mysqli_query($db, $divsql);
+                                        while ($row = mysqli_fetch_assoc($query)) {
+                                            $cat_id         = $row['cat_id'];
+                                            $cat_name       = $row['name'];
 
-                                                while ( $row = mysqli_fetch_assoc($divquery) ) {
-                                                    $id             = $row['id'];
-                                                    $name           = $row['name'];
-                                                    $priority       = $row['priority'];
-                                                    $status         = $row['status'];
-                                                    ?>
-                                                    <P style="color:#023021;">Address: <?php echo $location .", " . $district .", ". $name; ?></P>
-                                                    <?php
-                                                } 
-                                            ?>
-                                            
-                                        </div>
+                                            if ( $cat_id == 2 ) { ?>
+                                                <div class="mb-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
+                                                    <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 23px; font-weight:600; text-transform: uppercase;">For Online Booking</h1>
+                                                </div>
 
-                                        <div class="text-center py-2">
-                                            <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
-                                        </div>
-                                    </div>
+                                                <div class="bg-light p-4">
+                                                    <form action="" method="POST">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label for="">Check In</label>
+                                                                    <input type="date" name="checkin" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label for="">Check Out</label>
+                                                                    <input type="date" name="checkout" class="form-control">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label for="">Adults ( 10 Years + )</label>
+                                                                    <button type="button" class="btn btn-light" onclick="updateValue('adults', -1)">-</button>
+                                                                    <input type="number" name="adult" id="adults" class="input" value="1" min="1" max="10">
+                                                                    <button type="button" class="btn btn-light" onclick="updateValue('adults', 1)">+</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label for="">Child ( 0-10 Years )</label>
+                                                                    <button type="button" class="btn btn-light" onclick="updateValue('children', -1)">-</button>
+                                                                    <input type="number" name="child" id="children" class="input" value="0" min="0" max="10">
+                                                                    <button type="button" class="btn btn-light" onclick="updateValue('children', 1)">+</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="d-grid gap-2 col-6 mx-auto">
+                                                                    <input type="submit" class="btn btn-warning cntct-btn" value="Book Now">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <!--  -->
+
+                                                <div class="my-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
+                                                    <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 23px; font-weight:600; text-transform: uppercase;">Emergency Contact</h1>
+                                                </div>
+
+                                                <div class="bg-light p-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <?php
+                                                            if (!empty($ow_image)) {
+                                                                echo '<img src="admin/assets/images/owner/' . $ow_image . '" alt="" width="100">
+                                                                    ';
+                                                            } else {
+                                                                echo '
+                                                                    <img src="assets/images/dummy.png" alt="" width="100"">
+                                                                ';
+                                                            }
+                                                        ?>
+                                                        <h5 class="ps-3" style="color:#023021;"><?php echo $ow_name; ?></h5>
+                                                    </div>
+                                                    <div class="d-flex pt-5">
+                                                        <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
+                                                        <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <i class="fa-solid fa-envelope pe-3" style="color:#023021;"></i>
+                                                        <P style="color:#023021;">Email: <a href="mailto:<?php echo $ow_email; ?>" style="color:#023021;"><?php echo $ow_email; ?></a></P>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
+                                                        <?php  
+                                                            $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
+                                                            $divquery = mysqli_query($db, $divsql);
+
+                                                            while ( $row = mysqli_fetch_assoc($divquery) ) {
+                                                                $id             = $row['id'];
+                                                                $name           = $row['name'];
+                                                                $priority       = $row['priority'];
+                                                                $status         = $row['status'];
+                                                                ?>
+                                                                <P style="color:#023021;">Address: <?php echo $location .", " . $district .", ". $name; ?></P>
+                                                                <?php
+                                                            } 
+                                                        ?>
+                                                        
+                                                    </div>
+
+                                                    <div class="text-center py-2">
+                                                        <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
+                                                    </div>
+                                                </div>
+                                            <?php }
+                                            else { ?>
+                                                <div class="mb-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
+                                                    <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 23px; font-weight:600; text-transform: uppercase;">For Booking Contact Owner</h1>
+                                                </div>
+
+                                                <div class="bg-light p-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <?php
+                                                            if (!empty($ow_image)) {
+                                                                echo '<img src="admin/assets/images/owner/' . $ow_image . '" alt="" width="100">
+                                                                    ';
+                                                            } else {
+                                                                echo '
+                                                                    <img src="assets/images/dummy.png" alt="" width="100"">
+                                                                ';
+                                                            }
+                                                        ?>
+                                                        <h5 class="ps-3" style="color:#023021;"><?php echo $ow_name; ?></h5>
+                                                    </div>
+                                                    <div class="d-flex pt-5">
+                                                        <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
+                                                        <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <i class="fa-solid fa-envelope pe-3" style="color:#023021;"></i>
+                                                        <P style="color:#023021;">Email: <a href="mailto:<?php echo $ow_email; ?>" style="color:#023021;"><?php echo $ow_email; ?></a></P>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
+                                                        <?php  
+                                                            $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
+                                                            $divquery = mysqli_query($db, $divsql);
+
+                                                            while ( $row = mysqli_fetch_assoc($divquery) ) {
+                                                                $id             = $row['id'];
+                                                                $name           = $row['name'];
+                                                                $priority       = $row['priority'];
+                                                                $status         = $row['status'];
+                                                                ?>
+                                                                <P style="color:#023021;">Address: <?php echo $location .", " . $district .", ". $name; ?></P>
+                                                                <?php
+                                                            } 
+                                                        ?>
+                                                        
+                                                    </div>
+
+                                                    <div class="text-center py-2">
+                                                        <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
+                                                    </div>
+                                                </div>
+                                            <?php }
+                                        }
+                                    ?>
+                                    
 
                                     
                                 </div>

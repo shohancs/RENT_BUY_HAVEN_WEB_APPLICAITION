@@ -350,13 +350,13 @@
 										<div class="btn-group">
 											<div class="row row-cols-auto g-3">
 												<div class="col">
-													<a href="rent_category.php?do=Manage" class="btn btn-dark px-5">All Rent Category</a>
+													<a href="rentcategory.php?do=Manage" class="btn btn-dark px-5">All Rent Category</a>
 												</div>
 												<div class="col">
-													<a href="rent_category.php?do=Add" class="btn btn-primary px-5">Add New Rent Category</a>
+													<a href="rentcategory.php?do=Add" class="btn btn-primary px-5">Add New Rent Category</a>
 												</div>
 												<div class="col">
-													<a href="rent_category.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
+													<a href="rentcategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
 												</div>									
 											</div>
 										</div>

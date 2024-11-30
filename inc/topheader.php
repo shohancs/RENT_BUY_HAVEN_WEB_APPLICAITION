@@ -14,7 +14,7 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">  
                                 <div class="d-flex ms-auto align-items-center">
                                     <div class="mx-3">
-                                        <form action="index.php" method="GET">
+                                        <form action="packages.php" method="GET">
                                             <button type="submit" class="btn btn-secondary">+ Add Property</button>
                                         </form>
                                     </div>
@@ -47,7 +47,7 @@
                                     <a class="nav-link" href="rent.php">Rent</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Buy</a>
+                                    <a class="nav-link" href="buy.php">Buy</a>
                                 </li>
                                 <li class="nav-item mx-4">
                                     <a class="nav-link" href="#">Blog</a>
