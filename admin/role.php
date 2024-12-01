@@ -1221,7 +1221,7 @@
 															echo '<img src="assets/images/role/nid/' . $nid . '" alt="" style="width: 100%;">';
 											      		}
 											      		else { 
-															echo '<img src="assets/images/dummy.jpg" alt="" style="width: 100%;">';
+															echo 'Not Uploaded';
 											      		}
 											      	?>
 													<br><br>

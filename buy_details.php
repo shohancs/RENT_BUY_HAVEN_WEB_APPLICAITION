@@ -6,7 +6,7 @@
         if ( isset($_GET['rdId']) ) {
             $rentDetailsId = $_GET['rdId'];
 
-            $sql = "SELECT * FROM rent_subcategory WHERE status=1 AND sub_id ='$rentDetailsId'";
+            $sql = "SELECT * FROM buy_subcategory WHERE status=1 AND sub_id ='$rentDetailsId'";
             $query = mysqli_query($db, $sql);
 
             while( $row = mysqli_fetch_assoc($query) ) {
@@ -26,6 +26,7 @@
                 $washroom       = $row['washroom'];
                 $totalroom      = $row['totalroom'];
                 $area_size      = $row['area_size'];
+                $katha          = $row['katha'];
                 $floor          = $row['floor'];
                 $rank           = $row['rank'];
                 $decoration     = $row['decoration'];
@@ -67,23 +68,24 @@
                                     <div class="col-lg-12 text-uppercase d-flex justify-content-between">
                                         <?php  
 
-                                                $sql = "SELECT * FROM rent_category WHERE status = 1 AND cat_id='$is_parent'";
+                                                $sql = "SELECT * FROM buy_category WHERE status = 1 AND id='$is_parent'";
                                                 $query = mysqli_query( $db, $sql );
 
                                                 while ($row = mysqli_fetch_assoc($query)) {
-                                                    $cat_id         = $row['cat_id'];
+                                                    $cat_id         = $row['id'];
                                                     $cat_name       = $row['name'];
+                                                    $priority_id    = $row['priority_id'];
                                                     ?>
                                         <div>
-                                            <h4 style="color: #023021; font-size: 25px;">Rent Details <?php echo $cat_name; ?> </h4>
+                                            <h4 style="color: #023021; font-size: 25px;">Buy Details <?php echo $cat_name; ?> </h4>
                                         </div>
                                         <div class="d-flex">
                                             <a href="index.php"><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">HOME</h4></a>
                                             <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
-                                            <a href="rent.php"><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">RENT CATEGORY</h4></a>
+                                            <a href="buy.php"><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">BUY CATEGORY</h4></a>
                                             <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
                                             
-                                                    <a href="products.php?pid=<?php echo $cat_id; ?>"><h4 style="color:#545454; font-size: 17px; font-weight: 400; "><?php echo $cat_name; ?></h4></a>
+                                                    <a href="buy_products.php?pid=<?php echo $cat_id; ?>"><h4 style="color:#545454; font-size: 17px; font-weight: 400; "><?php echo $cat_name; ?></h4></a>
                                                     <?php
                                                     }
 
@@ -107,7 +109,7 @@
                         <div class="numbertext">1 / 6</div>
                         <?php
                             if (!empty($img_one)) {
-                                echo '<img src="admin/assets/images/subcategory/' . $img_one . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
+                                echo '<img src="admin/assets/images/buy_subcategory/' . $img_one . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             } else {
                                 echo '<img src="admin/assets/images/dummy.jpg" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             }
@@ -118,7 +120,7 @@
                         <div class="numbertext">2 / 6</div>
                         <?php
                             if (!empty($img_two)) {
-                                echo '<img src="admin/assets/images/subcategory/' . $img_two . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
+                                echo '<img src="admin/assets/images/buy_subcategory/' . $img_two . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             } else {
                                 echo '<img src="admin/assets/images/dummy.jpg" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             }
@@ -129,7 +131,7 @@
                         <div class="numbertext">3 / 6</div>
                         <?php
                             if (!empty($img_three)) {
-                                echo '<img src="admin/assets/images/subcategory/' . $img_three . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
+                                echo '<img src="admin/assets/images/buy_subcategory/' . $img_three . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             } else {
                                 echo '<img src="admin/assets/images/dummy.jpg" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             }
@@ -140,7 +142,7 @@
                         <div class="numbertext">4 / 6</div>
                         <?php
                             if (!empty($img_four)) {
-                                echo '<img src="admin/assets/images/subcategory/' . $img_four . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
+                                echo '<img src="admin/assets/images/buy_subcategory/' . $img_four . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             } else {
                                 echo '<img src="admin/assets/images/dummy.jpg" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             }
@@ -151,7 +153,7 @@
                         <div class="numbertext">5 / 6</div>
                         <?php
                             if (!empty($img_five)) {
-                                echo '<img src="admin/assets/images/subcategory/' . $img_five . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
+                                echo '<img src="admin/assets/images/buy_subcategory/' . $img_five . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             } else {
                                 echo '<img src="admin/assets/images/dummy.jpg" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             }
@@ -162,7 +164,7 @@
                         <div class="numbertext">6 / 6</div>
                         <?php
                             if (!empty($img_six)) {
-                                echo '<img src="admin/assets/images/subcategory/' . $img_six . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
+                                echo '<img src="admin/assets/images/buy_subcategory/' . $img_six . '" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             } else {
                                 echo '<img src="admin/assets/images/dummy.jpg" alt="" style="width:100%;height: 676px;object-fit: scale-down;">';
                             }
@@ -180,7 +182,7 @@
                         <div class="column">
                         <?php
                             if (!empty($img_one)) {
-                                echo '<img class="demo cursor" src="admin/assets/images/subcategory/' . $img_one . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(1)">';
+                                echo '<img class="demo cursor" src="admin/assets/images/buy_subcategory/' . $img_one . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(1)">';
                             } else {
                                 echo '<img class="demo cursor" src="admin/assets/images/dummy.jpg" alt="" style="width:100%; height: 100%;" onclick="currentSlide(1)">';
                             }
@@ -189,7 +191,7 @@
                         <div class="column">
                             <?php
                             if (!empty($img_two)) {
-                                echo '<img class="demo cursor" src="admin/assets/images/subcategory/' . $img_two . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(2)">';
+                                echo '<img class="demo cursor" src="admin/assets/images/buy_subcategory/' . $img_two . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(2)">';
                             } else {
                                 echo '<img class="demo cursor" src="admin/assets/images/dummy.jpg" alt="" style="width:100%; height: 100%;" onclick="currentSlide(2)">';
                             }
@@ -198,7 +200,7 @@
                         <div class="column">
                         <?php
                             if (!empty($img_three)) {
-                                echo '<img class="demo cursor" src="admin/assets/images/subcategory/' . $img_three . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(3)">';
+                                echo '<img class="demo cursor" src="admin/assets/images/buy_subcategory/' . $img_three . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(3)">';
                             } else {
                                 echo '<img class="demo cursor" src="admin/assets/images/dummy.jpg" alt="" style="width:100%; height: 100%;" onclick="currentSlide(3)">';
                             }
@@ -207,7 +209,7 @@
                         <div class="column">
                         <?php
                             if (!empty($img_four)) {
-                                echo '<img class="demo cursor" src="admin/assets/images/subcategory/' . $img_four . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(4)">';
+                                echo '<img class="demo cursor" src="admin/assets/images/buy_subcategory/' . $img_four . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(4)">';
                             } else {
                                 echo '<img class="demo cursor" src="admin/assets/images/dummy.jpg" alt="" style="width:100%; height: 100%;" onclick="currentSlide(4)">';
                             }
@@ -216,7 +218,7 @@
                         <div class="column">
                         <?php
                             if (!empty($img_five)) {
-                                echo '<img class="demo cursor" src="admin/assets/images/subcategory/' . $img_five . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(5)">';
+                                echo '<img class="demo cursor" src="admin/assets/images/buy_subcategory/' . $img_five . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(5)">';
                             } else {
                                 echo '<img class="demo cursor" src="admin/assets/images/dummy.jpg" alt="" style="width:100%; height: 100%;" onclick="currentSlide(5)">';
                             }
@@ -225,7 +227,7 @@
                         <div class="column">
                         <?php
                             if (!empty($img_six)) {
-                                echo '<img class="demo cursor" src="admin/assets/images/subcategory/' . $img_six . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(6)">';
+                                echo '<img class="demo cursor" src="admin/assets/images/buy_subcategory/' . $img_six . '" alt="" style="width:100%; height: 100%;" onclick="currentSlide(6)">';
                             } else {
                                 echo '<img class="demo cursor" src="admin/assets/images/dummy.jpg" alt="" style="width:100%; height: 100%;" onclick="currentSlide(6)">';
                             }
@@ -245,7 +247,7 @@
                                     <div class="row pb-3">
                                         <div class="col-lg-8">
                                               <?php  
-                                                if ( $cat_id == 2 ) { 
+                                                if ( $priority_id == 2 ) { 
                                                     if ( $rank == 1 ) { ?>
                                                         <div class="d-flex pb-2">
                                                             <div >
@@ -309,7 +311,7 @@
                                             <h1 class="" style="letter-spacing: 2px; color:#023021; font-size: 35px; font-weight:600; text-transform: uppercase;">৳ <?php echo $price; ?> BDT</h1>
                                             <h3 class="py-1" style="letter-spacing: 2px; color:#023021; font-size: 24px; font-weight:600; text-transform: capitalize;"><?php echo $subcat_name; ?></h3>
                                             <?php  
-                                                $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
+                                                $divsql = "SELECT * FROM buy_division WHERE status=1 AND id='$division_id'";
                                                 $divquery = mysqli_query($db, $divsql);
 
                                                 while ( $row = mysqli_fetch_assoc($divquery) ) {
@@ -324,49 +326,7 @@
                                             ?>
                                           
                                         </div>
-                                        <div class="col-lg-4">                                            
-                                            <div class="review">
-                                                <div>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    (20)
-                                                </div>
-                                                <div>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    (10)
-                                                </div>
-                                                <div>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    (10)
-                                                </div>
-                                                <div>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star-half-stroke text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    (10)
-                                                </div>
-                                                <div>
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                    (10)
-                                                </div>
-                                        </div> 
+                                        <div class="col-lg-4">    
                                              
                                         </div>
                                     </div>
@@ -377,11 +337,13 @@
                                     
                                     <div class="services d-flex">
                                         <?php  
-                                            if ( $cat_id == 3 ) { ?>
+
+                                        if ( empty( $priority_id == 4 ) ) {
+                                            if ( $priority_id == 3 ) { ?>
                                                 <div class="bg-light px-5 py-4 me-5">
                                                     <?php  
 
-                                                    if ( $cat_id == 2 || $cat_id == 3 ) { 
+                                                    if ( $priority_id == 2 || $priority_id == 3 ) { 
                                                         if ( $decoration == 1 ) {?>
                                                             <div class="d-flex ">
                                                                 <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
@@ -423,14 +385,15 @@
                                                     </div>
 
                                                     <div class="d-flex ">
-                                                        <p style="color:#023021; font-size: 18px;">Available: <?php echo $availability; ?></p>
+                                                        <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                        <div><p><?php echo $katha; ?> Katha</p></div>
                                                     </div>
                                                 </div>
                                             <?php }
 
                                             else { 
 
-                                                if ( $cat_id == 2 ) { ?>
+                                                if ( $priority_id == 2 ) { ?>
                                                     <div class="bg-light px-4 py-4 me-5">
                                                         <div class="d-flex ">
                                                             <div><i class="fa-solid fa-bed" style="padding-right: 11px"></i></div>
@@ -472,7 +435,7 @@
                                                         </div>
 
                                                         <?php  
-                                                            if ( $cat_id == 2 ) { ?>
+                                                            if ( $priority_id == 2 ) { ?>
                                                                 <div class="d-flex ">
                                                                     <div><i class="fa-solid fa-building" style="padding-right: 11px"></i></div>
                                                                     <div><p><?php echo $balcony; ?> Balcony</p></div>
@@ -491,7 +454,7 @@
 
                                                     <div class="bg-light px-4 py-4">
                                                         <?php  
-                                                            if ( $cat_id != 2 ) { ?>
+                                                            if ( $priority_id != 2 ) { ?>
                                                                 <div class="d-flex ">
                                                                     <div><i class="fa-solid fa-building" style="padding-right: 11px"></i></div>
                                                                     <div><p><?php echo $balcony; ?> Balcony</p></div>
@@ -515,8 +478,13 @@
                                                             <div><p><?php echo $area_size; ?> sqft area Size</p></div>
                                                         </div>
 
+                                                        <div class="d-flex ">
+                                                            <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $katha; ?> Katha</p></div>
+                                                        </div>
+
                                                         <?php  
-                                                            if ( $cat_id == 2 ) { ?>
+                                                            if ( $priority_id == 2 ) { ?>
                                                                 <div class="d-flex ">
                                                                     <?php  
                                                                         if ( !empty( $pool ) ) { ?>
@@ -566,9 +534,10 @@
                                                         ?>
 
                                                         <?php  
-                                                            if ( $cat_id != 2 ) { ?>
+                                                            if ( $priority_id != 2 ) { ?>
                                                                 <div class="d-flex ">
-                                                                    <p style="color:#023021; font-size: 18px;">Available: <?php echo $availability; ?></p>
+                                                                    <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                                    <div><p><?php echo $katha; ?> Katha</p></div>
                                                                 </div>
                                                             <?php }
                                                         ?>
@@ -577,7 +546,7 @@
                                                     </div>
 
                                                     <?php  
-                                                        if ( $cat_id == 2 ) { ?>
+                                                        if ( $priority_id == 2 ) { ?>
                                                             <div class="bg-light px-4 py-4 ms-5">
                                                                 <?php  
                                                                     if ( $decoration == 1 ) {?>
@@ -717,16 +686,33 @@
                                                         </div>
 
                                                         <div class="d-flex ">
-                                                            <p style="color:#023021; font-size: 18px;">Available: <?php echo $availability; ?></p>
+                                                            <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                            <div><p><?php echo $katha; ?> Katha</p></div>
                                                         </div>
                                                     </div>
                                                 <?php }
 
-
-
-                                                
-
                                              }
+
+                                        }
+
+                                        else { ?>
+                                            <div class="bg-light px-5 py-4 me-5">
+
+                                                <div class="d-flex ">
+                                                    <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                    <div><p><?php echo $area_size; ?> sqft area Size</p></div>
+                                                </div>
+
+                                                <div class="d-flex ">
+                                                    <div><i class="fa-solid fa-map-location-dot" style="padding-right: 11px"></i></div>
+                                                    <div><p><?php echo $katha; ?> Katha</p></div>
+                                                </div>
+                                            </div>
+
+                                       <?php  }
+                                            
+                                            
                                         ?>
                                         
                                     </div>
@@ -749,7 +735,7 @@
                                     <div class="amenities">
                                     <div class="row ">
                                         <?php  
-                                            if ( $cat_id == 3 ) { ?>
+                                            if ( $priority_id == 3 || $priority_id == 4 ) { ?>
 
                                                 <div class="col-lg-2 text-center p-2">
                                                     <i class="fa-solid fa-stairs"></i>
@@ -1022,114 +1008,8 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="sticky-top">
-                                    <?php  
-                                        $sql = "SELECT * FROM rent_category WHERE status = 1 AND cat_id='$is_parent'";
-                                        $query = mysqli_query( $db, $sql );
-
-                                        while ($row = mysqli_fetch_assoc($query)) {
-                                            $cat_id         = $row['cat_id'];
-                                            $cat_name       = $row['name'];
-
-                                            if ( $cat_id == 2 ) { ?>
-                                                <div class="mb-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
-                                                    <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 23px; font-weight:600; text-transform: uppercase;">For Online Booking</h1>
-                                                </div>
-
-                                                <div class="bg-light p-4">
-                                                    <form action="" method="POST">
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-3">
-                                                                    <label for="">Check In</label>
-                                                                    <input type="date" name="checkin" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-3">
-                                                                    <label for="">Check Out</label>
-                                                                    <input type="date" name="checkout" class="form-control">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-3">
-                                                                    <label for="">Adults ( 10 Years + )</label>
-                                                                    <button type="button" class="btn btn-light" onclick="updateValue('adults', -1)">-</button>
-                                                                    <input type="number" name="adult" id="adults" class="input" value="1" min="1" max="10">
-                                                                    <button type="button" class="btn btn-light" onclick="updateValue('adults', 1)">+</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-3">
-                                                                    <label for="">Child ( 0-10 Years )</label>
-                                                                    <button type="button" class="btn btn-light" onclick="updateValue('children', -1)">-</button>
-                                                                    <input type="number" name="child" id="children" class="input" value="0" min="0" max="10">
-                                                                    <button type="button" class="btn btn-light" onclick="updateValue('children', 1)">+</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <div class="d-grid gap-2 col-6 mx-auto">
-                                                                    <input type="submit" class="btn btn-warning cntct-btn" value="Book Now">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                                <!--  -->
-
-                                                <div class="my-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
-                                                    <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 23px; font-weight:600; text-transform: uppercase;">Emergency Contact</h1>
-                                                </div>
-
-                                                <div class="bg-light p-4">
-                                                    <div class="d-flex align-items-center">
-                                                        <?php
-                                                            if (!empty($ow_image)) {
-                                                                echo '<img src="admin/assets/images/owner/' . $ow_image . '" alt="" width="100">
-                                                                    ';
-                                                            } else {
-                                                                echo '
-                                                                    <img src="assets/images/dummy.png" alt="" width="100"">
-                                                                ';
-                                                            }
-                                                        ?>
-                                                        <h5 class="ps-3" style="color:#023021;"><?php echo $ow_name; ?></h5>
-                                                    </div>
-                                                    <div class="d-flex pt-5">
-                                                        <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
-                                                        <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <i class="fa-solid fa-envelope pe-3" style="color:#023021;"></i>
-                                                        <P style="color:#023021;">Email: <a href="mailto:<?php echo $ow_email; ?>" style="color:#023021;"><?php echo $ow_email; ?></a></P>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
-                                                        <?php  
-                                                            $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
-                                                            $divquery = mysqli_query($db, $divsql);
-
-                                                            while ( $row = mysqli_fetch_assoc($divquery) ) {
-                                                                $id             = $row['id'];
-                                                                $name           = $row['name'];
-                                                                $priority       = $row['priority'];
-                                                                $status         = $row['status'];
-                                                                ?>
-                                                                <P style="color:#023021;">Address: <?php echo $location .", " . $district .", ". $name; ?></P>
-                                                                <?php
-                                                            } 
-                                                        ?>
-                                                        
-                                                    </div>
-
-                                                    <div class="text-center py-2">
-                                                        <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
-                                                    </div>
-                                                </div>
-                                            <?php }
-                                            else { ?>
-                                                <div class="mb-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
+                                    
+                                    <div class="mb-4" style="border-left: 3px double #ffc107; padding: 0 2%;">
                                                     <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 23px; font-weight:600; text-transform: uppercase;">For Booking Contact Owner</h1>
                                                 </div>
 
@@ -1158,7 +1038,7 @@
                                                     <div class="d-flex">
                                                         <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
                                                         <?php  
-                                                            $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
+                                                            $divsql = "SELECT * FROM buy_division WHERE status=1 AND id='$division_id'";
                                                             $divquery = mysqli_query($db, $divsql);
 
                                                             while ( $row = mysqli_fetch_assoc($divquery) ) {
@@ -1178,11 +1058,6 @@
                                                         <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
                                                     </div>
                                                 </div>
-                                            <?php }
-                                        }
-                                    ?>
-                                    
-
                                     
                                 </div>
                                     

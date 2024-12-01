@@ -19,8 +19,8 @@
                                         </form>
                                     </div>
                                     <div class="">
-                                        <a href="" class="btn btn-outline-warning btn-1 px-4  mx-3">Login</a>
-                                        <a href="" class="btn btn-warning btn-2 px-4">SignUp </a>
+                                        <a href="login.php" class="btn btn-outline-warning btn-1 px-4  mx-3">Login</a>
+                                        <a href="register.php" class="btn btn-warning btn-2 px-4">SignUp </a>
                                     </div>                           
 
                                 </div>     

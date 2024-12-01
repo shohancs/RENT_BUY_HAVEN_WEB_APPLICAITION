@@ -579,7 +579,7 @@
 											<div class="col-lg-6">
 												<div class="mb-3">
 													<label>Katha <sup>(size)</sup></label>
-													<input type="number" name="katha" class="form-control"  autocomplete="off" placeholder="enter size of area katha..">
+													<input type="text" name="katha" class="form-control"  autocomplete="off" placeholder="enter size of area katha..">
 												</div>
 											</div>
 											<div class="col-lg-3">
