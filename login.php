@@ -69,7 +69,51 @@
 			                <div class="form-group">
 			                	<i class="fa-regular fa-circle-question"></i> Not a Member? <a href="register.php">Signup Here</a>
 			                </div>
-			              </form>					
+			              </form>	
+
+			              <!--  -->
+							<?php  
+								if (isset($_POST['login'])) {
+								    $email 		= mysqli_real_escape_string($db, $_POST['email']);
+								    $password 	= mysqli_real_escape_string($db, $_POST['password']);
+								    $hassedPass = sha1($password);
+
+								    $readSql = "SELECT * FROM role WHERE email='$email' AND status=1";
+								    $readQuery = mysqli_query($db, $readSql);
+								    $userCount = mysqli_num_rows($readQuery);
+
+								    if ($userCount == 0) { ?>
+								        <div class="alert alert-danger text-center my-2" role="alert">
+								            Sorry!! No User Found. Try Again.
+								        </div>
+								    <?php } 
+								    else {
+								        $row = mysqli_fetch_assoc($readQuery);
+
+								        if ($row['password'] === $hassedPass) {
+								            $_SESSION['id'] 	= $row['id'];
+								            $_SESSION['name'] 	= $row['name'];
+								            $_SESSION['email'] 	= $row['email'];
+								            $_SESSION['image'] 	= $row['image'];
+								            $_SESSION['role'] 	= $row['role'];
+
+								            // Role-based redirection
+								            if ($_SESSION['role'] == 3) { // Admin Role
+								                header("Location: index.php");
+								            } else { // Unknown Role
+								                session_destroy();
+								                header("Location: index.php");
+								            }
+								        } else { ?>
+								            <div class="alert alert-danger text-center my-2" role="alert">
+								                Invalid Credentials. Try Again.
+								            </div>
+								        <?php }
+								    }
+								}
+
+							?>
+							<!--  -->				
 
 						
 						<!-- END : FORM -->
@@ -100,8 +144,8 @@
 							</div>
 
 							<div class="mb-3">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1" onclick="myFunction()">
-								    <label class="form-check-label" for="exampleCheck1"> Show Password</label>
+								<input type="checkbox" class="form-check-input" id="exampleCheck2" onclick="myFunction()">
+								    <label class="form-check-label" for="exampleCheck2"> Show Password</label>
 								    <script>
 				                    function myFunction() {
 				                      var x = document.getElementById("myInput");
@@ -121,7 +165,7 @@
 							</div>
 
 			                <div class="form-group">
-			                	<i class="fa-regular fa-circle-question"></i> Not a Member? <a href="register.php">Signup Here</a>
+			                	<i class="fa-regular fa-circle-question"></i> Not a Member? <a href="sellerregister.php">Signup Here</a>
 			                </div>
 			              </form>					
 

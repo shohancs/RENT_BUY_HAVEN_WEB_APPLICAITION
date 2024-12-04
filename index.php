@@ -25,6 +25,7 @@
     <!-- END: BANNER PART -->
 
     <!-- START: Bannner Carousel Slider -->
+
      <section class="banner-slider">
         <swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper"
         speed="600" parallax="true" pagination="true" pagination-clickable="true" navigation="true">
@@ -1135,7 +1136,7 @@
                     <div class="">
                         <h1 class="text-white pb-3" >Rent Buy Haven Provide Safe, Trusted And Reliable Collection!</h1>
                         <p class="text-white fw-light pb-3" style="">We offer customers reliable and regular collection of trash and materials, on a scheduled or call basis, with a safe and unique level of service for family.</p>
-                        <a href="" class="quPartBtn">GET START NOW</a>
+                        <a href="packages.php" class="quPartBtn">GET START NOW</a>
 
                         <div class="row d-flex align-items-center pt-5 mt-4">
                             <div class="col-lg-3" style="text-align: center;">

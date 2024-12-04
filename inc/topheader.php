@@ -13,15 +13,46 @@
                             
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">  
                                 <div class="d-flex ms-auto align-items-center">
-                                    <div class="mx-3">
-                                        <form action="packages.php" method="GET">
-                                            <button type="submit" class="btn btn-secondary">+ Add Property</button>
-                                        </form>
-                                    </div>
-                                    <div class="">
-                                        <a href="login.php" class="btn btn-outline-warning btn-1 px-4  mx-3">Login</a>
-                                        <a href="register.php" class="btn btn-warning btn-2 px-4">SignUp </a>
-                                    </div>                           
+                                    
+
+                                    <?php  
+                                        if ( !empty( $_SESSION['email'] ) ) { ?>
+                                            <div class="dropdown">
+                                            <div class="d-flex align-items-center showlog">
+                                                <?php 
+                                                    if ( !empty( $_SESSION['image'] ) ) {
+                                                        echo '<img src="admin/assets/images/role/' . $_SESSION['image'] . '" alt="" style="width: 60px; border-radius: 20%;">';
+                                                    }
+                                                    else { 
+                                                        echo '<img src="admin/assets/images/dummy.jpg" alt="" style="width: 60px; border-radius: 20%;">';
+                                                    }
+                                                ?>
+                                                <h5 class="ps-3"><?php echo $_SESSION['name']; ?></h5>
+                                            </div>                                              
+
+                                              <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                                                <hr style="margin: 2px 0px;">
+                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <hr style="margin: 2px 0px;">
+                                                <li><a class="dropdown-item" href="logout.php">logout</a></li>
+                                              </ul>
+                                            </div>
+                                        <?php }
+                                        else { ?>
+                                            <div class="mx-3">
+                                                <form action="packages.php" method="GET">
+                                                    <button type="submit" class="btn btn-secondary">+ Add Property</button>
+                                                </form>
+                                            </div>
+                                            <div class="">
+                                                <a href="login.php" class="btn btn-outline-warning btn-1 px-4  mx-3">Login</a>
+                                                <a href="register.php" class="btn btn-warning btn-2 px-4">SignUp </a>
+                                            </div>
+                                       <?php }
+                                    ?>
+                                    
+                                                               
 
                                 </div>     
                             </div>

@@ -1,6 +1,17 @@
-<?php 
-	ob_start();
-	include "db.php"; 
+<?php
+session_start();
+ob_start();
+include "db.php";
+
+if (empty($_SESSION['id']) || empty($_SESSION['email'])) {
+    header("Location: index.php");
+    exit;
+}
+
+// Fetch logged-in user data
+$userId = $_SESSION['id'];
+$userQuery = mysqli_query($db, "SELECT * FROM role WHERE id='$userId' AND status=1");
+$userData = mysqli_fetch_assoc($userQuery);
 ?>
 
 <!doctype html>

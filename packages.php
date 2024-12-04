@@ -136,7 +136,7 @@
                                     <?php }
                                 ?>
 
-                                <form action="" method="POST" style="padding: 13px 0px; ">
+                                <form action="sellerregister.php" method="POST" style="padding: 13px 0px; ">
                                     <div class="d-grid gap-2">
                                         <input type="submit" class="btn btn-success quBtn" value="GET STARTED">
                                     </div>

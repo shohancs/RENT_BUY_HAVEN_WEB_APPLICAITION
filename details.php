@@ -989,11 +989,26 @@
                                                 <textarea name="" class="form-control" rows="3" placeholder="write here.."></textarea>
                                             </div>
 
+                                             <!--  -->
+                                                <?php  
+                                                    if ( !empty( $_SESSION['email'] ) ) { ?>
+                                                        <div class="d-grid gap-2">
+                                                            <input type="submit" class="btn btn-success" value="Submit Here">
+                                                        </div>
+                                                    <?php }
+                                                    else { ?>
+                                                        <div class="alert alert-info my-4 text-center" role="alert">
+                                                          Login to reserve you service. <a href="login.php">Click Here</a>
+                                                        </div>
+                                                   <?php }
+                                                ?>
+                                                <!--  -->
+
+
+
 
                                             
-                                            <div class="d-grid gap-2">
-                                                <input type="submit" class="btn btn-success" value="Submit Here">
-                                            </div>
+                                            
                                         </form>
 
                                         <div class="py-5">
@@ -1067,11 +1082,23 @@
                                                                     <button type="button" class="btn btn-light" onclick="updateValue('children', 1)">+</button>
                                                                 </div>
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <div class="d-grid gap-2 col-6 mx-auto">
-                                                                    <input type="submit" class="btn btn-warning cntct-btn" value="Book Now">
-                                                                </div>
-                                                            </div>
+                                                            <!--  -->
+                                                            <?php  
+                                                                if ( !empty( $_SESSION['email'] ) ) { ?>
+                                                                    <div class="mb-3">
+                                                                        <div class="d-grid gap-2 col-6 mx-auto">
+                                                                            <input type="submit" class="btn btn-warning cntct-btn" value="Book Now">
+                                                                        </div>
+                                                                    </div>
+                                                                <?php }
+                                                                else { ?>
+                                                                    <div class="alert alert-info my-4 text-center" role="alert">
+                                                                      Login to reserve you service. <a href="login.php">Click Here</a>
+                                                                    </div>
+                                                               <?php }
+                                                            ?>
+                                                            <!--  -->
+                                                            
                                                         </div>
                                                     </form>
                                                 </div>
@@ -1096,36 +1123,49 @@
                                                         ?>
                                                         <h5 class="ps-3" style="color:#023021;"><?php echo $ow_name; ?></h5>
                                                     </div>
-                                                    <div class="d-flex pt-5">
-                                                        <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
-                                                        <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <i class="fa-solid fa-envelope pe-3" style="color:#023021;"></i>
-                                                        <P style="color:#023021;">Email: <a href="mailto:<?php echo $ow_email; ?>" style="color:#023021;"><?php echo $ow_email; ?></a></P>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
-                                                        <?php  
-                                                            $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
-                                                            $divquery = mysqli_query($db, $divsql);
 
-                                                            while ( $row = mysqli_fetch_assoc($divquery) ) {
-                                                                $id             = $row['id'];
-                                                                $name           = $row['name'];
-                                                                $priority       = $row['priority'];
-                                                                $status         = $row['status'];
+                                                    <!--  -->
+                                                    <?php  
+                                                        if ( !empty( $_SESSION['email'] ) ) { ?>
+                                                            <div class="d-flex pt-5">
+                                                                <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
+                                                                <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <i class="fa-solid fa-envelope pe-3" style="color:#023021;"></i>
+                                                                <P style="color:#023021;">Email: <a href="mailto:<?php echo $ow_email; ?>" style="color:#023021;"><?php echo $ow_email; ?></a></P>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
+                                                                <?php  
+                                                                    $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
+                                                                    $divquery = mysqli_query($db, $divsql);
+
+                                                                    while ( $row = mysqli_fetch_assoc($divquery) ) {
+                                                                        $id             = $row['id'];
+                                                                        $name           = $row['name'];
+                                                                        $priority       = $row['priority'];
+                                                                        $status         = $row['status'];
+                                                                        ?>
+                                                                        <P style="color:#023021;">Address: <?php echo $location .", " . $district .", ". $name; ?></P>
+                                                                        <?php
+                                                                    } 
                                                                 ?>
-                                                                <P style="color:#023021;">Address: <?php echo $location .", " . $district .", ". $name; ?></P>
-                                                                <?php
-                                                            } 
-                                                        ?>
-                                                        
-                                                    </div>
+                                                                
+                                                            </div>
 
-                                                    <div class="text-center py-2">
-                                                        <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
-                                                    </div>
+                                                            <div class="text-center py-2">
+                                                                <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
+                                                            </div>
+                                                        <?php }
+                                                        else { ?>
+                                                            <div class="alert alert-info my-4 text-center" role="alert">
+                                                              Login to reserve you service. <a href="login.php">Click Here</a>
+                                                            </div>
+                                                       <?php }
+                                                    ?>
+                                                    <!--  -->
+                                                    
                                                 </div>
                                             <?php }
                                             else { ?>
@@ -1147,36 +1187,48 @@
                                                         ?>
                                                         <h5 class="ps-3" style="color:#023021;"><?php echo $ow_name; ?></h5>
                                                     </div>
-                                                    <div class="d-flex pt-5">
-                                                        <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
-                                                        <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <i class="fa-solid fa-envelope pe-3" style="color:#023021;"></i>
-                                                        <P style="color:#023021;">Email: <a href="mailto:<?php echo $ow_email; ?>" style="color:#023021;"><?php echo $ow_email; ?></a></P>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
-                                                        <?php  
-                                                            $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
-                                                            $divquery = mysqli_query($db, $divsql);
+                                                    <!--  -->
+                                                    <?php  
+                                                        if ( !empty( $_SESSION['email'] ) ) { ?>
+                                                            <div class="d-flex pt-5">
+                                                                <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
+                                                                <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <i class="fa-solid fa-envelope pe-3" style="color:#023021;"></i>
+                                                                <P style="color:#023021;">Email: <a href="mailto:<?php echo $ow_email; ?>" style="color:#023021;"><?php echo $ow_email; ?></a></P>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <i class="fa-solid fa-map-pin pe-3" style="color:#023021;"></i>
+                                                                <?php  
+                                                                    $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
+                                                                    $divquery = mysqli_query($db, $divsql);
 
-                                                            while ( $row = mysqli_fetch_assoc($divquery) ) {
-                                                                $id             = $row['id'];
-                                                                $name           = $row['name'];
-                                                                $priority       = $row['priority'];
-                                                                $status         = $row['status'];
+                                                                    while ( $row = mysqli_fetch_assoc($divquery) ) {
+                                                                        $id             = $row['id'];
+                                                                        $name           = $row['name'];
+                                                                        $priority       = $row['priority'];
+                                                                        $status         = $row['status'];
+                                                                        ?>
+                                                                        <P style="color:#023021;">Address: <?php echo $location .", " . $district .", ". $name; ?></P>
+                                                                        <?php
+                                                                    } 
                                                                 ?>
-                                                                <P style="color:#023021;">Address: <?php echo $location .", " . $district .", ". $name; ?></P>
-                                                                <?php
-                                                            } 
-                                                        ?>
-                                                        
-                                                    </div>
+                                                                
+                                                            </div>
 
-                                                    <div class="text-center py-2">
-                                                        <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
-                                                    </div>
+                                                            <div class="text-center py-2">
+                                                                <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
+                                                            </div>
+                                                        <?php }
+                                                        else { ?>
+                                                            <div class="alert alert-info my-4 text-center" role="alert">
+                                                              Login to reserve you service. <a href="login.php">Click Here</a>
+                                                            </div>
+                                                       <?php }
+                                                    ?>
+                                                    <!--  -->
+                                                    
                                                 </div>
                                             <?php }
                                         }

@@ -1,3 +1,13 @@
+<?php  
+	session_start();
+	ob_start();
+	include "inc/db.php";
+
+	if ( !empty($_SESSION['id']) || !empty($_SESSION['email']) ) {
+		header("Location: dashboard.php");
+		exit;
+	}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -22,8 +32,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
 	<link href="assets/css/app.css" rel="stylesheet">
 	<link href="assets/css/icons.css" rel="stylesheet">
-	<title>Rukada - Responsive Bootstrap 5 Admin Template</title>
+	<title>Login</title>
 </head>
+
 
 <body class="bg-login">
 	<!--wrapper-->
@@ -37,46 +48,78 @@
 							<div class="card-body">
 								<div class="border p-4 rounded">
 									<div class="text-center mb-4">
-										<h3 class="">Sign in</h3>
+										<h3 class="">Admin Sign In</h3>
 										<p class="mb-0">Login to your account</p>
 									</div>
-									<div class="d-grid gap-3">
-										<a href="javascript:void()" class="btn btn-facebook"><i class="bx bxl-facebook"></i>Login with facebook</a>
-										<a href="javascript:void()" class="btn btn-google-plus"><i class="bx bxl-google-plus"></i> <span>Login with google+</span></a>
-									</div>
-									<div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
+									<div class="login-separater text-center mb-4"> <span>SIGN IN WITH EMAIL</span>
 										<hr/>
 									</div>
 									<div class="form-body">
-										<form class="row g-4">
-											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Email Address</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Email Address">
+										<form action="" method="POST">
+											<div class="mb-3">
+												<label for="email" class="form-label">Email Address</label>
+												<input type="email" name="email" class="form-control" id="email" placeholder="Email Address" required autocomplete="off">
 											</div>
-											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Enter Password</label>
+											<div class="mb-3">
+												<label for="password" class="form-label">Enter Password</label>
 												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+													<input type="password" name="password" class="form-control border-end-0" id="password" placeholder="Enter Password" required autocomplete="off"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
 												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-check form-switch">
-													<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
-												</div>
-											</div>
-											<div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Sign in</button>
+													<button type="submit" name="adminSubmit" class="btn btn-primary"><i class="bx bxs-lock-open"></i> Sign in</button>
 												</div>
 											</div>
-											<div class="col-12 text-center">
-												<p class="mb-0">Don't have an account yet? <a href="authentication-signup.html">Sign up here</a>
-												</p>
-											</div>
 										</form>
+										<!--  -->
+										<?php  
+											if (isset($_POST['adminSubmit'])) {
+											    $email 		= mysqli_real_escape_string($db, $_POST['email']);
+											    $password 	= mysqli_real_escape_string($db, $_POST['password']);
+											    $hassedPass = sha1($password);
+
+											    $readSql = "SELECT * FROM role WHERE email='$email' AND status=1";
+											    $readQuery = mysqli_query($db, $readSql);
+											    $userCount = mysqli_num_rows($readQuery);
+
+											    if ($userCount == 0) { ?>
+											        <div class="alert alert-danger text-center my-2" role="alert">
+											            Sorry!! No User Found. Try Again.
+											        </div>
+											    <?php } 
+											    else {
+											        $row = mysqli_fetch_assoc($readQuery);
+
+											        if ($row['password'] === $hassedPass) {
+											            $_SESSION['id'] 	= $row['id'];
+											            $_SESSION['name'] 	= $row['name'];
+											            $_SESSION['email'] 	= $row['email'];
+											            $_SESSION['image'] 	= $row['image'];
+											            $_SESSION['role'] 	= $row['role'];
+
+											            // Role-based redirection
+											            if ($_SESSION['role'] == 1) { // Admin Role
+											                header("Location: dashboard.php");
+											            } else { // Unknown Role
+											                session_destroy();
+											                header("Location: index.php");
+											            }
+											        } else { ?>
+											            <div class="alert alert-danger text-center my-2" role="alert">
+											                Invalid Credentials. Try Again.
+											            </div>
+											        <?php }
+											    }
+											}
+
+										?>
+										<!--  -->
+										<div class="col-12 text-start pt-4">
+											<a href="fieldlogin.php" class="btn btn-success">Field Checker</a>
+											</p>
+										</div>
+
 									</div>
 								</div>
 							</div>

@@ -61,6 +61,20 @@ a {
     filter: drop-shadow(0px 0px 12px #023021);
 }
 
+.showlog h5{
+    color: #023021;
+    transition: 0.1s ease-in-out;
+    font-size: 19px;
+
+}
+
+.showlog:hover {
+    color: #023021;
+    transition: 0.1s ease-in-out;
+    filter: drop-shadow(0px 0px 12px #ffc107);
+    cursor: pointer;
+}
+
 /* End: Top Header Button Css */
 
 /* Start: Navigation Header Button Css */
