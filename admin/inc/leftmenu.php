@@ -135,11 +135,7 @@
 						<div class="menu-title">Blogs</div>
 					</a>
 					<ul>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Manage Blogs</a>
-						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Add New Blogs</a>
-						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Trash</a>
+						<li> <a href="blog.php?do=Manage"><i class="bx bx-radio-circle"></i>Manage Blogs</a>
 						</li>
 					</ul>
 				</li>
@@ -169,11 +165,9 @@
 						<div class="menu-title">Support</div>
 					</a>
 					<ul>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Manage Blogs</a>
+						<li> <a href="massage.php?do=Manage"><i class="bx bx-radio-circle"></i>Pending Message</a>
 						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Add New Blogs</a>
-						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Trash</a>
+						<li> <a href="activemassage.php?do=Manage"><i class="bx bx-radio-circle"></i>Active Message</a>
 						</li>
 					</ul>
 				</li>

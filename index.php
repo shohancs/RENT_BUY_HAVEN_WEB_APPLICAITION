@@ -126,360 +126,12 @@
                                 $rentcategoryQuery = mysqli_query($db, $rentcategorySql);
 
                                 while ($row = mysqli_fetch_assoc($rentcategoryQuery)) {
-                                    $cat_id  		= $row['cat_id'];
-                                    $cat_name  		= $row['name'];
+                                    $cat_id         = $row['cat_id'];
+                                    $cat_name       = $row['name'];
 
                                     $childSql = "SELECT * FROM rent_subcategory WHERE is_parent ='$cat_id' AND status=1 ORDER BY sub_id DESC LIMIT 12";
                                     $childQuery = mysqli_query($db, $childSql);
                                     $childSqlCount = mysqli_num_rows($childQuery);
-
-                                    while ($row = mysqli_fetch_assoc($childQuery)) {
-                                        $sub_id 		= $row['sub_id'];
-                                        $is_parent		= $row['is_parent'];
-                                        $subcat_name	= $row['subcat_name'];
-                                        $slug 			= $row['slug'];
-                                        $ow_name		= $row['ow_name'];
-                                        $ow_email		= $row['ow_email'];
-                                        $ow_phone		= $row['ow_phone'];
-                                        $district       = $row['district'];
-                                        $division_id       = $row['division_id'];
-                                        $location		= $row['location'];
-                                        $price			= $row['price'];
-                                        $bed			= $row['bed'];
-                                        $kitchen		= $row['kitchen'];
-                                        $washroom		= $row['washroom'];
-                                        $totalroom		= $row['totalroom'];
-                                        $area_size		= $row['area_size'];
-                                        $floor			= $row['floor'];
-                                        $rank           = $row['rank'];
-                                        $decoration     = $row['decoration'];
-                                        $desk           = $row['desk'];
-                                        $wifi           = $row['wifi'];
-                                        $hottub         = $row['hottub'];
-                                        $currency       = $row['currency'];
-                                        $ac             = $row['ac'];
-                                        $pool           = $row['pool'];
-                                        $park           = $row['park'];
-                                        $gym            = $row['gym'];
-                                        $luggage        = $row['luggage'];
-                                        $availability   = $row['availability'];
-                                        $short_desc		= $row['short_desc'];
-                                        $long_desc		= $row['long_desc'];
-                                        $ow_image       = $row['ow_image'];
-                                        $img_one		= $row['img_one'];
-                                        $img_two		= $row['img_two'];
-                                        $img_three		= $row['img_three'];
-                                        $img_four		= $row['img_four'];
-                                        $img_five		= $row['img_five'];
-                                        $img_six		= $row['img_six'];
-                                        $status 		= $row['status'];
-                                        $google_map     = $row['google_map'];
-                                        $join_date 		= $row['join_date'];
-                                        ?>
-                                            <swiper-slide class="text-start">
-                                                <div>
-                                                    <div>
-                                                        <div class="show-img">
-                                                            <?php
-                                                                if (!empty($img_one)) {
-                                                                    echo '<img src="admin/assets/images/subcategory/' . $img_one . '" alt="" style="height: 275px;">';
-                                                                } else {
-                                                                    echo '<img src="admin/assets/images/dummy.jpg" alt="" style="height: 275px;">';
-                                                                }
-                                                            ?>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="items">
-                                                                    <span class="badge text-bg-warning">FOR RENT</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="items-icon">
-                                                                    <form action="" method="POST">
-                                                                        <button type="submit" style="background: transparent; border: 0;"><i class="fa-solid fa-heart text-danger"></i></button>
-                                                                        
-                                                                    </form>
-                                                                    
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="py-4 px-3">
-                                                        <div class="row">
-                                                            <div class="col-lg-10">
-                                                                <div>
-                                                                    <h4 class="" style="font-size: 17px; color: #1a7e00; filter: drop-shadow(0px 0px 12px #1a7e00);"><?php echo $cat_name; ?></h4>
-                                                                    <h5 class="fw-semibold py-2" style="text-align:justify; color:#023021; letter-spacing: 0.5px;"><?php echo $subcat_name; ?></h5>  
-                                                                    <h4 class="fw-semibold" style="color:#023021; letter-spacing: 0.7px;">৳<?php echo $price; ?> BDT <sup class="fw-medium">PER 
-                                                                        <?php 
-                                                                            if ( $cat_id == 2 ) {
-                                                                                echo "NIGHT";
-                                                                            }
-                                                                            else {
-                                                                                echo "MONTH";
-                                                                            }
-                                                                        ?>
-                                                                         
-                                                                     </sup></h4>
-                                                                                                        
-                                                                    
-                                                                    <div class="d-flex">
-                                                                        <?php  
-                                                                            if ( $cat_id == 2 ) {
-                                                                                if ( $rank == 1 ) { ?>
-                                                                                    <div >
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                </div>
-                                                                                <p class="px-3">Five Star</p>
-                                                                                <?php }
-
-                                                                                else if ( $rank == 2 ) { ?>
-                                                                                    <div >
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                </div>
-                                                                                <p class="px-3">Four Star</p>
-                                                                                <?php }
-
-                                                                                else if ( $rank == 3 ) { ?>
-                                                                                    <div >
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                </div>
-                                                                                <p class="px-3">Three Star</p>
-                                                                                <?php }
-
-                                                                                else if ( $rank == 4 ) { ?>
-                                                                                    <div >
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                </div>
-                                                                                <p class="px-3">Two Star</p>
-                                                                                <?php }
-
-                                                                                else if ( $rank == 1 ) { ?>
-                                                                                    <div >
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                </div>
-                                                                                <p class="px-3">One Star</p>
-                                                                                <?php }
-                                                                            }
-                                                                            else {
-                                                                                ?>
-                                                                                <div >
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                                                    <i class="fa-solid fa-star-half-stroke text-warning"></i>
-                                                                                    <i class="fa-regular fa-star text-warning"></i>
-                                                                                </div>
-                                                                                <p class="px-3">1458 review</p>
-                                                                                <?php
-                                                                            }
-                                                                        ?>
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2">
-                                                                <div class="verifiction-owner">
-                                                                    <?php
-                                                                        if (!empty($ow_image)) {
-                                                                            echo '<img src="admin/assets/images/owner/' . $ow_image . '" alt="" class="ow_img">
-                                                                                <img src="assets/images/verified.png" alt="" class="verify">
-                                                                                ';
-                                                                        } else {
-                                                                            echo '
-                                                                                <img src="assets/images/dummy.png" alt="" class="ow_img">
-                                                                                    <img src="assets/images/verified.png" alt="" class="verify">
-                                                                            ';
-                                                                        }
-                                                                    ?>
-                                                                    
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="px-4 py-1">
-                                                            <?php  
-                                                                if ( $cat_id == 3 ) { ?>
-                                                                    <div class="d-flex justify-content-between">
-                                                                        
-                                                                        <div class="d-flex ">
-                                                                            <div><i class="fa-solid fa-house-user" style="padding-right: 11px"></i></div>
-                                                                            <div><p><?php echo $area_size; ?> sqft</p></div>
-                                                                        </div>
-                                                                    </div>
-                                                                <?php }
-                                                                else { ?>
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <div class="d-flex ">
-                                                                            <div><i class="fa-solid fa-bed" style="padding-right: 11px"></i></div>
-                                                                            <div><p><?php echo $bed; ?> Bedrooms</p></div>
-                                                                        </div>
-                                                                        <div class="d-flex ">
-                                                                            <div><i class="fa-solid fa-kitchen-set" style="padding-right: 11px"></i></div>
-                                                                            <div><p><?php echo $kitchen; ?> Kitchen</p></div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <div class="d-flex ">
-                                                                            <div><i class="fa-solid fa-bath" style="padding-right: 11px"></i></div>
-                                                                            <div><p><?php echo $washroom; ?> Bathrooms</p></div>
-                                                                        </div>
-                                                                        
-                                                                        <div class="d-flex ">
-                                                                            <?php  
-                                                                                if ( $cat_id == 2 ) { ?>
-                                                                                    <div><i class="fa-regular fa-snowflake" style="padding-right: 11px"></i></div>
-                                                                            <div><p>
-                                                                                <?php
-                                                                                if ( $ac == 1 ) {
-                                                                                     echo "Air Conditioning";
-                                                                                 } 
-                                                                                 else {
-                                                                                    echo "No Air Conditioning";
-                                                                                 }
-                                                                                ?>
-                                                                            </p></div>
-                                                                                <?php }
-                                                                                else { ?>
-                                                                                    <div><i class="fa-solid fa-house-user" style="padding-right: 11px"></i></div>
-                                                                                    <div><p><?php echo $area_size; ?> sqft</p></div>
-                                                                                <?php }
-                                                                            ?>
-                                                                            
-                                                                        </div>
-                                                                    </div>
-                                                                <?php }
-                                                            ?>
-                                                            
-
-                                                            <div class="d-flex justify-content-between">
-                                                                <?php  
-
-                                                                    if ( $cat_id == 2 || $cat_id == 3 ) { 
-                                                                        if ( $decoration == 1 ) {?>
-                                                                            <div class="d-flex ">
-                                                                                <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
-                                                                                <div><p>Furnished</p></div>
-                                                                            </div>
-                                                                        <?php }
-                                                                        else if ( $decoration == 2 ) {?>
-                                                                            <div class="d-flex ">
-                                                                                <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
-                                                                                <div><p>Semi-Furnished</p></div>
-                                                                            </div>
-                                                                        <?php }
-                                                                        else if ( $decoration == 3 ) {?>
-                                                                            <div class="d-flex ">
-                                                                                <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
-                                                                                <div><p>Non-Furnished</p></div>
-                                                                            </div>
-                                                                        <?php }
-
-                                                                        if ( !($cat_id == 1) ) {
-                                                                                if ( $park == 1 ) { ?>
-                                                                                    <div class="d-flex ">
-                                                                                        <div><i class="fa-solid fa-car-side" style="padding-right: 11px"></i></div>
-                                                                                        <div><p>Parking Jone</p></div>
-                                                                                    </div>
-                                                                                <?php }
-                                                                                else{ ?>
-                                                                                    <div class="d-flex ">
-                                                                                        <div><i class="fa-solid fa-car-side" style="padding-right: 11px"></i></div>
-                                                                                        <div><p>No Parking</p></div>
-                                                                                    </div>
-                                                                                <?php }
-                                                                            }
-                                                                    }
-                                                                ?>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        
-                                                        <hr class="m-0 pb-2">
-                                                        <?php  
-                                                            $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
-                                                            $divquery = mysqli_query($db, $divsql);
-
-                                                            while ( $row = mysqli_fetch_assoc($divquery) ) {
-                                                                $id             = $row['id'];
-                                                                $name           = $row['name'];
-                                                                $priority       = $row['priority'];
-                                                                $status         = $row['status'];
-                                                                ?>
-                                                                <p class="h-6 fw-light lh-sm py-2" style="text-align:justify; color:#023021; text-transform: capitalize;"><i class="fa-solid fa-location-dot px-1"></i> <?php echo $location; ?>, <span><?php echo $district; ?></span>, <span><?php echo $name; ?></span></p>                                        
-                                                                <?php
-                                                            } 
-                                                        ?>
-                                                        
-                                                        <div class="d-grid gap-2 pb-2">
-                                                            <a href="details.php?rdId=<?php echo $sub_id; ?>" class="btn btn-outline-warning btn-3 px-3">View Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>                                
-                                            </swiper-slide>
-                                        <?php
-                                    }
-                                }
-                                ?>
-
-                        </swiper-container>
-                    </div>
-
-                    
-                </div>
-            </div>
-        </div>
-        i
-     </section>
-    <!-- END: RENT Services Part -->
-
-    <!-- START: BUY Services Part -->
-    <section class="service-part pb-5 pt-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div style="border-left: 3px double #ffc107; padding: 0 2%;">
-                            <p style="margin: 0; color:#023021;">Browse Hot Offer</p>
-                            <h1 class=""  style="letter-spacing: 3px;  color:#023021; font-size: 40px; font-weight:600;">Explore Buy Category</h1>
-                        </div>
-                        <div>
-                            <a href="buy.php" style="color:#023021;">Show all</a>
-                        </div>
-                    </div>
-                    
-
-                    <div class="py-5">
-
-                        <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="3" space-between="30" free-mode="true">
-
-                            <?php 
-                                $rentcategorySql = "SELECT * FROM buy_category WHERE status = 1 ORDER BY priority_id ASC";
-                                    $rentcategoryQuery = mysqli_query($db, $rentcategorySql);
-
-                                    while ($row = mysqli_fetch_assoc($rentcategoryQuery)) {
-                                        $id             = $row['id'];
-                                        $catname        = $row['name'];
-                                        $priority_id    = $row['priority_id'];
-
-                                    $childSql = "SELECT * FROM buy_subcategory WHERE is_parent ='$id' AND status=1 ORDER BY subcat_name ASC";
-                                    $childQuery = mysqli_query($db, $childSql);
-                                    $childSqlCount = mysqli_num_rows($childQuery);
-
-                                    $i = 0;
 
                                     while ($row = mysqli_fetch_assoc($childQuery)) {
                                         $sub_id         = $row['sub_id'];
@@ -498,7 +150,6 @@
                                         $washroom       = $row['washroom'];
                                         $totalroom      = $row['totalroom'];
                                         $area_size      = $row['area_size'];
-                                        $katha          = $row['katha'];
                                         $floor          = $row['floor'];
                                         $rank           = $row['rank'];
                                         $decoration     = $row['decoration'];
@@ -524,7 +175,6 @@
                                         $status         = $row['status'];
                                         $google_map     = $row['google_map'];
                                         $join_date      = $row['join_date'];
-                                        $i++;
                                         ?>
                                             <swiper-slide class="text-start">
                                                 <div>
@@ -532,24 +182,522 @@
                                                         <div class="show-img">
                                                             <?php
                                                                 if (!empty($img_one)) {
-                                                                    echo '<img src="admin/assets/images/buy_subcategory/' . $img_one . '" alt="" style="height: 275px;">';
+                                                                    echo '<img src="admin/assets/images/subcategory/' . $img_one . '" alt="" style="height: 275px;">';
                                                                 } else {
                                                                     echo '<img src="admin/assets/images/dummy.jpg" alt="" style="height: 275px;">';
                                                                 }
                                                             ?>
                                                         </div>
+
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="items">
-                                                                    <span class="badge text-bg-warning">FOR BUY</span>
+                                                                    <span class="badge text-bg-warning">FOR RENT</span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="items-icon">
+
+                                                                    <?php
+                                                                     $ipaddress = getenv("REMOTE_ADDR") ;
+                                                                    ?>
+
                                                                     <form action="" method="POST">
-                                                                        <button type="submit" style="background: transparent; border: 0;"><i class="fa-solid fa-heart text-danger"></i></button>
-                                                                        
+                                                                        <input type="hidden" name="sub_id" value="<?php echo $sub_id; ?>">
+                                                                        <input type="hidden" name="ip_address" value="<?php echo $ipaddress; ?>">
+                                                                        <input type="hidden" name="cat_name" value="<?php echo $cat_name; ?>">
+                                                                    <?php  
+                                                                        if(!empty( $_SESSION['email'] )) {
+
+                                                                            $sesId = $_SESSION['email'];
+
+                                                                            $sql = "SELECT * FROM role WHERE email='$sesId' AND status = 1";
+                                                                            $query = mysqli_query($db, $sql);
+
+                                                                            while ( $row = mysqli_fetch_assoc($query) ) {
+                                                                                $id             = $row['id'];
+                                                                                $name           = $row['name'];
+                                                                                $email          = $row['email'];
+                                                                                $phone          = $row['phone'];
+                                                                                $address        = $row['address'];
+                                                                                $password       = $row['password'];
+                                                                                $role           = $row['role'];
+                                                                                $image          = $row['image'];
+                                                                                $nid            = $row['nid'];
+                                                                                $status         = $row['status'];
+                                                                                $join_date      = $row['join_date'];
+                                                                                ?>
+                                                                                <input type="hidden" name="user_id" value="<?php echo $id; ?>">
+                                                                                <?php
+                                                                            }
+
+                                                                        }
+                                                                    ?>
+                                                                        <input type="hidden" name="status" value="1">
+                                                                        <button type="submit" name="cart" style="background: transparent; border: 0;"><i class="fa-solid fa-heart text-danger"></i></button>                               
                                                                     </form>
+
+                                                                    <?php  
+                                                                    if ( isset( $_POST['cart'] ) ) {
+                                                                        $cat_name   = $_POST['cat_name'];
+                                                                        $sub_id     = $_POST['sub_id'];
+                                                                        $user_id    = $_POST['user_id'];
+                                                                        $ip_address = $_POST['ip_address'];
+                                                                        $status     = $_POST['status'];
+
+                                                                        // Check if the item already exists in the cart
+                                                                        $sql_check = "SELECT * FROM cart WHERE sub_id = '$sub_id' AND user_id = '$user_id'";
+                                                                        $result_check = mysqli_query($db, $sql_check);
+
+                                                                        if (mysqli_num_rows($result_check) > 0) {
+                                                                            // Item already exists, increment quantity
+                                                                            $row = mysqli_fetch_assoc($result_check);
+                                                                            $current_quantity = $row['quantity'];
+                                                                            $new_quantity = $current_quantity + 1;
+
+                                                                            $sql_update = "UPDATE cart SET quantity = $new_quantity WHERE sub_id = '$sub_id' AND user_id = '$user_id'";
+                                                                            $query_update = mysqli_query($db, $sql_update);
+                                                                        } else {
+                                                                            // Item doesn't exist, insert a new record
+                                                                            $sql = "INSERT INTO cart (cat_name, sub_id, user_id, ip_address, status, quantity, join_date) VALUES ('$cat_name', '$sub_id', '$user_id', '$ip_address', '$status', 1, now())";
+                                                                            $query = mysqli_query($db, $sql);
+                                                                        }
+
+                                                                        if ($query || $query_update) {
+                                                                            header("Location: index.php");
+                                                                            exit();
+                                                                        } else {
+                                                                            die('mysqli_query' . mysqli_error($db));
+                                                                        }
+
+                                                                       
+                                                                    }
+                                                                    ?>
+
+                                                                    
+                                                                </div> 
+                                                            </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                
+                                                                                                                <div class="py-4 px-3">
+                                                                                                                    <div class="row">
+                                                                                                                        <div class="col-lg-10">
+                                                                                                                            <div>
+                                                                                                                                <h4 class="" style="font-size: 17px; color: #1a7e00; filter: drop-shadow(0px 0px 12px #1a7e00);"><?php echo $cat_name; ?></h4>
+                                                                                                                                <h5 class="fw-semibold py-2" style="text-align:justify; color:#023021; letter-spacing: 0.5px;"><?php echo $subcat_name; ?></h5>  
+                                                                                                                                <h4 class="fw-semibold" style="color:#023021; letter-spacing: 0.7px;">৳<?php echo $price; ?> BDT <sup class="fw-medium">PER 
+                                                                                                                                    <?php 
+                                                                                                                                        if ( $cat_id == 2 ) {
+                                                                                                                                            echo "NIGHT";
+                                                                                                                                        }
+                                                                                                                                        else {
+                                                                                                                                            echo "MONTH";
+                                                                                                                                        }
+                                                                                                                                    ?>
+                                                                                                                                     
+                                                                                                                                 </sup></h4>
+                                                                                                                                                                    
+                                                                                                                                
+                                                                                                                                <div class="d-flex">
+                                                                                                                                    <?php  
+                                                                                                                                        if ( $cat_id == 2 ) {
+                                                                                                                                            if ( $rank == 1 ) { ?>
+                                                                                                                                                <div >
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                            </div>
+                                                                                                                                            <p class="px-3">Five Star</p>
+                                                                                                                                            <?php }
+
+                                                                                                                                            else if ( $rank == 2 ) { ?>
+                                                                                                                                                <div >
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                            </div>
+                                                                                                                                            <p class="px-3">Four Star</p>
+                                                                                                                                            <?php }
+
+                                                                                                                                            else if ( $rank == 3 ) { ?>
+                                                                                                                                                <div >
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                            </div>
+                                                                                                                                            <p class="px-3">Three Star</p>
+                                                                                                                                            <?php }
+
+                                                                                                                                            else if ( $rank == 4 ) { ?>
+                                                                                                                                                <div >
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                            </div>
+                                                                                                                                            <p class="px-3">Two Star</p>
+                                                                                                                                            <?php }
+
+                                                                                                                                            else if ( $rank == 1 ) { ?>
+                                                                                                                                                <div >
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                            </div>
+                                                                                                                                            <p class="px-3">One Star</p>
+                                                                                                                                            <?php }
+                                                                                                                                        }
+                                                                                                                                        else {
+                                                                                                                                            ?>
+                                                                                                                                            <div >
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star text-warning"></i>
+                                                                                                                                                <i class="fa-solid fa-star-half-stroke text-warning"></i>
+                                                                                                                                                <i class="fa-regular fa-star text-warning"></i>
+                                                                                                                                            </div>
+                                                                                                                                            <p class="px-3">1458 review</p>
+                                                                                                                                            <?php
+                                                                                                                                        }
+                                                                                                                                    ?>
+                                                                                                                                    
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <div class="col-lg-2">
+                                                                                                                            <div class="verifiction-owner">
+                                                                                                                                <?php
+                                                                                                                                    if (!empty($ow_image)) {
+                                                                                                                                        echo '<img src="admin/assets/images/owner/' . $ow_image . '" alt="" class="ow_img">
+                                                                                                                                            <img src="assets/images/verified.png" alt="" class="verify">
+                                                                                                                                            ';
+                                                                                                                                    } else {
+                                                                                                                                        echo '
+                                                                                                                                            <img src="assets/images/dummy.png" alt="" class="ow_img">
+                                                                                                                                                <img src="assets/images/verified.png" alt="" class="verify">
+                                                                                                                                        ';
+                                                                                                                                    }
+                                                                                                                                ?>
+                                                                                                                                
+                                                                                                                            </div> 
+                                                                                                                        </div>
+                                                                                                                    </div>
+
+                                                                                                                    <div class="px-4 py-1">
+                                                                                                                        <?php  
+                                                                                                                            if ( $cat_id == 3 ) { ?>
+                                                                                                                                <div class="d-flex justify-content-between">
+                                                                                                                                    
+                                                                                                                                    <div class="d-flex ">
+                                                                                                                                        <div><i class="fa-solid fa-house-user" style="padding-right: 11px"></i></div>
+                                                                                                                                        <div><p><?php echo $area_size; ?> sqft</p></div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            <?php }
+                                                                                                                            else { ?>
+                                                                                                                                <div class="d-flex justify-content-between">
+                                                                                                                                    <div class="d-flex ">
+                                                                                                                                        <div><i class="fa-solid fa-bed" style="padding-right: 11px"></i></div>
+                                                                                                                                        <div><p><?php echo $bed; ?> Bedrooms</p></div>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="d-flex ">
+                                                                                                                                        <div><i class="fa-solid fa-kitchen-set" style="padding-right: 11px"></i></div>
+                                                                                                                                        <div><p><?php echo $kitchen; ?> Kitchen</p></div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+
+                                                                                                                                <div class="d-flex justify-content-between">
+                                                                                                                                    <div class="d-flex ">
+                                                                                                                                        <div><i class="fa-solid fa-bath" style="padding-right: 11px"></i></div>
+                                                                                                                                        <div><p><?php echo $washroom; ?> Bathrooms</p></div>
+                                                                                                                                    </div>
+                                                                                                                                    
+                                                                                                                                    <div class="d-flex ">
+                                                                                                                                        <?php  
+                                                                                                                                            if ( $cat_id == 2 ) { ?>
+                                                                                                                                                <div><i class="fa-regular fa-snowflake" style="padding-right: 11px"></i></div>
+                                                                                                                                        <div><p>
+                                                                                                                                            <?php
+                                                                                                                                            if ( $ac == 1 ) {
+                                                                                                                                                 echo "Air Conditioning";
+                                                                                                                                             } 
+                                                                                                                                             else {
+                                                                                                                                                echo "No Air Conditioning";
+                                                                                                                                             }
+                                                                                                                                            ?>
+                                                                                                                                        </p></div>
+                                                                                                                                            <?php }
+                                                                                                                                            else { ?>
+                                                                                                                                                <div><i class="fa-solid fa-house-user" style="padding-right: 11px"></i></div>
+                                                                                                                                                <div><p><?php echo $area_size; ?> sqft</p></div>
+                                                                                                                                            <?php }
+                                                                                                                                        ?>
+                                                                                                                                        
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            <?php }
+                                                                                                                        ?>
+                                                                                                                        
+
+                                                                                                                        <div class="d-flex justify-content-between">
+                                                                                                                            <?php  
+
+                                                                                                                                if ( $cat_id == 2 || $cat_id == 3 ) { 
+                                                                                                                                    if ( $decoration == 1 ) {?>
+                                                                                                                                        <div class="d-flex ">
+                                                                                                                                            <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                                                                                            <div><p>Furnished</p></div>
+                                                                                                                                        </div>
+                                                                                                                                    <?php }
+                                                                                                                                    else if ( $decoration == 2 ) {?>
+                                                                                                                                        <div class="d-flex ">
+                                                                                                                                            <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                                                                                            <div><p>Semi-Furnished</p></div>
+                                                                                                                                        </div>
+                                                                                                                                    <?php }
+                                                                                                                                    else if ( $decoration == 3 ) {?>
+                                                                                                                                        <div class="d-flex ">
+                                                                                                                                            <div><i class="fa-solid fa-couch" style="padding-right: 11px"></i></div>
+                                                                                                                                            <div><p>Non-Furnished</p></div>
+                                                                                                                                        </div>
+                                                                                                                                    <?php }
+
+                                                                                                                                    if ( !($cat_id == 1) ) {
+                                                                                                                                            if ( $park == 1 ) { ?>
+                                                                                                                                                <div class="d-flex ">
+                                                                                                                                                    <div><i class="fa-solid fa-car-side" style="padding-right: 11px"></i></div>
+                                                                                                                                                    <div><p>Parking Jone</p></div>
+                                                                                                                                                </div>
+                                                                                                                                            <?php }
+                                                                                                                                            else{ ?>
+                                                                                                                                                <div class="d-flex ">
+                                                                                                                                                    <div><i class="fa-solid fa-car-side" style="padding-right: 11px"></i></div>
+                                                                                                                                                    <div><p>No Parking</p></div>
+                                                                                                                                                </div>
+                                                                                                                                            <?php }
+                                                                                                                                        }
+                                                                                                                                }
+                                                                                                                            ?>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    <hr class="m-0 pb-2">
+                                                                                                                    <?php  
+                                                                                                                        $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
+                                                                                                                        $divquery = mysqli_query($db, $divsql);
+
+                                                                                                                        while ( $row = mysqli_fetch_assoc($divquery) ) {
+                                                                                                                            $id             = $row['id'];
+                                                                                                                            $name           = $row['name'];
+                                                                                                                            $priority       = $row['priority'];
+                                                                                                                            $status         = $row['status'];
+                                                                                                                            ?>
+                                                                                                                            <p class="h-6 fw-light lh-sm py-2" style="text-align:justify; color:#023021; text-transform: capitalize;"><i class="fa-solid fa-location-dot px-1"></i> <?php echo $location; ?>, <span><?php echo $district; ?></span>, <span><?php echo $name; ?></span></p>                                        
+                                                                                                                            <?php
+                                                                                                                        } 
+                                                                                                                    ?>
+                                                                                                                    
+                                                                                                                    <div class="d-grid gap-2 pb-2">
+                                                                                                                        <a href="details.php?rdId=<?php echo $sub_id; ?>" class="btn btn-outline-warning btn-3 px-3">View Details</a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>                                
+                                                                                                        </swiper-slide>
+                                                                                                    <?php
+                                                                                                }
+                                                                                            }
+                                                                                            ?>
+
+                                                                                    </swiper-container>
+                                                                                </div>
+
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    i
+                                                                 </section>
+                                                                <!-- END: RENT Services Part -->
+
+                                                                <!-- START: BUY Services Part -->
+                                                                <section class="service-part pb-5 pt-3">
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                                    <div style="border-left: 3px double #ffc107; padding: 0 2%;">
+                                                                                        <p style="margin: 0; color:#023021;">Browse Hot Offer</p>
+                                                                                        <h1 class=""  style="letter-spacing: 3px;  color:#023021; font-size: 40px; font-weight:600;">Explore Buy Category</h1>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <a href="buy.php" style="color:#023021;">Show all</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                
+
+                                                                                <div class="py-5">
+
+                                                                                    <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="3" space-between="30" free-mode="true">
+
+                                                                                        <?php 
+                                                                                            $rentcategorySql = "SELECT * FROM buy_category WHERE status = 1 ORDER BY priority_id ASC";
+                                                                                                $rentcategoryQuery = mysqli_query($db, $rentcategorySql);
+
+                                                                                                while ($row = mysqli_fetch_assoc($rentcategoryQuery)) {
+                                                                                                    $id             = $row['id'];
+                                                                                                    $catname        = $row['name'];
+                                                                                                    $priority_id    = $row['priority_id'];
+
+                                                                                                $childSql = "SELECT * FROM buy_subcategory WHERE is_parent ='$id' AND status=1 ORDER BY subcat_name ASC";
+                                                                                                $childQuery = mysqli_query($db, $childSql);
+                                                                                                $childSqlCount = mysqli_num_rows($childQuery);
+
+                                                                                                $i = 0;
+
+                                                                                                while ($row = mysqli_fetch_assoc($childQuery)) {
+                                                                                                    $sub_id         = $row['sub_id'];
+                                                                                                    $is_parent      = $row['is_parent'];
+                                                                                                    $subcat_name    = $row['subcat_name'];
+                                                                                                    $slug           = $row['slug'];
+                                                                                                    $ow_name        = $row['ow_name'];
+                                                                                                    $ow_email       = $row['ow_email'];
+                                                                                                    $ow_phone       = $row['ow_phone'];
+                                                                                                    $district       = $row['district'];
+                                                                                                    $division_id       = $row['division_id'];
+                                                                                                    $location       = $row['location'];
+                                                                                                    $price          = $row['price'];
+                                                                                                    $bed            = $row['bed'];
+                                                                                                    $kitchen        = $row['kitchen'];
+                                                                                                    $washroom       = $row['washroom'];
+                                                                                                    $totalroom      = $row['totalroom'];
+                                                                                                    $area_size      = $row['area_size'];
+                                                                                                    $katha          = $row['katha'];
+                                                                                                    $floor          = $row['floor'];
+                                                                                                    $rank           = $row['rank'];
+                                                                                                    $decoration     = $row['decoration'];
+                                                                                                    $desk           = $row['desk'];
+                                                                                                    $wifi           = $row['wifi'];
+                                                                                                    $hottub         = $row['hottub'];
+                                                                                                    $currency       = $row['currency'];
+                                                                                                    $ac             = $row['ac'];
+                                                                                                    $pool           = $row['pool'];
+                                                                                                    $park           = $row['park'];
+                                                                                                    $gym            = $row['gym'];
+                                                                                                    $luggage        = $row['luggage'];
+                                                                                                    $availability   = $row['availability'];
+                                                                                                    $short_desc     = $row['short_desc'];
+                                                                                                    $long_desc      = $row['long_desc'];
+                                                                                                    $ow_image       = $row['ow_image'];
+                                                                                                    $img_one        = $row['img_one'];
+                                                                                                    $img_two        = $row['img_two'];
+                                                                                                    $img_three      = $row['img_three'];
+                                                                                                    $img_four       = $row['img_four'];
+                                                                                                    $img_five       = $row['img_five'];
+                                                                                                    $img_six        = $row['img_six'];
+                                                                                                    $status         = $row['status'];
+                                                                                                    $google_map     = $row['google_map'];
+                                                                                                    $join_date      = $row['join_date'];
+                                                                                                    $i++;
+                                                                                                    ?>
+                                                                                                        <swiper-slide class="text-start">
+                                                                                                            <div>
+                                                                                                                <div>
+                                                                                                                    <div class="show-img">
+                                                                                                                        <?php
+                                                                                                                            if (!empty($img_one)) {
+                                                                                                                                echo '<img src="admin/assets/images/buy_subcategory/' . $img_one . '" alt="" style="height: 275px;">';
+                                                                                                                            } else {
+                                                                                                                                echo '<img src="admin/assets/images/dummy.jpg" alt="" style="height: 275px;">';
+                                                                                                                            }
+                                                                                                                        ?>
+                                                                                                                    </div>
+                                                                                                                    <div class="row">
+                                                                                                                        <div class="col-lg-6">
+                                                                                                                            <div class="items">
+                                                                                                                                <span class="badge text-bg-warning">FOR BUY</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="items-icon">
+
+                                                                    <?php
+                                                                     $ipaddress = getenv("REMOTE_ADDR") ;
+                                                                    ?>
+
+                                                                    <form action="" method="POST">
+                                                                        <input type="hidden" name="sub_id" value="<?php echo $sub_id; ?>">
+                                                                        <input type="hidden" name="ip_address" value="<?php echo $ipaddress; ?>">
+
+                                                                        <input type="hidden" name="cat_name" value="<?php echo $catname; ?>">
+                                                                    <?php  
+                                                                        if(!empty( $_SESSION['email'] )) {
+
+                                                                            $sesId = $_SESSION['email'];
+
+                                                                            $sql = "SELECT * FROM role WHERE email='$sesId' AND status = 1";
+                                                                            $query = mysqli_query($db, $sql);
+
+                                                                            while ( $row = mysqli_fetch_assoc($query) ) {
+                                                                                $id             = $row['id'];
+                                                                                $name           = $row['name'];
+                                                                                $email          = $row['email'];
+                                                                                $phone          = $row['phone'];
+                                                                                $address        = $row['address'];
+                                                                                $password       = $row['password'];
+                                                                                $role           = $row['role'];
+                                                                                $image          = $row['image'];
+                                                                                $nid            = $row['nid'];
+                                                                                $status         = $row['status'];
+                                                                                $join_date      = $row['join_date'];
+                                                                                ?>
+                                                                                <input type="hidden" name="user_id" value="<?php echo $id; ?>">
+                                                                                <?php
+                                                                            }
+
+                                                                        }
+                                                                    ?>
+                                                                        <input type="hidden" name="status" value="1">
+                                                                        <button type="submit" name="cart" style="background: transparent; border: 0;"><i class="fa-solid fa-heart text-danger"></i></button>                               
+                                                                    </form>
+
+                                                                    <?php  
+                                                                    if ( isset( $_POST['cart'] ) ) {
+                                                                        $cat_name   = $_POST['cat_name'];
+                                                                        $sub_id     = $_POST['sub_id'];
+                                                                        $user_id    = $_POST['user_id'];
+                                                                        $ip_address = $_POST['ip_address'];
+                                                                        $status     = $_POST['status'];
+
+                                                                        // Check if the item already exists in the cart
+                                                                        $sql_check = "SELECT * FROM cart WHERE sub_id = '$sub_id' AND user_id = '$user_id'";
+                                                                        $result_check = mysqli_query($db, $sql_check);
+
+                                                                        if (mysqli_num_rows($result_check) > 0) {
+                                                                            // Item already exists, increment quantity
+                                                                            $row = mysqli_fetch_assoc($result_check);
+                                                                            $current_quantity = $row['quantity'];
+                                                                            $new_quantity = $current_quantity + 1;
+
+                                                                            $sql_update = "UPDATE cart SET quantity = $new_quantity WHERE sub_id = '$sub_id' AND user_id = '$user_id'";
+                                                                            $query_update = mysqli_query($db, $sql_update);
+                                                                        } else {
+                                                                            // Item doesn't exist, insert a new record
+                                                                            $sql = "INSERT INTO cart (cat_name, sub_id, user_id, ip_address, status, quantity, join_date) VALUES ('$cat_name', '$sub_id', '$user_id', '$ip_address', '$status', 1, now())";
+                                                                            $query = mysqli_query($db, $sql);
+                                                                        }
+
+                                                                        if ($query || $query_update) {
+                                                                            header("Location: index.php");
+                                                                            exit();
+                                                                        } else {
+                                                                            die('mysqli_query' . mysqli_error($db));
+                                                                        }
+
+                                                                       
+                                                                    }
+                                                                    ?>
+
                                                                     
                                                                 </div> 
                                                             </div>
@@ -826,31 +974,31 @@
                                         $childQuery = mysqli_query($db, $childSql);
 
                                         while ($row = mysqli_fetch_assoc($childQuery)) {
-                                            $sub_id 		= $row['sub_id'];
-                                            $is_parent		= $row['is_parent'];
-                                            $subcat_name	= $row['subcat_name'];
-                                            $slug 			= $row['slug'];
-                                            $ow_name		= $row['ow_name'];
-                                            $ow_email		= $row['ow_email'];
-                                            $ow_phone		= $row['ow_phone'];
-                                            $location		= $row['location'];
-                                            $price			= $row['price'];
-                                            $bed			= $row['bed'];
-                                            $kitchen		= $row['kitchen'];
-                                            $washroom		= $row['washroom'];
-                                            $totalroom		= $row['totalroom'];
-                                            $area_size		= $row['area_size'];
-                                            $floor			= $row['floor'];
-                                            $short_desc		= $row['short_desc'];
-                                            $long_desc		= $row['long_desc'];
-                                            $img_one		= $row['img_one'];
-                                            $img_two		= $row['img_two'];
-                                            $img_three		= $row['img_three'];
-                                            $img_four		= $row['img_four'];
-                                            $img_five		= $row['img_five'];
-                                            $img_six		= $row['img_six'];
-                                            $status 		= $row['status'];
-                                            $join_date 		= $row['join_date'];
+                                            $sub_id         = $row['sub_id'];
+                                            $is_parent      = $row['is_parent'];
+                                            $subcat_name    = $row['subcat_name'];
+                                            $slug           = $row['slug'];
+                                            $ow_name        = $row['ow_name'];
+                                            $ow_email       = $row['ow_email'];
+                                            $ow_phone       = $row['ow_phone'];
+                                            $location       = $row['location'];
+                                            $price          = $row['price'];
+                                            $bed            = $row['bed'];
+                                            $kitchen        = $row['kitchen'];
+                                            $washroom       = $row['washroom'];
+                                            $totalroom      = $row['totalroom'];
+                                            $area_size      = $row['area_size'];
+                                            $floor          = $row['floor'];
+                                            $short_desc     = $row['short_desc'];
+                                            $long_desc      = $row['long_desc'];
+                                            $img_one        = $row['img_one'];
+                                            $img_two        = $row['img_two'];
+                                            $img_three      = $row['img_three'];
+                                            $img_four       = $row['img_four'];
+                                            $img_five       = $row['img_five'];
+                                            $img_six        = $row['img_six'];
+                                            $status         = $row['status'];
+                                            $join_date      = $row['join_date'];
                                             ?>
                                                 <div class="col-lg-3">
                                                     <div class="explore-card" style="border-radius: 8px; transition: 0.2s ease-in; border: 1px solid #ccc;">
@@ -1096,39 +1244,122 @@
                         <h4 class="px-5 py-3" style="background: #1a7e00; color: #fff;">Got Questions? Ask Away!</h4 class="p-3">
                         <form action="" method="POST" class="px-5 py-5">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">First Name</label>
-                                        <input type="text" name="fname" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Last Name</label>
-                                        <input type="text" name="lname" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Email Address</label>
-                                        <input type="email" name="email" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Phone</label>
-                                        <input type="tel" name="phone" class="form-control" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-                                    </div>
-                                </div>
+                                <!--  -->
+                                <?php  
+                                    if ( !empty( $_SESSION['email'] ) ) { ?>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Message</label>
+                                            <textarea name="msg" id="" class="form-control" placeholder="write here..." rows="5" required></textarea>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <?php  
+                                                if ( isset( $_SESSION['email'] ) ) {
+                                                    $sesId = $_SESSION['email'];
+
+                                                    $sql = "SELECT * FROM role WHERE email='$sesId'";
+                                                    $query = mysqli_query($db, $sql);
+
+                                                    while ( $row = mysqli_fetch_assoc($query) ) {
+                                                        $id             = $row['id'];
+                                                        $name           = $row['name'];
+                                                        $email          = $row['email'];
+                                                        $phone          = $row['phone'];
+                                                        $address        = $row['address'];
+                                                        $password       = $row['password'];
+                                                        $role           = $row['role'];
+                                                        $image          = $row['image'];
+                                                        $nid            = $row['nid'];
+                                                        $status         = $row['status'];
+                                                        ?>
+                                                        <input type="hidden" name="fname" value="<?php echo $name; ?>">
+                                                        <input type="hidden" name="email" value="<?php echo $email; ?>">
+                                                        <input type="hidden" name="phone" value="<?php echo $phone; ?>">
+                                                        <input type="hidden" name="role" value="<?php echo $role; ?>">
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                            <input type="hidden" name="status" value="2">
+                                            
+                                            <!--  -->
+                                            <?php  
+                                                if ( !empty( $_SESSION['email'] ) ) { ?>
+                                                    <input type="submit" name="masg" value="SUBMIT" class="btn btn-primary quBtn">
+                                                <?php }
+                                                else { ?>
+                                                    <div class="alert alert-info my-4 text-center" role="alert">
+                                                      Login to reserve you service. <a href="login.php">Click Here</a>
+                                                    </div>
+                                               <?php }
+                                            ?>
+                                            <!--  -->
+                                            
+                                        </div>
+                                    <?php }
+                                    else { ?>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">First Name</label>
+                                                <input type="text" name="fname" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Last Name</label>
+                                                <input type="text" name="lname" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Email Address</label>
+                                                <input type="email" name="email" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Phone</label>
+                                                <input type="tel" name="phone" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Message</label>
+                                            <textarea name="msg" id="" class="form-control" placeholder="write here..." rows="5" required></textarea>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <input type="hidden" name="status" value="2">
+                                            <input type="hidden" name="role" value="3">
+                                            <input type="submit" name="masg" value="SUBMIT" class="btn btn-primary quBtn">
+                                            
+                                        </div>
+                                   <?php }
+                                ?>
+                                <!--  -->
+                                
                             </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Message</label>
-                                <textarea name="desb" id="" class="form-control" placeholder="write here..." rows="5" ></textarea>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <input type="submit" value="SUBMIT" class="btn btn-primary quBtn">
-                            </div>
+                            
                         </form>
+                        <?php  
+                            if ( isset($_POST['masg']) ) {
+                                $fname  = mysqli_real_escape_string($db, $_POST['fname']);
+                                $lname  = mysqli_real_escape_string($db, $_POST['lname']);
+                                $email  = mysqli_real_escape_string($db, $_POST['email']);
+                                $phone  = mysqli_real_escape_string($db, $_POST['phone']);
+                                $msg    = mysqli_real_escape_string($db, $_POST['msg']);
+                                $role   = mysqli_real_escape_string($db, $_POST['role']);
+                                $status = mysqli_real_escape_string($db, $_POST['status']);
+
+                                $sql = "INSERT INTO message (role, status, fname, lname, email, phone, msg, join_date) VALUES('$role', '$status', '$fname', '$lname', '$email', '$phone', '$msg', now())";
+                                $query = mysqli_query($db, $sql);
+
+                                if ( $query ) {
+                                    header('Location: index.php');
+                                }
+                                else {
+                                    die("Mysqli_Error" . mysqli_error($db));
+                                }
+                            }
+                        ?>
                     </div>
                 </div>
 
@@ -1166,43 +1397,98 @@
                     <div class="row py-5">
                         <div class="col-lg-6">
                             <div class="blog-left">
-                                <div class="card">
-                                    <div class="category_blog"> <p>Apartments</p> </div>
-                                    <a href="" class="b_title h4 pb-3">Wastia Start Recycling Electric Car Batteries To Solve An Ecological Issue With A Circular Solution!</a>
-                                    <p class="" style="text-align: justify; color: #677a74;">We partnered with community to create circular value ecosystem for electric and hybrid vehicle batteries, this will enable scarce raw materials to be reused through closed loop recycling...</p>
-                                    <hr>
-                                    <div class="d-flex">
-                                        <p class="px-3"><i class="fa-regular fa-calendar-days"></i> September 2, 2024</p>
-                                        <p><i class="fa-regular fa-user"></i> Habiba</p>
-                                    </div>
+                                <?php  
+                                    $sql = "SELECT * FROM blog WHERE status=1 ORDER BY id ASC LIMIT 1";
+                                    $query = mysqli_query($db, $sql);
 
-                                </div>
+                                    while ( $row = mysqli_fetch_assoc( $query ) ) {
+                                        $id             = $row['id'];
+                                        $name           = $row['name'];
+                                        $cateId         = $row['cateId'];
+                                        $title          = $row['title'];
+                                        $details        = $row['details'];
+                                        $image          = $row['image'];
+                                        $status         = $row['status'];
+                                        $join_date      = $row['join_date'];
+                                        ?>
+
+                                        <div class="card">
+                                            <div class="category_blog">
+                                                <?php
+                                                $catSql = "SELECT * FROM buy_category WHERE id='$cateId' AND status=1";
+                                                $catQuery = mysqli_query($db, $catSql);
+
+                                                while ($row = mysqli_fetch_assoc($catQuery)) {
+                                                    $catid      = $row['id'];
+                                                    $is_parent  = $row['is_parent'];
+                                                    $catname       = $row['name'];
+                                                ?>
+                                                <p><?php echo $catname; ?></p>
+                                                <?php
+                                                }
+                                                ?>
+                                            </div>
+                                            <a href="blog.php" class="b_title h4 pb-3"><?php echo $title; ?></a>
+                                            <p class="" style="text-align: justify; color: #677a74;"><?php echo  substr($details, 0,250) ?>...</p>
+                                            <hr>
+                                            <div class="d-flex">
+                                                <p class="px-3"><i class="fa-regular fa-calendar-days"></i> <?php echo $join_date; ?></p>
+                                                <p><i class="fa-regular fa-user"></i> <?php echo $name; ?></p>
+                                            </div>
+
+                                        </div>
+
+                                        <?php
+                                    }
+                                ?>
+                                
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="blog-right">
                                 <div class="rightBlogPart px-4">
-                                    <div>
-                                        <p class="text-warning link-underline-warning" ><u>Hottle</u></p>
-                                        <a href="" class="b_title h4 py-2">Wastia Start Recycling Electric Car Batteries To Solve An Ecological Issue With A Circular Solution!</a>
-                                        <div class="d-flex py-3">
-                                            <p class="px-3"><i class="fa-regular fa-calendar-days"></i> September 2, 2024</p>
-                                            <p><i class="fa-regular fa-user"></i> Habiba</p>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                    <div>
-                                        <p class="text-warning link-underline-warning" ><u>Hottle</u></p>
-                                        <a href="" class="b_title h4 py-2">Wastia Start Recycling Electric Car Batteries To Solve An Ecological Issue With A Circular Solution!</a>
-                                        <div class="d-flex py-3">
-                                            <p class="px-3"><i class="fa-regular fa-calendar-days"></i> September 2, 2024</p>
-                                            <p><i class="fa-regular fa-user"></i> Habiba</p>
-                                        </div>
-                                        <hr>
-                                    </div>
+                                    <?php  
+                                        $sql = "SELECT * FROM blog WHERE status=1 ORDER BY id DESC LIMIT 3";
+                                        $query = mysqli_query($db, $sql);
+
+                                        while ( $row = mysqli_fetch_assoc( $query ) ) {
+                                            $id             = $row['id'];
+                                            $name           = $row['name'];
+                                            $cateId         = $row['cateId'];
+                                            $title          = $row['title'];
+                                            $details        = $row['details'];
+                                            $image          = $row['image'];
+                                            $status         = $row['status'];
+                                            $join_date      = $row['join_date'];
+                                            ?>
+                                            <div>
+                                                <p class="text-warning link-underline-warning" ><u><?php
+                                                $catSql = "SELECT * FROM buy_category WHERE id='$cateId' AND status=1";
+                                                $catQuery = mysqli_query($db, $catSql);
+
+                                                while ($row = mysqli_fetch_assoc($catQuery)) {
+                                                    $catid      = $row['id'];
+                                                    $is_parent  = $row['is_parent'];
+                                                    $catname       = $row['name'];
+                                                ?>
+                                                <?php echo $catname; ?>
+                                                <?php
+                                                }
+                                                ?></u></p>
+                                                <a href="blog.php" class="b_title h4 py-2"><?php echo $title; ?></a>
+                                                <div class="d-flex py-3">
+                                                    <p class="px-3"><i class="fa-regular fa-calendar-days"></i> <?php echo $join_date; ?></p>
+                                                    <p><i class="fa-regular fa-user"></i> <?php echo $name; ?></p>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                            <?php
+
+                                        }
+                                        ?>
 
                                     <div class="py-5">
-                                      <a href="" class="quBtn" style="padding: 20px 35px;">Check All Blog Posts</a>  
+                                      <a href="blog.php" class="quBtn" style="padding: 20px 35px;">Check All Blog Posts</a>  
                                       
                                     </div>                                    
 

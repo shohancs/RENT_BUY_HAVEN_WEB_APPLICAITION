@@ -60,3 +60,21 @@ function showSlides(n) {
       }
     }
   </script>
+
+<script>
+  // Select elements
+const wishlistIcon = document.getElementById('wishlistIcon');
+const wishlistPanel = document.getElementById('wishlistPanel');
+const closePanel = document.getElementById('closePanel');
+
+// Show wishlist panel
+wishlistIcon.addEventListener('click', () => {
+  wishlistPanel.classList.add('active');
+});
+
+// Hide wishlist panel
+closePanel.addEventListener('click', () => {
+  wishlistPanel.classList.remove('active');
+});
+
+</script>

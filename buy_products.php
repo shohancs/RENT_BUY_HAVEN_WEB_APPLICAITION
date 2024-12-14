@@ -136,14 +136,88 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <div class="category-icon">
-                                                                <form action="" method="POST">
-                                                                    <button type="submit" style="background: transparent; border: 0;"><i class="fa-solid fa-heart text-danger"></i></button>
-                                                                    
-                                                                </form>
-                                                                
-                                                            </div> 
-                                                        </div>
+    <div class="items-icon">
+
+        <?php
+         $ipaddress = getenv("REMOTE_ADDR") ;
+        ?>
+
+        <form action="" method="POST">
+            <input type="hidden" name="sub_id" value="<?php echo $sub_id; ?>">
+            <input type="hidden" name="ip_address" value="<?php echo $ipaddress; ?>">
+
+            <input type="hidden" name="cat_name" value="<?php echo $cat_name; ?>">
+        <?php  
+            if(!empty( $_SESSION['email'] )) {
+
+                $sesId = $_SESSION['email'];
+
+                $sql = "SELECT * FROM role WHERE email='$sesId' AND status = 1";
+                $query = mysqli_query($db, $sql);
+
+                while ( $row = mysqli_fetch_assoc($query) ) {
+                    $id             = $row['id'];
+                    $name           = $row['name'];
+                    $email          = $row['email'];
+                    $phone          = $row['phone'];
+                    $address        = $row['address'];
+                    $password       = $row['password'];
+                    $role           = $row['role'];
+                    $image          = $row['image'];
+                    $nid            = $row['nid'];
+                    $status         = $row['status'];
+                    $join_date      = $row['join_date'];
+                    ?>
+                    <input type="hidden" name="user_id" value="<?php echo $id; ?>">
+                    <?php
+                }
+
+            }
+        ?>
+            <input type="hidden" name="status" value="1">
+            <button type="submit" name="cart" style="background: transparent; border: 0;"><i class="fa-solid fa-heart text-danger"></i></button>                               
+        </form>
+
+        <?php  
+        if ( isset( $_POST['cart'] ) ) {
+            $cat_name   = $_POST['cat_name'];
+            $sub_id     = $_POST['sub_id'];
+            $user_id    = $_POST['user_id'];
+            $ip_address = $_POST['ip_address'];
+            $status     = $_POST['status'];
+
+            // Check if the item already exists in the cart
+            $sql_check = "SELECT * FROM cart WHERE sub_id = '$sub_id' AND user_id = '$user_id'";
+            $result_check = mysqli_query($db, $sql_check);
+
+            if (mysqli_num_rows($result_check) > 0) {
+                // Item already exists, increment quantity
+                $row = mysqli_fetch_assoc($result_check);
+                $current_quantity = $row['quantity'];
+                $new_quantity = $current_quantity + 1;
+
+                $sql_update = "UPDATE cart SET quantity = $new_quantity WHERE sub_id = '$sub_id' AND user_id = '$user_id'";
+                $query_update = mysqli_query($db, $sql_update);
+            } else {
+                // Item doesn't exist, insert a new record
+                $sql = "INSERT INTO cart (cat_name, sub_id, user_id, ip_address, status, quantity, join_date) VALUES ('$cat_name', '$sub_id', '$user_id', '$ip_address', '$status', 1, now())";
+                $query = mysqli_query($db, $sql);
+            }
+
+            if ($query || $query_update) {
+                header("Location: buy.php");
+                exit();
+            } else {
+                die('mysqli_query' . mysqli_error($db));
+            }
+
+           
+        }
+        ?>
+
+        
+    </div> 
+</div>
                                                     </div> 
                                                 
                                             </div>

@@ -119,11 +119,7 @@ a {
     opacity: 1;
 }
 
-.cart {
-    color: #023021;
-    font-size: 20px;
-    filter: drop-shadow(0px 0px 12px #023021);
-}
+
 
 /* End: Navigation Header Button Css */
 
@@ -185,6 +181,7 @@ a {
 .banner-slider swiper-container {
     width: 100%;
     height: 100%;
+
 }
 
 .banner-slider swiper-slide {
@@ -380,7 +377,7 @@ a {
     background-position: center;
     background-size: cover;
     position: relative;
-    padding: 16% 0;
+    padding: 27% 0;
 }
 
 .card {
@@ -673,4 +670,114 @@ footer .nav-link:hover {
     color: #023021;
     font-size: 16px;
     letter-spacing: 1px;
+}
+
+
+.cart {
+    color: #023021;
+    font-size: 20px;
+    filter: drop-shadow(0px 0px 12px #023021);
+    cursor: ;
+}
+
+
+
+/**/
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-property,
+.login,
+.signup {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.signup {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Wishlist Icon */
+.wishlist-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.wishlist-icon .heart-icon {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.wishlist-icon .wishlist-count {
+  font-size: 14px;
+  color: green;
+}
+
+/* Wishlist Panel */
+.wishlist-panel {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Initially hidden on the right */
+  width: 300px;
+  height: 100vh; /* Full viewport height */
+  background-color: white;
+  border-left: 1px solid #ddd;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+}
+
+/* Show panel when active */
+.wishlist-panel.active {
+  right: 0; /* Fully visible */
+}
+
+/* Wishlist Header */
+.wishlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.wishlist-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.close-panel {
+  font-size: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Scrollable Wishlist Content */
+.wishlist-content {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #555;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: calc(100vh - 60px); /* Adjust height based on header height */
+}
+
+/* Scrollbar styling (optional) */
+.wishlist-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wishlist-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.wishlist-content::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }

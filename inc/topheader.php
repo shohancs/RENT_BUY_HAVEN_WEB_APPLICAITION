@@ -81,10 +81,10 @@
                                     <a class="nav-link" href="buy.php">Buy</a>
                                 </li>
                                 <li class="nav-item mx-4">
-                                    <a class="nav-link" href="#">Blog</a>
+                                    <a class="nav-link" href="blog.php">Blog</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">About Us</a>
+                                    <a class="nav-link" href="about.php">About Us</a>
                                 </li>
                             </ul>
                             <div class="d-flex align-items-center ms-auto">
@@ -98,10 +98,209 @@
 
                                 </div>
 
+                                <div class="actions">
+                                  <div class="wishlist-icon" id="wishlistIcon">
+                                    <?php  
+                                    if ( !empty($_SESSION['id']) ) {
+                                        $sesmail = $_SESSION['id'];
+                                        $sql = "SELECT * FROM cart WHERE user_id='$sesmail' AND status=1 ORDER BY id DESC";
+                                        $query = mysqli_query($db, $sql);
+                                        $i=0;
+
+                                        $quantity = mysqli_num_rows($query);
+                                        ?>
+                                        <i class="fa-solid fa-heart cart heart-icon"></i><sup class="wishlist-count" style="top: -14px; color:#023021; "><?php echo $quantity; ?></sup>
+                                        <?php
+                                    }
+
+                                    else  {
+                                        $sql = "SELECT * FROM cart WHERE status=1 ORDER BY id DESC";
+                                        $query = mysqli_query($db, $sql);
+                                        $i=0;
+
+                                        $quantity = mysqli_num_rows($query);
+                                        ?>
+                                        <i class="fa-solid fa-heart cart heart-icon"></i><sup class="wishlist-count" style="top: -14px; color:#023021; "><i class="fa-solid fa-circle-dot" style="font-size: 10px; color: #08c;"></i></sup>
+                                        <?php
+                                    }
+                                        
+                                    ?>
+                                    
+                                  </div>
+                                </div>
+                                <!--  -->
+                                <div class="wishlist-panel px-2" id="wishlistPanel">
+                                    <div class="wishlist-header">
+                                      <h2 style="color:#023021; font-size: 20px; font-weight:600;">My Wishlist</h2>
+                                      <button class="close-panel" id="closePanel">&times;</button>
+                                    </div>
+
+                                    <div class="wishlist-content">
+                                        <!-- Wishlist Code -->
+
+                                        <?php  
+
+                                            if ( !empty($_SESSION['id']) ) {
+                                                $sesmail = $_SESSION['id'];
+                                                $sql = "SELECT * FROM cart WHERE user_id='$sesmail' AND status=1 ORDER BY id DESC";
+                                                $query = mysqli_query($db, $sql);
+
+                                                $quantity = mysqli_num_rows($query);
+
+                                                if ( $quantity == 0 ) { ?>
+                                                    <div class="alert alert-info wishlist-content text-center" role="alert">
+                                                      Empty Your Wishlist
+                                                    </div>
+                                                <?php }
+
+                                                else {
+
+                                                    while ($row = mysqli_fetch_assoc($query)) {
+                                                        $id             = $row['id'];
+                                                        $cat_name       = $row['cat_name'];
+                                                        $sub_id         = $row['sub_id'];
+                                                        $user_id        = $row['user_id'];
+                                                        $ip_address     = $row['ip_address'];
+                                                        $status         = $row['status'];
+                                                        $join_date      = $row['join_date'];
+
+                                                        // rent part
+                                                        $childSql = "SELECT * FROM rent_subcategory WHERE sub_id ='$sub_id' AND status=1 ORDER BY sub_id DESC";
+                                                        $childQuery = mysqli_query($db, $childSql);
+
+                                                        while ($row = mysqli_fetch_assoc($childQuery)) {
+                                                            $sub_id         = $row['sub_id'];
+                                                            $is_parent      = $row['is_parent'];
+                                                            $subcat_name    = $row['subcat_name'];        
+                                                            $img_one        = $row['img_one'];
+                                                            ?>
+
+                                                            <div class="row align-items-center py-2">
+                                                                <div class="col-lg-3">
+                                                                    <div class="show-img">
+                                                                        <?php
+                                                                            if (!empty($img_one)) {
+                                                                                echo '<img src="admin/assets/images/subcategory/' . $img_one . '" alt="" style="height: 50px; width: 100%;">';
+                                                                            } else {
+                                                                                echo '<img src="admin/assets/images/dummy.jpg" alt="" style="height: 50px; width: 100%;">';
+                                                                            }
+                                                                        ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <h4 class="" style="font-size: 15px; color: #1a7e00; filter: drop-shadow(0px 0px 12px #1a7e00);">Rent <?php echo $cat_name; ?></h4>
+                                                                        <form action="" method="POST">
+                                                                            <input type="hidden" name="dData" value="<?php echo $id; ?>">
+                                                                            <input type="submit" value="X">
+                                                                        </form>
+                                                                        <?php  
+                                                                            if (isset($_POST['dData'])) {
+                                                                                $deleteData = $_POST['dData'];
+                                                                                $deleteSQL = "DELETE FROM cart WHERE id='$deleteData'";
+                                                                                $deleteQuery = mysqli_query($db, $deleteSQL);
+
+                                                                                if ($deleteQuery) {
+                                                                                    header("Location: index.php");
+                                                                                    exit();
+                                                                                } else {
+                                                                                    die("Mysqli_Error" . mysqli_error($db));
+                                                                                }
+                                                                            }
+                                                                        ?>
+
+                                                                    </div>
+                                                                    <a href="details.php?rdId=<?php echo $sub_id; ?>"><p style="color: #023021; font-weight: 600;"> <?php echo $subcat_name; ?> </p></a>
+                                                                    
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <hr class="my-0">
+
+                                                            <?php
+                                                        }
+
+                                                        // buy part
+                                                        $childSql = "SELECT * FROM buy_subcategory WHERE sub_id ='$sub_id' AND status=1 ORDER BY sub_id DESC";
+                                                        $childQuery = mysqli_query($db, $childSql);
+
+                                                        while ($row = mysqli_fetch_assoc($childQuery)) {
+                                                            $sub_id         = $row['sub_id'];
+                                                            $is_parent      = $row['is_parent'];
+                                                            $subcat_name    = $row['subcat_name'];        
+                                                            $img_one        = $row['img_one'];
+                                                            ?>
+
+                                                            <div class="row align-items-center py-2">
+                                                                <div class="col-lg-3">
+                                                                    <div class="show-img">
+                                                                        <?php
+                                                                            if (!empty($img_one)) {
+                                                                                echo '<img src="admin/assets/images/buy_subcategory/' . $img_one . '" alt="" style="height: 50px; width: 100%;">';
+                                                                            } else {
+                                                                                echo '<img src="admin/assets/images/dummy.jpg" alt="" style="height: 50px; width: 100%;">';
+                                                                            }
+                                                                        ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-9">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <h4 class="" style="font-size: 15px; color: #1a7e00; filter: drop-shadow(0px 0px 12px #1a7e00);">Buy <?php echo $cat_name; ?></h4>
+                                                                        <!-- style="background: transparent; border: 0; filter: drop-shadow(0px 0px 12px #023021); font-size: 14px;" -->
+
+                                                                        <form action="" method="POST">
+                                                                            <input type="hidden" name="dData" value="<?php echo $id; ?>">
+                                                                            <input type="submit" value="X">
+                                                                        </form>
+                                                                        <?php  
+                                                                            if (isset($_POST['dData'])) {
+                                                                                $deleteData = $_POST['dData'];
+                                                                                $deleteSQL = "DELETE FROM cart WHERE id='$deleteData'";
+                                                                                $deleteQuery = mysqli_query($db, $deleteSQL);
+
+                                                                                
+                                                                            }
+                                                                        ?>
+
+                                                                    </div>
+                                                                    <a href="buy_details.php?rdId=<?php echo $sub_id; ?>"><p style="color: #023021; font-weight: 600;"> <?php echo $subcat_name; ?> </p></a>
+                                                                    
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <hr class="my-0">
+
+                                                            <?php
+                                                        }
+                                                                    
+                                                    }
+
+                                                }
+                                                // code
+                                            }                                        
+                                            // ---------------------------------------------
+                                            else { ?>
+                                                <div class="alert alert-success text-center" role="alert">
+                                                  Login to check your List!
+                                                </div>
+                                            <?php }  
+                                            // --------------------------------------------
+                                            
+
+                                            
+                                        ?>
+
+                                        <!-- Wishlist Code -->
+                                    </div>
+
+                                </div>
+                                  <script src="scripts.php"></script>
+                                <!--  -->
+
                                 <div>
-                                    <a href="">
-                                    <i class="fa-solid fa-heart cart"></i><sup style="top: -14px; color:#023021; ">20</sup>
-                                    </a>
+                                    
                                 </div>
                             </div>
                             </div>
