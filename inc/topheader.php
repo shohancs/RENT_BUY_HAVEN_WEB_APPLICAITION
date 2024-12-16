@@ -88,15 +88,16 @@
                                 </li>
                             </ul>
                             <div class="d-flex align-items-center ms-auto">
+                                <!-- Search Button -->
                                 <div class="mx-4">
-                                    <form action="" method="GET" class="search-container">
-                                        <input type="text" name="query" id="search-input" placeholder="search here..." />
+                                    <form action="search_result.php" method="GET" class="search-container">
+                                        <input type="text" name="search" id="search-input" placeholder="search rent items..." />
                                         <button type="button" id="search-button">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>
                                     </form>
-
                                 </div>
+                                 <!-- Search Button -->
 
                                 <div class="actions">
                                   <div class="wishlist-icon" id="wishlistIcon">

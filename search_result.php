@@ -8,12 +8,12 @@
             <div class="row">
                 <div class="col-lg-12 text-uppercase d-flex justify-content-between">
                     <div>
-                        <h4 style="color: #023021; font-size: 25px;">EXPLORE RENT CATEGORY</h4>
+                        <h4 style="color: #023021; font-size: 25px;">Search</h4>
                     </div>
                     <div class="d-flex">
                         <a href="index.php"><h4 style="color:#545454; font-size: 17px; font-weight: 400; ">HOME</h4></a>
                         <h4 class="px-2" style="color:#545454; font-size: 17px; font-weight: 400; "> / </h4>
-                        <h4 style="color:#6c757d; font-size: 17px; font-weight: 400; ">RENT CATEGORY</h4>
+                        <h4 style="color:#6c757d; font-size: 17px; font-weight: 400; ">Search</h4>
                     </div>
                 </div>
             </div>
@@ -21,137 +21,87 @@
      </section>
     <!-- END: Breadcrumb -->
 
+    <?php  
+        if ( isset($_GET['search']) ) {
+            $sesId = $_GET['search'];
+            $sql = "SELECT * FROM rent_subcategory WHERE subcat_name LIKE '%$sesId%' OR slug LIKE '%$sesId%' OR ow_name LIKE '%$sesId%' OR ow_email LIKE '%$sesId%' OR ow_phone LIKE '%$sesId%' OR district LIKE '%$sesId%' OR location LIKE '%$sesId%' OR price LIKE '%$sesId%' OR short_desc LIKE '%$sesId%' OR long_desc LIKE '%$sesId%' ORDER BY sub_id DESC";
+            $query = mysqli_query($db, $sql);
+            $count = mysqli_num_rows($query);
 
-    <?php include"inc/rent_area.php"; ?>
+            if( $count == 0 ) { ?>
+                <section class="py-5">
+                    <div class="container">
+                        <div style="border-left: 3px double #ffc107; padding: 0 2%;">
+                            <p style="margin: 0; color:#023021;"><?php echo $count; ?> results found.</p>
+                            <h1 class="" style="letter-spacing: 3px;  color:#023021; font-size: 40px;">Showing results: <strong><?php echo $sesId; ?></strong></h1>
+                        </div>
+                    </div>
+                </section>
 
-    <!-- START: Category ShowCase -->
-    <section class="pt-5">
-        <div class="container">
-            <div class="row">                
-                <div class="col-lg-12 d-flex justify-content-center text-uppercase">
-                    <?php  
-                        $rentcategorySql = "SELECT * FROM rent_category WHERE status = 1 ORDER BY name ASC";
-                        $rentcategoryQuery = mysqli_query( $db, $rentcategorySql );
+                <section class="py-5">
+                    <div class="container">
+                        <div class="alert alert-danger text-center" role="alert">
+                         Sorry! No Result Found. Check the page. Thanks...
+                        </div>
+                    </div>
+                </section>
+            <?php }
 
-                        while ( $row = mysqli_fetch_assoc( $rentcategoryQuery ) ) {
-                            $cat_id         = $row['cat_id'];
-                            $name           = $row['name'];
-                            $slug           = $row['slug'];                                                     
-                            $is_parent      = $row['is_parent'];
-                            $description    = $row['description'];
-                            $image          = $row['image'];
-                            $status         = $row['status'];
-                            $join_date      = $row['join_date'];
+            else { ?>
+                <section class="py-5">
+                    <div class="container">
+                        <div style="border-left: 3px double #ffc107; padding: 0 2%;">
+                            <p style="margin: 0; color:#023021;"><?php echo $count; ?> results found.</p>
+                            <h1 class="" style="letter-spacing: 3px;  color:#023021; font-size: 40px;">Showing results: <strong><?php echo $sesId; ?></strong></h1>
+                        </div>
+
+                        <div class="row py-5">
+                            <!--  -->
+                        <?php
+
+                            while ($row = mysqli_fetch_assoc($query)) {
+                                $sub_id         = $row['sub_id'];
+                                $is_parent      = $row['is_parent'];
+                                $subcat_name    = $row['subcat_name'];
+                                $slug           = $row['slug'];
+                                $ow_name        = $row['ow_name'];
+                                $ow_email       = $row['ow_email'];
+                                $ow_phone       = $row['ow_phone'];
+                                $district       = $row['district'];
+                                $division_id       = $row['division_id'];
+                                $location       = $row['location'];
+                                $price          = $row['price'];
+                                $bed            = $row['bed'];
+                                $kitchen        = $row['kitchen'];
+                                $washroom       = $row['washroom'];
+                                $totalroom      = $row['totalroom'];
+                                $area_size      = $row['area_size'];
+                                $floor          = $row['floor'];
+                                $rank           = $row['rank'];
+                                $decoration     = $row['decoration'];
+                                $desk           = $row['desk'];
+                                $wifi           = $row['wifi'];
+                                $hottub         = $row['hottub'];
+                                $currency       = $row['currency'];
+                                $ac             = $row['ac'];
+                                $pool           = $row['pool'];
+                                $park           = $row['park'];
+                                $gym            = $row['gym'];
+                                $luggage        = $row['luggage'];
+                                $availability   = $row['availability'];
+                                $short_desc     = $row['short_desc'];
+                                $long_desc      = $row['long_desc'];
+                                $ow_image       = $row['ow_image'];
+                                $img_one        = $row['img_one'];
+                                $img_two        = $row['img_two'];
+                                $img_three      = $row['img_three'];
+                                $img_four       = $row['img_four'];
+                                $img_five       = $row['img_five'];
+                                $img_six        = $row['img_six'];
+                                $status         = $row['status'];
+                                $google_map     = $row['google_map'];
+                                $join_date      = $row['join_date'];
                             ?>
-                                <a href="products.php?pid=<?php echo $cat_id; ?>"><p class="border border-dark-subtle p-3 me-4 category_name" style="color: #023021; font-size: 19px; letter-spacing: 0.9px; font-weight: 600;"><?php echo $name; ?></p></a>
-                            <?php
-                        }
-
-
-                    ?>
-
-                </div>
-            </div>
-        </div>
-     </section>
-    <!-- END: Category ShowCase -->
-
-    <!-- START: RESULT TOTAL -->
-     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <?php  
-                    $sql = "SELECT * FROM rent_subcategory WHERE status = 1";
-                    $query = mysqli_query($db, $sql);
-
-                    $count = mysqli_num_rows($query);
-
-                    ?>
-                     <p class="pt-5 pb-2" style="color: #023021; font-size: 20px;"><?php echo $count; ?>+ results</p>
-                    <?php
-                ?>
-               
-            </div>
-        </div>
-     </div>
-    <!-- END: RESULT TOTAL -->
-
-    
-
-    <!-- START: Category Wise Product Showcase -->
-     <section class="">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <?php
-                        $rentcategorySql = "SELECT * FROM rent_category WHERE status = 1 ORDER BY name ASC";
-                        $rentcategoryQuery = mysqli_query($db, $rentcategorySql);
-
-                        while ($row = mysqli_fetch_assoc($rentcategoryQuery)) {
-                            $cat_id         = $row['cat_id'];
-                            $cat_name       = $row['name'];
-                            ?>
-
-                            <div style="border-left: 3px double #ffc107; padding: 0 2%;">
-                                <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 30px; font-weight:600; text-transform: uppercase;"><?php echo $cat_name; ?></h1>
-                            </div>
-                            
-
-                            <div class="row py-5">
-
-                            <?php
-
-                                $childSql = "SELECT * FROM rent_subcategory WHERE is_parent ='$cat_id' AND status=1 ORDER BY subcat_name ASC";
-                                $childQuery = mysqli_query($db, $childSql);
-                                $childSqlCount = mysqli_num_rows($childQuery);
-
-                                $i = 0;
-
-                                while ($row = mysqli_fetch_assoc($childQuery)) {
-                                    $sub_id         = $row['sub_id'];
-                                    $is_parent      = $row['is_parent'];
-                                    $subcat_name    = $row['subcat_name'];
-                                    $slug           = $row['slug'];
-                                    $ow_name        = $row['ow_name'];
-                                    $ow_email       = $row['ow_email'];
-                                    $ow_phone       = $row['ow_phone'];
-                                    $district       = $row['district'];
-                                    $division_id       = $row['division_id'];
-                                    $location       = $row['location'];
-                                    $price          = $row['price'];
-                                    $bed            = $row['bed'];
-                                    $kitchen        = $row['kitchen'];
-                                    $washroom       = $row['washroom'];
-                                    $totalroom      = $row['totalroom'];
-                                    $area_size      = $row['area_size'];
-                                    $floor          = $row['floor'];
-                                    $rank           = $row['rank'];
-                                    $decoration     = $row['decoration'];
-                                    $desk           = $row['desk'];
-                                    $wifi           = $row['wifi'];
-                                    $hottub         = $row['hottub'];
-                                    $currency       = $row['currency'];
-                                    $ac             = $row['ac'];
-                                    $pool           = $row['pool'];
-                                    $park           = $row['park'];
-                                    $gym            = $row['gym'];
-                                    $luggage        = $row['luggage'];
-                                    $availability   = $row['availability'];
-                                    $short_desc     = $row['short_desc'];
-                                    $long_desc      = $row['long_desc'];
-                                    $ow_image       = $row['ow_image'];
-                                    $img_one        = $row['img_one'];
-                                    $img_two        = $row['img_two'];
-                                    $img_three      = $row['img_three'];
-                                    $img_four       = $row['img_four'];
-                                    $img_five       = $row['img_five'];
-                                    $img_six        = $row['img_six'];
-                                    $status         = $row['status'];
-                                    $google_map     = $row['google_map'];
-                                    $join_date      = $row['join_date'];
-                                    $i++;
-                                ?>
 
                                 <div class="col-lg-4 pb-4">
                                     <div class="bg-light">
@@ -267,7 +217,19 @@
                                             <div class="row">
                                                 <div class="col-lg-10">
                                                     <div>
-                                                        <h4 class="" style="font-size: 17px; color: #1a7e00; filter: drop-shadow(0px 0px 12px #1a7e00);"><?php echo $cat_name; ?></h4>
+                                                        <h4 class="" style="font-size: 17px; color: #1a7e00; filter: drop-shadow(0px 0px 12px #1a7e00);">
+                                                            <?php
+                                                                $rentcategorySql = "SELECT * FROM rent_category WHERE cat_id='$is_parent' AND status = 1 ORDER BY name ASC";
+                                                                $rentcategoryQuery = mysqli_query($db, $rentcategorySql);
+
+                                                                while ($row = mysqli_fetch_assoc($rentcategoryQuery)) {
+                                                                    $cat_id         = $row['cat_id'];
+                                                                    $cat_name       = $row['name'];
+                                                                        echo $cat_name; 
+                                                                    }
+                                                            ?>
+                                                                
+                                                            </h4>
                                                         <h5 class="fw-semibold py-2" style="text-align:justify; color:#023021; letter-spacing: 0.5px;"><?php echo $subcat_name; ?></h5>  
                                                         <h4 class="fw-semibold" style="color:#023021; letter-spacing: 0.7px;">৳<?php echo $price; ?> BDT <sup class="fw-medium">PER 
                                                             <?php 
@@ -464,48 +426,54 @@
                                         </div>
                                                         
                                                         
-                                                        <hr class="m-0 pb-2">
-                                                        <?php  
-                                                            $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
-                                                            $divquery = mysqli_query($db, $divsql);
+                                            <hr class="m-0 pb-2">
+                                            <?php  
+                                                $divsql = "SELECT * FROM rent_division WHERE status=1 AND id='$division_id'";
+                                                $divquery = mysqli_query($db, $divsql);
 
-                                                            while ( $row = mysqli_fetch_assoc($divquery) ) {
-                                                                $id             = $row['id'];
-                                                                $name           = $row['name'];
-                                                                $priority       = $row['priority'];
-                                                                $status         = $row['status'];
-                                                                ?>
-                                                                <p class="h-6 fw-light lh-sm py-2" style="text-align:justify; color:#023021;"><i class="fa-solid fa-location-dot px-1"></i> <?php echo $location; ?>, <span><?php echo $district; ?></span>, <span><?php echo $name; ?></span></p>                                        
-                                                                <?php
-                                                            } 
-                                                        ?>
-                                                        <div class="d-grid gap-2 pb-2">
-                                                            <a href="details.php?rdId=<?php echo $sub_id; ?>" class="btn btn-outline-warning btn-3 px-3">View Details</a>
-                                                        </div>
+                                                while ( $row = mysqli_fetch_assoc($divquery) ) {
+                                                    $id             = $row['id'];
+                                                    $name           = $row['name'];
+                                                    $priority       = $row['priority'];
+                                                    $status         = $row['status'];
+                                                    ?>
+                                                    <p class="h-6 fw-light lh-sm py-2" style="text-align:justify; color:#023021;"><i class="fa-solid fa-location-dot px-1"></i> <?php echo $location; ?>, <span><?php echo $district; ?></span>, <span><?php echo $name; ?></span></p>                                        
+                                                    <?php
+                                                } 
+                                            ?>
+                                            <div class="d-grid gap-2 pb-2">
+                                                <a href="details.php?rdId=<?php echo $sub_id; ?>" class="btn btn-outline-warning btn-3 px-3">View Details</a>
+                                            </div>
                                         </div>
                                     </div> 
                                 </div>
 
-                                <?php
-                                    }
-                                }
+                            <?php
+                            }
+                        }
 
-                            ?>
+                        ?>
+                        <!--  -->
                         </div>
+                    </div>
+                </section>
+
+                
+
+
+            <?php }
 
 
 
-                    
 
-                </div>
-            </div>
-        </div>
-     </section>
-    <!-- END: Category Wise Product Showcase -->
+    ?>
 
     
+
+
+
     <!-- START: QUESTION PART -->
-     <section class="">
+     <section class="pb-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 question_part">
@@ -513,39 +481,122 @@
                         <h4 class="px-5 py-3" style="background: #1a7e00; color: #fff;">Got Questions? Ask Away!</h4 class="p-3">
                         <form action="" method="POST" class="px-5 py-5">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">First Name</label>
-                                        <input type="text" name="fname" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Last Name</label>
-                                        <input type="text" name="lname" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Email Address</label>
-                                        <input type="email" name="email" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Phone</label>
-                                        <input type="tel" name="phone" class="form-control" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-                                    </div>
-                                </div>
+                                <!--  -->
+                                <?php  
+                                    if ( !empty( $_SESSION['email'] ) ) { ?>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Message</label>
+                                            <textarea name="msg" id="" class="form-control" placeholder="write here..." rows="5" required></textarea>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <?php  
+                                                if ( isset( $_SESSION['email'] ) ) {
+                                                    $sesId = $_SESSION['email'];
+
+                                                    $sql = "SELECT * FROM role WHERE email='$sesId'";
+                                                    $query = mysqli_query($db, $sql);
+
+                                                    while ( $row = mysqli_fetch_assoc($query) ) {
+                                                        $id             = $row['id'];
+                                                        $name           = $row['name'];
+                                                        $email          = $row['email'];
+                                                        $phone          = $row['phone'];
+                                                        $address        = $row['address'];
+                                                        $password       = $row['password'];
+                                                        $role           = $row['role'];
+                                                        $image          = $row['image'];
+                                                        $nid            = $row['nid'];
+                                                        $status         = $row['status'];
+                                                        ?>
+                                                        <input type="hidden" name="fname" value="<?php echo $name; ?>">
+                                                        <input type="hidden" name="email" value="<?php echo $email; ?>">
+                                                        <input type="hidden" name="phone" value="<?php echo $phone; ?>">
+                                                        <input type="hidden" name="role" value="<?php echo $role; ?>">
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                            <input type="hidden" name="status" value="2">
+                                            
+                                            <!--  -->
+                                            <?php  
+                                                if ( !empty( $_SESSION['email'] ) ) { ?>
+                                                    <input type="submit" name="masg" value="SUBMIT" class="btn btn-primary quBtn">
+                                                <?php }
+                                                else { ?>
+                                                    <div class="alert alert-info my-4 text-center" role="alert">
+                                                      Login to reserve you service. <a href="login.php">Click Here</a>
+                                                    </div>
+                                               <?php }
+                                            ?>
+                                            <!--  -->
+                                            
+                                        </div>
+                                    <?php }
+                                    else { ?>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">First Name</label>
+                                                <input type="text" name="fname" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Last Name</label>
+                                                <input type="text" name="lname" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Email Address</label>
+                                                <input type="email" name="email" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Phone</label>
+                                                <input type="tel" name="phone" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Message</label>
+                                            <textarea name="msg" id="" class="form-control" placeholder="write here..." rows="5" required></textarea>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <input type="hidden" name="status" value="2">
+                                            <input type="hidden" name="role" value="3">
+                                            <input type="submit" name="masg" value="SUBMIT" class="btn btn-primary quBtn">
+                                            
+                                        </div>
+                                   <?php }
+                                ?>
+                                <!--  -->
+                                
                             </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Message</label>
-                                <textarea name="desb" id="" class="form-control" placeholder="write here..." rows="5" ></textarea>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <input type="submit" value="SUBMIT" class="btn btn-primary quBtn">
-                            </div>
+                            
                         </form>
+                        <?php  
+                            if ( isset($_POST['masg']) ) {
+                                $fname  = mysqli_real_escape_string($db, $_POST['fname']);
+                                $lname  = mysqli_real_escape_string($db, $_POST['lname']);
+                                $email  = mysqli_real_escape_string($db, $_POST['email']);
+                                $phone  = mysqli_real_escape_string($db, $_POST['phone']);
+                                $msg    = mysqli_real_escape_string($db, $_POST['msg']);
+                                $role   = mysqli_real_escape_string($db, $_POST['role']);
+                                $status = mysqli_real_escape_string($db, $_POST['status']);
+
+                                $sql = "INSERT INTO message (role, status, fname, lname, email, phone, msg, join_date) VALUES('$role', '$status', '$fname', '$lname', '$email', '$phone', '$msg', now())";
+                                $query = mysqli_query($db, $sql);
+
+                                if ( $query ) {
+                                    header('Location: index.php');
+                                }
+                                else {
+                                    die("Mysqli_Error" . mysqli_error($db));
+                                }
+                            }
+                        ?>
                     </div>
                 </div>
 
@@ -553,7 +604,7 @@
                     <div class="">
                         <h1 class="text-white pb-3" >Rent Buy Haven Provide Safe, Trusted And Reliable Collection!</h1>
                         <p class="text-white fw-light pb-3" style="">We offer customers reliable and regular collection of trash and materials, on a scheduled or call basis, with a safe and unique level of service for family.</p>
-                        <a href="" class="quPartBtn">GET START NOW</a>
+                        <a href="packages.php" class="quPartBtn">GET START NOW</a>
 
                         <div class="row d-flex align-items-center pt-5 mt-4">
                             <div class="col-lg-3" style="text-align: center;">
@@ -573,6 +624,8 @@
         </div>
      </section>
     <!-- END: QUESTION PART -->
+
+
     
 </main>
     
