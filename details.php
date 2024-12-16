@@ -919,7 +919,7 @@
                                         <form action="" method="POST">
                                             <div class="mb-3">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="5">
+                                                    <input class="form-check-input" type="radio" name="star" id="flexRadioDefault2" value="5" required>
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         <div>
                                                             <i class="fa-solid fa-star text-warning"></i>
@@ -932,8 +932,8 @@
                                                 </div>
 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="4">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" name="star" id="flexRadioDefault3" value="4" required>
+                                                    <label class="form-check-label" for="flexRadioDefault3">
                                                         <div>
                                                             <i class="fa-solid fa-star text-warning"></i>
                                                             <i class="fa-solid fa-star text-warning"></i>
@@ -945,8 +945,8 @@
                                                 </div>
 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="3">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" name="star" id="flexRadioDefault4" value="3" required>
+                                                    <label class="form-check-label" for="flexRadioDefault4">
                                                         <div>
                                                             <i class="fa-solid fa-star text-warning"></i>
                                                             <i class="fa-solid fa-star text-warning"></i>
@@ -958,8 +958,8 @@
                                                 </div>
 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="2">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" name="star" id="flexRadioDefault5" value="2" required>
+                                                    <label class="form-check-label" for="flexRadioDefault5">
                                                         <div>
                                                             <i class="fa-solid fa-star text-warning"></i>
                                                             <i class="fa-solid fa-star text-warning"></i>
@@ -971,8 +971,8 @@
                                                 </div>
 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="1">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" name="star" id="flexRadioDefault6" value="1" required>
+                                                    <label class="form-check-label" for="flexRadioDefault6">
                                                         <div>
                                                             <i class="fa-solid fa-star text-warning"></i>
                                                             <i class="fa-regular fa-star text-warning"></i>
@@ -986,14 +986,42 @@
                                             
 
                                             <div class="mb-3">
-                                                <textarea name="" class="form-control" rows="3" placeholder="write here.."></textarea>
+                                                <textarea name="msg" class="form-control" rows="3" placeholder="write here.." required></textarea>
                                             </div>
+
+                                            <?php  
+                                                if ( isset( $_SESSION['email'] ) ) {
+                                                    $sesId = $_SESSION['email'];
+
+                                                    $sql = "SELECT * FROM role WHERE email='$sesId'";
+                                                    $query = mysqli_query($db, $sql);
+
+                                                    while ( $row = mysqli_fetch_assoc($query) ) {
+                                                        $id             = $row['id'];
+                                                        $name           = $row['name'];
+                                                        $email          = $row['email'];
+                                                        $phone          = $row['phone'];
+                                                        $address        = $row['address'];
+                                                        $password       = $row['password'];
+                                                        $role           = $row['role'];
+                                                        $image          = $row['image'];
+                                                        $nid            = $row['nid'];
+                                                        $status         = $row['status'];
+                                                        ?>
+                                                        <input type="hidden" name="name" value="<?php echo $name; ?>">
+                                                        <input type="hidden" name="email" value="<?php echo $email; ?>">
+                                                        <input type="hidden" name="role" value="<?php echo $role; ?>">
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                            <input type="hidden" name="prd_id" value="<?php echo $sub_id; ?>">
 
                                              <!--  -->
                                                 <?php  
                                                     if ( !empty( $_SESSION['email'] ) ) { ?>
                                                         <div class="d-grid gap-2">
-                                                            <input type="submit" class="btn btn-success" value="Submit Here">
+                                                            <input type="submit" name="subm" class="btn btn-success" value="Submit Here">
                                                         </div>
                                                     <?php }
                                                     else { ?>
@@ -1002,33 +1030,108 @@
                                                         </div>
                                                    <?php }
                                                 ?>
-                                                <!--  -->
-
-
-
-
-                                            
+                                                <!--  -->                                            
                                             
                                         </form>
+
+                                        <?php  
+                                            if ( isset($_POST['subm']) ) {
+                                                $star       = mysqli_real_escape_string($db, $_POST['star']);
+                                                $msg        = mysqli_real_escape_string($db, $_POST['msg']);
+                                                $prd_id     = mysqli_real_escape_string($db, $_POST['prd_id']);
+                                                $role       = mysqli_real_escape_string($db, $_POST['role']);
+                                                $name       = mysqli_real_escape_string($db, $_POST['name']);
+                                                $email      = mysqli_real_escape_string($db, $_POST['email']);
+
+                                                $sql = "INSERT INTO rentreview (prd_id, role, name, email, star, msg, join_date) VALUES('$prd_id', '$role', '$name', '$email', '$star', '$msg', now())";
+                                                $query = mysqli_query($db, $sql);
+
+                                                if ( $query ) {
+                                                    header('Location: rent.php');
+                                                }
+                                                else {
+                                                    die("Mysqli_Error" . mysqli_error($db));
+                                                }
+                                            }
+                                        ?>
 
                                         <div class="py-5">
                                             <div style="border-left: 3px double #ffc107; padding: 0 2%;">
                                                 <h1 class=""  style="letter-spacing: 3px; color:#023021; font-size: 23px; font-weight:600; text-transform: uppercase;">All Reviews </h1>
                                             </div>
                                         </div>
-                                            <hr>
-                                        <div>
-                                            
-                                                <p>2024-07-28</p>
-                                                <h4 style="color:#023021;">Shohanur Rahamn Shohan</h4>
-                                                <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium maiores totam, adipisci tempore facilis quisquam veniam nam libero error exercitationem quidem, obcaecati repellat, quia deleniti est dicta molestias ducimus minus?</p>
-                                            <hr>
+                                        
 
-                                            <p>2024-07-28</p>
-                                                <h4 style="color:#023021;">Shohanur Rahamn Shohan</h4>
-                                                <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium maiores totam, adipisci tempore facilis quisquam veniam nam libero error exercitationem quidem, obcaecati repellat, quia deleniti est dicta molestias ducimus minus?</p>
                                             <hr>
-                                        </div>
+                                            <?php  
+                                                $sql = "SELECT * FROM rentreview WHERE prd_id ='$rentDetailsId' ORDER BY id DESC";
+                                                $query = mysqli_query($db, $sql);
+
+                                                while ( $row = mysqli_fetch_assoc($query) ) {
+                                                    $id         = $row['id'];
+                                                    $prd_id     = $row['prd_id'];
+                                                    $role       = $row['role'];
+                                                    $name       = $row['name'];
+                                                    $email      = $row['email'];
+                                                    $star       = $row['star'];
+                                                    $msg        = $row['msg'];
+                                                    $join_date  = $row['join_date'];
+                                                    ?>
+                                                    <div>
+                                                <p class="mb-0"><?php echo $join_date; ?></p>
+
+                                                <div class="py-2">
+                                                    <?php  
+                                                        if ( $star == 5 ) { ?>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                        <?php }
+
+                                                        else if ( $star == 4 ) { ?>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                        <?php }
+
+                                                        else if ( $star == 3 ) { ?>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                        <?php }
+
+                                                        else if ( $star == 2 ) { ?>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                        <?php }
+
+                                                        else if ( $star == 1 ) { ?>
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                            <i class="fa-regular fa-star text-warning"></i>
+                                                        <?php }
+                                                    ?>
+                                                </div>
+                                                <h4 style="color:#023021;"><?php echo $name; ?></h4>
+                                                <p style="text-align: justify;"><?php echo $msg; ?></p>
+                                                <hr>
+                                            </div>
+
+                                                    <?php
+                                                }
+                                            ?>
+                                            
 
                                         
                                         
