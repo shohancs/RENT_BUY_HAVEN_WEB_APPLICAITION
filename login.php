@@ -119,6 +119,8 @@
 						<!-- END : FORM -->
 					</div>
 				</div>
+
+
 				
 				<div class="col-lg-6">
 					<div class="" style="border-left: 3px double #023021; padding: 0 2%;">
@@ -160,14 +162,57 @@
 
 							<div class="mb-3">
 								<div class="d-grid gap-2">
-									<input type="submit" name="login" class="btn btn-dark px-5 quBtn" value="Seller Log in">
+									<input type="submit" name="sellogin" class="btn btn-dark px-5 quBtn" value="Seller Log in">
 								</div>								
 							</div>
 
 			                <div class="form-group">
 			                	<i class="fa-regular fa-circle-question"></i> Not a Member? <a href="sellerregister.php">Signup Here</a>
 			                </div>
-			              </form>					
+			              </form>	
+			              <!--  -->
+							<?php  
+								if (isset($_POST['sellogin'])) {
+								    $email 		= mysqli_real_escape_string($db, $_POST['email']);
+								    $password 	= mysqli_real_escape_string($db, $_POST['password']);
+								    $hassedPass = sha1($password);
+
+								    $readSql = "SELECT * FROM role WHERE email='$email' AND status=1";
+								    $readQuery = mysqli_query($db, $readSql);
+								    $userCount = mysqli_num_rows($readQuery);
+
+								    if ($userCount == 0) { ?>
+								        <div class="alert alert-danger text-center my-2" role="alert">
+								            Sorry!! No User Found. Try Again.
+								        </div>
+								    <?php } 
+								    else {
+								        $row = mysqli_fetch_assoc($readQuery);
+
+								        if ($row['password'] === $hassedPass) {
+								            $_SESSION['id'] 	= $row['id'];
+								            $_SESSION['name'] 	= $row['name'];
+								            $_SESSION['email'] 	= $row['email'];
+								            $_SESSION['image'] 	= $row['image'];
+								            $_SESSION['role'] 	= $row['role'];
+
+								            // Role-based redirection
+								            if ($_SESSION['role'] == 4) { // Admin Role
+								                header("Location: sellerDashboard.php");
+								            } else { // Unknown Role
+								                session_destroy();
+								                header("Location: index.php");
+								            }
+								        } else { ?>
+								            <div class="alert alert-danger text-center my-2" role="alert">
+								                Invalid Credentials. Try Again.
+								            </div>
+								        <?php }
+								    }
+								}
+
+							?>
+							<!--  -->					
 
 						
 						<!-- END : FORM -->

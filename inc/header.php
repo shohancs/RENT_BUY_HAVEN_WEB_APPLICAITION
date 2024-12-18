@@ -1,7 +1,7 @@
 <?php
     session_start();
     ob_start();
-    include"admin/inc/db.php"
+    include"admin/inc/db.php";
 ?>
 <!doctype html>
 <html lang="en">

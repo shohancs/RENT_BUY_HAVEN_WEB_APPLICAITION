@@ -13,7 +13,6 @@
                             
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">  
                                 <div class="d-flex ms-auto align-items-center">
-                                    
 
                                     <?php  
                                         if ( !empty( $_SESSION['email'] ) ) { ?>

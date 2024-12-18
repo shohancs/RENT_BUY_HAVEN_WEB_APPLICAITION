@@ -13,5 +13,7 @@
     <!-- Animate CSS CDN link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
+    
+
     <!-- Custom Css Link Here -->
      <link rel="stylesheet" href="inc/custom.css">
