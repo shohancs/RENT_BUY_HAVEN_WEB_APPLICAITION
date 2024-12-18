@@ -85,7 +85,7 @@
 					<ul>
 						<li> <a href="package.php?do=Manage"><i class="bx bx-radio-circle"></i>All Packages</a>
 						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Packages Control</a>
+						<li> <a href="packageControl.php?do=Manage"><i class="bx bx-radio-circle"></i>Packages Control</a>
 						</li>
 					</ul>
 				</li>
