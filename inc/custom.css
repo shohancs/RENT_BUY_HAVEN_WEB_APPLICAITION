@@ -781,3 +781,27 @@ footer .nav-link:hover {
 .wishlist-content::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
+.action-btn,
+.modal-footer {
+    text-align: center;
+    
+}
+
+.action-btn ul,
+.modal-footer ul {
+    padding: 0;
+    margin: 0;
+
+}
+
+.action-btn ul li,
+.modal-footer ul li {
+    list-style: none;
+    display: inline-block;
+
+} 
+
+.action-btn ul li a i {
+    font-size: 13px;
+
+}

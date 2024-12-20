@@ -103,7 +103,7 @@
 														      			<span class="badge text-bg-success">Active</span>
 														      		<?php }
 														      		else if ($status == 0) { ?>
-														      			<span class="badge text-bg-danger">InActive</span>
+														      			<span class="badge text-bg-warning">Pending</span>
 														      		<?php }
 														      	?>
 														      </td>
@@ -169,50 +169,38 @@
 									<form action="packageControl.php?do=Store" method="POST" enctype="multipart/form-data">
 										<div class="row">
 											<div class="col-lg-12">
+
 												<div class="mb-3">
-													<label>Seller Email</label>
-													<select name="user_email" class="form-select">
-														<option value="">Seller All Email List</option>
-														<?php  
-															$rentDivSql = "SELECT * FROM transactions ORDER BY id DESC";
-										  					$rentDivQuery = mysqli_query( $db, $rentDivSql );
-										  					while ( $row = mysqli_fetch_assoc( $rentDivQuery ) ) {
-													  				$id               = $row['id'];
-									                                $transaction_id   = $row['transaction_id'];
-									                                $user_email       = $row['user_email'];
-									                                $package_name     = $row['package_name'];
-									                                $price            = $row['price'];
-									                                $transaction_date = $row['transaction_date'];
-									                                $renewal_date     = $row['renewal_date'];
-									                                $status           = $row['status'];
+												    <label>Seller Email</label>
+												    <select name="user_email" class="form-select">
+												        <option value="">Seller All Email List</option>
+												        <?php  
+												            $rentDivSql = "SELECT * FROM transactions ORDER BY id DESC";
+												            $rentDivQuery = mysqli_query($db, $rentDivSql);
 
-									                                $sql = "SELECT * FROM role WHERE status=1 AND email = '$user_email' AND role = 4 ORDER BY name ASC";
-																	$query = mysqli_query($db, $sql);
+												            $emails = []; // Array to store unique emails
 
-																	while($row = mysqli_fetch_assoc( $query )) {
-																		$id  			= $row['id'];
-														  				$name  			= $row['name'];
-														  				$email  		= $row['email'];
-														  				$phone  		= $row['phone'];
-														  				$address  		= $row['address'];
-														  				$password  		= $row['password'];
-														  				$role  			= $row['role'];
-														  				$image  		= $row['image'];
-														  				$nid  			= $row['nid'];
-														  				$status  		= $row['status'];
-														  				?>
+												            while ($row = mysqli_fetch_assoc($rentDivQuery)) {
+												                $user_email = $row['user_email'];
 
-														  				<option value="<?php echo $id; ?>"> - <?php echo $email; ?></option>
+												                $sql = "SELECT * FROM role WHERE status=1 AND email = '$user_email' AND role = 4 ORDER BY name ASC";
+												                $query = mysqli_query($db, $sql);
 
-														  				<?php
-																	}
-									                            }
+												                while ($roleRow = mysqli_fetch_assoc($query)) {
+												                    $email = $roleRow['email'];
 
-															
-														?>
-														
-													</select>
+												                    if (!in_array($email, $emails)) { // Check if email is not already in the array
+												                        $emails[] = $email; // Add email to the array
+												                        ?>
+												                        <option value="<?php echo $email; ?>"> - <?php echo $email; ?></option>
+												                        <?php
+												                    }
+												                }
+												            }
+												        ?>
+												    </select>
 												</div>
+
 
 												<div class="mb-3">
 													<label>Package Name</label>
@@ -227,7 +215,7 @@
 												  				$name  			= $row['name'];
 												  				?>
 
-												  				<option value="<?php echo $id; ?>"> - <?php echo $name; ?></option>
+												  				<option value="<?php echo $name; ?>"> - <?php echo $name; ?></option>
 
 												  				<?php
 															}
@@ -303,14 +291,18 @@
 					else if( $do == "Edit" ) {
 						if ( isset($_GET['editId']) ) {
 							$editIdStore = $_GET['editId'];
-							$editSql = "SELECT * FROM rent_division WHERE id='$editIdStore'";
+							$editSql = "SELECT * FROM transactions WHERE id='$editIdStore'";
 							$editQuery = mysqli_query( $db, $editSql );
 
 							while ( $row = mysqli_fetch_assoc( $editQuery ) ) {
-								$id  			= $row['id'];
-				  				$name  			= $row['name'];
-				  				$priority  		= $row['priority'];
-				  				$status  		= $row['status'];
+								$id               = $row['id'];
+                                $transaction_id   = $row['transaction_id'];
+                                $user_email       = $row['user_email'];
+                                $package_name     = $row['package_name'];
+                                $price            = $row['price'];
+                                $transaction_date = $row['transaction_date'];
+                                $renewal_date     = $row['renewal_date'];
+                                $status           = $row['status'];
 				  				?>
 				  				<!--breadcrumb-->
 								<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -320,7 +312,7 @@
 											<ol class="breadcrumb mb-0 p-0">
 												<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
 												</li>
-												<li class="breadcrumb-item active" aria-current="page">Rent Division Edit</li>
+												<li class="breadcrumb-item active" aria-current="page">Package Control Edit</li>
 											</ol>
 										</nav>
 									</div>
@@ -329,13 +321,7 @@
 										<div class="btn-group">
 											<div class="row row-cols-auto g-3">
 												<div class="col">
-													<a href="rentDivision.php?do=Manage" class="btn btn-dark px-5">All Rent Division</a>
-												</div>
-												<div class="col">
-													<a href="rentDivision.php?do=Add" class="btn btn-primary px-5">Add New Rent Division</a>
-												</div>
-												<div class="col">
-													<a href="rentDivision.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
+													<a href="packageControl.php?do=Manage" class="btn btn-dark px-5">All Package Control</a>
 												</div>									
 											</div>
 										</div>
@@ -344,36 +330,47 @@
 								</div>
 								<!--end breadcrumb-->
 
-								<h6 class="mb-0 text-uppercase">Edit Rent Division Info</h6>
+								<h6 class="mb-0 text-uppercase">Edit Package Control</h6>
 								<hr>
 								<div class="card" style="width: 45%;">
 									<div class="card-body">
 										<div class="border p-3 radius-10">
 											<!-- START : FORM -->
-											<form action="rentDivision.php?do=Update" method="POST" enctype="multipart/form-data">
+											<form action="packageControl.php?do=Update" method="POST" enctype="multipart/form-data">
 												<div class="mb-3">
-													<label>Division Name</label>
-													<input type="text" name="name" class="form-control" required autocomplete="off" placeholder="enter category name.." value="<?php echo $name; ?>">
+												    <label>Seller Email</label>
+												    <p class="form-control" name="user_email"> <?php echo $user_email; ?> </p>
+												</div>
+
+
+												<div class="mb-3">
+													<label>Package Name</label>
+													<p class="form-control" name="package_name"> <?php echo $package_name; ?> </p>
 												</div>
 
 												<div class="mb-3">
-													<label>Priority Number</label>
-													<input type="text" name="priority" class="form-control" required autocomplete="off" value="<?php echo $priority; ?>">
+													<label>Package Renewal Price</label>
+													<p name="price" class="form-control"><?php echo $price; ?></p>
+												</div>
+
+												<div class="mb-3">
+													<label>Package Renewal Date</label>
+													<input type="date" name="renewal_date" class="form-control" placeholder="date" value="<?php echo $renewal_date; ?>">
 												</div>
 
 												<div class="mb-3">
 													<label>Status</label>
 													<select name="status" class="form-select">
-														<option value="1">Please Select the Status</option>
+														<option>Please Select the Status</option>
 														<option value="1" <?php if( $status == 1 ) { echo "selected"; } ?>>Active</option>
-														<option value="0" <?php if( $status == 0 ) { echo "selected"; } ?>>InActive</option>
+														<option value="0" <?php if( $status == 0 ) { echo "selected"; } ?>>Pending</option>
 													</select>
 												</div>
 
 												<div class="mb-3">
 													<div class="d-grid gap-2">
 														<input type="hidden" name="updateId" value="<?php echo $id; ?>">
-														<input type="submit" name="updateRentCat" class="btn btn-dark px-5" value="Update Rent Division">
+														<input type="submit" name="updateRentCat" class="btn btn-dark px-5" value="Update Package Control Info">
 													</div>											
 												</div>							
 											</form>
@@ -393,17 +390,19 @@
 
 							$updateIdStore 	= mysqli_real_escape_string($db, $_POST['updateRentCat']);
 							$updateId 		= mysqli_real_escape_string($db, $_POST['updateId']);
-							$name 			= mysqli_real_escape_string($db, $_POST['name']);
-							$priority 		= mysqli_real_escape_string($db, $_POST['priority']);
+							$user_email 	= mysqli_real_escape_string($db, $_POST['user_email']);
+							$package_name 	= mysqli_real_escape_string($db, $_POST['package_name']);
+							$price 			= mysqli_real_escape_string($db, $_POST['price']);
+							$renewal_date 	= mysqli_real_escape_string($db, $_POST['renewal_date']);
 							$status 		= mysqli_real_escape_string($db, $_POST['status']);
 
 							
 
-							$updateRentSql = "UPDATE rent_division SET name='$name', priority='$priority', status='$status', join_date=now() WHERE id='$updateId'";
+							$updateRentSql = "UPDATE transactions SET renewal_date='$renewal_date', status='$status' WHERE id='$updateId'";
 							$updateRentQuery = mysqli_query( $db, $updateRentSql );
 
 							if ($updateRentQuery) {
-								header("Location: rentDivision.php?do=Manage");
+								header("Location: packageControl.php?do=Manage");
 							}
 							else {
 								die ( "Mysqli Error." . mysqli_error($db) );

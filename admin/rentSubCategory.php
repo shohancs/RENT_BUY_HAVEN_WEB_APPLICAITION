@@ -804,157 +804,162 @@
 						</div>
 					</div>
 				</div>
-				<?php } else if ($do == "Store") {
-				if (isset($_POST['addSubCat'])) {
-					$subname 		= mysqli_real_escape_string($db, $_POST['subname']);
-					$ow_name 		= mysqli_real_escape_string($db, $_POST['ow_name']);
-					$ow_email 		= mysqli_real_escape_string($db, $_POST['ow_email']);
-					$ow_phone 		= mysqli_real_escape_string($db, $_POST['ow_phone']);
-					$division		= mysqli_real_escape_string($db, $_POST['division']);
-					$district 		= mysqli_real_escape_string($db, $_POST['district']);
-					$location 		= mysqli_real_escape_string($db, $_POST['location']);
-					$price 			= mysqli_real_escape_string($db, $_POST['price']);
-					$bed 			= mysqli_real_escape_string($db, $_POST['bed']);
-					$kitchen 		= mysqli_real_escape_string($db, $_POST['kitchen']);
-					$drawing 		= mysqli_real_escape_string($db, $_POST['drawing']);
-					$dinning 		= mysqli_real_escape_string($db, $_POST['dinning']);
-					$balcony 		= mysqli_real_escape_string($db, $_POST['balcony']);
-					$garage 		= mysqli_real_escape_string($db, $_POST['garage']);
-					$washroom 		= mysqli_real_escape_string($db, $_POST['washroom']);
-					$totalRoom 		= mysqli_real_escape_string($db, $_POST['totalRoom']);
-					$areaSize 		= mysqli_real_escape_string($db, $_POST['areaSize']);
-					$floor 			= mysqli_real_escape_string($db, $_POST['floor']);
-					$rank 			= mysqli_real_escape_string($db, $_POST['rank']);
-					$decoration 	= mysqli_real_escape_string($db, $_POST['decoration']);
-					$desk 			= mysqli_real_escape_string($db, $_POST['desk']);
-					$wifi 			= mysqli_real_escape_string($db, $_POST['wifi']);
-					$hottub 		= mysqli_real_escape_string($db, $_POST['hottub']);
-					$currency 		= mysqli_real_escape_string($db, $_POST['currency']);
-					$breakfast 		= mysqli_real_escape_string($db, $_POST['breakfast']);
-					$restourant 	= mysqli_real_escape_string($db, $_POST['restourant']);
-					$ac 			= mysqli_real_escape_string($db, $_POST['ac']);
-					$pool 			= mysqli_real_escape_string($db, $_POST['pool']);
-					$park 			= mysqli_real_escape_string($db, $_POST['park']);
-					$gym 			= mysqli_real_escape_string($db, $_POST['gym']);
-					$luggage 		= mysqli_real_escape_string($db, $_POST['luggage']);
-					$sdesc 			= mysqli_real_escape_string($db, $_POST['sdesc']);
-					$ldesc 			= mysqli_real_escape_string($db, $_POST['ldesc']);
-					$map			= mysqli_real_escape_string($db, $_POST['map']);
-					$availabe		= $_POST['availabe'];
-					$is_parent 		= mysqli_real_escape_string($db, $_POST['is_parent']);
-					$status 		= mysqli_real_escape_string($db, $_POST['status']);
+				<?php } 
 
-					// For Owner Image
-					$ow_image		= mysqli_real_escape_string($db, $_FILES['ow_image']['name']);
-					$tmpImgOwn		= $_FILES['ow_image']['tmp_name'];
+				else if ($do == "Store") {
+					if (isset($_POST['addSubCat'])) {
+						$subname 		= mysqli_real_escape_string($db, $_POST['subname']);
+						$ow_name 		= mysqli_real_escape_string($db, $_POST['ow_name']);
+						$ow_email 		= mysqli_real_escape_string($db, $_POST['ow_email']);
+						$ow_phone 		= mysqli_real_escape_string($db, $_POST['ow_phone']);
+						$division		= mysqli_real_escape_string($db, $_POST['division']);
+						$district 		= mysqli_real_escape_string($db, $_POST['district']);
+						$location 		= mysqli_real_escape_string($db, $_POST['location']);
+						$price 			= mysqli_real_escape_string($db, $_POST['price']);
+						$bed 			= mysqli_real_escape_string($db, $_POST['bed']);
+						$kitchen 		= mysqli_real_escape_string($db, $_POST['kitchen']);
+						$drawing 		= mysqli_real_escape_string($db, $_POST['drawing']);
+						$dinning 		= mysqli_real_escape_string($db, $_POST['dinning']);
+						$balcony 		= mysqli_real_escape_string($db, $_POST['balcony']);
+						$garage 		= mysqli_real_escape_string($db, $_POST['garage']);
+						$washroom 		= mysqli_real_escape_string($db, $_POST['washroom']);
+						$totalRoom 		= mysqli_real_escape_string($db, $_POST['totalRoom']);
+						$areaSize 		= mysqli_real_escape_string($db, $_POST['areaSize']);
+						$floor 			= mysqli_real_escape_string($db, $_POST['floor']);
+						$rank 			= mysqli_real_escape_string($db, $_POST['rank']);
+						$decoration 	= mysqli_real_escape_string($db, $_POST['decoration']);
+						$desk 			= mysqli_real_escape_string($db, $_POST['desk']);
+						$wifi 			= mysqli_real_escape_string($db, $_POST['wifi']);
+						$hottub 		= mysqli_real_escape_string($db, $_POST['hottub']);
+						$currency 		= mysqli_real_escape_string($db, $_POST['currency']);
+						$breakfast 		= mysqli_real_escape_string($db, $_POST['breakfast']);
+						$restourant 	= mysqli_real_escape_string($db, $_POST['restourant']);
+						$ac 			= mysqli_real_escape_string($db, $_POST['ac']);
+						$pool 			= mysqli_real_escape_string($db, $_POST['pool']);
+						$park 			= mysqli_real_escape_string($db, $_POST['park']);
+						$gym 			= mysqli_real_escape_string($db, $_POST['gym']);
+						$luggage 		= mysqli_real_escape_string($db, $_POST['luggage']);
+						$sdesc 			= mysqli_real_escape_string($db, $_POST['sdesc']);
+						$ldesc 			= mysqli_real_escape_string($db, $_POST['ldesc']);
+						$map			= mysqli_real_escape_string($db, $_POST['map']);
+						$availabe		= $_POST['availabe'];
+						$is_parent 		= mysqli_real_escape_string($db, $_POST['is_parent']);
+						$status 		= mysqli_real_escape_string($db, $_POST['status']);
 
-					if (!empty($ow_image)) {
-						$imgOwn = rand(0, 999999) . "_" . $ow_image;
-						move_uploaded_file($tmpImgOwn, 'assets/images/owner/' . $imgOwn);
-					} else {
-						$imgOwn = '';
+						// For Owner Image
+						$ow_image		= mysqli_real_escape_string($db, $_FILES['ow_image']['name']);
+						$tmpImgOwn		= $_FILES['ow_image']['tmp_name'];
+
+						if (!empty($ow_image)) {
+							$imgOwn = rand(0, 999999) . "_" . $ow_image;
+							move_uploaded_file($tmpImgOwn, 'assets/images/owner/' . $imgOwn);
+						} else {
+							$imgOwn = '';
+						}
+
+						// For Image One
+						$img_one		= mysqli_real_escape_string($db, $_FILES['img_one']['name']);
+						$tmpImgOne		= $_FILES['img_one']['tmp_name'];
+
+						if (!empty($img_one)) {
+							$img1 = rand(0, 999999) . "_" . $img_one;
+							move_uploaded_file($tmpImgOne, 'assets/images/subcategory/' . $img1);
+						} else {
+							$img1 = '';
+						}
+
+						// For Image Two
+						$img_two 		= mysqli_real_escape_string($db, $_FILES['img_two']['name']);
+						$tmpImgTwo 		= $_FILES['img_two']['tmp_name'];
+
+						if (!empty($tmpImgTwo)) {
+							$img2 = rand(0, 999999) . "_" . $img_two;
+							move_uploaded_file($tmpImgTwo, 'assets/images/subcategory/' . $img2);
+						} else {
+							$img2 = '';
+						}
+
+						// For Image Three
+						$img_three		= mysqli_real_escape_string($db, $_FILES['img_three']['name']);
+						$tmpImgThree	= $_FILES['img_three']['tmp_name'];
+
+						if (!empty($img_three)) {
+							$img3 = rand(0, 999999) . "_" . $img_three;
+							move_uploaded_file($tmpImgThree, 'assets/images/subcategory/' . $img3);
+						} else {
+							$img3 = '';
+						}
+
+						// For Image Four
+						$img_four		= mysqli_real_escape_string($db, $_FILES['img_four']['name']);
+						$tmpImgFour		= $_FILES['img_four']['tmp_name'];
+
+						if ($img_four) {
+							$img4 = rand(0, 999999) . "_" . $img_four;
+							move_uploaded_file($tmpImgFour, 'assets/images/subcategory/' . $img4);
+						} else {
+							$img4 = '';
+						}
+
+						// For Image Five
+						$img_five 		= mysqli_real_escape_string($db, $_FILES['img_five']['name']);
+						$tmpImgFive		= $_FILES['img_five']['tmp_name'];
+
+						if (!empty($img_five)) {
+							$img5 = rand(0, 999999) . "_" . $img_five;
+							move_uploaded_file($tmpImgFive, 'assets/images/subcategory/' . $img5);
+						} else {
+							$img5 = '';
+						}
+
+						// For Image Six
+						$img_six 		= mysqli_real_escape_string($db, $_FILES['img_six']['name']);
+						$tmpImgSix		= $_FILES['img_six']['tmp_name'];
+
+						if (!empty($img_six)) {
+							$img6 = rand(0, 999999) . "_" . $img_six;
+							move_uploaded_file($tmpImgSix, 'assets/images/subcategory/' . $img6);
+						} else {
+							$img6 = '';
+						}
+
+
+						// Start: For Slug Making
+						function createSlug($subname)
+						{
+							// Convert to Lower case
+							$slug = strtolower($subname);
+
+							// Remove Special Character
+							$slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+
+							// Replace multiple spaces or hyphens with a single hyphen
+							$slug = preg_replace('/[\s-]+/', ' ', $slug);
+
+							// Replace spaces with hyphens
+							$slug = preg_replace('/\s/', '-', $slug);
+
+							// Trim leading and trailing hyphens
+							$slug = trim($slug, '-');
+
+							return $slug;
+						}
+						$slug = createSlug($subname);
+						// End: For Slug Making
+
+						$addSubCategorySql = "INSERT INTO rent_subcategory ( subcat_name, slug, is_parent, ow_name, ow_email, ow_phone, district, division_id, location, price, bed, kitchen, washroom, totalroom, area_size, floor, rank, decoration, desk, wifi, hottub, currency, breakfast, restourant, ac, pool, park, gym, luggage, drwaing, dinning, balcony, garage, availability, short_desc, long_desc, ow_image, img_one, img_two, img_three, img_four, img_five, img_six, status, google_map, join_date ) VALUES ( '$subname', '$slug', '$is_parent', '$ow_name', '$ow_email', '$ow_phone', '$district', '$division', '$location', '$price', '$bed', '$kitchen', '$washroom', '$totalRoom', '$areaSize', '$floor', '$rank', '$decoration', '$desk', '$wifi', '$hottub', '$currency', '$breakfast', '$restourant', '$ac', '$pool', '$park', '$gym', '$luggage', '$drawing', '$dinning', '$balcony', '$garage', '$availabe', '$sdesc', '$ldesc', '$imgOwn', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$status', '$map', now() )";
+						$addQuery = mysqli_query($db, $addSubCategorySql);
+
+						if ($addQuery) {
+							header("Location: rentSubCategory.php?do=Manage");
+						} else {
+							die("Mysql Error." . mysqli_error($db));
+						}
 					}
-
-					// For Image One
-					$img_one		= mysqli_real_escape_string($db, $_FILES['img_one']['name']);
-					$tmpImgOne		= $_FILES['img_one']['tmp_name'];
-
-					if (!empty($img_one)) {
-						$img1 = rand(0, 999999) . "_" . $img_one;
-						move_uploaded_file($tmpImgOne, 'assets/images/subcategory/' . $img1);
-					} else {
-						$img1 = '';
-					}
-
-					// For Image Two
-					$img_two 		= mysqli_real_escape_string($db, $_FILES['img_two']['name']);
-					$tmpImgTwo 		= $_FILES['img_two']['tmp_name'];
-
-					if (!empty($tmpImgTwo)) {
-						$img2 = rand(0, 999999) . "_" . $img_two;
-						move_uploaded_file($tmpImgTwo, 'assets/images/subcategory/' . $img2);
-					} else {
-						$img2 = '';
-					}
-
-					// For Image Three
-					$img_three		= mysqli_real_escape_string($db, $_FILES['img_three']['name']);
-					$tmpImgThree	= $_FILES['img_three']['tmp_name'];
-
-					if (!empty($img_three)) {
-						$img3 = rand(0, 999999) . "_" . $img_three;
-						move_uploaded_file($tmpImgThree, 'assets/images/subcategory/' . $img3);
-					} else {
-						$img3 = '';
-					}
-
-					// For Image Four
-					$img_four		= mysqli_real_escape_string($db, $_FILES['img_four']['name']);
-					$tmpImgFour		= $_FILES['img_four']['tmp_name'];
-
-					if ($img_four) {
-						$img4 = rand(0, 999999) . "_" . $img_four;
-						move_uploaded_file($tmpImgFour, 'assets/images/subcategory/' . $img4);
-					} else {
-						$img4 = '';
-					}
-
-					// For Image Five
-					$img_five 		= mysqli_real_escape_string($db, $_FILES['img_five']['name']);
-					$tmpImgFive		= $_FILES['img_five']['tmp_name'];
-
-					if (!empty($img_five)) {
-						$img5 = rand(0, 999999) . "_" . $img_five;
-						move_uploaded_file($tmpImgFive, 'assets/images/subcategory/' . $img5);
-					} else {
-						$img5 = '';
-					}
-
-					// For Image Six
-					$img_six 		= mysqli_real_escape_string($db, $_FILES['img_six']['name']);
-					$tmpImgSix		= $_FILES['img_six']['tmp_name'];
-
-					if (!empty($img_six)) {
-						$img6 = rand(0, 999999) . "_" . $img_six;
-						move_uploaded_file($tmpImgSix, 'assets/images/subcategory/' . $img6);
-					} else {
-						$img6 = '';
-					}
+				} 
 
 
-					// Start: For Slug Making
-					function createSlug($subname)
-					{
-						// Convert to Lower case
-						$slug = strtolower($subname);
-
-						// Remove Special Character
-						$slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
-
-						// Replace multiple spaces or hyphens with a single hyphen
-						$slug = preg_replace('/[\s-]+/', ' ', $slug);
-
-						// Replace spaces with hyphens
-						$slug = preg_replace('/\s/', '-', $slug);
-
-						// Trim leading and trailing hyphens
-						$slug = trim($slug, '-');
-
-						return $slug;
-					}
-					$slug = createSlug($subname);
-					// End: For Slug Making
-
-					$addSubCategorySql = "INSERT INTO rent_subcategory ( subcat_name, slug, is_parent, ow_name, ow_email, ow_phone, district, division_id, location, price, bed, kitchen, washroom, totalroom, area_size, floor, rank, decoration, desk, wifi, hottub, currency, breakfast, restourant, ac, pool, park, gym, luggage, drwaing, dinning, balcony, garage, availability, short_desc, long_desc, ow_image, img_one, img_two, img_three, img_four, img_five, img_six, status, google_map, join_date ) VALUES ( '$subname', '$slug', '$is_parent', '$ow_name', '$ow_email', '$ow_phone', '$district', '$division', '$location', '$price', '$bed', '$kitchen', '$washroom', '$totalRoom', '$areaSize', '$floor', '$rank', '$decoration', '$desk', '$wifi', '$hottub', '$currency', '$breakfast', '$restourant', '$ac', '$pool', '$park', '$gym', '$luggage', '$drawing', '$dinning', '$balcony', '$garage', '$availabe', '$sdesc', '$ldesc', '$imgOwn', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$status', '$map', now() )";
-					$addQuery = mysqli_query($db, $addSubCategorySql);
-
-					if ($addQuery) {
-						header("Location: rentSubCategory.php?do=Manage");
-					} else {
-						die("Mysql Error." . mysqli_error($db));
-					}
-				}
-			} else if ($do == "Edit") {
+			else if ($do == "Edit") {
 				if (isset($_GET['editId'])) {
 					$editIdStore = $_GET['editId'];
 					$editSql = "SELECT * FROM rent_subcategory WHERE sub_id='$editIdStore'";
@@ -1795,13 +1800,15 @@
 																					<div class="col-lg-12">
 																						<div class="card">
 																							<div class="card-body">
-												<div class="border p-3 radius-10">
-												<!-- START : FORM -->
-												<form action="" method="POST" enctype="multipart/form-data">
-													<div class="row" style="text-align: left;">
-														<div class="col-lg-6">
-															<div class="mb-3">																						<label class="form-label">Sub Category Name</label>																											<input type="text" name="subname" class="form-control" required autocomplete="off" placeholder="enter sub category name.." value="<?php echo $subcat_name; ?>" readonly>
-				</div>
+																								<div class="border p-3 radius-10">
+																								<!-- START : FORM -->
+																								<form action="" method="POST" enctype="multipart/form-data">
+																									<div class="row" style="text-align: left;">
+																										<div class="col-lg-6">
+																											<div class="mb-3">
+																												<label class="form-label">Sub Category Name</label>									
+																												<input type="text" name="subname" class="form-control" required autocomplete="off" placeholder="enter sub category name.." value="<?php echo $subcat_name; ?>" readonly>
+																											</div>
 					<div class="mb-3">																										<label>Owner Name</label>															<input type="text" name="ow_name" class="form-control" required autocomplete="off" placeholder="enter owner name.." value="<?php echo $ow_name; ?>" readonly>																							</div>																						<div class="mb-3">																				<label>Owner Email</label>																		<input type="email" name="ow_email" class="form-control" required autocomplete="off" placeholder="enter owner email.." value="<?php echo $ow_email; ?>" readonly>								</div>																					<div class="mb-3">																				<label>Owner Phone No.</label>															<input type="phone" name="ow_phone" class="form-control" required autocomplete="off" placeholder="enter owner phone.." value="<?php echo $ow_phone; ?>" readonly>																												</div>																								<div class="mb-3">																						<label>Location</label>																								<input type="text" name="location" class="form-control" required autocomplete="off" placeholder="enter location.." value="<?php echo $location; ?>" readonly>																								</div>																							<div class="row">																						<div class="col-lg-6">																				<div class="mb-3">																		<label>Category Name</label>																														<select class="form-select" name="is_parent" readonly>																															<option>Please Select the Category</option>																						<?php														$catSql = "SELECT * FROM rent_category WHERE status=1";																																$catQuery = mysqli_query($db, $catSql);																														while ($row = mysqli_fetch_assoc($catQuery)) {																																	$cat_id = $row['cat_id'];																			$catname = $row['name'];																					?>															<option value="<?php echo $cat_id ?>" <?php if ($is_parent == $cat_id) {																																	echo "selected";																																				} ?>> - <?php echo $catname; ?></option>																													<?php																														}																					?>																									</select>																				</div>																						</div>																						<div class="col-lg-6">																							<div class="mb-3">																															<label>Price <sup>(Taka)</sup></label>																											<input type="number" name="price" class="form-control" required autocomplete="off" placeholder="enter price.." value="<?php echo $price; ?>" readonly>																										</div>																									</div>																						<div class="col-lg-6">																		<div class="mb-3">																													<label>Bed</label>																															<input type="number" name="bed" class="form-control" required autocomplete="off" placeholder="enter number of bed.." value="<?php echo $bed; ?>" readonly>																														</div>																											</div>																													<div class="col-lg-6">																														<div class="mb-3">																															<label>Kitchen</label>																															<input type="number" name="kitchen" class="form-control" required autocomplete="off" placeholder="enter number of kitchen.." value="<?php echo $kitchen; ?>" readonly>																														</div>																													</div>																													<div class="col-lg-6">																														<div class="mb-3">																															<label>Washroom</label>																															<input type="number" name="washroom" class="form-control" required autocomplete="off" placeholder="enter number of washroom.." value="<?php echo $washroom; ?>" readonly>																														</div>																													</div>																													<div class="col-lg-6">																														<div class="mb-3">																															<label>Total Room <sup>(Included Drawing, Dining)</sup> </label>																															<input type="number" name="totalRoom" class="form-control" required autocomplete="off" placeholder="enter number of total room.." value="<?php echo $totalroom; ?>" readonly>																														</div>																													</div>																								<div class="col-lg-6">																														<div class="mb-3">																															<label>Area Size <sup>(Sq Ft)</sup></label>																															<input type="number" name="areaSize" class="form-control" required autocomplete="off" placeholder="enter size of area.." value="<?php echo $area_size; ?>" readonly>																													</div>																										</div>																													<div class="col-lg-6">																														<div class="mb-3">																															<label>Floor Number <sup>(1st->2nd->3rd..)</sup></label>																															<input type="number" name="floor" class="form-control" required autocomplete="off" placeholder="enter size of area.." value="<?php echo $floor; ?>" readonly>																														</div>																													</div>																													<div class="mb-3">																														<label>Short Description</label>																														<textarea name="sdesc" class="form-control" cols="30" rows="10" id="editor" placeholder="write short description..." readonly><?php echo $short_desc; ?></textarea>																													</div>																													<div class="mb-3">																														<label>Long Description</label>																														<textarea name="ldesc" class="form-control" cols="30" rows="10" id="editor1" placeholder="write long description..." readonly><?php echo $long_desc; ?></textarea>																													</div>																												</div>
 																								</div>
 						<div class="col-lg-6">
