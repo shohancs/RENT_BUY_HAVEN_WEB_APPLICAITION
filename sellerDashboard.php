@@ -328,13 +328,22 @@
                                       <div class="modal-body">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to Delete?</h1>                                       
                                       </div>
+
                                       <div class="modal-footer justify-content-around">
-                                        <ul>
-                                          <li>
-                                            <a href="sellerDashboard.php?do=Delete&dData=<?php echo $sub_id ; ?>" class="btn btn-primary">Yes</a>
-                                            <a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
-                                          </li>
-                                        </ul>
+                                        <?php  
+                                            if ( $status == 1 ) {
+                                                echo "Sorry! Please Contact with Support. Thanks";
+                                            }
+                                            else { ?>
+                                                <ul>
+                                                  <li>
+                                                    <a href="sellerDashboard.php?do=Delete&dData=<?php echo $sub_id ; ?>" class="btn btn-primary">Yes</a>
+                                                    <a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
+                                                  </li>
+                                                </ul>
+                                            <?php }
+                                        ?>
+                                        
                                       </div>
                                     </div>
                                   </div>
@@ -357,6 +366,20 @@
 
                   <?php }
 
+                  else if ($do == "Delete") {
+                        if (isset($_GET['dData'])) {
+                            $deleteData = $_GET['dData'];
+                            $deleteSQL = "DELETE FROM rent_subcategory WHERE sub_id='$deleteData' ";
+                            $deleteQuery = mysqli_query($db, $deleteSQL);
+
+                            if ($deleteQuery) {
+                                header("Location: sellerDashboard.php?do=allRentProducts");
+                            } else {
+                                die("Mysqli_Error" . mysqli_error($db));
+                            }
+                        }
+                    }
+
                   else if ( $do == 'Add' ) { ?>    
 
                     <div class="row pt-3 pb-2">
@@ -370,6 +393,140 @@
                     <hr class="">
 
                     <div class="p-5 bg-light">
+
+                        <?php  
+                            $activeEmail = $_SESSION['email'];
+                            $sql = "SELECT * FROM transactions WHERE user_email='$activeEmail' AND status=1";
+                            $query = mysqli_query($db, $sql);
+
+                            while ( $row = mysqli_fetch_assoc( $query ) ) {
+                                $id               = $row['id'];
+                                $transaction_id   = $row['transaction_id'];
+                                $user_email       = $row['user_email'];
+                                $package_name     = $row['package_name'];
+                                $price            = $row['price'];
+                                $transaction_date = $row['transaction_date'];
+                                $renewal_date     = $row['renewal_date'];
+                                $status           = $row['status'];
+
+                                $pacsql = "SELECT * FROM package WHERE name='$package_name' AND status=1";
+                                $pacquery = mysqli_query($db, $pacsql);
+
+                                while ( $row = mysqli_fetch_assoc( $pacquery ) ) {
+                                    $pacid              = $row['id'];
+                                    $name               = $row['name'];
+                                    $details            = $row['details'];
+                                    $basic_price        = $row['basic_price'];
+                                    $discount_price     = $row['discount_price'];
+                                    $dis_percent        = $row['dis_percent'];
+                                    $renew              = $row['renew'];
+                                    $rent_flat          = $row['rent_flat'];
+                                    $rent_store         = $row['rent_store'];
+                                    $rent_hotel         = $row['rent_hotel'];
+                                    $buy_flat           = $row['buy_flat'];
+                                    $buy_store          = $row['buy_store'];
+                                    $buy_hotel          = $row['buy_hotel'];
+                                    $buy_property       = $row['buy_property'];
+                                    $status             = $row['status'];
+                                    $join_date          = $row['join_date'];
+
+                                    // Package Id 1 means Starter
+                                    if ( $pacid == 1 ) {
+                                        
+                                         echo $name;
+
+                                        // Package db some data store as a variable
+                                        $rentflat      = $rent_flat;
+                                        $rentstore     = $rent_store;
+                                        $renthotel     = $rent_hotel;
+                                        $buyflat       = $buy_flat;
+                                        $buystore      = $buy_store;
+                                        $buyhotel      = $buy_hotel;
+                                        $buyproperty   = $buy_property;
+
+                                        $margeSql = "SELECT cat_id AS id, name, 'Rent' AS category_type FROM rent_category WHERE status = 1
+                                            UNION
+                                            SELECT id, name, 'Buy' AS category_type FROM buy_category WHERE status = 1 
+                                            ORDER BY category_type, name";
+                                        $margeQuery = mysqli_query($db, $margeSql);
+
+                                        while ($row = mysqli_fetch_assoc($margeQuery)) {
+                                            $id = $row['id'];
+                                            $name = $row['name'];
+                                            $type = $row['category_type'];
+
+                                            
+                                        }
+                                        echo "<br>Check<br>";
+                                        echo "rent ". $name . $rentflat . "<br>";
+                                        echo "rent ". $name . $renthotel . "<br>";
+                                        echo "rent ". $name . $rentstore . "<br>";
+                                        echo "buy " . $name . $buyflat. "<br>";
+                                        echo "buy " . $name . $buystore. "<br>";
+                                        echo "buy " . $name . $buyhotel. "<br>";
+                                        echo "buy " . $name . $buyproperty. "<br>";
+
+
+                                        // 
+                                        $sesEmail = $_SESSION['email'];
+                                        $sql = "SELECT * FROM rent_subcategory WHERE ow_email='$sesEmail' ORDER BY sub_id DESC";
+                                        $query = mysqli_query($db, $sql);
+                                        $count = mysqli_num_rows($query);
+                                        echo $count;
+
+                                        $displayedCategories = []; 
+
+                                        while ($row = mysqli_fetch_assoc($query)) {
+                                            $is_parent = $row['is_parent'];
+
+                                            // rent
+                                            $rentcategorySql = "SELECT * FROM rent_category WHERE cat_id = '$is_parent' AND status = 1 ORDER BY name ASC";
+                                            $rentcategoryQuery = mysqli_query($db, $rentcategorySql);
+
+                                            while ($category = mysqli_fetch_assoc($rentcategoryQuery)) {
+                                                $cat_id = $category['cat_id'];
+                                                $cat_name = $category['name'];
+
+                                                if (!in_array($cat_id, $displayedCategories)) {
+                                                    $valId = $cat_id + 1;
+                                                    echo $valId . $cat_name . " -- ";
+                                                    $displayedCategories[] = $cat_id; // Mark this category as displayed
+
+                                                    if ( $renthotel >= $valId ) {
+                                                        echo $renthotel;
+                                                    }
+                                                }
+                                            }
+
+
+                                        }
+                                        /**/
+
+                                        
+
+                                    }
+
+                                    // Package Id 2 means Standard
+                                    else if ( $pacid == 2  ) {
+                                        echo $name;
+                                    }
+
+                                    // Package Id 2 means Advance
+                                    else if ( $pacid == 3 ) {
+                                       echo"$name";
+
+
+
+
+
+                                    }
+
+
+
+                                    
+                                }
+                            }
+                        ?>
                       <!-- START : FORM -->
                       <form action="sellerDashboard.php?do=Store" method="POST" enctype="multipart/form-data">
                         <div class="row">
@@ -945,7 +1102,7 @@
                               $img_four     = $row['img_four'];
                               $img_five     = $row['img_five'];
                               $img_six      = $row['img_six'];
-                              $status       = $row['status'];
+                              $substatus       = $row['status'];
                               $google_map   = $row['google_map'];
                               $join_date    = $row['join_date'];
                               ?>
@@ -1196,7 +1353,7 @@
                                       </div>
 
                                       <div class="form-check">
-                                        <input name="restourant" class="form-check-input" type="checkbox" value="1" <?php if ( $restourant == 1 ) {
+                                        <input name="restaurant" class="form-check-input" type="checkbox" value="1" <?php if ( $restourant == 1 ) {
                                           echo "checked";
                                         } ?> id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
@@ -1275,12 +1432,12 @@
                                     <div class="col-lg-6">
                                       <div class="mb-3">
                                         <label>Available on</label>
-                                        <input type="date" name="availabe" class="form-control" value="<?php echo $availability; ?>">
+                                        <input type="date" name="available" class="form-control" value="<?php echo $availability; ?>">
                                       </div>
                                     </div>
                                     <div class="col-lg-6">
                                       <div class="mb-3">
-                                        <input type="hidden" name="status" value="2">
+                                        <input type="hidden" name="status" value="<?php echo $substatus; ?>">
                                       </div>
                                     </div>                      
                                   </div>
@@ -1423,42 +1580,42 @@
                       $updateIdStore    = mysqli_real_escape_string($db, $_POST['rentSubId']);
                       $subname          = mysqli_real_escape_string($db, $_POST['subname']);
                       $ow_name          = mysqli_real_escape_string($db, $_POST['ow_name']);
-                      $ow_email     = mysqli_real_escape_string($db, $_POST['ow_email']);
-                      $ow_phone     = mysqli_real_escape_string($db, $_POST['ow_phone']);
-                      $division   = mysqli_real_escape_string($db, $_POST['division']);
-                      $district     = mysqli_real_escape_string($db, $_POST['district']);
-                      $location     = mysqli_real_escape_string($db, $_POST['location']);
-                      $price      = mysqli_real_escape_string($db, $_POST['price']);
-                      $bed      = mysqli_real_escape_string($db, $_POST['bed']);
-                      $kitchen    = mysqli_real_escape_string($db, $_POST['kitchen']);
-                      $drawing    = mysqli_real_escape_string($db, $_POST['drawing']);
-                      $dinning    = mysqli_real_escape_string($db, $_POST['dinning']);
-                      $balcony    = mysqli_real_escape_string($db, $_POST['balcony']);
-                      $garage     = mysqli_real_escape_string($db, $_POST['garage']);
-                      $washroom     = mysqli_real_escape_string($db, $_POST['washroom']);
-                      $totalRoom    = mysqli_real_escape_string($db, $_POST['totalRoom']);
-                      $areaSize     = mysqli_real_escape_string($db, $_POST['areaSize']);
-                      $floor      = mysqli_real_escape_string($db, $_POST['floor']);
-                      $rank       = mysqli_real_escape_string($db, $_POST['rank']);
-                      $decoration   = mysqli_real_escape_string($db, $_POST['decoration']);
-                      $desk       = mysqli_real_escape_string($db, $_POST['desk']);
-                      $wifi       = mysqli_real_escape_string($db, $_POST['wifi']);
-                      $hottub     = mysqli_real_escape_string($db, $_POST['hottub']);
-                      $currency     = mysqli_real_escape_string($db, $_POST['currency']);
-                      $breakfast    = mysqli_real_escape_string($db, $_POST['breakfast']);
-                      $restourant   = mysqli_real_escape_string($db, $_POST['restourant']);
-                      $ac       = mysqli_real_escape_string($db, $_POST['ac']);
-                      $pool       = mysqli_real_escape_string($db, $_POST['pool']);
-                      $park       = mysqli_real_escape_string($db, $_POST['park']);
-                      $gym      = mysqli_real_escape_string($db, $_POST['gym']);
-                      $luggage    = mysqli_real_escape_string($db, $_POST['luggage']);
-                      $sdesc      = mysqli_real_escape_string($db, $_POST['sdesc']);
-                      $ldesc      = mysqli_real_escape_string($db, $_POST['ldesc']);
-                      $map      = mysqli_real_escape_string($db, $_POST['map']);
-                      $availabe   = $_POST['availabe'];
-                      $is_parent    = mysqli_real_escape_string($db, $_POST['is_parent']);
-                      $status     = mysqli_real_escape_string($db, $_POST['status']);
-                      $imgOwn     = mysqli_real_escape_string($db, $_POST['ow_image']);
+                      $ow_email         = mysqli_real_escape_string($db, $_POST['ow_email']);
+                      $ow_phone         = mysqli_real_escape_string($db, $_POST['ow_phone']);
+                      $division         = mysqli_real_escape_string($db, $_POST['division']);
+                      $district         = mysqli_real_escape_string($db, $_POST['district']);
+                      $location         = mysqli_real_escape_string($db, $_POST['location']);
+                      $price            = mysqli_real_escape_string($db, $_POST['price']);
+                      $bed              = mysqli_real_escape_string($db, $_POST['bed']);
+                      $kitchen          = mysqli_real_escape_string($db, $_POST['kitchen']);
+                      $drawing          = mysqli_real_escape_string($db, $_POST['drawing']);
+                      $dinning          = mysqli_real_escape_string($db, $_POST['dinning']);
+                      $balcony          = mysqli_real_escape_string($db, $_POST['balcony']);
+                      $garage           = mysqli_real_escape_string($db, $_POST['garage']);
+                      $washroom         = mysqli_real_escape_string($db, $_POST['washroom']);
+                      $totalRoom        = mysqli_real_escape_string($db, $_POST['totalRoom']);
+                      $areaSize         = mysqli_real_escape_string($db, $_POST['areaSize']);
+                      $floor            = mysqli_real_escape_string($db, $_POST['floor']);
+                      $rank             = mysqli_real_escape_string($db, $_POST['rank']);
+                      $decoration       = mysqli_real_escape_string($db, $_POST['decoration']);
+                      $desk             = mysqli_real_escape_string($db, $_POST['desk']);
+                      $wifi             = mysqli_real_escape_string($db, $_POST['wifi']);
+                      $hottub           = mysqli_real_escape_string($db, $_POST['hottub']);
+                      $currency         = mysqli_real_escape_string($db, $_POST['currency']);
+                      $breakfast        = mysqli_real_escape_string($db, $_POST['breakfast']);
+                      $restaurant       = mysqli_real_escape_string($db, $_POST['restaurant']);
+                      $ac               = mysqli_real_escape_string($db, $_POST['ac']);
+                      $pool             = mysqli_real_escape_string($db, $_POST['pool']);
+                      $park             = mysqli_real_escape_string($db, $_POST['park']);
+                      $gym              = mysqli_real_escape_string($db, $_POST['gym']);
+                      $luggage          = mysqli_real_escape_string($db, $_POST['luggage']);
+                      $sdesc            = mysqli_real_escape_string($db, $_POST['sdesc']);
+                      $ldesc            = mysqli_real_escape_string($db, $_POST['ldesc']);
+                      $map              = mysqli_real_escape_string($db, $_POST['map']);
+                      $available        = $_POST['available'];
+                      $is_parent        = mysqli_real_escape_string($db, $_POST['is_parent']);
+                      $status           = mysqli_real_escape_string($db, $_POST['status']);
+                      $imgOwn           = mysqli_real_escape_string($db, $_POST['ow_image']);
 
                       // For Image
                       // For Image One
@@ -1499,7 +1656,7 @@
                         }
                         $slug = createSlug($subname);
                         // End: For Slug Making
-                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division_id', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restourant', availability='$availability', short_desc='$sdesc', long_desc='$ldesc', google_map='$google_map', img_one='$img1', status='$status' WHERE sub_id='$updateIdStore' ";
+                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available', short_desc='$sdesc', long_desc='$ldesc', google_map='$map', status='$status', img_one='$img1' WHERE sub_id='$updateIdStore' ";
                         $updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
                         if ($updateRentCatQuery) {
@@ -1548,7 +1705,7 @@
                         $slug = createSlug($subname);
                         // End: For Slug Making
 
-                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division_id', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restourant', availability='$availability', short_desc='$sdesc', long_desc='$ldesc', google_map='$google_map', img_two='$img2', status='$status' WHERE sub_id='$updateIdStore' ";
+                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available', short_desc='$sdesc', long_desc='$ldesc', google_map='$map', status='$status', img_two='$img2' WHERE sub_id='$updateIdStore' ";
                         $updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
                         if ($updateRentCatQuery) {
@@ -1598,7 +1755,7 @@
                         $slug = createSlug($subname);
                         // End: For Slug Making
 
-                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division_id', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restourant', availability='$availability', short_desc='$sdesc', long_desc='$ldesc', google_map='$google_map', img_three='$img3', status='$status' WHERE sub_id='$updateIdStore' ";
+                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available', short_desc='$sdesc', long_desc='$ldesc', google_map='$map', status='$status', img_three='$img3' WHERE sub_id='$updateIdStore' ";
                         $updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
                         if ($updateRentCatQuery) {
@@ -1646,7 +1803,7 @@
                         }
                         $slug = createSlug($subname);
                         // End: For Slug Making
-                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division_id', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restourant', availability='$availability', short_desc='$sdesc', long_desc='$ldesc', google_map='$google_map', img_four='$img4', status='$status' WHERE sub_id='$updateIdStore' ";
+                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available', short_desc='$sdesc', long_desc='$ldesc', google_map='$map', status='$status', img_four='$img4' WHERE sub_id='$updateIdStore' ";
                         $updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
                         if ($updateRentCatQuery) {
@@ -1694,7 +1851,7 @@
                         }
                         $slug = createSlug($subname);
                         // End: For Slug Making
-                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division_id', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restourant', availability='$availability', short_desc='$sdesc', long_desc='$ldesc', google_map='$google_map', img_five='$img5', status='$status' WHERE sub_id='$updateIdStore' ";
+                        $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available', short_desc='$sdesc', long_desc='$ldesc', google_map='$map', status='$status', img_five='$img5' WHERE sub_id='$updateIdStore' ";
                         $updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
                         if ($updateRentCatQuery) {
@@ -1743,7 +1900,7 @@
                       }
                       $slug = createSlug($subname);
                       // End: For Slug Making
-                      $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division_id', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restourant', availability='$availability', short_desc='$sdesc', long_desc='$ldesc', google_map='$google_map', img_six='$img6', status='$status' WHERE sub_id='$updateIdStore' ";
+                      $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available', short_desc='$sdesc', long_desc='$ldesc', google_map='$map', status='$status', img_six='$img6' WHERE sub_id='$updateIdStore' ";
                       $updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
                       if ($updateRentCatQuery) {
@@ -1754,9 +1911,6 @@
                     } 
 
                     else {
-
-                      // For Image
-
 
                       // Start: For Slug Making
                       function createSlug($subname)
@@ -1781,7 +1935,7 @@
                       $slug = createSlug($subname);
                       // End: For Slug Making
 
-                      $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division_id', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restourant', availability='$availability', short_desc='$sdesc', long_desc='$ldesc', google_map='$google_map', img_one='$img_one', img_two='$img_two', img_three='$img_three', img_four='$img_four', img_five='$img_five', img_six='$img6', status='$status' WHERE sub_id='$updateIdStore' ";
+                      $updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drwaing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available', short_desc='$sdesc', long_desc='$ldesc', google_map='$map', status='$status' WHERE sub_id='$updateIdStore' ";
                       $updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
                       if ($updateRentCatQuery) {

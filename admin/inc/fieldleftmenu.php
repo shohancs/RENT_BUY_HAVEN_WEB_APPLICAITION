@@ -28,7 +28,7 @@
 						</div>
 						<div class="menu-title">My Account</div>
 					</a>
-					<a href="fieldRole.php" class="">
+					<a href="fieldRole.php?do=sellerManage" class="">
 						<div class="parent-icon"><i class='bx bx-category'></i>
 						</div>
 						<div class="menu-title">Seller Account</div>

@@ -153,7 +153,7 @@
 						</div>
 					<?php }
 
-					else if ( $do == "userManage" ) { ?>
+					else if ( $do == "sellerManage" ) { ?>
 						<!--breadcrumb-->
 						<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 							<div class="breadcrumb-title pe-3">Manage</div>
@@ -162,28 +162,14 @@
 									<ol class="breadcrumb mb-0 p-0">
 										<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
 										</li>
-										<li class="breadcrumb-item active" aria-current="page">All Role list</li>
+										<li class="breadcrumb-item active" aria-current="page">All Seller list</li>
 									</ol>
 								</nav>
 							</div>
-							<!-- START: For Right Part -->
-							<div class="ms-auto">
-								<div class="btn-group">
-									<div class="row row-cols-auto g-3">
-										<div class="col">
-											<a href="role.php?do=Add" class="btn btn-dark px-5">Add New Role</a>
-										</div>
-										<div class="col">
-											<a href="role.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
-										</div>									
-									</div>
-								</div>
-							</div>
-							<!-- END: For Right Part -->
 						</div>
 						<!--end breadcrumb-->
 
-						<h6 class="mb-0 text-uppercase">ALL Role LIST</h6>
+						<h6 class="mb-0 text-uppercase">ALL Seller LIST</h6>
 						<hr>
 						<div class="card">
 							<div class="card-body">
@@ -207,9 +193,15 @@
 										  </thead>
 
 										  <tbody>
-										  	<?php  
 
-										  		$roleSql = "SELECT * FROM role WHERE status = 1 AND role=3 ORDER BY name ASC";
+										  	<?php  
+										  		$rentDivSql = "SELECT * FROM transactions ORDER BY id DESC";
+										  		$rentDivQuery = mysqli_query( $db, $rentDivSql );
+										  		while ( $row = mysqli_fetch_assoc( $rentDivQuery ) ) {
+									  				$id               = $row['id'];
+					                                $user_email       = $row['user_email'];
+
+					                                $roleSql = "SELECT * FROM role WHERE email='$user_email' AND status = 1 AND role=4 ORDER BY name ASC";
 										  		$roleQuery = mysqli_query( $db, $roleSql );
 										  		$Count = mysqli_num_rows($roleQuery);
 
@@ -285,42 +277,17 @@
 														      	<div class="action-btn">
 														      		<ul>
 														      			<li>
-														      				<a href="role.php?do=Edit&editId=<?php echo $id; ?>" class="btn btn-outline-primary" style="margin: 0 15px;"><i class="fa-solid fa-pencil"></i> Edit</a> 
-														      				<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#tId<?php echo $id; ?>"><i class="fa-regular fa-eye-slash"></i> Disable</a>
+														      				<a href="fieldRole.php?do=Edit&editId=<?php echo $id; ?>" class="btn btn-outline-primary" style="margin: 0 15px;"><i class="fa-solid fa-pencil"></i> Check Info</a> 
 														      			</li>
 														      		</ul>
 														      	</div>
-
-														      	<!-- START: MODAL -->
-																<div class="modal fade" id="tId<?php echo $id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-																  <div class="modal-dialog">
-																    <div class="modal-content">
-																      <div class="modal-header">
-																        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation Alert!</h1>
-																        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-																      </div>
-																      <div class="modal-body">
-																      	<h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to disable <span style="color: red;"><?php echo $name; ?> </span>?</h1>																        
-																      </div>
-																      <div class="modal-footer justify-content-around">
-																      	<ul>
-																      		<li>
-																      			<a href="role.php?do=Trash&tData=<?php echo $id; ?>" class="btn btn-primary">Yes</a>
-																      			<a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
-																      		</li>
-																      	</ul>
-																      </div>
-																    </div>
-																  </div>
-																</div>
-														      	<!-- END: MODAL -->
 														      </td>
 														    </tr>
 										  				<?php
 										  			}
 										  		}
 
-
+					                            }
 										  	?>
 										    
 										  </tbody>
@@ -363,23 +330,6 @@
 											</ol>
 										</nav>
 									</div>
-									<!-- START: For Right Part -->
-									<div class="ms-auto">
-										<div class="btn-group">
-											<div class="row row-cols-auto g-3">
-												<div class="col">
-													<a href="role.php?do=Manage" class="btn btn-dark px-5">All Role Manage</a>
-												</div>
-												<div class="col">
-													<a href="role.php?do=Add" class="btn btn-primary px-5">Add New Role</a>
-												</div>
-												<div class="col">
-													<a href="role.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
-												</div>									
-											</div>
-										</div>
-									</div>
-									<!-- END: For Right Part -->
 								</div>
 								<!--end breadcrumb-->
 
@@ -389,7 +339,7 @@
 									<div class="card-body">
 										<div class="border p-3 radius-10">
 											<!-- START : FORM -->
-									<form action="role.php?do=Update" method="POST" enctype="multipart/form-data">
+									<form action="fieldRole.php?do=Update" method="POST" enctype="multipart/form-data">
 										<div class="row">
 											<div class="col-lg-6">
 												<div class="mb-3">
@@ -399,7 +349,8 @@
 
 												<div class="mb-3">
 													<label>Email Address</label>
-													<input type="email" name="email" class="form-control" required autocomplete="off" placeholder="enter email"value="<?php echo $email; ?>">
+													<input type="hidden" name="email" class="form-control" value="<?php echo $email; ?>">
+													<h6 name="email" class="text-danger"><?php echo $email; ?></h6>
 												</div>
 
 												<div class="mb-3">
@@ -407,14 +358,22 @@
 													<input type="tel" name="phone" class="form-control" required autocomplete="off" placeholder="+880 1...." value="<?php echo $phone; ?>">
 												</div>
 
-												<div class="mb-3">
-													<label>Password</label>
-													<input type="password" name="password" class="form-control" placeholder="**********">
-												</div>
-												<div class="mb-3">
-													<label>Re-Password</label>
-													<input type="password" name="repassword" class="form-control" placeholder="**********">
-												</div>
+												<?php  
+													if (  $role == 4 ) {
+													}
+													else { ?>
+														<div class="mb-3">
+															<label>Password</label>
+															<input type="password" name="password" class="form-control" placeholder="**********">
+														</div>
+														<div class="mb-3">
+															<label>Re-Password</label>
+															<input type="password" name="repassword" class="form-control" placeholder="**********">
+														</div>
+													<?php }
+												?>
+
+												
 
 												<div class="mb-3">
 													<label>Address</label>
@@ -424,22 +383,8 @@
 											<div class="col-lg-6">
 
 												<div class="mb-3">
-													<label>Manage Role</label>
-													<select name="role" class="form-select">
-														<option >Please Select the role</option>
-														<option value="1" <?php if( $role == 1 ) { echo "selected"; } ?>>Admin</option>
-														<option value="2" <?php if( $role == 2 ) { echo "selected"; } ?>>Field Checker</option>
-														<option value="3" <?php if( $role == 3 ) { echo "selected"; } ?>>User</option>
-														<option value="4" <?php if( $role == 4 ) { echo "selected"; } ?>>Seller</option>
-													</select>
-												</div>
-												
-												<div class="mb-3">
-													<label>Status</label>
-													<select name="status" class="form-select">
-														<option value="1" <?php if( $status == 1 ) { echo "selected"; } ?>>Active</option>
-														<option value="0" <?php if( $status == 0 ) { echo "selected"; } ?>>InActive</option>
-													</select>
+													<input type="hidden" name="role" value="<?php echo $role; ?>">
+													<input type="hidden" name="status" value="<?php echo $status; ?>">
 												</div>
 
 												<div class="mb-3">
@@ -454,7 +399,14 @@
 											      		}
 											      	?>
 													<br><br>
-													<input type="file" class="form-control" name="image">
+													<?php  
+														if (  $role == 4 ) {
+														}
+														else { ?>
+															<input type="file" class="form-control" name="image">
+														<?php }
+													?>
+													
 												</div>
 
 												<div class="mb-3">
@@ -469,13 +421,27 @@
 											      		}
 											      	?>
 													<br><br>
-													<input type="file" class="form-control" name="nid">
+													<?php  
+														if (  $role == 4 ) {
+														}
+														else { ?>
+															<input type="file" class="form-control" name="nid">
+														<?php }
+													?>
+													
 												</div>
 
 												<div class="mb-3">
 													<div class="d-grid gap-2">
 														<input type="hidden" name="updateId" value="<?php echo $id; ?>">
-														<input type="submit" name="updateRole" class="btn btn-dark px-5" value="Update Role Info">
+														<?php  
+															if (  $role == 4 ) {
+															}
+															else { ?>
+																<input type="submit" name="updateRole" class="btn btn-dark px-5" value="Update Role Info">
+															<?php }
+														?>
+														
 													</div>											
 												</div>
 											</div>
@@ -550,7 +516,7 @@
 									$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 									if ($updateRoleQuery) {
-										header("Location: role.php?do=Manage");
+										header("Location: fieldRole.php?do=fieldManage");
 									}
 									else {
 										die ( "Mysqli Error." . mysqli_error($db) );
@@ -581,7 +547,7 @@
 									$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 									if ($updateRoleQuery) {
-										header("Location: role.php?do=Manage");
+										header("Location: fieldRole.php?do=fieldManage");
 									}
 									else {
 										die ( "Mysqli Error." . mysqli_error($db) );
@@ -612,7 +578,7 @@
 									$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 									if ($updateRoleQuery) {
-										header("Location: role.php?do=Manage");
+										header("Location: fieldRole.php?do=fieldManage");
 									}
 									else {
 										die ( "Mysqli Error." . mysqli_error($db) );
@@ -651,7 +617,7 @@
 								$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 								if ($updateRoleQuery) {
-									header("Location: role.php?do=Manage");
+									header("Location: fieldRole.php?do=fieldManage");
 								}
 								else {
 									die ( "Mysqli Error." . mysqli_error($db) );
@@ -679,7 +645,7 @@
 								$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 								if ($updateRoleQuery) {
-									header("Location: role.php?do=Manage");
+									header("Location: fieldRole.php?do=fieldManage");
 								}
 								else {
 									die ( "Mysqli Error." . mysqli_error($db) );
@@ -707,7 +673,7 @@
 								$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 								if ($updateRoleQuery) {
-									header("Location: role.php?do=Manage");
+									header("Location: fieldRole.php?do=fieldManage");
 								}
 								else {
 									die ( "Mysqli Error." . mysqli_error($db) );
@@ -726,7 +692,7 @@
 									$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 									if ($updateRoleQuery) {
-										header("Location: role.php?do=Manage");
+										header("Location: fieldRole.php?do=fieldManage");
 									}
 									else {
 										die ( "Mysqli Error." . mysqli_error($db) );
@@ -743,7 +709,7 @@
 								$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 								if ($updateRoleQuery) {
-									header("Location: role.php?do=Manage");
+									header("Location: fieldRole.php?do=fieldManage");
 								}
 								else {
 									die ( "Mysqli Error." . mysqli_error($db) );
