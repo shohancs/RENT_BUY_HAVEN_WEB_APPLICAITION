@@ -14,7 +14,7 @@
       <ul class="dropdown-menu" style="background: #C8BFE7; ">
         <li><a class="dropdown-item" href="sellerDashboard.php?do=allRentProducts" style="text-decoration: none; color:#023021; font-size: 17px; font-weight:500;">Rent Products</a></li>
         <hr>
-        <li><a class="dropdown-item" href="sellerDashboard.php?do=addProducts" style="text-decoration: none; color:#023021; font-size: 17px; font-weight:500;">Buy Product</a></li>
+        <li><a class="dropdown-item" href="sellerDashboard.php?do=allBuyProducts" style="text-decoration: none; color:#023021; font-size: 17px; font-weight:500;">Buy Product</a></li>
       </ul>
     </div>
     <hr>

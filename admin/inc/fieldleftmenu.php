@@ -45,6 +45,8 @@
 					<ul>
 						<li> <a href="fieldRole.php?do=rentsubCategory"><i class="bx bx-radio-circle"></i>Pending Sub Categories</a>
 						</li>
+						<li> <a href="fieldRole.php?do=rentappsubCategory"><i class="bx bx-radio-circle"></i>Sub Categories</a>
+						</li>
 					</ul>
 				</li>
 
@@ -55,7 +57,22 @@
 						<div class="menu-title">Buy Manage</div>
 					</a>
 					<ul>
-						<li> <a href="fieldbuySubCategory.php?do=Manage"><i class="bx bx-radio-circle"></i>Pending Sub Categories</a>
+						<li> <a href="fieldRole.php?do=buysubCategory"><i class="bx bx-radio-circle"></i>Pending Sub Categories</a>
+						</li>
+						<li> <a href="fieldRole.php?do=buyappsubCategory"><i class="bx bx-radio-circle"></i>Sub Categories</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="menu-label">Report Submit</li>
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-category'></i>
+						</div>
+						<div class="menu-title">Report</div>
+					</a>
+					<ul>
+						<li> <a href="report.php?do=add"><i class="bx bx-radio-circle"></i>Report Add</a>
 						</li>
 					</ul>
 				</li>
