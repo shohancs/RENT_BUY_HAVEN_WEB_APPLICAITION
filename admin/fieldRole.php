@@ -3787,6 +3787,27 @@
 
 						}
 					}
+
+					else if ( $do == "Support" ) { ?>
+					
+
+				<h6 class="mb-0 text-uppercase">Support</h6>
+				<hr>
+				<div class="card">
+					<div class="card-body">
+						<div class="border p-3 radius-10">
+							<h1 class="text-center pb-5 mb-5">Contact Us</h1>
+
+							<h4>Phone No: 01731-578788</h4>
+							<h4>Email Address: Shohanurrahmanshohan.cs@gmail.com</h4>
+							<h4>Website: <a href="https://shohancs.com/">https://shohancs.com/</a></h4>
+							<h4>Linkdin: <a href="https://www.linkedin.com/in/shohancs/">https://www.linkedin.com/in/shohancs/</a></h4>
+							<h4>Github: <a href="https://github.com/shohancs">https://github.com/shohancs</a></h4>
+
+						</div>										
+					</div>
+				</div>
+					<?php }
 				?>
 
 			</div>

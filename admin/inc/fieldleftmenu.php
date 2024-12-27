@@ -72,23 +72,21 @@
 						<div class="menu-title">Report</div>
 					</a>
 					<ul>
-						<li> <a href="report.php?do=add"><i class="bx bx-radio-circle"></i>Report Add</a>
+						<li> <a href="report.php?do=Manage"><i class="bx bx-radio-circle"></i>Report Manage</a>
+						</li>
+						<li> <a href="report.php?do=Add"><i class="bx bx-radio-circle"></i>Report Add</a>
 						</li>
 					</ul>
 				</li>
 
-				<li class="menu-label">Support</li>
 				<li>
-					<a href="javascript:;" class="has-arrow">
+					<a href="fieldRole.php?do=Support" class="">
 						<div class="parent-icon"><i class='bx bx-category'></i>
 						</div>
 						<div class="menu-title">Support</div>
 					</a>
-					<ul>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Comment</a>
-						</li>
-					</ul>
 				</li>
+				
 			</ul>
 			<!--end navigation-->
 		</div>
