@@ -206,9 +206,9 @@
 										  		$Count = mysqli_num_rows($roleQuery);
 
 										  		if ( $Count == 0 ) { ?>
-										  			<div class="alert alert-danger text-center" role="alert">
+										  			<!-- <div class="alert alert-danger text-center" role="alert">
 													  Sorry!! No data found in this datatable.
-													</div>
+													</div> -->
 										  		<?php }
 										  		else {
 										  			$i = 0;
@@ -298,6 +298,697 @@
 							</div>
 						</div>
 					<?php }
+
+					else if ( $do == "rentsubCategory" ) { ?>
+						<!--breadcrumb-->
+						<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+							<div class="breadcrumb-title pe-3">Manage</div>
+							<div class="ps-3">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb mb-0 p-0">
+										<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">Pending Rent Sub Categories</li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+						<!--end breadcrumb-->
+
+						<h6 class="mb-0 text-uppercase">Pending Rent Sub Categories</h6>
+						<hr>
+						<div class="card">
+							<div class="card-body">
+								<div class="border p-3 radius-10">
+									<!-- START: DATATABLE -->
+									<div class="table-responsive">
+										<table class="table table-striped table-hover table-bordered"  id="example">
+										  <thead class="table-dark">
+										    <tr>
+											    <th scope="col" class="text-center">Id</th>
+					                            <th scope="col" class="text-center">Email</th>
+					                            <th scope="col" class="text-center">Phone</th>
+					                            <th scope="col" class="text-center">Title</th>
+					                            <th scope="col" class="text-center">Category</th>
+					                            <th scope="col" class="text-center">District</th>
+					                            <th scope="col" class="text-center">Area</th>
+					                            <th scope="col" class="text-center">Status</th>
+					                            <th scope="col" class="text-center">Join Date</th>
+					                            <th scope="col" class="text-center">Action</th>
+										    </tr>
+										  </thead>
+
+										  <tbody>
+
+										  	<?php  
+										  		$rentcategorySql = "SELECT * FROM rent_category WHERE status = 1 ORDER BY name ASC";
+												$rentcategoryQuery = mysqli_query($db, $rentcategorySql);
+
+												while ($row = mysqli_fetch_assoc($rentcategoryQuery)) {
+													$cat_id  		= $row['cat_id'];
+													$cat_name  		= $row['name'];
+
+													$childSql = "SELECT * FROM rent_subcategory WHERE is_parent ='$cat_id' AND status=2 ORDER BY sub_id DESC";
+													$childQuery = mysqli_query($db, $childSql);
+													$childSqlCount = mysqli_num_rows($childQuery);
+
+													$i = 0;
+
+													while ($row = mysqli_fetch_assoc($childQuery)) {
+														$sub_id       = $row['sub_id'];
+						                                $is_parent    = $row['is_parent'];
+						                                $subcat_name  = $row['subcat_name'];
+						                                $slug         = $row['slug'];
+						                                $ow_name      = $row['ow_name'];
+						                                $ow_email     = $row['ow_email'];
+						                                $ow_phone     = $row['ow_phone'];
+						                                $district     = $row['district'];
+						                                $division_id  = $row['division_id'];
+						                                $location     = $row['location'];
+						                                $price        = $row['price'];
+						                                $bed          = $row['bed'];
+						                                $kitchen      = $row['kitchen'];
+						                                $washroom     = $row['washroom'];
+						                                $totalroom    = $row['totalroom'];
+						                                $area_size    = $row['area_size'];
+						                                $floor        = $row['floor'];
+						                                $rank         = $row['rank'];
+						                                $decoration   = $row['decoration'];
+						                                $desk         = $row['desk'];
+						                                $wifi         = $row['wifi'];
+						                                $hottub       = $row['hottub'];
+						                                $currency     = $row['currency'];
+						                                $ac           = $row['ac'];
+						                                $pool         = $row['pool'];
+						                                $park         = $row['park'];
+						                                $gym          = $row['gym'];
+						                                $luggage      = $row['luggage'];
+						                                $drwaing      = $row['drwaing'];
+						                                $dinning      = $row['dinning'];
+						                                $balcony      = $row['balcony'];
+						                                $garage       = $row['garage'];
+						                                $breakfast    = $row['breakfast'];
+						                                $restourant    = $row['restourant'];
+						                                $availability    = $row['availability'];
+						                                $short_desc   = $row['short_desc'];
+						                                $long_desc    = $row['long_desc'];
+						                                $ow_image     = $row['ow_image'];
+						                                $img_one      = $row['img_one'];
+						                                $img_two      = $row['img_two'];
+						                                $img_three    = $row['img_three'];
+						                                $img_four     = $row['img_four'];
+						                                $img_five     = $row['img_five'];
+						                                $img_six      = $row['img_six'];
+						                                $status       = $row['status'];
+						                                $google_map   = $row['google_map'];
+						                                $join_date    = $row['join_date'];
+														$i++;
+														?>
+
+														<tr>
+													      <th scope="row" class="text-center"><?php echo $i; ?></th>
+													      <td class="text-center"><?php echo $ow_email; ?></td>
+													      <td class="text-center"><?php echo $ow_phone; ?></td>
+													      <td class="text-center"><?php echo $subcat_name; ?></td>	     
+													      <td class="text-center"><span class="badge rounded-pill text-bg-primary"><?php echo $cat_name; ?></span></td>
+													      <td class="text-center"><?php echo $district; ?></td>
+													      <td class="text-center"><?php echo $location; ?></td>
+													      <td class="text-center">
+															<?php
+															if ($status == 2) { ?>
+																<span class="badge text-bg-info">Pending</span>
+															<?php } else if ($status == 0) { ?>
+																<span class="badge text-bg-danger">InActive</span>
+															<?php }
+															?>
+															</td>
+															<td class="text-center"><?php echo $join_date; ?></td>
+															<td class="text-center">
+														<div class="action-btn">
+															<ul>
+																<li>
+																	<a href="fieldRole.php&viewId=<?php echo $sub_id; ?>" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#vId<?php echo $sub_id; ?>"><i class="fa-regular fa-eye"></i> View</a>
+
+																	<a href="" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#aId<?php echo $sub_id; ?>"><i class="fa-solid fa-file-circle-check"></i> Approve</a>
+
+																	<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#tId<?php echo $sub_id; ?>"><i class="fa-regular fa-eye-slash"></i> Disable</a>
+																</li>
+															</ul>
+														</div>
+
+														<!-- START: MODAL FOR Active -->
+														<div class="modal fade" id="aId<?php echo $sub_id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+															<div class="modal-dialog">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation Alert!</h1>
+																		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																	</div>
+																	<div class="modal-body">
+																		<h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to Active Rent SubCategory <br><span style="color: red;"><?php echo $subcat_name; ?> </span>?</h1>
+																	</div>
+																	<div class="modal-footer justify-content-around">
+																		<ul>
+																			<li>
+																				<a href="fieldRole.php?do=ManageActive&activeId=<?php echo $sub_id; ?>" class="btn btn-primary">Yes</a>
+																				<a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
+																			</li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- END: MODAL FOR Active -->
+
+
+
+														<!-- START: MODAL FOR DELETE -->
+														<div class="modal fade" id="tId<?php echo $sub_id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+															<div class="modal-dialog">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation Alert!</h1>
+																		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																	</div>
+																	<div class="modal-body">
+																		<h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure to disable Rent SubCategory <br><span style="color: red;"><?php echo $subcat_name; ?> </span>?</h1>
+																	</div>
+																	<div class="modal-footer justify-content-around">
+																		<ul>
+																			<li>
+																				<a href="fieldRole.php?do=Managetrash&tData=<?php echo $sub_id; ?>" class="btn btn-primary">Yes</a>
+																				<a href="" class="btn btn-dark" data-bs-dismiss="modal">No</a>
+																			</li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- END: MODAL FOR DELETE -->
+
+														<!-- START: MODAL FOR FULL VIEW -->
+														<div class="col">
+															<!-- Modal -->
+															<div class="modal fade" id="vId<?php echo $sub_id; ?>" tabindex="-1" aria-hidden="true" style="display: none;">
+																<div class="modal-dialog modal-xl">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h1 class="modal-title fs-5" id="exampleModalLabel">Full View of <span style="color: red;"><?php echo $ow_email; ?> </span></h1>
+																			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																		</div>
+																		<div class="modal-body">
+																			<div class="container">
+																				<div class="row">
+																					<div class="col-lg-12">
+																						<div class="card">
+																							<div class="card-body">
+																								<div class="border p-3 radius-10">
+																									<!-- START : FORM -->
+																									<form action="" method="POST" enctype="multipart/form-data">
+																										<div class="row" style="text-align: left;">
+																		                                <div class="col-lg-6">
+																		                                  <div class="mb-3">
+																		                                    <label class="form-label">Sub Category Name</label>
+																		                                    <p class="border p-2 text-dark"><?php echo $subcat_name; ?></p>
+																		                                  </div>
+																		                                  <div class="mb-3">
+																		                                  	<label for="">Owner Name</label>
+																		                                  	<p class="border p-2 text-dark"><?php echo $ow_name; ?></p>
+																		                                  </div>
+
+																		                                  <div class="mb-3">
+																		                                  	<label for="">Owner Email</label>
+																		                                  	<p class="border p-2 text-dark"><?php echo $ow_email; ?></p>
+																		                                  </div>
+																		                                  <div class="mb-3">
+																		                                  	<label for="">Owner Phone</label>
+																		                                  	<p class="border p-2 text-dark"><?php echo $ow_phone; ?></p>
+																		                                  </div>
+																		                                  
+																		                                  <div class="row">
+																		                                  	<div class="col-6">
+																		                                  		<div class="mb-3">
+																				                                  	<label for="">Division</label>
+																				                                  	 <?php  
+																			                                            $sql = "SELECT * FROM rent_division WHERE id='$division_id' AND status=1 ORDER BY priority ASC";
+																			                                            $query = mysqli_query($db, $sql);
+
+																			                                            while ( $row = mysqli_fetch_assoc($query) ) {
+																			                                              $id       = $row['id'];
+																			                                                $name       = $row['name'];
+																			                                                $priority     = $row['priority'];
+																			                                                $status     = $row['status'];
+																			                                                ?>
+																			                                                  
+																			                                               <p class="border p-2 text-dark"><?php echo $name; ?></p>
+																			                                                <?php
+																			                                            }
+																			                                          ?>
+																				                                  	
+																				                                  </div>
+																		                                  	</div>
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>District</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $district; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                  </div>
+																		                                  <div class="mb-3">
+																		                                    <label>House Number & Location</label>
+																		                                    <p class="border p-2 text-dark"><?php echo $location; ?></p>
+																		                                  </div>
+
+																		                                  <div class="row">
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Category Name</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $cat_name; ?></p>
+																		                                          
+																		                                        </select>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Price <sup>(Taka)</sup></label>
+																		                                        <p class="border p-2 text-dark"><?php echo $price; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-2">
+																		                                      <div class="mb-3">
+																		                                        <label>Bed</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $bed; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-2">
+																		                                      <div class="mb-3">
+																		                                        <label>Kitchen</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $kitchen; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-2">
+																		                                      <div class="mb-3">
+																		                                        <label>Drawing</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $drwaing; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-2">
+																		                                      <div class="mb-3">
+																		                                        <label>Dinning</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $dinning; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-2">
+																		                                      <div class="mb-3">
+																		                                        <label>Balcony</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $balcony; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-2">
+																		                                      <div class="mb-3">
+																		                                        <label>Garage</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $garage; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-3">
+																		                                      <div class="mb-3">
+																		                                        <label>Bathroom</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $washroom; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-3">
+																		                                      <div class="mb-3">
+																		                                        <label>Total Room</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $totalroom; ?></p>
+																		                                      </div>
+																		                                    </div>
+
+																		                                    <div class="col-lg-3">
+																		                                      <div class="mb-3">
+																		                                        <label>Area Size <sup>(Sq Ft)</sup></label>
+																		                                        <p class="border p-2 text-dark"><?php echo $area_size; ?></p>
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-3">
+																		                                      <div class="mb-3">	                   	
+																		                                        <label>Floor No</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $floor; ?></p>
+																		                                      </div>
+																		                                    </div>
+
+																		                                    <label for="">For Hotel And Other Category</label>
+
+																		                                    <div class="col-lg-3">
+																		                                      <div class="mb-3">
+																		                                        <label>Ranking For Hotel</label>
+																		                                        <select name="rank" class="form-select">
+																		                                          <option>select Here</option>
+																		                                          <option value="1" <?php if ( $rank == 1 ) {
+																		                                            echo "selected";
+																		                                          } ?>>5 Star</option>
+																		                                          <option value="2" <?php if ( $rank == 2 ) {
+																		                                            echo "selected";
+																		                                          } ?>>4 Star</option>
+																		                                          <option value="3" <?php if ( $rank == 3 ) {
+																		                                            echo "selected";
+																		                                          } ?>>3 Star</option>
+																		                                          <option value="4" <?php if ( $rank == 4 ) {
+																		                                            echo "selected";
+																		                                          } ?>>2 Star</option>
+																		                                          <option value="5" <?php if ( $rank == 5 ) {
+																		                                            echo "selected";
+																		                                          } ?>>1 Star</option>
+																		                                        </select>
+																		                                      </div>
+																		                                    </div>                      
+
+																		                                    <div class="col-lg-3">
+																		                                      <div class="mb-3">
+																		                                        <label>Decoration</label>>
+																		                                        <select name="decoration" class="form-select">
+																		                                          <option>select Here</option>
+																		                                          <option value="1" <?php if ( $decoration == 1 ) {
+																		                                            echo "selected";
+																		                                          } ?>>Furnished</option>
+																		                                          <option value="2" <?php if ( $decoration == 2 ) {
+																		                                            echo "selected";
+																		                                          } ?>>Semi-Furnished</option>
+																		                                          <option value="3" <?php if ( $decoration == 3 ) {
+																		                                            echo "selected";
+																		                                          } ?>>Non-Furnished</option>
+																		                                        </select>
+																		                                      </div>
+																		                                    </div>
+
+																		                                    <div class="col-lg-3">
+																		                                      
+																		                                      <div class="form-check">
+																		                                        <input name="desk" class="form-check-input" type="checkbox" value="1" <?php if ( $desk == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Front desk [24-hour]
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="wifi" class="form-check-input" type="checkbox" value="1" <?php if ( $wifi == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Free Wi-Fi in all rooms!
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="hottub" class="form-check-input" type="checkbox" value="1" <?php if ( $hottub == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Hot tub
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="currency" class="form-check-input" type="checkbox" value="1"<?php if ( $currency == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Currency exchange
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="breakfast" class="form-check-input" type="checkbox" value="1"<?php if ( $breakfast == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Breakfast
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="restaurant" class="form-check-input" type="checkbox" value="1" <?php if ( $restourant == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Restourant
+																		                                        </label>
+																		                                      </div>
+																		                                      
+																		                                    </div>
+
+																		                                    <div class="col-lg-3">
+																		                                      
+																		                                      <div class="form-check">
+																		                                        <input name="ac" class="form-check-input" type="checkbox" value="1" <?php if ( $ac == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Air conditioning
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="pool" class="form-check-input" type="checkbox" value="1" <?php if ( $pool == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Swimming pool(indoor)
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="park" class="form-check-input" type="checkbox" value="1" <?php if ( $park == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Car park
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="gym" class="form-check-input" type="checkbox" value="1" <?php if ( $gym == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Fitness center
+																		                                        </label>
+																		                                      </div>
+
+																		                                      <div class="form-check">
+																		                                        <input name="luggage" class="form-check-input" type="checkbox" value="1" <?php if ( $luggage == 1 ) {
+																		                                          echo "checked";
+																		                                        } ?> id="flexCheckDefault">
+																		                                        <label class="form-check-label" for="flexCheckDefault">
+																		                                          Luggage storage
+																		                                        </label>
+																		                                      </div>
+																		                                      
+																		                                    </div>
+
+																		                                  </div>
+
+																		                                </div>
+																		                                <div class="col-lg-6">
+																		                                  <div class="mb-3">
+																		                                    <label>Short Description</label>
+																		                                    <p class="border p-2 text-dark"><?php echo $short_desc; ?></p>
+																		                                  </div>
+																		                                  <div class="mb-3">
+																		                                    <label>Long Description</label>
+																		                                    <p class="border p-2 text-dark"><?php echo $long_desc; ?></p>
+																		                                  </div>
+																		                                  <div class="mb-3">
+																		                                    <label>Google Embed Map URL <sup>(iframe)</sup></label>
+																		                                    <p style="width: 50px !important;">
+																		                                    	<?php echo $google_map; ?>
+																		                                    </p>
+																		                                    
+																		                                  </div>
+																		                                  <div class="row">
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Available on</label>
+																		                                        <p class="border p-2 text-dark"><?php echo $availability; ?></p>
+																		                                      </div>
+																		                                    </div>                     
+																		                                  </div>
+
+																		                                  <div class="mb-3">
+																		                                        <label>Owner Image</label>
+																		                                        <br><br>
+																		                                          <?php 
+																											      		if ( !empty( $ow_image ) ) {
+																															echo '<img src="assets/images/role/' . $ow_image . '" alt="" style="width: 100%;">';
+																											      		}
+																											      		else { 
+																															echo '<img src="assets/images/dummy.jpg" alt="" style="width: 100%;">';
+																											      		}
+																											      	?>
+																		                                      </div>
+
+
+																		                                  <div class="row">
+																		                                    <label for="">Products Images</label>
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Image One</label>
+																		                                        <br><br>
+																		                                          <?php
+																		                                            if (!empty($img_one)) {
+																		                                              echo '<img src="assets/images/subcategory/' . $img_one . '" alt="" style="width: 100%;">';
+																		                                            } else {
+																		                                              echo '<h5>No Image Uploaded!!</h5>';
+																		                                            }
+																		                                          ?>
+																		                                          <br><br>
+																		                                        <input type="file" class="form-control" name="img_one">
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Image Two</label>
+																		                                        <br><br>
+																		                                          <?php
+																		                                            if (!empty($img_two)) {
+																		                                              echo '<img src="assets/images/subcategory/' . $img_two . '" alt="" style="width: 100%;">';
+																		                                            } else {
+																		                                              echo '<h5>No Image Uploaded!!</h5>';
+																		                                            }
+																		                                          ?>
+																		                                          <br><br>
+																		                                        <input type="file" class="form-control" name="img_two">
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Image Three</label>
+																		                                        <br><br>
+																		                                          <?php
+																		                                            if (!empty($img_three)) {
+																		                                              echo '<img src="assets/images/subcategory/' . $img_three . '" alt="" style="width: 100%;">';
+																		                                            } else {
+																		                                              echo '<h5>No Image Uploaded!!</h5>';
+																		                                            }
+																		                                          ?>
+																		                                          <br><br>
+																		                                        <input type="file" class="form-control" name="img_three">
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Image Four</label>
+																		                                        <br><br>
+																		                                          <?php
+																		                                            if (!empty($img_four)) {
+																		                                              echo '<img src="assets/images/subcategory/' . $img_four . '" alt="" style="width: 100%;">';
+																		                                            } else {
+																		                                              echo '<h5>No Image Uploaded!!</h5>';
+																		                                            }
+																		                                          ?>
+																		                                          <br><br>
+																		                                        <input type="file" class="form-control" name="img_four">
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Image Five</label>
+																		                                        <br><br>
+																		                                          <?php
+																		                                            if (!empty($img_five)) {
+																		                                              echo '<img src="assets/images/subcategory/' . $img_five . '" alt="" style="width: 100%;">';
+																		                                            } else {
+																		                                              echo '<h5>No Image Uploaded!!</h5>';
+																		                                            }
+																		                                          ?>
+																		                                          <br><br>
+																		                                        <input type="file" class="form-control" name="img_five">
+																		                                      </div>
+																		                                    </div>
+																		                                    <div class="col-lg-6">
+																		                                      <div class="mb-3">
+																		                                        <label>Image Six</label>
+																		                                        <br><br>
+																		                                          <?php
+																		                                            if (!empty($img_six)) {
+																		                                              echo '<img src="assets/images/subcategory/' . $img_six . '" alt="" style="width: 100%;">';
+																		                                            } else {
+																		                                              echo '<h5>No Image Uploaded!!</h5>';
+																		                                            }
+																		                                          ?>
+																		                                          <br><br>
+																		                                        <input type="file" class="form-control" name="img_six">
+																		                                      </div>
+																		                                    </div>
+																		                                  </div>    
+																		                                </div>
+																		                              </div>
+																		                            </form>
+																									<!-- END : FORM -->
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Exit</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- END: MODAL FOR FULL VIEW -->
+
+													</td>
+													    </tr>
+
+														<?php
+													}
+												}
+										  	?>
+										    
+										  </tbody>
+										</table>
+									</div>							
+									<!-- END: DATATABLE -->	
+								</div>													
+							</div>
+						</div>
+					<?php }
+
+					else if ( $do == "ManageActive" ) {
+						if ( isset($_GET['activeId']) ) {
+							$acId = $_GET['activeId'];
+							$activeSql = "UPDATE rent_subcategory SET status=3 WHERE sub_id ='$acId'";
+							$activeQuery = mysqli_query($db, $activeSql);
+
+							if ($activeQuery) {
+								header("Location: fieldRole.php?do=rentsubCategory");
+							}
+							else {
+								die("Mysqli_Error" . mysqli_error($db));
+							}
+						}
+					}
+
+					else if ( $do == "Managetrash" ) {
+						if ( isset($_GET['tData']) ) {
+							$acId = $_GET['tData'];
+							$activeSql = "UPDATE rent_subcategory SET status=4 WHERE sub_id ='$acId'";
+							$activeQuery = mysqli_query($db, $activeSql);
+
+							if ($activeQuery) {
+								header("Location: fieldRole.php?do=rentsubCategory");
+							}
+							else {
+								die("Mysqli_Error" . mysqli_error($db));
+							}
+						}
+					}
+
 
 					else if( $do == "Edit" ) {
 						if ( isset($_GET['editId']) ) {

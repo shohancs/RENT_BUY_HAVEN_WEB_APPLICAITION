@@ -302,6 +302,12 @@
                                     else if ( $status == 2 ) { ?>
                                       <span class="badge text-bg-warning">Pending</span>
                                     <?php }
+                                    else if ( $status == 3 ) { ?>
+                                      <span class="badge text-bg-info">Approve</span>
+                                    <?php }
+                                     else if ( $status == 4 ) { ?>
+                                      <span class="badge text-bg-danger">Decline</span>
+                                    <?php }
                                     else if ( $status == 0 ) { ?>
                                       <span class="badge text-bg-danger">Not Active</span>
                                     <?php }

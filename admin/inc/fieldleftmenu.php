@@ -43,7 +43,7 @@
 						<div class="menu-title">Rent Manage</div>
 					</a>
 					<ul>
-						<li> <a href="fieldrentSubCategory.php?do=Manage"><i class="bx bx-radio-circle"></i>Pending Sub Categories</a>
+						<li> <a href="fieldRole.php?do=rentsubCategory"><i class="bx bx-radio-circle"></i>Pending Sub Categories</a>
 						</li>
 					</ul>
 				</li>
