@@ -80,7 +80,36 @@
 										  				
 										  					<tr>
 														      <th scope="row" class="text-center"><?php echo $i; ?></th>
-														      <td class="text-center"><?php echo $rent_prdId; ?></td>
+														      <td class="text-center">
+																<?php  
+																	$childSql = "SELECT * FROM rent_subcategory WHERE sub_id ='$rent_prdId' ORDER BY subcat_name ASC";
+																	$childQuery = mysqli_query($db, $childSql);
+
+																	while ($row = mysqli_fetch_assoc($childQuery)) {
+																		$sub_id 		= $row['sub_id'];
+																		$is_parent		= $row['is_parent'];
+																		$subcat_name	= $row['subcat_name'];
+																		
+
+																		echo $subcat_name;
+																	}
+																?>
+															</td>
+															<td class="text-center">
+																<?php  
+																	$bchildSql = "SELECT * FROM buy_subcategory WHERE sub_id ='$buy_prdId' ORDER BY subcat_name ASC";
+																	$bchildQuery = mysqli_query($db, $bchildSql);
+
+																	while ($row = mysqli_fetch_assoc($bchildQuery)) {
+																		$bsub_id 		= $row['sub_id'];
+																		$bis_parent		= $row['is_parent'];
+																		$bsubcat_name	= $row['subcat_name'];
+																		
+
+																		echo $bsubcat_name;
+																	}
+																?>
+															</td>
 														      <td class="text-center"><?php echo $buy_prdId; ?></td>
 														      <td class="text-center"><?php echo $seller_email; ?></td>
 														      <td class="text-center"><?php echo $join_date; ?></td>	      
@@ -272,7 +301,7 @@
 															</select>
 														</div>
 
-														<div class="mb-3">													<input type="email" name="field_email" value="<?php echo $_SESSION['email']; ?>">
+														<div class="mb-3">													<input type="hidden" name="field_email" value="<?php echo $_SESSION['email']; ?>">
 														</div>
 
 														<div class="mb-3">
