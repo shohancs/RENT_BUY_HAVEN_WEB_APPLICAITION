@@ -29,9 +29,9 @@
 						</div>
 						<!--end breadcrumb-->
 
-						<h6 class="mb-0 text-uppercase">ALL Report LIST</h6>
+						<h6 class="mb-0 text-uppercase">ALL Report LIST</h6> 
 						<hr>
-						<div class="card">
+						<div class="card"> 
 							<div class="card-body">
 								<div class="border p-3 radius-10">
 									<!-- START: DATATABLE -->
