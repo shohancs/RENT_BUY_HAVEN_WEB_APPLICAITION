@@ -91,20 +91,28 @@
 				</li>
 
 
-				<li class="menu-label">Vertification (Field Checker)</li>
+				<li class="menu-label">Vertification (Activation)</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-category'></i>
 						</div>
-						<div class="menu-title">Activation</div>
+						<div class="menu-title">Field Checker</div>
 					</a>
 					<ul>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Super Admin</a>
+						<li> <a href=""><i class="bx bx-radio-circle"></i>Rent</a>
+						</li><a href=""><i class="bx bx-radio-circle"></i>Buy</a>
 						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Field Checker</a>
-						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>User</a>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Seller</a>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-category'></i>
+						</div>
+						<div class="menu-title">Seller</div>
+					</a>
+					<ul>
+						<li> <a href=""><i class="bx bx-radio-circle"></i>Rent</a>
+						</li><a href=""><i class="bx bx-radio-circle"></i>Buy</a>
 						</li>
 					</ul>
 				</li>
@@ -131,23 +139,6 @@
 					</a>
 					<ul>
 						<li> <a href="blog.php?do=Manage"><i class="bx bx-radio-circle"></i>Manage Blogs</a>
-						</li>
-					</ul>
-				</li>
-
-				<li class="menu-label">Comments</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-category'></i>
-						</div>
-						<div class="menu-title">Comments</div>
-					</a>
-					<ul>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Manage Blogs</a>
-						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Add New Blogs</a>
-						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Trash</a>
 						</li>
 					</ul>
 				</li>
