@@ -25,6 +25,9 @@
     <h4 class="menutitle py-3"><a href="sellerDashboard.php?do=Profile" style="text-decoration: none; color:#023021; font-size: 20px; font-weight:500;"><i class="fa-solid fa-layer-group pe-2"></i> My Profile</a></h4>
     <hr>
 
+    <h4 class="menutitle py-3"><a href="sellerDashboard.php?do=Support" style="text-decoration: none; color:#023021; font-size: 20px; font-weight:500;"><i class="fa-solid fa-layer-group pe-2"></i> Support</a></h4>
+    <hr>
+
     <h4 class="menutitle py-3"><a href="logout.php" style="text-decoration: none; color:#023021; font-size: 20px; font-weight:500;"><i class="fa-solid fa-layer-group pe-2"></i> Logout</a></h4>
     <hr>
 </div>

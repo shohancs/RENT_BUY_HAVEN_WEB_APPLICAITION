@@ -2412,6 +2412,166 @@
                     </div>             
                   <?php }
 
+                  else if ( $do == 'Support' ) { ?>
+                    <!-- STRAT: PACKAGE PART -->
+                    <section class="">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center pb-3">
+                                    <h3 style="letter-spacing: 3px; color:#023021; font-size: 40px; font-weight:600;">Contact Us!</h3>
+                                    <p style="letter-spacing: 1px; color:#023021;">We Have the Features and Service You Deserve!</p>
+                                </div>
+
+                                <div class="py-2">
+
+                                    <h6 style="color: #000;">Phone No: 01731-578788</h6>
+                                    <h6 style="color: #000;">Email Address: Shohanurrahmanshohan.cs@gmail.com</h6>
+                                    <h6 style="color: #000;">Website: <a href="https://shohancs.com/">https://shohancs.com/</a></h6>
+                                    <h6 style="color: #000;">Linkdin: <a href="https://www.linkedin.com/in/shohancs/">https://www.linkedin.com/in/shohancs/</a></h6>
+                                    <h6 style="color: #000;">Github: <a href="https://github.com/shohancs">https://github.com/shohancs</a></h6>
+                                </div>
+                                <!-- START: QUESTION PART -->
+                                 <section class="pb-5">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 question_part">
+                                                <div class="bg-white " style="margin: 10% auto; width: 65%;">
+                                                    <h4 class="px-5 py-3" style="background: #1a7e00; color: #fff;">Got Questions? Ask Away!</h4 class="p-3">
+                                                    <form action="" method="POST" class="px-5 py-5">
+                                                        <div class="row">
+                                                            <!--  -->
+                                                            <?php  
+                                                                if ( !empty( $_SESSION['email'] ) ) { ?>
+                                                                    <div class="mb-3">
+                                                                        <label for="" class="form-label">Message</label>
+                                                                        <textarea name="msg" id="" class="form-control" placeholder="write here..." rows="5" required></textarea>
+                                                                    </div>
+                                                                    <div class="d-grid gap-2">
+                                                                        <?php  
+                                                                            if ( isset( $_SESSION['email'] ) ) {
+                                                                                $sesId = $_SESSION['email'];
+
+                                                                                $sql = "SELECT * FROM role WHERE email='$sesId'";
+                                                                                $query = mysqli_query($db, $sql);
+
+                                                                                while ( $row = mysqli_fetch_assoc($query) ) {
+                                                                                    $id             = $row['id'];
+                                                                                    $name           = $row['name'];
+                                                                                    $email          = $row['email'];
+                                                                                    $phone          = $row['phone'];
+                                                                                    $address        = $row['address'];
+                                                                                    $password       = $row['password'];
+                                                                                    $role           = $row['role'];
+                                                                                    $image          = $row['image'];
+                                                                                    $nid            = $row['nid'];
+                                                                                    $status         = $row['status'];
+                                                                                    ?>
+                                                                                    <input type="hidden" name="fname" value="<?php echo $name; ?>">
+                                                                                    <input type="hidden" name="email" value="<?php echo $email; ?>">
+                                                                                    <input type="hidden" name="phone" value="<?php echo $phone; ?>">
+                                                                                    <input type="hidden" name="role" value="<?php echo $role; ?>">
+                                                                                    <?php
+                                                                                }
+                                                                            }
+                                                                        ?>
+                                                                        <input type="hidden" name="status" value="2">
+                                                                        
+                                                                        <!--  -->
+                                                                        <?php  
+                                                                            if ( !empty( $_SESSION['email'] ) ) { ?>
+                                                                                <input type="submit" name="masg" value="SUBMIT" class="btn btn-primary quBtn">
+                                                                            <?php }
+                                                                            else { ?>
+                                                                                <div class="alert alert-info my-4 text-center" role="alert">
+                                                                                  Login to reserve you service. <a href="login.php">Click Here</a>
+                                                                                </div>
+                                                                           <?php }
+                                                                        ?>
+                                                                        <!--  -->
+                                                                        
+                                                                    </div>
+                                                                <?php }
+                                                                else { ?>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="" class="form-label">First Name</label>
+                                                                            <input type="text" name="fname" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="" class="form-label">Last Name</label>
+                                                                            <input type="text" name="lname" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="" class="form-label">Email Address</label>
+                                                                            <input type="email" name="email" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="" class="form-label">Phone</label>
+                                                                            <input type="tel" name="phone" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="" class="form-label">Message</label>
+                                                                        <textarea name="msg" id="" class="form-control" placeholder="write here..." rows="5" required></textarea>
+                                                                    </div>
+                                                                    <div class="d-grid gap-2">
+                                                                        <input type="hidden" name="status" value="2">
+                                                                        <input type="hidden" name="role" value="3">
+                                                                        <input type="submit" name="masg" value="SUBMIT" class="btn btn-primary quBtn">
+                                                                        
+                                                                    </div>
+                                                               <?php }
+                                                            ?>
+                                                            <!--  -->
+                                                            
+                                                        </div>
+                                                        
+                                                    </form>
+                                                    <?php  
+                                                        if ( isset($_POST['masg']) ) {
+                                                            $fname  = mysqli_real_escape_string($db, $_POST['fname']);
+                                                            $lname  = mysqli_real_escape_string($db, $_POST['lname']);
+                                                            $email  = mysqli_real_escape_string($db, $_POST['email']);
+                                                            $phone  = mysqli_real_escape_string($db, $_POST['phone']);
+                                                            $msg    = mysqli_real_escape_string($db, $_POST['msg']);
+                                                            $role   = mysqli_real_escape_string($db, $_POST['role']);
+                                                            $status = mysqli_real_escape_string($db, $_POST['status']);
+
+                                                            $sql = "INSERT INTO message (role, status, fname, lname, email, phone, msg, join_date) VALUES('$role', '$status', '$fname', '$lname', '$email', '$phone', '$msg', now())";
+                                                            $query = mysqli_query($db, $sql);
+
+                                                            if ( $query ) {
+                                                                header('Location: sellerDashboard.php?do=Support');
+                                                            }
+                                                            else {
+                                                                die("Mysqli_Error" . mysqli_error($db));
+                                                            }
+                                                        }
+                                                    ?>
+                                                </div>
+                                            </div>
+
+                                            
+                                        </div>
+                                    </div>
+                                 </section>
+                                <!-- END: QUESTION PART -->
+
+                                
+
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END: PACKAGE PART -->
+                  <?php }
+
 
                   // For Buy
 

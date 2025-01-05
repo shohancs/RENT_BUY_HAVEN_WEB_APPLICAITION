@@ -160,7 +160,9 @@
 						<div class="menu-title">Support</div>
 					</a>
 					<ul>
-						<li> <a href="massage.php?do=Manage"><i class="bx bx-radio-circle"></i>Pending Message</a>
+						<li> <a href="massage.php?do=Manage"><i class="bx bx-radio-circle"></i>User Pending Message</a>
+						</li>
+						<li> <a href="massage.php?do=sellerManage"><i class="bx bx-radio-circle"></i>Seller Pending Message</a>
 						</li>
 						<li> <a href="activemassage.php?do=Manage"><i class="bx bx-radio-circle"></i>Active Message</a>
 						</li>

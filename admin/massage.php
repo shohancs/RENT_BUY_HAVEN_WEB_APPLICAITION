@@ -29,7 +29,7 @@
 						</div>
 						<!--end breadcrumb-->
 
-						<h6 class="mb-0 text-uppercase">Massage List</h6>
+						<h6 class="mb-0 text-uppercase">User Massage List</h6>
 						<hr>
 						<div class="card">
 							<div class="card-body">
@@ -54,7 +54,135 @@
 										  <tbody>
 										  	<?php  
 
-										  		$roleSql = "SELECT * FROM message WHERE status=2 ORDER BY id DESC";
+										  		$roleSql = "SELECT * FROM message WHERE role=3 AND status=2 ORDER BY id DESC";
+										  		$roleQuery = mysqli_query( $db, $roleSql );
+										  		$Count = mysqli_num_rows($roleQuery);
+
+										  		if ( $Count == 0 ) { ?>
+										  			<div class="alert alert-danger text-center" role="alert">
+													  Sorry!! No data found in this datatable.
+													</div>
+										  		<?php }
+										  		else {
+										  			$i = 0;
+
+										  			while ( $row = mysqli_fetch_assoc( $roleQuery ) ) {
+										  				$id  			= $row['id'];
+										  				$role  			= $row['role'];
+										  				$status  		= $row['status'];
+										  				$fname  		= $row['fname'];
+										  				$lname  		= $row['lname'];
+										  				$email  		= $row['email'];
+										  				$phone  		= $row['phone'];
+										  				$msg  			= $row['msg'];
+										  				$join_date  	= $row['join_date'];
+										  				$i++;
+										  				?>
+										  				
+										  					<tr>
+														      <th scope="row" class="text-center"><?php echo $i; ?></th>
+														      <td class="text-center"><?php echo $fname; ?></td>
+														      <td class="text-center"><?php echo $lname; ?></td>
+														      <td class="text-center"><?php echo $email; ?></td>
+														      <td class="text-center"><?php echo $phone; ?></td>
+														      <td class="text-center">
+														      	<?php  
+														      		if ( $role == 1 ) { ?>
+														      			<span class="badge text-bg-success">Admin</span>
+														      		<?php }
+														      		else if ( $role == 2 ) { ?>
+														      			<span class="badge text-bg-info">Field Checker</span>
+														      		<?php }
+														      		else if ( $role == 3 ) { ?>
+														      			<span class="badge text-bg-warning">User</span>
+														      		<?php }
+														      		else if ( $role == 4 ) { ?>
+														      			<span class="badge text-bg-primary">Seller</span>
+														      		<?php }
+																?>
+														      </td>
+														      <td class="text-center">
+														      	<?php  
+														      		if ($status == 1) { ?>
+														      			<span class="badge text-bg-success">Active</span>
+														      		<?php }
+														      		else if ($status == 2) { ?>
+														      			<span class="badge text-bg-info">Pending</span>
+														      		<?php }
+														      	?>
+														      </td>
+														      <td class="text-center"><?php echo $join_date; ?></td>
+														      <td class="text-center">
+														      	<div class="action-btn">
+														      		<ul>
+														      			<li>
+														      				<a href="massage.php?do=Edit&editId=<?php echo $id; ?>" class="btn btn-outline-primary" style="margin: 0 15px;"><i class="fa-solid fa-pencil"></i> Edit</a> 
+
+														      				<a href="massage.php?do=ManageActive&activeId=<?php echo $id; ?>" class="btn btn-outline-success" style="margin: 0 15px;"><i class="fa-solid fa-file-circle-check"></i> Active</a> 
+														      			</li>
+
+														      		</ul>
+														      	</div>
+														      </td>
+														    </tr>
+										  				<?php
+										  			}
+										  		}
+
+
+										  	?>
+										    
+										  </tbody>
+										</table>
+									</div>							
+									<!-- END: DATATABLE -->	
+								</div>													
+							</div>
+						</div>
+					<?php }
+
+					else if ( $do == "sellerManage" ) { ?>
+						<!--breadcrumb-->
+						<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+							<div class="breadcrumb-title pe-3">Seller Manage</div>
+							<div class="ps-3">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb mb-0 p-0">
+										<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">Support</li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+						<!--end breadcrumb-->
+
+						<h6 class="mb-0 text-uppercase">Seller Massage List</h6>
+						<hr>
+						<div class="card">
+							<div class="card-body">
+								<div class="border p-3 radius-10">
+									<!-- START: DATATABLE -->
+									<div class="table-responsive">
+										<table class="table table-striped table-hover table-bordered"  id="example">
+										  <thead class="table-dark">
+										    <tr>
+										      <th scope="col" class="text-center">#Sl.</th>
+										      <th scope="col" class="text-center">First Name</th>
+										      <th scope="col" class="text-center">Last Name</th>
+										      <th scope="col" class="text-center">Email</th>
+										      <th scope="col" class="text-center">Phone</th>
+										      <th scope="col" class="text-center">Role</th>
+										      <th scope="col" class="text-center">Status</th>
+										      <th scope="col" class="text-center">Join Date</th>
+										      <th scope="col" class="text-center">Action</th>
+										    </tr>
+										  </thead>
+
+										  <tbody>
+										  	<?php  
+
+										  		$roleSql = "SELECT * FROM message WHERE role=4 AND status=2 ORDER BY id DESC";
 										  		$roleQuery = mysqli_query( $db, $roleSql );
 										  		$Count = mysqli_num_rows($roleQuery);
 
@@ -287,7 +415,7 @@
 							$updateRoleQuery = mysqli_query( $db, $updateRoleSql );
 
 							if ($updateRoleQuery) {
-								header("Location: massage.php?do=Manage");
+								header("Location: activemassage.php?do=Manage");
 							}
 							else {
 								die ( "Mysqli Error." . mysqli_error($db) );
@@ -306,7 +434,7 @@
 							$activeQuery = mysqli_query($db, $activeSql);
 
 							if ($activeQuery) {
-								header("Location: message.php?do=Manage");
+								header("Location: activemassage.php?do=Manage");
 							}
 							else {
 								die("Mysqli_Error" . mysqli_error($db));
@@ -321,7 +449,7 @@
 							$deleteQuery = mysqli_query($db, $deleteSQL);
 
 							if ($deleteQuery) {
-								header("Location: message.php?do=ManageTrash");
+								header("Location: activemassage.php?do=Manage");
 							}
 							else {
 								die("Mysqli_Error" . mysqli_error($db));
