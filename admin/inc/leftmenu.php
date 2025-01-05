@@ -75,7 +75,7 @@
 				</li>
 
 
-				<li class="menu-label">Packages Offer</li>
+				<li class="menu-label">Packages & Transactions</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-category'></i>
@@ -85,7 +85,7 @@
 					<ul>
 						<li> <a href="package.php?do=Manage"><i class="bx bx-radio-circle"></i>All Packages</a>
 						</li>
-						<li> <a href="packageControl.php?do=Manage"><i class="bx bx-radio-circle"></i>Packages Control</a>
+						<li> <a href="packageControl.php?do=Manage"><i class="bx bx-radio-circle"></i>Transactions Control</a>
 						</li>
 					</ul>
 				</li>
@@ -109,21 +109,16 @@
 					</ul>
 				</li>
 
-				<li class="menu-label">Transactions (Packages)</li>
+				<li class="menu-label">Report (Field Checker)</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-category'></i>
 						</div>
-						<div class="menu-title">Transactions</div>
+						<div class="menu-title">Report</div>
 					</a>
 					<ul>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Super Admin</a>
-						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Field Checker</a>
-						</li>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>User</a>
-						<li> <a href=""><i class="bx bx-radio-circle"></i>Seller</a>
-						</li>
+						<li> <a href="adminReport.php?do=Manage"><i class="bx bx-radio-circle"></i>All Report</a>
+						</li> 
 					</ul>
 				</li>
 

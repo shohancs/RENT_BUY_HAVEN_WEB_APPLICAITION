@@ -2,28 +2,6 @@
 
 <main>
 
-    <!-- START: BANNER PART -->
-     <!-- <section class="text-bg-light p-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <div class="left-banner">
-                        <h1 class=""  style="letter-spacing: 3px; font-family: &quot;Acme&quot;, sans-serif; color:#023021; font-size: 80px;text-transform: uppercase; font-weight:600;">Rent to Buy</h1>
-                        <div style="border-left: 3px double #ffc107; padding: 0 3%;">
-                            <h3 style="letter-spacing: 1px; font-size: 32px; color:#023021;">Save for Your Dream Home</h3>
-                            <p style="font-size: 20px;color:#023021;letter-spacing: 1px;">Affordable Rentals with a path to Ownership</p>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <img src="assets/images/banner.png" alt="" width="100%">
-                </div>
-            </div>
-        </div>
-     </section> -->
-    <!-- END: BANNER PART -->
-
     <!-- START: Bannner Carousel Slider -->
 
      <section class="banner-slider">
@@ -190,7 +168,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-6">
                     <div class="items">
                         <span class="badge text-bg-warning">FOR RENT</span>
                     </div>
