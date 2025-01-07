@@ -171,7 +171,7 @@
 																<li>
 																	<a href="rentSubCategory.php?do=Edit&editId=<?php echo $sub_id; ?>" class="btn btn-outline-primary"><i class="fa-solid fa-pencil"></i> Edit</a>
 																	<a href="rentSubCategory.php&viewId=<?php echo $sub_id; ?>" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#vId<?php echo $sub_id; ?>"><i class="fa-regular fa-eye"></i> View</a>
-																	<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#tId<?php echo $sub_id; ?>"><i class="fa-regular fa-eye-slash"></i> Disable</a>
+																	<a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#tId<?php echo $sub_id; ?>"><i class="fa-regular fa-eye-slash"></i> Disable</a>   
 																</li>
 															</ul>
 														</div>
