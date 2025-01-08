@@ -200,226 +200,496 @@
 														</div>
 														<!-- END: MODAL FOR DELETE -->
 
-														<!-- START: MODAL FOR FULL VIEW -->
-														<div class="col">
-															<!-- Modal -->
-															<div class="modal fade" id="vId<?php echo $sub_id; ?>" tabindex="-1" aria-hidden="true" style="display: none;">
-																<div class="modal-dialog modal-xl">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h1 class="modal-title fs-5" id="exampleModalLabel">Full View of <span style="color: red;"><?php echo $subcat_name; ?> </span></h1>
-																			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-																		</div>
-																		<div class="modal-body">
-																			<div class="container">
-																				<div class="row">
-																					<div class="col-lg-12">
-																						<div class="card">
-																							<div class="card-body">
-																								<div class="border p-3 radius-10">
-																									<!-- START : FORM -->
-																									<form action="" method="POST" enctype="multipart/form-data">
-																										<div class="row" style="text-align: left;">
-																											<div class="col-lg-6">
-																												<div class="mb-3">
-																													<label class="form-label">Sub Category Name</label>
-																													<input type="text" name="subname" class="form-control" required autocomplete="off" placeholder="enter sub category name.." value="<?php echo $subcat_name; ?>" readonly>
-																												</div>
-																												<div class="mb-3">
-																													<label>Owner Name</label>
-																													<input type="text" name="ow_name" class="form-control" required autocomplete="off" placeholder="enter owner name.." value="<?php echo $ow_name; ?>" readonly>
-																												</div>
-																												<div class="mb-3">
-																													<label>Owner Email</label>
-																													<input type="email" name="ow_email" class="form-control" required autocomplete="off" placeholder="enter owner email.." value="<?php echo $ow_email; ?>" readonly>
-																												</div>
-																												<div class="mb-3">
-																													<label>Owner Phone No.</label>
-																													<input type="phone" name="ow_phone" class="form-control" required autocomplete="off" placeholder="enter owner phone.." value="<?php echo $ow_phone; ?>" readonly>
-																												</div>
-																												<div class="mb-3">
-																													<label>Location</label>
-																													<input type="text" name="location" class="form-control" required autocomplete="off" placeholder="enter location.." value="<?php echo $location; ?>" readonly>
-																												</div>
+<!-- START: MODAL FOR FULL VIEW -->
+<div class="col">
+	<!-- Modal -->
+	<div class="modal fade" id="vId<?php echo $sub_id; ?>" tabindex="-1" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Full View of <span style="color: red;"><?php echo $subcat_name; ?> </span></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="border p-3 radius-10">
+											<!-- START : FORM -->
+									<form action="" method="POST" enctype="multipart/form-data" style="text-align: left;">
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label>Sub Category Name</label>
+													<input type="text" name="subname" class="form-control" required autocomplete="off" placeholder="enter sub category name.." value="<?php echo $subcat_name; ?>">
+												</div>
+												<div class="mb-3">
+													<label>Owner Name</label>
+													<input type="text" name="ow_name" class="form-control" required autocomplete="off" placeholder="enter owner name.." value="<?php echo $ow_name; ?>">
+												</div>
+												<div class="mb-3">
+													<label>Owner Email</label>
+													<input type="email" name="ow_email" class="form-control" required autocomplete="off" placeholder="enter owner email.." value="<?php echo $ow_email; ?>">
+												</div>
+												<div class="mb-3">
+													<label>Owner Phone No.</label>
+													<input type="phone" name="ow_phone" class="form-control" required autocomplete="off" placeholder="enter owner phone.." value="<?php echo $ow_phone; ?>">
+												</div>
+												<div class="mb-3">
+													<label>Location</label>
+													<input type="text" name="location" class="form-control" required autocomplete="off" placeholder="enter location.." value="<?php echo $location; ?>">
+												</div>
 
-																												<div class="row">
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Category Name</label>
-																															<select class="form-select" name="is_parent" readonly>
-																																<option>Please Select the Category</option>
-																																<?php
-																																$catSql = "SELECT * FROM rent_category WHERE status=1";
-																																$catQuery = mysqli_query($db, $catSql);
+												<div class="row">
+				                                    <div class="col-lg-6">
+				                                      <div class="mb-3">
+				                                        <label>Division</label>
+				                                        <select class="form-select" name="division">
+				                                          <option>Select the Division</option>
+				                                          <?php  
+				                                            $sql = "SELECT * FROM rent_division WHERE status=1 ORDER BY priority ASC";
+				                                            $query = mysqli_query($db, $sql);
 
-																																while ($row = mysqli_fetch_assoc($catQuery)) {
-																																	$cat_id = $row['cat_id'];
-																																	$catname = $row['name'];
-																																?>
-																																<option value="<?php echo $cat_id ?>" <?php if ($is_parent == $cat_id) {
-																																																																												echo "selected";
-																																																																											} ?>> - <?php echo $catname; ?>																																  <option>
-																																<?php
-																																}
-																																?>
-																															</select>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Price <sup>(Taka)</sup></label>
-																															<input type="number" name="price" class="form-control" required autocomplete="off" placeholder="enter price.." value="<?php echo $price; ?>" readonly>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Bed</label>
-																															<input type="number" name="bed" class="form-control" required autocomplete="off" placeholder="enter number of bed.." value="<?php echo $bed; ?>" readonly>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Kitchen</label>
-																															<input type="number" name="kitchen" class="form-control" required autocomplete="off" placeholder="enter number of kitchen.." value="<?php echo $kitchen; ?>" readonly>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Washroom</label>
-																															<input type="number" name="washroom" class="form-control" required autocomplete="off" placeholder="enter number of washroom.." value="<?php echo $washroom; ?>" readonly>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Total Room <sup>(Included Drawing, Dining)</sup> </label>
-																															<input type="number" name="totalRoom" class="form-control" required autocomplete="off" placeholder="enter number of total room.." value="<?php echo $totalroom; ?>" readonly>
-																														</div>
-																													</div>
+				                                            while ( $row = mysqli_fetch_assoc($query) ) {
+				                                              $id       = $row['id'];
+				                                                $name       = $row['name'];
+				                                                $priority     = $row['priority'];
+				                                                $status     = $row['status'];
+				                                                ?>
+				                                                  
+				                                                <option value="<?php echo $id; ?>" <?php if ( $id == $division_id ) {
+				                                                  echo "selected";
+				                                                } ?>><?php echo $name; ?></option>
+				                                                <?php
+				                                            }
+				                                          ?>
+				                                          
+				                                        </select>
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-6">
+				                                      <div class="mb-3">
+				                                        <label>District</label>
+				                                        <input type="text" name="district" class="form-control"  autocomplete="off" placeholder="enter district.." value="<?php echo $district; ?>">
+				                                      </div>
+				                                    </div>
+				                                </div>
+				                                  <div class="mb-3">
+				                                    <label>House Number & Location</label>
+				                                    <input type="text" name="location" class="form-control"  autocomplete="off" placeholder="enter area location.." value="<?php echo $location; ?>">
+				                                  </div>
 
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Area Size <sup>(Sq Ft)</sup></label>
-																															<input type="number" name="areaSize" class="form-control" required autocomplete="off" placeholder="enter size of area.." value="<?php echo $area_size; ?>" readonly>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Floor Number <sup>(1st->2nd->3rd..)</sup></label>
-																															<input type="number" name="floor" class="form-control" required autocomplete="off" placeholder="enter size of area.." value="<?php echo $floor; ?>" readonly>
-																														</div>
-																													</div>
-																													<div class="mb-3">
-																														<label>Short Description</label>
-																														<textarea name="sdesc" class="form-control" cols="30" rows="10" id="editor" placeholder="write short description..." readonly><?php echo $short_desc; ?></textarea>
-																													</div>
-																													<div class="mb-3">
-																														<label>Long Description</label>
-																														<textarea name="ldesc" class="form-control" cols="30" rows="10" id="editor1" placeholder="write long description..." readonly><?php echo $long_desc; ?></textarea>
-																													</div>
-																												</div>
+												<div class="row">
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Category Name</label>
+															<select class="form-select" name="is_parent">
+																<option>Please Select the Category</option>
+																<?php
+																$catSql = "SELECT * FROM rent_category WHERE status=1";
+																$catQuery = mysqli_query($db, $catSql);
 
-																											</div>
-																											<div class="col-lg-6">
-
-																												<div class="row">
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Image One</label>
-																															<br><br>
-																															<?php
-																															if (!empty($img_one)) {
-																																echo '<img src="assets/images/subcategory/' . $img_one . '" alt="" style="width: 100%;">';
-																															} else {
-																																echo '<h5>No Image Uploaded!!</h5>';
-																															}
-																															?>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Image Two</label>
-																															<br><br>
-																															<?php
-																															if (!empty($img_two)) {
-																																echo '<img src="assets/images/subcategory/' . $img_two . '" alt="" style="width: 100%;">';
-																															} else {
-																																echo '<h5>No Image Uploaded!!</h5>';
-																															}
-																															?>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Image Three</label>
-																															<br><br>
-																															<?php
-																															if (!empty($img_three)) {
-																																echo '<img src="assets/images/subcategory/' . $img_three . '" alt="" style="width: 100%;">';
-																															} else {
-																																echo '<h5>No Image Uploaded!!</h5>';
-																															}
-																															?>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Image Four</label>
-																															<br><br>
-																															<?php
-																															if (!empty($img_four)) {
-																																echo '<img src="assets/images/subcategory/' . $img_four . '" alt="" style="width: 100%;">';
-																															} else {
-																																echo '<h5>No Image Uploaded!!</h5>';
-																															}
-																															?>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Image Five</label>
-																															<br><br>
-																															<?php
-																															if (!empty($img_five)) {
-																																echo '<img src="assets/images/subcategory/' . $img_five . '" alt="" style="width: 100%;">';
-																															} else {
-																																echo '<h5>No Image Uploaded!!</h5>';
-																															}
-																															?>
-																														</div>
-																													</div>
-																													<div class="col-lg-6">
-																														<div class="mb-3">
-																															<label>Image Six</label>
-																															<br><br>
-																															<?php
-																															if (!empty($img_six)) {
-																																echo '<img src="assets/images/subcategory/' . $img_six . '" alt="" style="width: 100%;">';
-																															} else {
-																																echo '<h5>No Image Uploaded!!</h5>';
-																															}
-																															?>
-																														</div>
-																													</div>
-																												</div>
-																											</div>
-																										</div>
-																									</form>
-																									<!-- END : FORM -->
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Exit</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
+																while ($row = mysqli_fetch_assoc($catQuery)) {
+																	$cat_id = $row['cat_id'];
+																	$catname = $row['name'];
+																?>
+																	<option value="<?php echo $cat_id ?>" <?php if ($is_parent == $cat_id) {
+																	echo "selected";
+																	} ?>> - <?php echo $catname; ?></option>
+																<?php
+																}
+																?>
+															</select>
 														</div>
-														<!-- END: MODAL FOR FULL VIEW -->
+													</div>
+													<div class="col-lg-6">
+				                                      <div class="mb-3">
+				                                        <label>Price <sup>(Taka)</sup></label>
+				                                        <input type="number" name="price" class="form-control"  autocomplete="off" placeholder="enter price.." value="<?php echo $price; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-2">
+				                                      <div class="mb-3">
+				                                        <label>Bed</label>
+				                                        <input type="number" name="bed" class="form-control"  autocomplete="off" placeholder="enter number of bed.." value="<?php echo $bed; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-2">
+				                                      <div class="mb-3">
+				                                        <label>Kitchen</label>
+				                                        <input type="number" name="kitchen" class="form-control"  autocomplete="off" placeholder="enter number of kitchen.." value="<?php echo $kitchen; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-2">
+				                                      <div class="mb-3">
+				                                        <label>Drawing</label>
+				                                        <input type="number" name="drawing" class="form-control"  autocomplete="off" placeholder="drawing.." value="<?php echo $drwaing; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-2">
+				                                      <div class="mb-3">
+				                                        <label>Dinning</label>
+				                                        <input type="number" name="dinning" class="form-control"  autocomplete="off" placeholder="enter number of dinning.." value="<?php echo $dinning; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-2">
+				                                      <div class="mb-3">
+				                                        <label>Balcony</label>
+				                                        <input type="number" name="balcony" class="form-control"  autocomplete="off" placeholder="enter number of balcony.." value="<?php echo $balcony; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-2">
+				                                      <div class="mb-3">
+				                                        <label>Garage</label>
+				                                        <input type="number" name="garage" class="form-control"  autocomplete="off" placeholder="enter number of garage.." value="<?php echo $garage; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-3">
+				                                      <div class="mb-3">
+				                                        <label>Bathroom</label>
+				                                        <input type="number" name="washroom" class="form-control"  autocomplete="off" placeholder="enter number of washroom.." value="<?php echo $washroom; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-3">
+				                                      <div class="mb-3">
+				                                        <label>Total Room</label>
+				                                        <input type="number" name="totalRoom" class="form-control"  autocomplete="off" placeholder="enter number of total room.." value="<?php echo $totalroom; ?>">
+				                                      </div>
+				                                    </div>
+
+				                                    <div class="col-lg-3">
+				                                      <div class="mb-3">
+				                                        <label>Area Size <sup>(Sq Ft)</sup></label>
+				                                        <input type="number" name="areaSize" class="form-control"  autocomplete="off" placeholder="enter size of area.." value="<?php echo $area_size; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-3">
+				                                      <div class="mb-3">
+				                                        <label>Floor Number <sup>(1st->2nd->3rd..)</sup></label>
+				                                        <input type="number" name="floor" class="form-control"  autocomplete="off" placeholder="enter size of area.." value="<?php echo $floor; ?>">
+				                                      </div>
+				                                    </div>
+
+				                                    <label for="">For Hotel And Other Category</label>
+
+                                    <div class="col-lg-3">
+                                      <div class="mb-3">
+                                        <label>Ranking For Hotel</label>
+                                        <select name="rank" class="form-select">
+                                          <option>select Here</option>
+                                          <option value="1" <?php if ( $rank == 1 ) {
+                                            echo "selected";
+                                          } ?>>5 Star</option>
+                                          <option value="2" <?php if ( $rank == 2 ) {
+                                            echo "selected";
+                                          } ?>>4 Star</option>
+                                          <option value="3" <?php if ( $rank == 3 ) {
+                                            echo "selected";
+                                          } ?>>3 Star</option>
+                                          <option value="4" <?php if ( $rank == 4 ) {
+                                            echo "selected";
+                                          } ?>>2 Star</option>
+                                          <option value="5" <?php if ( $rank == 5 ) {
+                                            echo "selected";
+                                          } ?>>1 Star</option>
+                                        </select>
+                                      </div>
+                                    </div>                      
+
+                                    <div class="col-lg-3">
+                                      <div class="mb-3">
+                                        <label>Decoration</label>
+                                        <select name="decoration" class="form-select">
+                                          <option>select Here</option>
+                                          <option value="1" <?php if ( $decoration == 1 ) {
+                                            echo "selected";
+                                          } ?>>Furnished</option>
+                                          <option value="2" <?php if ( $decoration == 2 ) {
+                                            echo "selected";
+                                          } ?>>Semi-Furnished</option>
+                                          <option value="3" <?php if ( $decoration == 3 ) {
+                                            echo "selected";
+                                          } ?>>Non-Furnished</option>
+                                        </select>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                      
+                                      <div class="form-check">
+                                        <input name="desk" class="form-check-input" type="checkbox" value="1" <?php if ( $desk == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Front desk [24-hour]
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="wifi" class="form-check-input" type="checkbox" value="1" <?php if ( $wifi == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Free Wi-Fi in all rooms!
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="hottub" class="form-check-input" type="checkbox" value="1" <?php if ( $hottub == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Hot tub
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="currency" class="form-check-input" type="checkbox" value="1"<?php if ( $currency == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Currency exchange
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="breakfast" class="form-check-input" type="checkbox" value="1"<?php if ( $breakfast == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Breakfast
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="restaurant" class="form-check-input" type="checkbox" value="1" <?php if ( $restourant == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Restourant
+                                        </label>
+                                      </div>
+                                      
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                      
+                                      <div class="form-check">
+                                        <input name="ac" class="form-check-input" type="checkbox" value="1" <?php if ( $ac == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Air conditioning
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="pool" class="form-check-input" type="checkbox" value="1" <?php if ( $pool == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Swimming pool(indoor)
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="park" class="form-check-input" type="checkbox" value="1" <?php if ( $park == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Car park
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="gym" class="form-check-input" type="checkbox" value="1" <?php if ( $gym == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Fitness center
+                                        </label>
+                                      </div>
+
+                                      <div class="form-check">
+                                        <input name="luggage" class="form-check-input" type="checkbox" value="1" <?php if ( $luggage == 1 ) {
+                                          echo "checked";
+                                        } ?> id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Luggage storage
+                                        </label>
+                                      </div>
+                                      
+                                    </div>
+
+												</div>
+
+											</div>
+											<div class="col-lg-6">
+												<div class="mb-3">
+				                                    <label>Short Description</label>
+				                                    <textarea name="sdesc" class="form-control" cols="30" rows="3" id="editor" placeholder="write short description..."><?php echo $short_desc; ?></textarea>
+				                                  </div>
+				                                  <div class="mb-3">
+				                                    <label>Long Description</label>
+				                                    <textarea name="ldesc" class="form-control" cols="30" rows="4" id="editor1" placeholder="write long description..."><?php echo $long_desc; ?></textarea>
+				                                  </div>
+				                                  <div class="mb-3">
+				                                    <label>Google Embed Map URL <sup>(iframe)</sup></label>
+				                                    <textarea name="map" rows="2" class="form-control"  placeholder="iframe url code"><?php echo $google_map; ?></textarea>
+				                                  </div>
+
+				                                  <div class="row">
+				                                    <div class="col-lg-6">
+				                                      <div class="mb-3">
+				                                        <label>Available on</label>
+				                                        <input type="date" name="available" class="form-control" value="<?php echo $availability; ?>">
+				                                      </div>
+				                                    </div>
+				                                    <div class="col-lg-6">
+				                                      <div class="mb-3">
+														<label>Status</label>
+														<select name="status" class="form-select">
+															<option value="1">Please Select the Status</option>
+															<option value="1" <?php if ($status == 1) {
+																					echo 'selected';
+																				} ?>>Active</option>
+															<option value="0" <?php if ($status == 0) {
+																					echo 'selected';
+																				} ?>>InActive</option>
+														</select>
+													</div>
+				                                    </div>                      
+				                                  </div>
+
+				                                  <div class="mb-3">
+													<label>Owner Image</label>
+													<br><br>
+													<?php
+													if (!empty($ow_image)) {
+														echo '<img src="assets/images/owner/' . $ow_image . '" alt="" style="width: 100%;">';
+													} else {
+														echo '<h5>No Image Uploaded!!</h5>';
+													}
+													?>
+													<br><br>
+													<input type="file" class="form-control" name="ow_image">
+												</div>
+																
+
+												<div class="row">
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image One</label>
+															<br><br>
+															<?php
+															if (!empty($img_one)) {
+																echo '<img src="assets/images/subcategory/' . $img_one . '" alt="" style="width: 100%;">';
+															} else {
+																echo '<h5>No Image Uploaded!!</h5>';
+															}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_one">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Two</label>
+															<br><br>
+															<?php
+															if (!empty($img_two)) {
+																echo '<img src="assets/images/subcategory/' . $img_two . '" alt="" style="width: 100%;">';
+															} else {
+																echo '<h5>No Image Uploaded!!</h5>';
+															}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_two">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Three</label>
+															<br><br>
+															<?php
+															if (!empty($img_three)) {
+																echo '<img src="assets/images/subcategory/' . $img_three . '" alt="" style="width: 100%;">';
+															} else {
+																echo '<h5>No Image Uploaded!!</h5>';
+															}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_three">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Four</label>
+															<br><br>
+															<?php
+															if (!empty($img_four)) {
+																echo '<img src="assets/images/subcategory/' . $img_four . '" alt="" style="width: 100%;">';
+															} else {
+																echo '<h5>No Image Uploaded!!</h5>';
+															}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_four">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Five</label>
+															<br><br>
+															<?php
+															if (!empty($img_five)) {
+																echo '<img src="assets/images/subcategory/' . $img_five . '" alt="" style="width: 100%;">';
+															} else {
+																echo '<h5>No Image Uploaded!!</h5>';
+															}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_five">
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<div class="mb-3">
+															<label>Image Six</label>
+															<br><br>
+															<?php
+															if (!empty($img_six)) {
+																echo '<img src="assets/images/subcategory/' . $img_six . '" alt="" style="width: 100%;">';
+															} else {
+																echo '<h5>No Image Uploaded!!</h5>';
+															}
+															?>
+															<br><br>
+															<input type="file" class="form-control" name="img_six">
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</form>
+									<!-- END : FORM -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Exit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: MODAL FOR FULL VIEW -->
 
 													</td>
 												</tr>
