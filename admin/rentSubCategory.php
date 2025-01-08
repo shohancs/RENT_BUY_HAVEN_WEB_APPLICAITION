@@ -22,7 +22,7 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">All Sub Category list</li>
+								<li class="breadcrumb-item active" aria-current="page">All Rent Sub Category list</li>
 							</ol>
 						</nav>
 					</div>
@@ -31,7 +31,7 @@
 						<div class="btn-group">
 							<div class="row row-cols-auto g-3">
 								<div class="col">
-									<a href="rentSubCategory.php?do=Add" class="btn btn-dark px-5">Add New Sub Category</a>
+									<a href="rentSubCategory.php?do=Add" class="btn btn-dark px-5">Add New Rent Sub Category</a>
 								</div>
 								<div class="col">
 									<a href="rentSubCategory.php?do=ManageTrash" class="btn btn-danger px-5">Trash</a>
@@ -43,7 +43,7 @@
 				</div>
 				<!--end breadcrumb-->
 
-				<h6 class="mb-0 text-uppercase">ALL SUB CATEGORY LIST</h6>
+				<h6 class="mb-0 text-uppercase">ALL RENT SUB CATEGORY LIST</h6>
 				<hr>
 				<div class="card">
 					<div class="card-body">
@@ -1589,6 +1589,54 @@
                   $is_parent        = mysqli_real_escape_string($db, $_POST['is_parent']);
                   $status           = mysqli_real_escape_string($db, $_POST['status']);
 
+                  // For Owner Image
+					$ow_image		= mysqli_real_escape_string($db, $_FILES['ow_image']['name']);
+					$tmpImgOw		= $_FILES['ow_image']['tmp_name'];
+
+					if (!empty($ow_image)) {
+						$oldImgOwSql = "SELECT * FROM rent_subcategory WHERE sub_id='$updateIdStore'";
+						$oldImageQuery = mysqli_query($db, $oldImgOwSql);
+
+						while ($row = mysqli_fetch_assoc($oldImageQuery)) {
+							$old_Img_ow = $row['ow_image'];
+							unlink('assets/images/owner/' . $old_Img_ow);
+						}
+
+						$imgOw = rand(0, 999999) . "_" . $ow_image;
+						move_uploaded_file($tmpImgOw, 'assets/images/owner/' . $imgOw);
+
+						// Start: For Slug Making
+						function createSlug($subname)
+						{
+							// Convert to Lower case
+							$slug = strtolower($subname);
+
+							// Remove Special Character
+							$slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+
+							// Replace multiple spaces or hyphens with a single hyphen
+							$slug = preg_replace('/[\s-]+/', ' ', $slug);
+
+							// Replace spaces with hyphens
+							$slug = preg_replace('/\s/', '-', $slug);
+
+							// Trim leading and trailing hyphens
+							$slug = trim($slug, '-');
+
+							return $slug;
+						}
+						$slug = createSlug($subname);
+						// End: For Slug Making
+						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drawing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available',  short_desc='$sdesc', long_desc='$ldesc', google_map='$map', ow_image='$imgOw', status='$status' WHERE sub_id='$updateIdStore' ";
+						$updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
+
+						if ($updateRentCatQuery) {
+							header("Location: rentSubCategory.php?do=Manage");
+						} else {
+							die("Mysql Error." . mysqli_error($db));
+						}
+					}
+
 					// For Image One
 					$img_one		= mysqli_real_escape_string($db, $_FILES['img_one']['name']);
 					$tmpImgOne		= $_FILES['img_one']['tmp_name'];
@@ -1627,7 +1675,7 @@
 						}
 						$slug = createSlug($subname);
 						// End: For Slug Making
-						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', short_desc='$sdesc', long_desc='$ldesc', img_one='$img1', status='$status' WHERE sub_id='$updateIdStore' ";
+						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drawing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available',  short_desc='$sdesc', long_desc='$ldesc', google_map='$map', img_one='$img1', status='$status' WHERE sub_id='$updateIdStore' ";
 						$updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
 						if ($updateRentCatQuery) {
@@ -1676,7 +1724,7 @@
 						$slug = createSlug($subname);
 						// End: For Slug Making
 
-						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', short_desc='$sdesc', long_desc='$ldesc', img_two='$img2', status='$status' WHERE sub_id='$updateIdStore' ";
+						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drawing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available',  short_desc='$sdesc', long_desc='$ldesc', google_map='$map', img_two='$img2', status='$status' WHERE sub_id='$updateIdStore' ";
 						$updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
 						if ($updateRentCatQuery) {
@@ -1726,7 +1774,7 @@
 						$slug = createSlug($subname);
 						// End: For Slug Making
 
-						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', short_desc='$sdesc', long_desc='$ldesc', img_three='$img3', status='$status' WHERE sub_id='$updateIdStore' ";
+						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drawing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available',  short_desc='$sdesc', long_desc='$ldesc', google_map='$map', img_three='$img3', status='$status' WHERE sub_id='$updateIdStore' ";
 						$updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
 						if ($updateRentCatQuery) {
@@ -1774,7 +1822,7 @@
 						}
 						$slug = createSlug($subname);
 						// End: For Slug Making
-						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', short_desc='$sdesc', long_desc='$ldesc', img_four='$img4', status='$status' WHERE sub_id='$updateIdStore' ";
+						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drawing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available',  short_desc='$sdesc', long_desc='$ldesc', google_map='$map', img_four='$img4', status='$status' WHERE sub_id='$updateIdStore' ";
 						$updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
 						if ($updateRentCatQuery) {
@@ -1822,7 +1870,7 @@
 						}
 						$slug = createSlug($subname);
 						// End: For Slug Making
-						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', short_desc='$sdesc', long_desc='$ldesc', img_five='$img5', status='$status' WHERE sub_id='$updateIdStore' ";
+						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drawing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available',  short_desc='$sdesc', long_desc='$ldesc', google_map='$map',  img_five='$img5', status='$status' WHERE sub_id='$updateIdStore' ";
 						$updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
 						if ($updateRentCatQuery) {
@@ -1872,7 +1920,7 @@
 						}
 						$slug = createSlug($subname);
 						// End: For Slug Making
-						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', short_desc='$sdesc', long_desc='$ldesc', img_six='$img6', status='$status' WHERE sub_id='$updateIdStore' ";
+						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drawing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available',  short_desc='$sdesc', long_desc='$ldesc', google_map='$map', img_six='$img6', status='$status' WHERE sub_id='$updateIdStore' ";
 						$updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
 						if ($updateRentCatQuery) {
@@ -1880,7 +1928,9 @@
 						} else {
 							die("Mysql Error." . mysqli_error($db));
 						}
-					} else {
+					} 
+
+					else {
 
 						// Start: For Slug Making
 						function createSlug($subname)
@@ -1904,7 +1954,7 @@
 						}
 						$slug = createSlug($subname);
 						// End: For Slug Making
-						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', short_desc='$sdesc', long_desc='$ldesc', status='$status' WHERE sub_id='$updateIdStore' ";
+						$updateRentCatSql = "UPDATE rent_subcategory SET subcat_name='$subname', slug='$slug', is_parent='$is_parent', ow_name='$ow_name', ow_email='$ow_email', ow_phone='$ow_phone', district='$district', division_id='$division', location='$location', price='$price', bed='$bed', kitchen='$kitchen', washroom='$washroom', totalroom='$totalRoom', area_size='$areaSize', floor='$floor', rank='$rank', decoration='$decoration', desk='$desk', wifi='$wifi', hottub='$hottub', currency='$currency', ac='$ac', pool='$pool', park='$park', gym='$gym', luggage='$luggage', drwaing='$drawing', dinning='$dinning', balcony='$balcony', garage='$garage', breakfast='$breakfast', restourant='$restaurant', availability='$available',  short_desc='$sdesc', long_desc='$ldesc', google_map='$map', status='$status' WHERE sub_id='$updateIdStore' ";
 						$updateRentCatQuery = mysqli_query($db, $updateRentCatSql);
 
 						if ($updateRentCatQuery) {
