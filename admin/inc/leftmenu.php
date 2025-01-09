@@ -100,7 +100,7 @@
 					</a>
 					<ul>
 						<li> <a href="rentSubCategory.php?do=fieldcheckManage"><i class="bx bx-radio-circle"></i>Rent</a>
-						</li><a href=""><i class="bx bx-radio-circle"></i>Buy</a>
+						</li><a href="buySubCategory.php?do=fieldcheckManage"><i class="bx bx-radio-circle"></i>Buy</a>
 						</li>
 					</ul>
 				</li>
