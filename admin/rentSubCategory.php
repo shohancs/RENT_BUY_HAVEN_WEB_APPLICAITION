@@ -708,7 +708,9 @@
 						</div>
 					</div>
 				</div>
-			<?php } else if ($do == "Add") { ?>
+			<?php } 
+
+			else if ($do == "Add") { ?>
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 					<div class="breadcrumb-title pe-3">Create</div>
@@ -3740,7 +3742,9 @@
 				<?php
 					}
 				}
-			} else if ($do == "Update") {
+			} 
+
+			else if ($do == "Update") {
 
 				if (isset($_POST['updateRentSubCat'])) {
 
@@ -4158,7 +4162,9 @@
 						}
 					}
 				}
-			} else if ($do == "Trash") {
+			} 
+
+			else if ($do == "Trash") {
 				if (isset($_GET['tData'])) {
 					$trashId = $_GET['tData'];
 					$trashSql = "UPDATE rent_subcategory SET status=0 WHERE sub_id='$trashId'";
