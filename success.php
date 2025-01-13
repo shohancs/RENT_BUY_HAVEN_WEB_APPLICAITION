@@ -6,7 +6,7 @@ $username = 'root';        // Your database username
 $password = '';            // Your database password (for XAMPP, it's typically blank)
 
 // Set the DSN (Data Source Name)
-$dsn = "mysql:host=$host;dbname=$dbname;charset=UTF8"; 
+$dsn = "mysql:host=$host;dbname=$dbname;charset=UTF8";    
 
 try {
     // Create a PDO instance
