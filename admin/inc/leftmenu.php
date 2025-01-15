@@ -130,6 +130,19 @@
 					</ul>
 				</li>
 
+				<li class="menu-label">Hotel Booking Pending Manage</li>
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-category'></i>
+						</div>
+						<div class="menu-title">Hotel Booking</div>
+					</a>
+					<ul>
+						<li> <a href="adminBooking.php?do=Manage"><i class="bx bx-radio-circle"></i>Booking Manage</a>
+						</li> 
+					</ul>
+				</li>
+
 				<li class="menu-label">Blogs</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">

@@ -1233,7 +1233,7 @@
                                                             $roleQuery = mysqli_query ( $db, $sql );
 
                                                             if ( $roleQuery ) {
-                                                                header( "Location: index.php" );
+                                                                header( "Location: hotelbook.php" );
                                                             }  
                                                             else {
                                                                 die( "Mysql Error." . mysqli_error($db) );

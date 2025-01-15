@@ -32,7 +32,7 @@
                                               <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="profile.php">Profile</a></li>
                                                 <hr style="margin: 2px 0px;">
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <li><a class="dropdown-item" href="hotelbook.php">Booking Update</a></li>
                                                 <hr style="margin: 2px 0px;">
                                                 <li><a class="dropdown-item" href="logout.php">logout</a></li>
                                               </ul>
