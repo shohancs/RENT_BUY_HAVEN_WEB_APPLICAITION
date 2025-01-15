@@ -1227,10 +1227,7 @@
                                                         <h5 class="ps-3" style="color:#023021;"><?php echo $ow_name; ?></h5>
                                                     </div>
 
-                                                    <!--  -->
-                                                    <?php  
-                                                        if ( !empty( $_SESSION['email'] ) ) { ?>
-                                                            <div class="d-flex pt-5">
+                                                    <div class="d-flex pt-5">
                                                                 <i class="fa-solid fa-phone pe-3" style="color:#023021;"></i>
                                                                 <P style="color:#023021;">Phone: <a href="callto:<?php echo $ow_phone; ?>" style="color:#023021;"><?php echo $ow_phone; ?></a></P>
                                                             </div>
@@ -1260,14 +1257,6 @@
                                                             <div class="text-center py-2">
                                                                 <a href="callto:+<?php echo $ow_phone; ?>" class="btn btn-warning px-4 cntct-btn">Contact Availability</a>
                                                             </div>
-                                                        <?php }
-                                                        else { ?>
-                                                            <div class="alert alert-info my-4 text-center" role="alert">
-                                                              Login to reserve you service. <a href="login.php">Click Here</a>
-                                                            </div>
-                                                       <?php }
-                                                    ?>
-                                                    <!--  -->
                                                     
                                                 </div>
                                             <?php }
