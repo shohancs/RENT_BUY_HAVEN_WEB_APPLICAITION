@@ -1156,6 +1156,19 @@
                                                 <div class="bg-light p-4">
                                                     <form action="" method="POST">
                                                         <div class="row">
+                                                            <input type="hidden" name="email" value="<?php echo $_SESSION['email']; ?>">
+                                                            <?php  
+                                                                $sesId = $_SESSION['email'];
+                                                                $sql = "SELECT * FROM role WHERE email='$sesId'";
+                                                                $query = mysqli_query($db, $sql);
+
+                                                                while ( $row = mysqli_fetch_assoc($query) ){
+                                                                    $phone          = $row['phone'];
+                                                                    ?>
+                                                                    <input type="hidden" name="phone" value="<?php echo $phone; ?>">
+                                                                    <?php
+                                                                }
+                                                            ?>
                                                             <div class="col-lg-6">
                                                                 <div class="mb-3">
                                                                     <label for="">Check In</label>
@@ -1190,7 +1203,8 @@
                                                                 if ( !empty( $_SESSION['email'] ) ) { ?>
                                                                     <div class="mb-3">
                                                                         <div class="d-grid gap-2 col-6 mx-auto">
-                                                                            <input type="submit" class="btn btn-warning cntct-btn" value="Book Now">
+                                                                            <input type="hidden" name="prd_id" value="<?php echo $rentDetailsId; ?>">
+                                                                            <input type="submit" name="book" class="btn btn-warning cntct-btn" value="Book Now">
                                                                         </div>
                                                                     </div>
                                                                 <?php }
@@ -1204,6 +1218,28 @@
                                                             
                                                         </div>
                                                     </form>
+
+                                                    <?php  
+                                                        if ( isset($_POST['book']) ) {
+                                                            $checkin    = $_POST['checkin'];
+                                                            $checkout   = $_POST['checkout'];
+                                                            $adult      = $_POST['adult'];
+                                                            $child      = $_POST['child'];
+                                                            $email      = $_POST['email'];
+                                                            $phone      = $_POST['phone'];
+                                                            $prd_id     = $_POST['prd_id'];
+
+                                                            $sql = "INSERT INTO booking (prd_id, email, phone, check_in, check_out, adult, child, join_date) VALUES('$prd_id', '$email', '$phone', '$checkin', '$checkout', '$adult', '$child', now())";
+                                                            $roleQuery = mysqli_query ( $db, $sql );
+
+                                                            if ( $roleQuery ) {
+                                                                header( "Location: index.php" );
+                                                            }  
+                                                            else {
+                                                                die( "Mysql Error." . mysqli_error($db) );
+                                                            }
+                                                        }
+                                                    ?>
                                                 </div>
 
                                                 <!--  -->
