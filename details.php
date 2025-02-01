@@ -1156,8 +1156,15 @@
                                                 <div class="bg-light p-4">
                                                     <form action="" method="POST">
                                                         <div class="row">
-                                                            <input type="hidden" name="email" value="<?php echo $_SESSION['email']; ?>">
                                                             <?php  
+                                                                if(!empty($_SESSION['email'])) { ?>
+                                                                    <input type="hidden"  name="email" value="<?php echo $_SESSION['email']; ?>">
+                                                                <?php }
+                                                            ?>
+                                                            
+                                                            
+                                                            <?php  
+                                                            if ( !empty($_SESSION['email']) ) {
                                                                 $sesId = $_SESSION['email'];
                                                                 $sql = "SELECT * FROM role WHERE email='$sesId'";
                                                                 $query = mysqli_query($db, $sql);
@@ -1168,6 +1175,8 @@
                                                                     <input type="hidden" name="phone" value="<?php echo $phone; ?>">
                                                                     <?php
                                                                 }
+                                                            }
+                                                                
                                                             ?>
                                                             <div class="col-lg-6">
                                                                 <div class="mb-3">
